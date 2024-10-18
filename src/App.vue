@@ -2,7 +2,8 @@
 <template>
   <div id="app">
     <nav>
-      <router-link to="/">Home</router-link>
+      <!-- <router-link to="/">Login</router-link> -->
+      <router-link to="/Home">Home</router-link>
       <router-link to="/Forest">Forest</router-link>
       <router-link to="/ItemIdentifier">ItemIdentifier</router-link>
       <router-link to="/Education/Quiz">Quiz</router-link>
