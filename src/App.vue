@@ -1,17 +1,24 @@
+<script setup lang="ts">
+import Navbar from './components/navbar.vue';
+</script>
+
 
 <template>
   <div id="app">
-    <nav>
-      <!-- <router-link to="/">Login</router-link> -->
+    <!-- <nav>
       <router-link to="/Home">Home</router-link>
       <router-link to="/Forest">Forest</router-link>
       <router-link to="/ItemIdentifier">ItemIdentifier</router-link>
       <router-link to="/Education/Quiz">Quiz</router-link>
       <router-link to="/Education/Video">Video</router-link>
-    </nav>
+    </nav> -->
+    
+    <Navbar/>
     <router-view />
   </div>
 </template>
+
+
 
 
 
