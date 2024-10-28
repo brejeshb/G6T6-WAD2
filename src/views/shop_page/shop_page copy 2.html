@@ -187,13 +187,11 @@
       </div>
     </div>
 
-    <script>
+    <script type="module">
       //database
 
-  import { createClient } from '@supabase/supabase-js'
-  const supabaseUrl = 'ikqzxknjqayiwicpfdha.supabase.co'
-  const supabaseKey = process.env.SUPABASE_KEY
-  const supabase = createClient(supabaseUrl, supabaseKey)
+      import { supabase } from '../../lib/supabaseClient.js' 
+
 
 
 

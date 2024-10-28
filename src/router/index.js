@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import Login from '../views/Login.vue';
 import Register from '../views/Register.vue';
 import Home from '../views/Home.vue';
-import Forest from '../views/Forest.vue';
+import Forest from '../views/shop_page/shop_page.vue';
 import ItemIdentifier from '../views/ItemIdentifier.vue';
 import Quiz from '../views/Education/Quiz.vue';
 import Video from '../views/Education/Video.vue';
