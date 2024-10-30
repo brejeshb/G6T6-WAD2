@@ -7,8 +7,8 @@
               <h1 class="fw-light">Welcome to Our Recycling Education Hub!</h1>
               <p class="lead text-body-secondary">Recycling is a simple, powerful way to create a cleaner planet. In this hub, explore what can and can’t be recycled, learn tips for reducing waste, and discover how small actions can make a big impact. Together, let’s build a more sustainable future—one recycled item at a time!</p>
               <p>
-                <a href="educational_hub.html" class="btn btn-primary my-2">Watch some educational videos</a>
-                <a href="quiz.html" class="btn btn-secondary my-2">Do some quizzes for points</a>
+                <router-link to="./video" class="btn btn-primary my-2">Watch some educational videos</router-link>
+                <router-link to="./quiz" class="btn btn-secondary my-2">Do some quizzes for points</router-link>
               </p>
             </div>
           </div>
@@ -145,3 +145,183 @@ function videoFiltering() {
   return videos.value.filter(video => video.status);
 }
 </script>
+<style scoped>
+/* General Styling */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f9;
+}
+
+/* Top Section - Banner */
+.top_section {
+  background-color: #e0f7f4;
+  padding: 2rem;
+  border-radius: 8px;
+}
+
+.top_section h1 {
+  font-size: 2.5rem;
+  color: #333;
+}
+
+.top_section p.lead {
+  color: #555;
+}
+
+.top_section .btn-primary {
+  background-color: #4CAF50;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 20px;
+}
+
+.top_section .btn-secondary {
+  background-color: #ff9800;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 20px;
+  color: white;
+}
+
+/* Navbar and Filter Buttons */
+#nav-bar .navbar {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-top: 1rem;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+#nav-bar .navbar-brand {
+  font-weight: bold;
+  color: #4CAF50;
+}
+
+#nav-bar .nav-link {
+  color: #555;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  transition: background-color 0.2s ease;
+}
+
+#nav-bar .nav-link:hover {
+  background-color: #e0f7f4;
+  color: #333;
+}
+
+#nav-bar .nav-link.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+/* Search and Reset Button */
+#nav-bar .form-control {
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+}
+
+#nav-bar .btn-outline-success {
+  border-radius: 20px;
+  color: #4CAF50;
+  border-color: #4CAF50;
+  padding: 0.5rem 1rem;
+}
+
+#nav-bar .btn-outline-success:hover {
+  background-color: #4CAF50;
+  color: white;
+  border-color: #4CAF50;
+}
+
+/* Quiz Cards */
+.card {
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.card-title {
+  font-weight: bold;
+  color: #333;
+}
+
+.card-text {
+  color: #666;
+}
+
+/* Start Quiz Button */
+.btn-primary {
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+}
+
+.btn-primary:hover {
+  background-color: #388E3C;
+  color: #fff;
+}
+
+/* Progress Bar */
+.progress {
+  height: 8px;
+  border-radius: 20px;
+}
+
+.progress-bar {
+  background-color: #4CAF50;
+}
+
+/* Submit and Back Buttons */
+.btn-success {
+  background-color: #4CAF50;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+}
+
+.btn-secondary {
+  background-color: #ff9800;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  color: white;
+  border-radius: 8px;
+}
+
+/* Responsive Spacing */
+@media (max-width: 768px) {
+  .top_section {
+      padding: 1.5rem;
+  }
+  .card {
+      margin-bottom: 1.5rem;
+  }
+}
+/* Active Filter Styling */
+.active-filter {
+background-color: #4CAF50; /* Green fill for active filter */
+color: white; /* White text for better contrast */
+border-radius: 20px;
+padding: 0.5rem 1rem;
+transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Standard nav-link styling (non-active state) */
+.nav-link {
+color: #555;
+padding: 0.5rem 1rem;
+border-radius: 20px;
+transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-link:hover {
+background-color: #e0f7f4;
+color: #333;
+}
+</style>

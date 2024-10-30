@@ -47,10 +47,7 @@
           <a href="#" @click="triggerAll">All</a>
           <a href="#" @click="changePet_state">Pets</a>
           <a href="#" @click="changetree_state">Trees</a>
-          <a href="#">Background</a>
-          <div class="saved-wishlist">
-            <p>Background owned</p>
-          </div>
+
         </div>
       </div>
 
@@ -67,8 +64,8 @@
           <div class="item" v-for="item of shop_display()" @click="purchase(item)">
             <img :src="item.tree_png" alt="FAMAS Pulse" />
             <h3>{{ item.item }}</h3>
-            <p class="price">{{ item.price }}</p>
-            <p class="time">{{ item.growth_points }}</p>
+            <p class="price"><span style="color: white;"></span>Cost: {{ item.price }}</p>
+            <p class="time" ><span style="color: white;">Cost to grow: </span>{{ item.growth_points }}</p>
           </div>
         </div>
       </div>
@@ -77,13 +74,13 @@
     <div v-if="fact_box.status" class="fact_box">
       <div class="content align-content-center">
         <button type="button" @click="fact_box.status = false" class="btn btn-secondary close">X</button>
-        <div class="row">
-          <div class="col align-content-center">
+        <div class="row m-3">
+          <div class="col-12 col-xl-6 align-content-center">
             <div class="container">
               <img :src="fact_box.img" style="width: 100%;" />
             </div>
           </div>
-          <div class="col text-center">
+          <div class="col-12 col-xl-6 text-center">
             <h1>Some fun facts</h1>
             <p>{{ fact_box.description }}</p>
           </div>
@@ -384,7 +381,7 @@ update_tree()
 <style scoped>
 #app {
   background-color: #54a186;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .content {
@@ -400,8 +397,8 @@ update_tree()
 }
 
 .fact_box {
-  height: 50%;
-  width: 50%;
+  height: 30vw;
+  width: 50vw;
   background-color: #4caf50;
   position: fixed;
   top: 50%;
@@ -551,12 +548,7 @@ update_tree()
 
 
 /* for shop */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
-}
+
 
 .shop {
   display: flex;
@@ -566,7 +558,7 @@ update_tree()
 
 .sidebar {
   width: 250px;
-
+  transition: width 0.3s ease;
   background-color: #2a2a2a;
   padding: 20px;
 }
@@ -586,7 +578,9 @@ update_tree()
 
 .menu a.active,
 .menu a:hover {
-  opacity: 1;
+  color: #4caf50; /* Light green on hover */
+  background-color: #1f1f1f; /* Slightly darker background */
+  padding-left: 15px; /* Indent to show it's active */
 }
 
 .saved-wishlist {
@@ -631,6 +625,8 @@ update_tree()
   border: none;
   border-radius: 5px;
   width: 40%;
+  background-color: white;
+  height: 60%;
 }
 
 .item-grid {
@@ -742,13 +738,17 @@ update_tree()
 
   #searchBar {
     width: 100%;
+    height: 60%;
   }
 
 }
 
 
 @media (max-width: 992px) {
-
+  .fact_box{
+    height: 50vw;
+    width: 50vw;
+  }
   .box {
     height: 10vw;
     width: 10vw;
@@ -776,6 +776,9 @@ update_tree()
 
 /* Media query for smaller screens */
 @media (max-width: 768px) {
+  .fact_box h1{
+    font-size: medium;
+  }
   .hamburger {
     display: block;
     /* Show hamburger on small screens */
