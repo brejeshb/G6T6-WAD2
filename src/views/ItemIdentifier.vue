@@ -16,12 +16,7 @@
             <div class="card-body">
               <h3>{{ card.title }}</h3>
               <p>{{ card.text }}</p>
-              <button
-                type="button"
-                class="btn btn-primary"
-                :data-bs-target="card.modalTarget"
-                data-bs-toggle="modal"
-              >
+              <button type="button" class="btn btn-primary" :data-bs-target="card.modalTarget" data-bs-toggle="modal">
                 {{ card.buttonText }}
               </button>
             </div>
@@ -31,13 +26,8 @@
     </div>
 
     <!-- Modals -->
-    <div
-      class="modal fade"
-      id="modalLocateBins"
-      tabindex="-1"
-      aria-labelledby="modalLocateBinsLabel"
-      aria-hidden="true"
-    >
+    <div class="modal fade" id="modalLocateBins" tabindex="-1" aria-labelledby="modalLocateBinsLabel"
+      aria-hidden="true">
       <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
@@ -50,12 +40,7 @@
               <div class="row">
                 <div class="col-3">
                   <label for="search-location" class="form-label">Location</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    v-model="searchText"
-                    placeholder="Search your location"
-                  />
+                  <input type="text" class="form-control" v-model="searchText" placeholder="Search your location" />
                   <button class="btn btn-primary mt-2" @click="performSearch">Search</button>
                 </div>
                 <div class="col-9">
@@ -283,4 +268,88 @@ export default {
 
 <style scoped>
 /* Include relevant CSS here */
+template {
+  background-color: #FEFAE0;
+  color: #333;
+}
+
+.banner {
+  position: relative;
+  height: 500px;
+  overflow: hidden;
+}
+
+.banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.7;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.banner-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: black;
+  text-align: center;
+  z-index: 2;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.info-section {
+  padding: 50px 20px;
+  text-align: center;
+}
+
+.info-card {
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 30%;
+  margin: 10px;
+  text-align: center;
+}
+
+.btn-primary {
+  background-color: #d32f2f;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #c62828;
+}
+
+.card-img-top {
+  border-radius: 10px 10px 0 0;
+}
+
+.upload-container {
+  border: 2px dashed #798645;
+  border-radius: 10px;
+  padding: 20px;
+  position: relative;
+  text-align: center;
+  color: #798645;
+  overflow: hidden;
+}
+
+.upload-container p {
+  margin: 0;
+  font-weight: bold;
+  color: #798645;
+}
+
+.upload-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: none;
+  border-radius: 10px;
+}
 </style>
