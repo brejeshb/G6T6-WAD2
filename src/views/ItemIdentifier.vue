@@ -1,84 +1,89 @@
 <template>
-  <div>
-    <div class="banner">
-      <img src="" alt="Banner Image" class="banner-img" />
-      <div class="banner-text">
-        <h1 class="display-3">Welcome to RecycleNow!</h1>
-        <p class="lead">Your guide to smart recycling and sustainable living</p>
-      </div>
-    </div>
-
-    <div class="info-section">
-      <div class="row">
-        <div class="col" v-for="card in infoCards" :key="card.id">
-          <div class="card">
-            <img :src="card.image" class="card-img-top" alt="Map Image" />
-            <div class="card-body">
-              <h3>{{ card.title }}</h3>
-              <p>{{ card.text }}</p>
-              <button type="button" class="btn btn-primary" :data-bs-target="card.modalTarget" data-bs-toggle="modal">
-                {{ card.buttonText }}
-              </button>
-            </div>
-          </div>
+  <div class="body">
+    <div>
+      <div class="banner">
+        <img src="" alt="Banner Image" class="banner-img" />
+        <div class="banner-text">
+          <h1 class="display-3">Welcome to RecycleNow!</h1>
+          <p class="lead">Your guide to smart recycling and sustainable living</p>
         </div>
       </div>
-    </div>
 
-    <!-- Modals -->
-    <div class="modal fade" id="modalLocateBins" tabindex="-1" aria-labelledby="modalLocateBinsLabel"
-      aria-hidden="true">
-      <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="modalLocateBinsLabel">Locate Recycling Bins</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <h3>Find Recycling Bins Nearby</h3>
-            <div class="container">
-              <div class="row">
-                <div class="col-3">
-                  <label for="search-location" class="form-label">Location</label>
-                  <input type="text" class="form-control" v-model="searchText" placeholder="Search your location" />
-                  <button class="btn btn-primary mt-2" @click="performSearch">Search</button>
-                </div>
-                <div class="col-9">
-                  <div id="map" style="width: 100%; height: 500px;"></div>
-                </div>
+      <div class="info-section">
+        <div class="row">
+          <div class="col" v-for="card in infoCards" :key="card.id">
+            <div class="card">
+              <img :src="card.image" class="card-img-top" alt="Map Image" />
+              <div class="card-body">
+                <h3>{{ card.title }}</h3>
+                <p>{{ card.text }}</p>
+                <button type="button" class="btn btn-primary" :data-bs-target="card.modalTarget" data-bs-toggle="modal">
+                  {{ card.buttonText }}
+                </button>
               </div>
             </div>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+      <!-- Modals -->
+      <div class="modal fade" id="modalLocateBins" tabindex="-1" aria-labelledby="modalLocateBinsLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalLocateBinsLabel">Locate Recycling Bins</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <h3>Find Recycling Bins Nearby</h3>
+              <div class="container">
+                <div class="row">
+                  <div class="col-3">
+                    <label for="search-location" class="form-label">Location</label>
+                    <input type="text" class="form-control" v-model="searchText" placeholder="Search your location" />
+                    <button class="btn btn-primary mt-2" @click="performSearch">Search</button>
+                  </div>
+                  <div class="col-9">
+                    <div id="map" style="width: 100%; height: 500px;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="addImgModal" tabindex="-1" aria-labelledby="addImgModal" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="addImgModal">Upload Item Image</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+              <div class="upload-container" @click="triggerImageUpload">
+                <p id="uploadText">Drop image or click to select<br>JPG, PNG, BMP, or WEBP</p>
+                <img v-if="imagePreviewUrl" :src="imagePreviewUrl" alt="Image Preview" id="imagePreview" />
+              </div>
+              <input type="file" id="imageInput" accept="image/*" style="display: none" @change="previewImageModal" />
+              <p id="result" style="margin-top: 10px;">{{ resultMessage }}</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn main-btns" @click="analyseImage">Check Recyclability</button>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="modal fade" id="addImgModal" tabindex="-1" aria-labelledby="addImgModal" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="addImgModal">Upload Item Image</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body text-center">
-            <div class="upload-container" @click="triggerImageUpload">
-              <p id="uploadText">Drop image or click to select<br>JPG, PNG, BMP, or WEBP</p>
-              <img v-if="imagePreviewUrl" :src="imagePreviewUrl" alt="Image Preview" id="imagePreview" />
-            </div>
-            <input type="file" id="imageInput" accept="image/*" style="display: none" @change="previewImageModal" />
-            <p id="result" style="margin-top: 10px;">{{ resultMessage }}</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn main-btns" @click="analyseImage">Check Recyclability</button>
-          </div>
-        </div>
-      </div>
-    </div>
+
   </div>
+
 </template>
 
 <script>
@@ -268,7 +273,7 @@ export default {
 
 <style scoped>
 /* Include relevant CSS here */
-template {
+.body {
   background-color: #FEFAE0;
   color: #333;
 }
