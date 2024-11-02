@@ -47,6 +47,7 @@
           <a href="#" @click="triggerAll">All</a>
           <a href="#" @click="changePet_state">Pets</a>
           <a href="#" @click="changetree_state">Trees</a>
+          <p>Your current points: {{ cal_data.current_points }}</p>
 
         </div>
       </div>
@@ -99,7 +100,7 @@ fetchCalculationData()
 
 async function readData() {
   console.log("trying")
-  let { data } = await supabase
+  const { data } = await supabase
     .from('UserTreesStats')
     .select('*')
 
@@ -719,6 +720,10 @@ update_tree()
   .item-grid {
     grid-template-columns: repeat(auto-fill, minmax(33%, 1fr));
   }
+  .fact_box{
+    height: 50vw;
+    width: 50vw;
+  }
 
   .top-bar {
     flex-wrap: wrap;
@@ -778,6 +783,10 @@ update_tree()
 @media (max-width: 768px) {
   .fact_box h1{
     font-size: medium;
+  }
+  .fact_box{
+    height: 50vh;
+    width: 50vw;
   }
   .hamburger {
     display: block;
