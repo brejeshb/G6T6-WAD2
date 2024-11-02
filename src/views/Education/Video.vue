@@ -24,13 +24,16 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                          <a class="nav-link" aria-current="page" href="#" @click="filter_recycle=false; filter_upcycle=false;videoFiltering() ">All</a>
+                          <a class="nav-link" aria-current="page" :class="{ 'active-filter': activeFilter === 'all' }" 
+                          @click.prevent="activeFilter = 'all'" href="#"  @click="filter_recycle=false; filter_upcycle=false;videoFiltering() ">All</a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link" aria-current="page" href="#" @click="filter_recycle=true; filter_upcycle=false;videoFiltering()">Recycle</a>
+                          <a class="nav-link" aria-current="page" :class="{ 'active-filter': activeFilter === 'recycling' }" 
+                          @click.prevent="activeFilter = 'recycling'" href="#" @click="filter_recycle=true; filter_upcycle=false;videoFiltering()">Recycle</a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link" aria-current="page" href="#" @click="filter_recycle=false; filter_upcycle=true;videoFiltering()">Upcycle</a>
+                          <a class="nav-link" aria-current="page" :class="{ 'active-filter': activeFilter === 'upcycling' }" 
+                          @click.prevent="activeFilter = 'upcycling'" href="#" @click="filter_recycle=false; filter_upcycle=true;videoFiltering()">Upcycle</a>
                         </li>
                       </ul>
                       <form class="d-flex" role="search">
@@ -63,7 +66,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 
 
 // Environment variables
@@ -84,9 +87,16 @@ const upcycle_videos = ref([]);
 const recycle_videos = ref([]);
 const filter_recycle = ref(false);
 const filter_upcycle = ref(false);
-
+const activeFilter = ref('all');
 // Fetch videos on mount
 onMounted(fetchVideos);
+const filteredQuizzes = computed(() => {
+return quizzes.filter(quiz => {
+  const matchesCategory = activeFilter.value === 'all' || quiz.category === activeFilter.value;
+  const matchesSearch = quiz.title.toLowerCase().includes(search.value.toLowerCase());
+  return matchesCategory && matchesSearch;
+});
+});
 
 // Functions
 async function fetchVideos() {
