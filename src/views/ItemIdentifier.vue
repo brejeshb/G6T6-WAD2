@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="banner">
-      <img src="img/banner.png" alt="Banner Image" class="banner-img" />
+      <img src="" alt="Banner Image" class="banner-img" />
       <div class="banner-text">
         <h1 class="display-3">Welcome to RecycleNow!</h1>
         <p class="lead">Your guide to smart recycling and sustainable living</p>
@@ -136,20 +136,37 @@ export default {
     };
   },
   mounted() {
-    this.initMap();
+    this.loadGoogleMapsScript().then(() => {
+      this.initMap();
+    });
   },
   methods: {
+    loadGoogleMapsScript() {
+      return new Promise((resolve, reject) => {
+        if (typeof google !== "undefined" && google.maps) {
+          resolve(); // Script is already loaded
+        } else {
+          const script = document.createElement("script");
+          script.src = `https://maps.googleapis.com/maps/api/js?key=${cs_key}&libraries=geometry`;
+          script.async = true;
+          script.defer = true;
+          script.onload = resolve;
+          script.onerror = reject;
+          document.head.appendChild(script);
+        }
+      });
+    },
     initMap() {
-      this.map = new google.maps.Map(document.getElementById('map'), {
+      this.map = new google.maps.Map(document.getElementById("map"), {
         center: { lat: 1.3521, lng: 103.8198 },
-        zoom: 13
+        zoom: 13,
       });
 
       this.directionsService = new google.maps.DirectionsService();
       this.directionsRenderer = new google.maps.DirectionsRenderer({
         map: this.map,
         suppressMarkers: true,
-        polylineOptions: { strokeColor: '#006400', strokeWeight: 6 }
+        polylineOptions: { strokeColor: "#006400", strokeWeight: 6 },
       });
 
       fetch('./RecyclingBins.json')
