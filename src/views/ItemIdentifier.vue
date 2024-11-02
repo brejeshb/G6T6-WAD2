@@ -98,11 +98,14 @@
 
 <script>
 import axios from 'axios';
+const cs_key = import.meta.env.VITE_MAPS_API_KEY;
+import MY_JSON from './RecyclingBins.json';
 
 export default {
   data() {
     return {
       map: null,
+      myJson: MY_JSON,
       recyclingBins: [],
       mapMarkers: [],
       searchLocationMarker: null,
@@ -115,7 +118,7 @@ export default {
         {
           id: 1,
           image:
-            'https://maps.googleapis.com/maps/api/staticmap?center=1.3521,103.8198&zoom=13&size=600x300&key=API_KEY',
+            `https://maps.googleapis.com/maps/api/staticmap?center=1.3521,103.8198&zoom=13&size=600x300&key=${cs_key}`,
           title: 'Recycle Where?',
           text: 'Find the nearest recycling bin in your area with ease.',
           buttonText: 'Locate Bins',
@@ -149,7 +152,7 @@ export default {
         polylineOptions: { strokeColor: '#006400', strokeWeight: 6 }
       });
 
-      fetch('./RecyclingBins.geojson')
+      fetch('./RecyclingBins.json')
         .then((response) => response.json())
         .then((data) => {
           this.recyclingBins = data.features;
