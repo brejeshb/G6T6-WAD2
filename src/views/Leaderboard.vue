@@ -64,86 +64,101 @@
                     </ul>
                 </div>
             </div>
+
         </div>
+
+        <div class="svg-container">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="#798645">
+                <rect fill="#FEFAE0" width="100%" height="100%" />
+                <path d="M0 0v100c250 0 375-24 500-48 125 24 250 48 500 48V0H0Z" opacity=".5"></path>
+                <path d="M0 0v4c250 0 375 24 500 48C625 28 750 4 1000 4V0H0Z"></path>
+            </svg>
+        </div>
+
+        <div class="bar-chart">
+
+            <div class="col-8 offset-2 py-5">
+                <div class="card">
+                    <div class="card-body">
+                        <h1>Overall user ranking</h1>
+                        <hr>
+
+                        <!-- <BarChart /> -->
+                        <BarChart />
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+
+
     </div>
+
+
 </template>
 
-<script>
-import { ref, onMounted } from 'vue'
-import { supabase } from '../lib/supabaseClient' // Adjust path to your Supabase instance
-const players = ref([])
 
-export default {
-    name: "RecyclingLeaderboard",
-    data() {
-        return {
-            players: [],
-            isWeekly: true,
-        };
-    },
-    computed: {
-        topPlayers() {
-            return this.players.filter(player => player.rank <= 3);
-        },
-        sortedPlayers() {
-            return this.players.filter(player => player.rank > 3);
-        }
-    },
-    methods: {
-        getPodiumClass(rank) {
-            return rank === 1 ? 'first-place' : rank === 2 ? 'second-place' : 'third-place';
-        },
-        sortLeaderboard(type) {
-            this.isWeekly = type === 'weekly';
-            this.players.sort((a, b) => this.isWeekly ? b.weeklyScore - a.weeklyScore : b.score - a.score);
-        },
+<script setup lang="ts">
+import { ref, computed, onMounted } from 'vue';
+import { supabase } from '../lib/supabaseClient';
+import BarChart from '../views/barchart.vue';
 
-        async fetchLeaderboardData() {
-            // Clear the current players array
-            this.players = [];
+// Data and state
+const players = ref([]);
+const isWeekly = ref(true);
 
-            // Define date range for weekly scores
-            const endDate = new Date();
-            const startDate = new Date();
-            startDate.setDate(endDate.getDate() - 7);
+// Computed properties
+const topPlayers = computed(() => players.value.filter(player => player.rank <= 3));
+const sortedPlayers = computed(() => players.value.filter(player => player.rank > 3));
 
-            // Convert dates to ISO string format
-            const formattedStartDate = startDate.toISOString();
-            const formattedEndDate = endDate.toISOString();
+// Methods
+function getPodiumClass(rank: number) {
+    return rank === 1 ? 'first-place' : rank === 2 ? 'second-place' : 'third-place';
+}
 
-            // Fetch data from Supabase based on weekly or all-time criteria
-            let { data: UserOverallStatsTable, error } = await supabase
-                    .from('UserOverallStatsTable')
-                    .select('username, total_points_accumulated')
-                    .order('total_points_accumulated', {ascending: false})
+function sortLeaderboard() {
+    players.value.sort((a, b) => b.score - a.score);
+}
 
-            console.log(UserOverallStatsTable)
-            this.players = UserOverallStatsTable
+// Fetch leaderboard data
+async function fetchLeaderboardData() {
+    players.value = []; // Clear current players
+    const { data: UserOverallStatsTable, error } = await supabase
+        .from('UserOverallStatsTable')
+        .select('username, total_points_accumulated')
+        .order('total_points_accumulated', { ascending: false });
 
-            if (error) {
-                console.error('Error fetching leaderboard data:', error);
-                return;
-            }
-
-            this.players = UserOverallStatsTable.map((record, index) => ({
-                rank: record.rank || index + 1,
-                name: record.username,
-                weeklyScore: record.total_points_accumulated,
-            }));
-        }
-    },
-    async mounted() {
-        await this.fetchLeaderboardData();
-        this.sortLeaderboard('weekly');
+    if (error) {
+        console.error('Error fetching leaderboard data:', error);
+        return;
     }
-};
 
+    players.value = UserOverallStatsTable.map((record, index) => ({
+        rank: index + 1,
+        name: record.username,
+        weeklyScore: record.total_points_accumulated,
+    }));
+}
 
+// Lifecycle hook
+onMounted(async () => {
+    await fetchLeaderboardData();
+    sortLeaderboard();
+});
 </script>
 
+
 <style scoped>
+.bar-chart {
+    margin-top: 0px;
+    background-color: #FEFAE0
+}
+
 .navbar {
-    background-color: transparent !important; /* Ensures no background */
+    background-color: transparent !important;
+    /* Ensures no background */
     outline: none;
 }
 
@@ -183,16 +198,20 @@ export default {
     background-color: #798645;
     height: 100vh;
     width: 100vw;
-    max-width: 100%;    
+    max-width: 100%;
 }
 
 .leaderboard-title {
-    text-align: left;
     color: white;
-    margin-top: 30px;
     margin-left: 100px;
+}
+
+h1 {
+    text-align: left;
+    margin-top: 30px;
     font-size: 3rem;
     font-weight: bold;
+    margin-left: 30px;
 }
 
 

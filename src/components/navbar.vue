@@ -4,6 +4,7 @@
       <v-toolbar-title>RecycleLah</v-toolbar-title>
 
       <v-btn text to="/Home">Home</v-btn>
+      <v-btn text to="/Leaderboard">Leaderboard</v-btn>
       <v-btn text to="/Forest">Forest</v-btn>
       <v-btn text to="/ItemIdentifier">ItemIdentifier</v-btn>
       <v-btn text to="/Education/Quiz">Quiz</v-btn>
