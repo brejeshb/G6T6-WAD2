@@ -90,12 +90,13 @@
 
 const cs_key = import.meta.env.VITE_MAPS_API_KEY;
 import MY_JSON from './RecyclingBins.json';
+console.log(MY_JSON);
 
 export default {
   data() {
     return {
       map: null,
-      myJson: MY_JSON,
+      mapJson: MY_JSON,
       recyclingBins: [],
       mapMarkers: [],
       searchLocationMarker: null,
@@ -159,12 +160,6 @@ export default {
         polylineOptions: { strokeColor: "#006400", strokeWeight: 6 },
       });
 
-      fetch('./RecyclingBins.json')
-        .then((response) => response.json())
-        .then((data) => {
-          this.recyclingBins = data.features;
-        })
-        .catch((error) => console.error('Error loading GeoJSON data:', error));
     },
     performSearch() {
       const geocoder = new google.maps.Geocoder();
@@ -187,7 +182,7 @@ export default {
           const bounds = new google.maps.LatLngBounds();
           bounds.extend(searchLocation);
 
-          this.recyclingBins.forEach((feature) => {
+          this.mapJson.features.forEach((feature) => {
             const [lng, lat] = feature.geometry.coordinates;
             const binLocation = new google.maps.LatLng(lat, lng);
 
