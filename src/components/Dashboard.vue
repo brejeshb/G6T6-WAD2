@@ -109,11 +109,11 @@
                         </div>
                     </div>
 
-                    <div class="col rounded-4 pieLine d-flex" style="margin-right: 3em;">
-                        <div class="w-100">
-                            <h1>Socials</h1>
-                        </div>
+                    <div class="col rounded-4 pieLine h-100">
+                        <!-- Import socialsIcons.vue-->
+                        <SocialsDiv />
                     </div>
+
                 </div>
             </div>
 
@@ -137,6 +137,7 @@ import leaderboardRanking from './dashboardCharts/leaderboardRankingOverTime.vue
 import bubble from './dashboardCharts/bubbleChart.vue';
 import Radar from './dashboardCharts/radar.vue';
 import Doughnut from './dashboardCharts/doughnut.vue';
+import SocialsDiv from './dashboardCharts/socialsIcons.vue';
 
 const supabaseUrl = "https://ikqzxknjqayiwicpfdha.supabase.co"; // Replace with your Supabase URL
 const supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlrcXp4a25qcWF5aXdpY3BmZGhhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjk2NjYxNTYsImV4cCI6MjA0NTI0MjE1Nn0.R6sYvpC0JmR07N_ktN8dWB8F_YTqLdxWMUJg6HBOQrw"; // Replace with your Supabase anon key
@@ -151,7 +152,8 @@ export default {
         leaderboardRanking,
         bubble,
         Radar,
-        Doughnut
+        Doughnut,
+        SocialsDiv
     },
     data() {
         return {
@@ -525,7 +527,7 @@ export default {
 
                     this.radarUser.push(userTotal / maxTotal * 100);
                     this.radarAvgUser.push((totalPoints / UserOverallStatsTable11.length) / maxTotal * 100);
-                    console.log((totalPoints / UserOverallStatsTable11.length)/maxTotal);
+                    console.log((totalPoints / UserOverallStatsTable11.length) / maxTotal);
 
                     // 2. settle Quizzes Completed 
                     try {

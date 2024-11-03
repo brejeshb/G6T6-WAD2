@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import Navbar from './components/navbar.vue';
+import DashboardPage from './views/DashboardPage.vue';
+
 </script>
 
 
@@ -11,9 +13,11 @@ import Navbar from './components/navbar.vue';
       <router-link to="/ItemIdentifier">ItemIdentifier</router-link>
       <router-link to="/Education/Quiz">Quiz</router-link>
       <router-link to="/Education/Video">Video</router-link>
+
     </nav> -->
-    
-    <Navbar/>
+
+    <Navbar />
+    <!-- <DashboardPage/>> -->
     <router-view />
   </div>
 </template>

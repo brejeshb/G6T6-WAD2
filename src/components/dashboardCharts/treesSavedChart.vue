@@ -3,10 +3,9 @@
         <div class="pt-2 ps-2 pe-2">
             <h1 style="text-align: center;">Your Trees & Co2 Savings Over Time </h1>
         </div>
-
-        <div style="position: relative; height:100%;width: 100%"
-            class="flex-grow-1 d-flex align-items-center justify-content-center">
-            <canvas id="stackedChart"></canvas>
+        
+        <div style="position: relative; height:100%;width: 100%" class="flex-grow-1 d-flex align-items-center justify-content-center">
+            <canvas id="stackedChart" ></canvas>
         </div>
     </div>
 </template>
