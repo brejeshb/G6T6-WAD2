@@ -114,7 +114,6 @@ export default {
   top: 0;
   left: 0;
   right: 0;
-  background-color: #1976d2; /* Vuetify primary color */
   color: white;
 }
 
