@@ -53,13 +53,14 @@
       </div>
 
       <div class="main-content">
-        <div class="top-bar">
-          <input id="searchBar" type="text" placeholder="Search items..." @input="shop_display()" v-model="search" />
-          <select class="filters" @change="shop_display()" v-model="sort">
+        <div class="row mb-3">
+          <input id="searchBar" class="col-lg-5 col-sm-10 col-8 me-1 rounded" type="text" placeholder="Search items..." @input="shop_display()" v-model="search" />
+          <button type="button"  @click="shop_open = false" class="btn btn-secondary col-lg-1 col-xs-2 col-1 order-lg-last mx-4" style="width: 50px;">X</button>
+          <select class="filters col-lg-5 col-sm-10 col-8" @change="shop_display()" v-model="sort">
             <option>Sort by: Highest price</option>
             <option>Lowest price</option>
           </select>
-
+          
         </div>
 
         <div class="item-grid">
@@ -520,7 +521,7 @@ update_tree()
 
 #searchBar {
 
-  width: 50%;
+
   height: 35px;
   background-color: lightgray;
   border: none;
@@ -607,31 +608,20 @@ update_tree()
 
 }
 
-.top-bar {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
 
-}
 
-.top-bar input[type=text] {
-  width: 80%;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-}
 
 
 
 .filters {
   
-  margin-left: 20px;
-  padding: 10px;
   border: none;
+
   border-radius: 5px;
-  width: 40%;
+
   background-color: white;
-  height: 60%;
+  height: 35px;
+
 }
 
 .item-grid {
@@ -726,26 +716,15 @@ update_tree()
   }
 
 
-  .top-bar {
-    flex-wrap: wrap;
-    width: 80%;
-  }
 
-  .filters {
-    margin-top: 10px;
-    width: 100%;
-    margin-left: 0px;
 
-  }
+
 
   .shop {
     width: 100vw;
   }
 
-  #searchBar {
-    width: 100%;
-    height: 60%;
-  }
+
 
 }
 
