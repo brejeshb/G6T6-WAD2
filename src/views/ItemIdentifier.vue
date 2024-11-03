@@ -87,7 +87,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+
 const cs_key = import.meta.env.VITE_MAPS_API_KEY;
 import MY_JSON from './RecyclingBins.json';
 
