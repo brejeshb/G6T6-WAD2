@@ -59,6 +59,7 @@
             <option>Sort by: Highest price</option>
             <option>Lowest price</option>
           </select>
+
         </div>
 
         <div class="item-grid">
@@ -74,7 +75,13 @@
 
     <div v-if="fact_box.status" class="fact_box">
       <div class="content align-content-center">
-        <button type="button" @click="fact_box.status = false" class="btn btn-secondary close">X</button>
+        <div class="row m-3">
+          <div class="col-xl-1 col-lg-2 col-md-4 ">          <button type="button" @click="fact_box.status = false" class="btn btn-secondary">X</button></div>
+          <div class="col-xl-11 col-lg-10 col-md-8 "></div>
+          
+
+        </div>
+        
         <div class="row m-3">
           <div class="col-12 col-xl-6 align-content-center">
             <div class="container">
@@ -231,6 +238,7 @@ async function purchase(item) {
       .update({ curr_trees_points: item.growth_points })
       .eq('username', 'ann2')
     fetchCalculationData()
+    alert('Item purchased, please exit the shop to view it');
   }
 
 }
@@ -391,15 +399,10 @@ update_tree()
   height: 100%;
 }
 
-.close {
-  position: absolute;
-  right: 5%;
-  top: 5%;
-}
+
 
 .fact_box {
-  height: 30vw;
-  width: 50vw;
+
   background-color: #4caf50;
   position: fixed;
   top: 50%;
@@ -408,6 +411,7 @@ update_tree()
   transform: translate(-50%, -50%);
   border-radius: 10%;
   z-index: 10;
+
 
 }
 
@@ -620,7 +624,7 @@ update_tree()
 
 
 .filters {
-  margin-right: 100px;
+  
   margin-left: 20px;
   padding: 10px;
   border: none;
@@ -720,10 +724,7 @@ update_tree()
   .item-grid {
     grid-template-columns: repeat(auto-fill, minmax(33%, 1fr));
   }
-  .fact_box{
-    height: 50vw;
-    width: 50vw;
-  }
+
 
   .top-bar {
     flex-wrap: wrap;
@@ -750,10 +751,7 @@ update_tree()
 
 
 @media (max-width: 992px) {
-  .fact_box{
-    height: 50vw;
-    width: 50vw;
-  }
+
   .box {
     height: 10vw;
     width: 10vw;
@@ -784,10 +782,7 @@ update_tree()
   .fact_box h1{
     font-size: medium;
   }
-  .fact_box{
-    height: 50vh;
-    width: 50vw;
-  }
+
   .hamburger {
     display: block;
     /* Show hamburger on small screens */

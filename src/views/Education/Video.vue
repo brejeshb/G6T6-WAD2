@@ -14,8 +14,8 @@
           </div>
         </section>
       <div id="main_content" class="container mt-2">
-          <div id="sidebar">
-              <nav class="navbar navbar-expand-lg bg-body-tertiary flex-column">
+          <div id="sidebar ">
+              <nav class="navbar rounded shadow navbar-expand-lg bg-body-tertiary flex-column">
                   <div class="container-fluid">
                     <a class="navbar-brand ms-5" href="#">Filter</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -277,6 +277,10 @@ body {
   background-color: #388E3C;
   color: #fff;
 }
+.btn-secondary:hover {
+      background-color:orange;
+      color: #fff;
+  }
 
 /* Progress Bar */
 .progress {

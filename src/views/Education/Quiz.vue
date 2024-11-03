@@ -585,6 +585,10 @@ function getScorePercentage(quizId) {
       background-color: #388E3C;
       color: #fff;
   }
+  .btn-secondary:hover {
+      background-color:orange;
+      color: #fff;
+  }
   
   /* Progress Bar */
   .progress {
