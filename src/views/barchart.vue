@@ -13,7 +13,7 @@ import {
     BarElement,
     CategoryScale,
     LinearScale
-} from 'chart.js'
+} from 'chart.js';
 import { Bar } from 'vue-chartjs'
 import { ref, onMounted } from 'vue'
 import { supabase } from '../lib/supabaseClient';
