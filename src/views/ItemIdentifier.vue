@@ -89,14 +89,14 @@
 <script>
 
 const cs_key = import.meta.env.VITE_MAPS_API_KEY;
-import MY_JSON from './RecyclingBins.json';
-console.log(MY_JSON);
+import MAP_JSON from './RecyclingBins.json';
+
 
 export default {
   data() {
     return {
       map: null,
-      mapJson: MY_JSON,
+      mapJson: MAP_JSON,
       recyclingBins: [],
       mapMarkers: [],
       searchLocationMarker: null,
@@ -159,6 +159,7 @@ export default {
         suppressMarkers: true,
         polylineOptions: { strokeColor: "#006400", strokeWeight: 6 },
       });
+
 
     },
     performSearch() {
