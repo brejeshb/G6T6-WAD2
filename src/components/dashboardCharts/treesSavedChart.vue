@@ -1,11 +1,11 @@
 <template>
-    <div class="h-100">
-        <div class="pt-2 ps-2 pe-2">
+    <div class="w-100">
+        <div class="">
             <h1 style="text-align: center;">Your Trees & Co2 Savings Over Time </h1>
         </div>
-        
-        <div style="position: relative; height:100%;width: 100%" class="flex-grow-1 d-flex align-items-center justify-content-center">
-            <canvas id="stackedChart" ></canvas>
+
+        <div style="position: relative;width: 89%;height: 100%;margin: auto;">
+            <canvas id="stackedChart"></canvas>
         </div>
     </div>
 </template>
@@ -65,7 +65,8 @@ export default {
                 },
                 options: {
                     responsive: true,
-                    maintainAspectRatio: false,
+                    maintainAspectRatio: true, // Allows it to stretch to fill container
+
                     title: {
                         text: "Trees and Co2 Savings Over Time",
                         display: true,
@@ -131,6 +132,8 @@ h1 {
 }
 
 canvas {
-    width: 100% !important;
+    /* width: 80% !important;
+    height: 100% !important;
+    margin: auto !important; */
 }
 </style>

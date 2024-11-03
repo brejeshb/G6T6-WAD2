@@ -1,10 +1,10 @@
 <!-- src/dashboardCharts/PieChart.vue -->
 <template>
-    <div class="h-100">
-        <div class="pt-2 ps-2 pe-2 text-center">
+    <div class="h-100 w-100 mx-auto">
+        <div class="text-center">
             <h1>Relative Personal Stats</h1>
         </div>
-        <div style="position: relative; height:100%;width: 100%;">
+        <div style="position: relative;" class="w-75 mx-auto d-flex justify-content-center">
             <canvas id="radar"></canvas> <!-- Use ref to reference the canvas element -->
         </div>
     </div>
@@ -70,7 +70,21 @@ export default {
                             display: true
                         },
 
+                    },
+                    scales: {
+                        r: {
+                            pointLabels: {
+                                callback: function (label) {
+                                    return label.split('\n'); // Split labels by '\n' to make them multi-line
+                                }, 
+                                font :{
+                                    size: 14, 
+                                    weight: "bold"
+                                }, 
+                                padding: 20
+                            },
 
+                        }
                     }
                 },
             });
@@ -105,8 +119,5 @@ h1 {
 }
 
 /* To make pie chart not become very big after resizing*/
-/* canvas {
-    width: 80% !important;
-    height: 100% !important;
-} */
+
 </style>

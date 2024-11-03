@@ -1,12 +1,12 @@
 <!-- src/dashboardCharts/bubble.vue -->
 <template>
-    <div class="h-100 ">
-        <div class="pt-2 ps-2 pe-2 text-center h-100 mb-3">
-            <h1>Trees Saved (you vs Community)</h1>
+    <div class="w-100">
+        <div class="text-center h-100">
+            <h1>Community's Trees Saved</h1>
         </div>
-        <canvas id="bubble" ></canvas>
-        <!-- Use ref to reference the canvas element -->
-
+        <div style="position: relative;height: 100%;width:100%;margin: auto;">
+            <canvas id="bubble"></canvas>
+        </div>
     </div>
 </template>
 
@@ -52,13 +52,13 @@ export default {
                 },
                 options: {
                     responsive: true,
+                    maintainAspectRatio: true, // Allows it to stretch to fill container
 
                     plugins: {
                         legend: {
                             position: 'top',
                             labels: {
-                                padding: 10
-                            }, 
+                            },
                             display: false
                         },
                         tooltip: { intersect: true }
@@ -69,7 +69,7 @@ export default {
                             title: {
                                 display: true,
                                 text: 'Co2 Savings',
-                            }, 
+                            },
                             grid: {
                                 display: false,
                             },
@@ -102,7 +102,4 @@ h1 {
 }
 
 /* To make pie chart not become very big after resizing*/
-canvas {
-    /* height: 100% !important; */
-}
 </style>

@@ -1,19 +1,19 @@
 <template>
-  <Dashboard/>
+  <Navbar />
+  <Dashboard />
 </template>
 
 <script>
-  import Dashboard from '../components/Dashboard.vue'; 
-  
-  export default {
-    name: "DashboardPage", 
-    components:{
-      Dashboard
-    }
+import Navbar from '../components/navbar.vue';
+import Dashboard from '../components/Dashboard.vue';
+
+export default {
+  name: "DashboardPage",
+  components: {
+    Dashboard,
+    Navbar
   }
+}
 </script>
 
-<style scoped>
-
-</style>
-
+<style scoped></style>

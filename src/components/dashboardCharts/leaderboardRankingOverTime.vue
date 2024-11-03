@@ -4,7 +4,9 @@
         <div class="pt-2 ps-2 pe-2 text-center">
             <h1>Your Leaderboard Ranking Over Time</h1>
         </div>
-        <canvas id="leaderboardRanking"></canvas> <!-- Use ref to reference the canvas element -->
+        <div style="position: relative;" class="w-100 h-100 mx-auto">
+            <canvas id="leaderboardRanking"></canvas> 
+        </div>
     </div>
 </template>
 

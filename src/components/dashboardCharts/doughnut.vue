@@ -1,10 +1,12 @@
 <!-- src/dashboardCharts/PieChart.vue -->
 <template>
-    <div class="h-100">
-        <div class="pt-2 ps-2 pe-2 text-center mb-3">
+    <div class="">
+        <div class="text-center">
             <h1>Your Co2 Savings Contribution</h1>
         </div>
-        <canvas id="doughnut" class="mx-auto"></canvas> <!-- Use ref to reference the canvas element -->
+        <div style="position: relative; width: 100%;height: 100%; margin: auto;">
+            <canvas id="doughnut"></canvas> <!-- Use ref to reference the canvas element -->
+        </div>
     </div>
 </template>
 
@@ -47,7 +49,7 @@ export default {
                     ctx.fillStyle = '#788645';
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'middle';
-                    ctx.fillText(`${(data.datasets[0].data[0]/(data.datasets[0].data[0] + data.datasets[0].data[1])*100).toFixed(2)}%`, xCoor, yCoor);
+                    ctx.fillText(`${(data.datasets[0].data[0] / (data.datasets[0].data[0] + data.datasets[0].data[1]) * 100).toFixed(2)}%`, xCoor, yCoor);
                 }
             }
 
@@ -67,13 +69,14 @@ export default {
                 },
                 options: {
                     responsive: true,
+                    maintainAspectRatio: false, // Allows it to stretch to fill container
+
                     plugins: {
                         legend: {
                             position: 'top',
                             labels: {
-                                padding: 10
-                            }, 
-                            display: false 
+                            },
+                            display: false
                         },
                         tooltip: {
                             callbacks: {
@@ -106,10 +109,5 @@ h1 {
     color: #788645;
     font-weight: bold;
     font-size: 27px;
-}
-
-/* To make pie chart not become very big after resizing*/
-canvas {
-    height: 100% !important;
 }
 </style>

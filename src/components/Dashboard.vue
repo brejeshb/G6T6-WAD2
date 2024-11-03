@@ -4,6 +4,8 @@
     <!--https://ui-libs.vercel.app/-->
     <!--https://www.justinmind.com/ui-design/cards-->
     <!--Socials Animation https://www.youtube.com/watch?v=yU3giDe-N6c&list=PLpwngcHZlPacgMG_APw961UEBAmN18h8B-->
+
+
     <div class="container-fluid ps-5 pe-5 pb-5 dashboard h-100">
         <div id="dashboard" class="p-5">
             <div class="mb-5" style="color: #121F33;">
@@ -13,9 +15,9 @@
 
             <div class="container-fluid mb-5">
                 <div class="row">
-                    <div class="col me-5 rounded-4 ">
+                    <div class="col me-5 rounded-4 " style="background-color: #E8F4EA;">
                         <div>
-                            <h1 class="stats">{{ username }}</h1>
+                            <h1 class="stats" style="color: #2F5F48">{{ username }}</h1>
                             <div class="cardName">Username ࣪ ִֶָ☾.</div>
                         </div>
                         <div class="iconBox">
@@ -55,22 +57,20 @@
 
             <!-- Pie Chart + Trees Saved Stacked -->
             <div class="container-fluid mb-5"> <!-- Outer container has h-100 -->
-                <div class="row d-flex justify-content-between h-100 ">
+                <div class="row">
                     <!-- Row has h-100 and align-items-stretch -->
 
                     <!-- Left Column with Pie Chart -->
-                    <div class="col rounded-5 pieLine1 h-100 d-flex flex-column"
-                        style="margin-right: 3em; background-color: white;">
-                        <div v-if="dataLoaded"
-                            class="w-100 h-100 d-flex align-items-center justify-content-center flex-column">
+                    <div class="col rounded-5 pieLine1 w-100" style="margin-right: 3em; background-color: white;">
+                        <div v-if="dataLoaded" class="w-100">
                             <PieChart :labels="recycledLabels" :data_values="recycledDataValues" />
                         </div>
                     </div>
 
                     <!-- Right Column with Trees Saved Chart -->
-                    <div class="col-8 rounded-5 pieLine h-100 d-flex flex-column">
-                        <!-- Added d-flex flex-column to ensure full height and flex behavior -->
-                        <div v-if="treesReady" class="w-100 h-100 d-flex flex-column">
+                    <div class="col-8 rounded-5 pieLine">
+
+                        <div v-if="treesReady" class="w-100">
                             <TreesSaved :labels="timeX" :data_values="treesSaved" :data_values1="co2Savings" />
                         </div>
                     </div>
@@ -78,16 +78,16 @@
             </div>
 
             <!-- Leaderboard Ranking + Radar -->
-            <div class="container-fluid mb-5">
-                <div class="row d-flex justify-content-between">
-                    <div class="col-7 rounded-4 pieLine d-flex " style="margin-right: 3em;background-color: #D3E4CD;">
+            <div class="container-fluid mb-5 w-100">
+                <div class="row d-flex justify-content-between w-100 h-100">
+                    <div class="col-7 rounded-4 pieLine d-flex" style="margin-right: 3em;background-color: #D3E4CD;">
                         <div v-if="leaderboardReady" class="w-100 h-100">
                             <leaderboardRanking :labels="timeX" :data_values="highestRankData" class="h-100" />
-
                         </div>
                     </div>
+
                     <div class="col rounded-4">
-                        <div v-if="radarReady" class="w-100 h-100">
+                        <div v-if="radarReady" class="w-100 h-100 mx-auto d-flex justify-content-center">
                             <Radar :labels="radarCat" :data_values="radarUser" :data_values1="radarAvgUser"
                                 style="margin: auto;" />
                         </div>
@@ -96,20 +96,20 @@
             </div>
 
             <!--Last Row-->
-            <div class="container-fluid h-100">
-                <div class="row h-100 align-items-stretch ">
-                    <div class="col-4 rounded-4 pieLine  d-flex flex-column " style="margin-right: 3em;">
-                        <div v-if="bubbleReady" class="w-100 h-100">
+            <div class="container-fluid">
+                <div class="row h-100">
+                    <div class="col-4 rounded-4" style="margin-right: 3em;">
+                        <div v-if="bubbleReady" class="w-100">
                             <bubble :data_values="bubbleData" />
                         </div>
                     </div>
-                    <div class="col rounded-4 pieLine d-flex " style="margin-right: 3em;">
-                        <div class="w-100 h-100" v-if="doughnutReady">
+                    <div class="col rounded-4" style="margin-right: 3em;">
+                        <div class="w-100" v-if="doughnutReady">
                             <Doughnut :labels="doughnutX" :data_values="co2SavingsY" />
                         </div>
                     </div>
 
-                    <div class="col rounded-4 pieLine h-100">
+                    <div class="col rounded-4">
                         <!-- Import socialsIcons.vue-->
                         <SocialsDiv />
                     </div>
@@ -130,7 +130,8 @@ var currUser = "ann1";
 
 
 // Importing Smaller Components
-import { createClient } from '@supabase/supabase-js';
+import { supabase } from '../lib/supabaseClient';
+
 import PieChart from './dashboardCharts/piechart.vue';
 import TreesSaved from './dashboardCharts/treesSavedChart.vue';
 import leaderboardRanking from './dashboardCharts/leaderboardRankingOverTime.vue';
@@ -139,10 +140,7 @@ import Radar from './dashboardCharts/radar.vue';
 import Doughnut from './dashboardCharts/doughnut.vue';
 import SocialsDiv from './dashboardCharts/socialsIcons.vue';
 
-const supabaseUrl = "https://ikqzxknjqayiwicpfdha.supabase.co"; // Replace with your Supabase URL
-const supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlrcXp4a25qcWF5aXdpY3BmZGhhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjk2NjYxNTYsImV4cCI6MjA0NTI0MjE1Nn0.R6sYvpC0JmR07N_ktN8dWB8F_YTqLdxWMUJg6HBOQrw"; // Replace with your Supabase anon key
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 export default {
     name: "Dashboard",
@@ -183,7 +181,7 @@ export default {
 
             // for radar 
             radarReady: false,
-            radarCat: ["Total Points", "Quizzes Completed", "Trees Saved", "Current Points", "Rank Growth"],
+            radarCat: ["Total Points", "Quizzes\nCompleted", "Trees Saved", "Current Points", "Rank Growth"],
             radarUser: [],
             radarAvgUser: [],
 
@@ -755,10 +753,11 @@ h1 {
 }
 
 
+
 #dashboard .col {
     /* Card */
     position: relative;
-    background-color: #d3e4cd;
+    /* background-color: #d3e4cd; */
     padding: 30px;
     display: flex;
     justify-content: space-between;
@@ -767,14 +766,21 @@ h1 {
 
 }
 
-#dashboard #treecard {
+#dashboard .col-4 {
     /* Card */
     position: relative;
+    padding: 30px;
     display: flex;
     justify-content: space-between;
     cursor: pointer;
     box-shadow: 0 7px 25px rgb(0, 0, 0, 0.08);
+}
 
+#dashboard .col-4:hover {
+    background-color: #DBD9FF !important;
+    cursor: pointer;
+    position: relative;
+    transition: all 1s;
 }
 
 
@@ -826,128 +832,3 @@ h1 {
     transition: all 0.4s;
 }
 </style>
-
-
-<!-- Code to filter by alltime, day and week-->
-<!-- <script>
-import { Chart } from 'chart.js';
-
-export default {
-    name: "TreesSaved",
-    data() {
-        return {
-            chart: null,
-            timeX: [],
-            treesSaved: [],
-            co2Saved: []
-        };
-    },
-    mounted() {
-        // Initialize chart with all-time data by default
-        this.fetchData('alltime');
-    },
-    methods: {
-        async fetchData(filter) {
-            // Reset data arrays
-            this.timeX = [];
-            this.treesSaved = [];
-            this.co2Saved = [];
-
-            // Query Supabase based on the selected filter
-            let response;
-            if (filter === 'day') {
-                // Fetch data grouped by day
-                response = await supabase
-                    .from('UserData')
-                    .select('date, trees_saved, co2_saved')
-                    .order('date', { ascending: true })
-                    .range(0, 6); // Example: Last 7 days, adjust as needed
-            } else if (filter === 'month') {
-                // Fetch data grouped by month
-                response = await supabase
-                    .from('UserData')
-                    .select('month, trees_saved, co2_saved')
-                    .order('month', { ascending: true })
-                    .range(0, 11); // Example: Last 12 months, adjust as needed
-            } else {
-                // Fetch all-time data
-                response = await supabase
-                    .from('UserData')
-                    .select('date, trees_saved, co2_saved')
-                    .order('date', { ascending: true });
-            }
-
-            if (response.error) {
-                console.error('Error fetching data:', response.error);
-                return;
-            }
-
-            // Process data based on filter
-            const data = response.data;
-            data.forEach(entry => {
-                if (filter === 'day' || filter === 'alltime') {
-                    this.timeX.push(entry.date); // Use date for daily/all-time
-                } else if (filter === 'month') {
-                    this.timeX.push(entry.month); // Use month name for monthly view
-                }
-                this.treesSaved.push(entry.trees_saved);
-                this.co2Saved.push(entry.co2_saved);
-            });
-
-            // Update the chart
-            this.updateChart();
-        },
-        updateChart() {
-            const stackedChart = document.getElementById("stackedChart");
-
-            // Destroy the previous chart instance if it exists
-            if (this.chart) {
-                this.chart.destroy();
-            }
-
-            // Create a new chart instance
-            this.chart = new Chart(stackedChart, {
-                type: 'bar',
-                data: {
-                    labels: this.timeX,
-                    datasets: [
-                        {
-                            label: "Number of Trees Saved",
-                            data: this.treesSaved,
-                            borderWidth: 1,
-                            backgroundColor: "rgba(0, 123, 255, 0.5)",
-                            yAxisID: 'yTrees'
-                        },
-                        {
-                            label: 'CO2 Savings',
-                            data: this.co2Saved,
-                            type: 'line',
-                            borderColor: "rgba(255, 99, 132, 0.8)",
-                            backgroundColor: "rgba(255, 99, 132, 0.2)",
-                            yAxisID: 'yCO2'
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    scales: {
-                        yTrees: {
-                            type: 'linear',
-                            position: 'left',
-                            beginAtZero: true
-                        },
-                        yCO2: {
-                            type: 'linear',
-                            position: 'right',
-                            beginAtZero: true,
-                            grid: {
-                                drawOnChartArea: false
-                            }
-                        }
-                    }
-                }
-            });
-        }
-    }
-};
-</script> -->

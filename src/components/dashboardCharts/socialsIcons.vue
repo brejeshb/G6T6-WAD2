@@ -1,8 +1,9 @@
 <template>
 
-    <div class="socials-container w-100 h-100 align-items-center justify-content-center pt-5">
-        <div class=" justify-content-center">
-            <a href="https://www.instagram.com/" data-social="Instagram" style="--accent-color: #FE1184 ">
+    <div class="socials-container d-flex w-100 align-items-center justify-content-center">
+
+        <div class="justify-content-center align-items-center">
+            <a href="https://www.instagram.com/" data-social="Instagram" style="--accent-color: #FE1184 " class="mb-4">
                 <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <title>Instagram</title>
                     <path
@@ -19,8 +20,8 @@
         </div>
         <br><br><br><br>
 
-        <div class=" justify-content-center">
-            <a href="https://www.facebook.com/" data-social="Facebook" style="--accent-color: #1276FC">
+        <div class="justify-content-center align-items-center">
+            <a href="https://www.facebook.com/" data-social="Facebook" style="--accent-color: #1276FC" class="mb-4">
                 <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <title>Facebook</title>
                     <path
@@ -68,9 +69,9 @@ export default {
     display: grid;
     place-items: center;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
-    margin-bottom: 55px;
-    top: 50%;
+
     position: relative;
+    border: 2px solid var(--accent-color);
 }
 
 .socials-container a svg {
