@@ -20,7 +20,7 @@
 
             <div class="container-fluid" style="margin-bottom: 3em;">
                 <div class="row gx-5">
-                    <div class="col-md-3 col-sm-6 ">
+                    <div class="col-md-3 col-sm-6 mb-4 mb-lg-0">
                         <div class="col1 rounded-4 d-flex justify-content-between h-100 ">
                             <div class="w-75">
                                 <h1 class="stats text-wrap">{{ username }}</h1>
@@ -34,7 +34,7 @@
                     </div>
 
 
-                    <div class="col-md-3 col-sm-6 ">
+                    <div class="col-md-3 col-sm-6 mb-4 mb-lg-0">
                         <div class="col1 rounded-4 d-flex justify-content-between h-100 ">
                             <div class="w-75">
                                 <h1 class="stats text-wrap">{{ totalCo2Reduction }} kg</h1>
@@ -47,7 +47,7 @@
                         </div>
 
                     </div>
-                    <div class="col-md-3 col-sm-6">
+                    <div class="col-md-3 col-sm-6 mb-4 mb-lg-0">
                         <div class="col1 rounded-4 d-flex justify-content-between h-100">
                             <div class="w-75">
                                 <h1 class="stats text-wrap">{{ totalTreesSaved }}</h1>
@@ -60,7 +60,7 @@
                         </div>
 
                     </div>
-                    <div class="col-md-3 col-sm-6 ">
+                    <div class="col-md-3 col-sm-6 mb-4 mb-lg-0">
                         <div class="col1 rounded-4 d-flex justify-content-between h-100 ">
                             <div class="w-75">
                                 <h1 class="stats text-wrap">{{ currRankingFormatted }}</h1>
