@@ -16,7 +16,7 @@ import DashboardPage from './views/DashboardPage.vue';
     </nav> -->
     <router-link to="/Dashboard">Dashboard Page</router-link>
 
-    <!-- <Navbar /> -->
+    <Navbar />
     <!-- <DashboardPage/>> -->
     <router-view />
   </div>
