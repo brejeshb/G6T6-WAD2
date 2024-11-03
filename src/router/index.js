@@ -6,7 +6,7 @@ import Forest from '../views/shop_page/shop_page.vue';
 import ItemIdentifier from '../views/ItemIdentifier.vue';
 import Quiz from '../views/Education/Quiz.vue';
 import Video from '../views/Education/Video.vue';
-import Leaderboard from '../views/Education/Leaderboard.vue';
+import Leaderboard from '../views/Leaderboard.vue';
 
 
 const routes = [
