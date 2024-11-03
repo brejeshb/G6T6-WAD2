@@ -4,14 +4,13 @@
 </template>
 
 <script>
-import Navbar from '../components/navbar.vue';
+// import Navbar from '../components/navbar.vue';
 import Dashboard from '../components/Dashboard.vue';
 
 export default {
   name: "DashboardPage",
   components: {
     Dashboard,
-    Navbar
   }
 }
 </script>
