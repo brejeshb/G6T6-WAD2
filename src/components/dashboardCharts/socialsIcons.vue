@@ -3,7 +3,7 @@
     <div class="socials-container d-flex w-100 align-items-center justify-content-center">
 
         <div class="justify-content-center align-items-center">
-            <a href="https://www.instagram.com/" data-social="Instagram" style="--accent-color: #FE1184 " class="mb-4">
+            <a href="https://www.instagram.com/" data-social="Instagram" style="--accent-color: #FE1184; margin-bottom: 2em;">
                 <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <title>Instagram</title>
                     <path
@@ -18,10 +18,10 @@
                 </svg>
             </a>
         </div>
-        <br><br><br><br>
+
 
         <div class="justify-content-center align-items-center">
-            <a href="https://www.facebook.com/" data-social="Facebook" style="--accent-color: #1276FC" class="mb-4">
+            <a href="https://www.facebook.com/" data-social="Facebook" style="--accent-color: #1276FC;margin-bottom: 2em;">
                 <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <title>Facebook</title>
                     <path

@@ -1,6 +1,6 @@
 <!-- src/dashboardCharts/PieChart.vue -->
 <template>
-    <div class="h-100 w-100 mx-auto">
+    <div class="">
         <div class="text-center">
             <h1>Relative Personal Stats</h1>
         </div>

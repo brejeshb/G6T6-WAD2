@@ -6,90 +6,107 @@
     <!--Socials Animation https://www.youtube.com/watch?v=yU3giDe-N6c&list=PLpwngcHZlPacgMG_APw961UEBAmN18h8B-->
 
 
-    <div class="container-fluid ps-5 pe-5 pb-5 dashboard h-100">
+    <div class="container-fluid p-4 dashboard h-100">
         <div id="dashboard" class="p-5">
-            <div class="mb-5" style="color: #121F33;">
-                <h1>Welcome back, {{ username }}!</h1>
-                <p class="text-secondary fw-medium">Here's the recycling activities in your current lifetime ♥︎</p>
+            <div>
+                <h1>Welcome Home, {{ username }}!</h1>
+                <p class="fw-bold" style="color:#788645 ;">Here's the recycling activities in your current lifetime ♥︎
+                </p>
             </div>
 
-            <div class="container-fluid mb-5">
-                <div class="row">
-                    <div class="col me-5 rounded-4 " style="background-color: #E8F4EA;">
-                        <div>
-                            <h1 class="stats" style="color: #2F5F48">{{ username }}</h1>
-                            <div class="cardName">Username ࣪ ִֶָ☾.</div>
+            <div style="background-color: #788645;padding: 5px;margin-bottom: 3em;">
+                <h1 style="text-align: center;font-weight: 900;color: #FEFAE1">your dashboard</h1>
+            </div>
+
+            <div class="container-fluid" style="margin-bottom: 3em;">
+                <div class="row gx-5">
+                    <div class="col-md-3 col-sm-6 ">
+                        <div class="col1 rounded-4 d-flex justify-content-between h-100 ">
+                            <div class="w-75">
+                                <h1 class="stats text-wrap">{{ username }}</h1>
+                                <div class="cardName">Username ࣪ ִֶָ☾.</div>
+                            </div>
+
+                            <div class="iconBox">
+                                <ion-icon name="people" class="d-block d-sm-none  d-md-none d-lg-block"></ion-icon>
+                            </div>
                         </div>
-                        <div class="iconBox">
-                            <ion-icon name="people"></ion-icon>
+                    </div>
+
+
+                    <div class="col-md-3 col-sm-6 ">
+                        <div class="col1 rounded-4 d-flex justify-content-between h-100 ">
+                            <div class="w-75">
+                                <h1 class="stats text-wrap">{{ totalCo2Reduction }} kg</h1>
+                                <div class="cardName">Total CO2 Reduction ✧₊⁺</div>
+                            </div>
+
+                            <div class="iconBox">
+                                <ion-icon name="earth" class="d-block d-sm-none  d-md-none d-lg-block"></ion-icon>
+                            </div>
                         </div>
 
                     </div>
-                    <div class="col me-5 rounded-4 ">
-                        <div>
-                            <h1 class="stats">{{ totalCo2Reduction }} kg</h1>
-                            <div class="cardName">Total CO2 Reduction ✧₊⁺</div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="col1 rounded-4 d-flex justify-content-between h-100">
+                            <div class="w-75">
+                                <h1 class="stats text-wrap">{{ totalTreesSaved }}</h1>
+                                <div class="cardName">Total Trees Saved 𖡼𖤣𖥧</div>
+                            </div>
+
+                            <div class="iconBox">
+                                <ion-icon name="leaf" class="d-block d-sm-none  d-md-none d-lg-block"></ion-icon>
+                            </div>
                         </div>
-                        <div class="iconBox">
-                            <ion-icon name="earth"></ion-icon>
-                        </div>
+
                     </div>
-                    <div class="col me-5  rounded-4 ">
-                        <div>
-                            <h1 class="stats">{{ totalTreesSaved }}</h1>
-                            <div class="cardName">Total Trees Saved 𖡼𖤣𖥧</div>
+                    <div class="col-md-3 col-sm-6 ">
+                        <div class="col1 rounded-4 d-flex justify-content-between h-100 ">
+                            <div class="w-75">
+                                <h1 class="stats text-wrap">{{ currRankingFormatted }}</h1>
+                                <div class="cardName">Current Ranking ♛ </div>
+                            </div>
+
+                            <div class="iconBox">
+                                <ion-icon name="ribbon" class="d-block d-sm-none d-md-none d-lg-block"></ion-icon>
+                            </div>
                         </div>
-                        <div class="iconBox">
-                            <ion-icon name="leaf"></ion-icon>
-                        </div>
-                    </div>
-                    <div class="col rounded-4 ">
-                        <div>
-                            <h1 class="stats">{{ currRankingFormatted }}</h1>
-                            <div class="cardName">Current Ranking ♛ </div>
-                        </div>
-                        <div class="iconBox">
-                            <ion-icon name="ribbon"></ion-icon>
-                        </div>
+
                     </div>
                 </div>
             </div>
 
             <!-- Pie Chart + Trees Saved Stacked -->
-            <div class="container-fluid mb-5"> <!-- Outer container has h-100 -->
-                <div class="row">
+            <div class="container-fluid" style="margin-bottom: 3em;"> <!-- Outer container has h-100 -->
+                <div class="row gx-5">
                     <!-- Row has h-100 and align-items-stretch -->
 
                     <!-- Left Column with Pie Chart -->
-                    <div class="col rounded-5 pieLine1 w-100" style="margin-right: 3em; background-color: white;">
-                        <div v-if="dataLoaded" class="w-100">
-                            <PieChart :labels="recycledLabels" :data_values="recycledDataValues" />
-                        </div>
+                    <div v-if="dataLoaded" class="col-xl-4 col-12 mb-4 mb-lg-0 mx-auto" style="margin-right: 3em;">
+                        <PieChart :labels="recycledLabels" :data_values="recycledDataValues" />
                     </div>
+
 
                     <!-- Right Column with Trees Saved Chart -->
-                    <div class="col-8 rounded-5 pieLine">
-
-                        <div v-if="treesReady" class="w-100">
-                            <TreesSaved :labels="timeX" :data_values="treesSaved" :data_values1="co2Savings" />
-                        </div>
+                    <div v-if="treesReady" class="col-xl-8 col-12 mx-auto">
+                        <TreesSaved :labels="timeX" :data_values="treesSaved" :data_values1="co2Savings" />
                     </div>
+
                 </div>
             </div>
 
             <!-- Leaderboard Ranking + Radar -->
-            <div class="container-fluid mb-5 w-100">
-                <div class="row d-flex justify-content-between w-100 h-100">
-                    <div class="col-7 rounded-4 pieLine d-flex" style="margin-right: 3em;background-color: #D3E4CD;">
-                        <div v-if="leaderboardReady" class="w-100 h-100">
+            <div class="container-fluid" style="margin-bottom: 3em;">
+                <div class="row">
+                    <div class="col-7 rounded-5 pieLine1 " style="margin-right: 3em;">
+                        <div v-if="leaderboardReady" class="w-100">
                             <leaderboardRanking :labels="timeX" :data_values="highestRankData" class="h-100" />
                         </div>
                     </div>
 
-                    <div class="col rounded-4">
-                        <div v-if="radarReady" class="w-100 h-100 mx-auto d-flex justify-content-center">
-                            <Radar :labels="radarCat" :data_values="radarUser" :data_values1="radarAvgUser"
-                                style="margin: auto;" />
+                    <div class="col rounded-5">
+                        <div v-if="radarReady" class="w-100">
+                            <Radar :labels="radarCat" :data_values="radarUser" :data_values1="radarAvgUser" />
                         </div>
                     </div>
                 </div>
@@ -753,8 +770,14 @@ h1 {
 }
 
 
+/* 1ST ROW */
 
-#dashboard .col {
+#dashboard .col1 .iconBox {
+    font-size: 4em;
+    color: #788645;
+}
+
+#dashboard .col1 {
     /* Card */
     position: relative;
     /* background-color: #d3e4cd; */
@@ -763,28 +786,28 @@ h1 {
     justify-content: space-between;
     cursor: pointer;
     box-shadow: 0 7px 25px rgb(0, 0, 0, 0.08);
+    background-color: #E0F7F4;
 
 }
 
-#dashboard .col-4 {
-    /* Card */
+/* #dashboard .col-4 {
     position: relative;
     padding: 30px;
     display: flex;
     justify-content: space-between;
     cursor: pointer;
     box-shadow: 0 7px 25px rgb(0, 0, 0, 0.08);
-}
+} */
 
-#dashboard .col-4:hover {
+/* #dashboard .col-4:hover {
     background-color: #DBD9FF !important;
     cursor: pointer;
     position: relative;
     transition: all 1s;
-}
+} */
 
 
-#dashboard .pieLine,
+
 #dashboard .pieLine1 {
     /* Card */
     position: relative;
@@ -810,25 +833,37 @@ h1 {
 
 
 
-#dashboard .col .cardName {
+#dashboard .col .cardName,
+#dashboard .col1 .cardName {
     font-size: 1.1em;
     color: #788645;
     font-weight: 500;
 }
 
-#dashboard .col .stats {
+#dashboard .col .stats,
+#dashboard .col1 .stats {
     position: relative;
 }
 
-#dashboard .col .iconBox {
-    font-size: 3.5em;
-    color: #788645;
-}
 
-#dashboard .col:hover {
+
+#dashboard .col:hover,
+#dashboard .col1:hover {
     background-color: #DBD9FF;
     cursor: pointer;
     position: relative;
     transition: all 0.4s;
+}
+
+#dashboard .col {
+    /* Card */
+    position: relative;
+    /* background-color: #d3e4cd; */
+    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    box-shadow: 0 7px 25px rgb(0, 0, 0, 0.08);
+
 }
 </style>
