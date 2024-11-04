@@ -1,10 +1,10 @@
 <template>
-    <div class="w-100">
-        <div class="">
+    <div class="border rounded-5 p-5 w-100 h-100">
+        <div>
             <h1 style="text-align: center;">Your Trees & Co2 Savings Over Time </h1>
         </div>
 
-        <div style="position: relative;width: 89%;height: 100%;margin: auto;">
+        <div class="chart-container">
             <canvas id="stackedChart"></canvas>
         </div>
     </div>
@@ -131,9 +131,38 @@ h1 {
     font-size: 27px;
 }
 
+.chart-container {
+    width: 100%;
+    /* Makes the container fill the width of the parent */
+    height: 100%;
+    /* Adjusts the height automatically to maintain aspect ratio */
+    max-width: 100%;
+    /* Prevents overflow */
+    position: relative;
+    max-height: 100%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    min-height: 400px;
+
+}
+
 canvas {
-    /* width: 80% !important;
-    height: 100% !important;
-    margin: auto !important; */
+    min-height: 200px;
+    min-width: 200px;
+    width: 100%;
+    height: auto;
+}
+
+.pieLine1 {
+    /* Card */
+    position: relative;
+    padding: 30px;
+    height: 100%;
+    /* background-color: #d3e4cd; */
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    box-shadow: 0 7px 25px rgb(0, 0, 0, 0.08);
 }
 </style>
