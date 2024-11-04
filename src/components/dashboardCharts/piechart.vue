@@ -1,7 +1,6 @@
 <!-- src/dashboardCharts/PieChart.vue -->
 <template>
-    <div class="bento rounded-5 w-100 h-100 p-1 p-md-3 p-lg-5 p-xl-5 border"
-        style="background-color: white;min-height: 600px;">
+    <div class="bento rounded-5 w-100 h-100 p-1 p-md-3 p-lg-5 p-xl-5 border" style="min-height: 600px;">
         <div class="mb-4">
             <h1 class="text-center">Your Recycled Materials Distribution</h1>
         </div>
@@ -48,7 +47,7 @@ export default {
                         {
                             label: "Recycled Materials",
                             data: this.data_values,
-
+                            hoverOffset: 40,
                             borderWidth: 1
                         }
                     ]

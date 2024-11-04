@@ -1,7 +1,7 @@
 <!-- src/dashboardCharts/PieChart.vue -->
 <template>
     <div class="border rounded-5 w-100 h-100 p-1 p-md-3 p-lg-5 p-xl-5 bento"
-        style="background-color: white;min-height: 600px;">
+        style="min-height: 600px;">
         <div class="text-center mb-4">
             <h1>Your Co2 Savings Contribution</h1>
         </div>
@@ -64,7 +64,8 @@ export default {
                             label: "Co2 Savings",
                             data: this.data_values,
                             borderWidth: 1,
-                            cutout: '60%'
+                            cutout: '60%', 
+                            hoverOffset: 40
                         }
                     ]
                 },
@@ -138,4 +139,7 @@ h1 {
     box-shadow: 0 7px 25px rgb(0, 0, 0, 0.08);
 }
 
+.bento:hover{
+    background-color: #E7F5EE;
+}
 </style>

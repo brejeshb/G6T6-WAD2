@@ -7,7 +7,7 @@
             <div style="align-items: center;align-content: center;justify-content: center;">
                 <div class="socials-container">
                     <div style="align-content: center" class="h-75">
-                        <a href="https://www.instagram.com/" data-social="Instagram"
+                        <a href="https://www.instagram.com/" data-social="Instagram" target="_blank"
                             style="--accent-color: #FE1184; margin-bottom: 2em;">
                             <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <title>Instagram</title>
@@ -16,7 +16,7 @@
                             </svg>
                         </a>
                         <a href="https://x.com/home" data-social="Twitter" style="--accent-color: #000001 ">
-                            <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" target="_blank"> 
                                 <title>X</title>
                                 <path
                                     d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" />
@@ -26,7 +26,7 @@
 
 
                     <div style="align-content: center" class="h-75">
-                        <a href="https://www.facebook.com/" data-social="Facebook"
+                        <a href="https://www.facebook.com/" data-social="Facebook" target="_blank"
                             style="--accent-color: #1276FC;margin-bottom: 2em;">
                             <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <title>Facebook</title>
@@ -35,7 +35,7 @@
                             </svg>
                         </a>
 
-                        <a href="https://www.tiktok.com/foryou?lang=en" data-social="Tiktok"
+                        <a href="https://www.tiktok.com/foryou?lang=en" data-social="Tiktok" target="_blank"
                             style="--accent-color: #331129 ">
                             <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <title>TikTok</title>

@@ -6,13 +6,15 @@
     <!--Socials Animation https://www.youtube.com/watch?v=yU3giDe-N6c&list=PLpwngcHZlPacgMG_APw961UEBAmN18h8B-->
 
 
-    <div class="container-fluid p-0 p-xl-5 dashboard h-100">
-        <div id="dashboard" class="p-0 p-xl-5">
-            <div>
-                <h1>Welcome Home, {{ username }}!</h1>
-                <p class="fw-bold" style="color:#788645 ;">Here's the recycling activities in your current lifetime ♥︎
-                </p>
-            </div>
+    <div class="container-fluid p-0 ps-xl-5 pe-xl-5 pt-xl-5 pb-xs-0 dashboard h-100">
+        <div class="pb-0 p-xl-5 pb-0">
+            <h1>Welcome Home, {{ username }}!</h1>
+            <p class="fw-bold" style="color:#788645 ;font-style: italic;">Here's the recycling statistics in your
+                current lifetime ♥︎
+            </p>
+        </div>
+
+        <div id="dashboard" class="p-0 p-xl-5 pt-0">
 
             <div style="background-color: #788645;padding: 5px;margin-bottom: 3em;">
                 <h1 style="text-align: center;font-weight: 900;color: #FEFAE1">your dashboard</h1>
@@ -132,6 +134,10 @@
 
 
         </div>
+        <div class="w-25 mx-auto">
+            <Button v-on:click="captureAndDownload" />
+        </div>
+
     </div>
 
 </template>
@@ -139,6 +145,7 @@
 <script>
 // src/supabase.js
 var currUser = "ann1";
+
 
 
 // Importing Smaller Components
@@ -151,7 +158,7 @@ import bubble from './dashboardCharts/bubbleChart.vue';
 import Radar from './dashboardCharts/radar.vue';
 import Doughnut from './dashboardCharts/doughnut.vue';
 import SocialsDiv from './dashboardCharts/socialsIcons.vue';
-
+import Button from './dashboardCharts/button.vue';
 
 
 export default {
@@ -163,7 +170,8 @@ export default {
         bubble,
         Radar,
         Doughnut,
-        SocialsDiv
+        SocialsDiv,
+        Button
     },
     data() {
         return {
@@ -754,6 +762,19 @@ export default {
             this.radarReady = true;
 
 
+        },
+
+        captureAndDownload() {
+            html2canvas(document.getElementById("dashboard")).then(canvas => {
+                const dashboardURL = canvas.toDataURL('image/png');
+                const link = document.createElement('a');
+                link.href = dashboardURL;
+                link.download = 'lovelyDashboard.png';
+                link.click();
+            })
+                .catch((error) => {
+                    console.log("Screenshot Failed: ", error);
+                })
         }
 
     }
@@ -784,11 +805,9 @@ h1 {
     justify-content: space-between;
     cursor: pointer;
     box-shadow: 0 7px 25px rgb(0, 0, 0, 0.08);
-    background-color: #E0F7F4;
+    background-color: #E7F5EE;
 
 }
-
-
 
 
 #dashboard .pieLine1 {
@@ -815,22 +834,17 @@ h1 {
 }
 
 
-
-#dashboard .col .cardName,
 #dashboard .col1 .cardName {
     font-size: 1.1em;
     color: #788645;
     font-weight: 500;
 }
 
-#dashboard .col .stats,
+
 #dashboard .col1 .stats {
     position: relative;
 }
 
-
-
-#dashboard .col:hover,
 #dashboard .col1:hover {
     background-color: #DBD9FF;
     cursor: pointer;
@@ -847,6 +861,11 @@ h1 {
     justify-content: space-between;
     cursor: pointer;
     box-shadow: 0 7px 25px rgb(0, 0, 0, 0.08);
+}
+
+.bento:hover {
+    background-color: #E7F5EE;
+    transition: all 0.4s;
 
 }
 </style>

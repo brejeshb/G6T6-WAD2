@@ -1,6 +1,5 @@
 <template>
-    <div class="border rounded-5 p-2 p-md-3 p-lg-5 p-xl-5 w-100 h-100 bento" 
-    style="min-height: 600px;">
+    <div class="border rounded-5 p-2 p-md-3 p-lg-5 p-xl-5 w-100 h-100 bento" style="min-height: 600px;">
         <div class="mb-4">
             <h1 style="text-align: center;">Your Trees & Co2 Savings Over Time </h1>
         </div>
@@ -67,7 +66,15 @@ export default {
                 options: {
                     responsive: true,
                     maintainAspectRatio: true, // Allows it to stretch to fill container
-
+                    animations: {
+                        tension: {
+                            duration: 2000,
+                            easing: 'easeInQuad',
+                            from: 1,
+                            to: 0,
+                            loop: true
+                        }
+                    },
                     title: {
                         text: "Trees and Co2 Savings Over Time",
                         display: true,

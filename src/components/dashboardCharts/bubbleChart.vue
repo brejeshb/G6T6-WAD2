@@ -124,6 +124,7 @@ canvas {
     width: 100%;
     height: auto;
 }
+
 .bento {
     /* Card */
     cursor: pointer;

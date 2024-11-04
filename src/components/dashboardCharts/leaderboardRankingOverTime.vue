@@ -11,6 +11,8 @@
 </template>
 
 <script>
+let delayed;
+
 export default {
     name: "leaderboardRanking",
     data() {
@@ -54,16 +56,25 @@ export default {
                     datasets: [{
                         label: "Leaderboard Ranking Over Time",
                         data: this.data_values,
+                        tension: 0.2, // adjust rounded corners
+                        borderColor: "#A6C4A7", // adjust line color 
+                        backgroundColor: '#EDFCED', // adjust dot color
+                        fill: 'start'
 
-                        tension: 0.7, // adjust rounded corners
-                        borderColor: "#788645", // adjust line color 
-                        backgroundColor: "#788645", // adjust dot color
-
-
-                    }]
+                    }],
                 },
                 options: {
                     responsive: true,
+                    animations: {
+                        tension: {
+                            duration: 2000,
+                            easing: 'easeInQuad',
+                            from: 1,
+                            to: 0,
+                            loop: true
+                        }
+                    },
+
                     title: {
                         text: "Leaderboard Ranking Over Time",
                         display: true,
