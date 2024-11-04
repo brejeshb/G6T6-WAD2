@@ -134,8 +134,8 @@ const item_facts = ref({
   tree: {
     description: 'This is a tree'
   },
-  cat: {},
-  dog: {}
+  cat: {description:'Just like human fingerprints, each cat’s nose has a unique print. No two noses are the same, which is why your cat’s boops are one of a kind.'},
+  dog: {description:'Dogs can actually sense the passage of time, so they often know how long you’ve been gone. They use cues like scent fading over time and internal rhythms, which is why they’re often extra excited when you come home after a long day.'}
 });
 const fact_box = ref({
   status: false,
