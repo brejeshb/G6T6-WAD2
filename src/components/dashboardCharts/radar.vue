@@ -1,10 +1,10 @@
 <!-- src/dashboardCharts/PieChart.vue -->
 <template>
-    <div class="">
-        <div class="text-center">
+    <div class="border rounded-5 w-100 h-100 p-1 p-md-3 p-lg-5 p-xl-5 bento" style="min-height: 600px;">
+        <div class="text-center mb-4">
             <h1>Relative Personal Stats</h1>
         </div>
-        <div style="position: relative;" class="w-75 mx-auto d-flex justify-content-center">
+        <div class="chart-container">
             <canvas id="radar"></canvas> <!-- Use ref to reference the canvas element -->
         </div>
     </div>
@@ -64,6 +64,7 @@ export default {
                 },
                 options: {
                     responsive: true,
+                    maintainAspectRatio: true, // Allows it to stretch to fill container
 
                     plugins: {
                         legend: {
@@ -76,11 +77,11 @@ export default {
                             pointLabels: {
                                 callback: function (label) {
                                     return label.split('\n'); // Split labels by '\n' to make them multi-line
-                                }, 
-                                font :{
-                                    size: 14, 
+                                },
+                                font: {
+                                    size: 14,
                                     weight: "bold"
-                                }, 
+                                },
                                 padding: 20
                             },
 
@@ -118,6 +119,27 @@ h1 {
     font-size: 27px;
 }
 
-/* To make pie chart not become very big after resizing*/
+.chart-container {
+    width: 100%;
+    /* Makes the container fill the width of the parent */
+    height: 100%;
+    /* Adjusts the height automatically to maintain aspect ratio */
+    max-width: 100%;
+    /* Prevents overflow */
+    max-height: 90%;
+    margin-right: auto;
+    margin-left: auto;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+    /* overflow: hidden; */
+}
 
+.bento {
+    /* Card */
+    cursor: pointer;
+    box-shadow: 0 7px 25px rgb(0, 0, 0, 0.08);
+}
 </style>

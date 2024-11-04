@@ -1,6 +1,7 @@
 <template>
-    <div class="border rounded-5 p-5 w-100 h-100">
-        <div>
+    <div class="border rounded-5 p-2 p-md-3 p-lg-5 p-xl-5 w-100 h-100 bento" 
+    style="min-height: 600px;">
+        <div class="mb-4">
             <h1 style="text-align: center;">Your Trees & Co2 Savings Over Time </h1>
         </div>
 
@@ -139,10 +140,11 @@ h1 {
     max-width: 100%;
     /* Prevents overflow */
     position: relative;
-    max-height: 100%;
+    max-height: 80%;
     margin: auto;
     display: flex;
     justify-content: center;
+    align-items: center;
     min-height: 400px;
 
 }
@@ -154,14 +156,10 @@ canvas {
     height: auto;
 }
 
-.pieLine1 {
+
+
+.bento {
     /* Card */
-    position: relative;
-    padding: 30px;
-    height: 100%;
-    /* background-color: #d3e4cd; */
-    display: flex;
-    justify-content: space-between;
     cursor: pointer;
     box-shadow: 0 7px 25px rgb(0, 0, 0, 0.08);
 }

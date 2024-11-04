@@ -1,10 +1,10 @@
 <!-- src/dashboardCharts/bubble.vue -->
 <template>
-    <div class="w-100">
-        <div class="text-center h-100">
+    <div class="border rounded-5 p-2 p-md-3 p-lg-5 p-xl-5 w-100 h-100 bento" style="min-height: 600px;">
+        <div class="text-center mb-4 w-100">
             <h1>Community's Trees Saved</h1>
         </div>
-        <div style="position: relative;height: 100%;width:100%;margin: auto;">
+        <div class="chart-container">
             <canvas id="bubble"></canvas>
         </div>
     </div>
@@ -99,6 +99,35 @@ h1 {
     color: #788645;
     font-weight: bold;
     font-size: 27px;
+}
+
+.chart-container {
+    width: 100%;
+    /* Makes the container fill the width of the parent */
+    height: 100%;
+    /* Adjusts the height automatically to maintain aspect ratio */
+    max-width: 100%;
+    /* Prevents overflow */
+    position: relative;
+    max-height: 80%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+
+}
+
+canvas {
+    min-height: 200px;
+    min-width: 200px;
+    width: 100%;
+    height: auto;
+}
+.bento {
+    /* Card */
+    cursor: pointer;
+    box-shadow: 0 7px 25px rgb(0, 0, 0, 0.08);
 }
 
 /* To make pie chart not become very big after resizing*/

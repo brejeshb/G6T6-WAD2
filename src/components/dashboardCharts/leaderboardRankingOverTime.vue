@@ -1,11 +1,11 @@
 <!-- src/dashboardCharts/PieChart.vue -->
 <template>
-    <div>
-        <div class="pt-2 ps-2 pe-2 text-center">
+    <div class="border rounded-5 p-2 p-md-3 p-lg-5 p-xl-5 w-100 h-100 bento" style="min-height: 600px;">
+        <div class="text-center mb-4 w-100">
             <h1>Your Leaderboard Ranking Over Time</h1>
         </div>
-        <div style="position: relative;" class="w-100 h-100 mx-auto">
-            <canvas id="leaderboardRanking"></canvas> 
+        <div class="chart-container">
+            <canvas id="leaderboardRanking"></canvas>
         </div>
     </div>
 </template>
@@ -116,11 +116,42 @@ export default {
 };
 </script>
 
+
 <style scoped>
 /* Optional: Style specific to the Leaderboard component */
 h1 {
     color: #788645;
     font-weight: bold;
     font-size: 27px;
+}
+
+.chart-container {
+    width: 100%;
+    /* Makes the container fill the width of the parent */
+    height: 100%;
+    /* Adjusts the height automatically to maintain aspect ratio */
+    max-width: 100%;
+    /* Prevents overflow */
+    position: relative;
+    max-height: 80%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+
+}
+
+canvas {
+    min-height: 200px;
+    min-width: 200px;
+    width: 100%;
+    height: auto;
+}
+
+.bento {
+    /* Card */
+    cursor: pointer;
+    box-shadow: 0 7px 25px rgb(0, 0, 0, 0.08);
 }
 </style>
