@@ -3,13 +3,12 @@
     <!--https://dribbble.com/tags/bento-ui-->
     <!--https://ui-libs.vercel.app/-->
     <!--https://www.justinmind.com/ui-design/cards-->
-    <!--Socials Animation https://www.youtube.com/watch?v=yU3giDe-N6c&list=PLpwngcHZlPacgMG_APw961UEBAmN18h8B-->
 
     <div class="container-fluid" v-if="allChartsReady">
         <div class="container-fluid p-0 ps-xl-5 pe-xl-5 pt-xl-5 pb-xs-0 dashboard h-100"
             style="background-color: white;">
             <div class="pb-0 p-xl-5 pb-0">
-                <h1>Welcome Home, {{ username }}!</h1>
+                <h1>Recycle Right, Feel Right!</h1>
                 <p class="fw-bold" style="color:#788645 ;font-style: italic;">Here's the recycling statistics in your
                     current lifetime ♥︎
                 </p>
@@ -18,7 +17,7 @@
             <div id="dashboard" class="p-0 p-xl-5 pt-0">
 
                 <div style="background-color: #788645;padding: 5px;margin-bottom: 3em;">
-                    <h1 style="text-align: center;font-weight: 900;color: #FEFAE1">your dashboard</h1>
+                    <h1 style="text-align: center;font-weight: 900;color: #FEFAE1" class="m12">୨⎯ your dashboard ⎯୧</h1>
                 </div>
 
                 <div class="container-fluid" style="margin-bottom: 3em">
@@ -118,7 +117,7 @@
                 <div class="container-fluid" style="margin-bottom: 3em;">
                     <div class="row gx-5">
                         <div v-if="bubbleReady" class="col-xl-4 col-12 mb-4 mb-lg-0">
-                            <bubble :data_values="bubbleData" />
+                            <bubble :data_values="bubbleData" :isUser="index" />
                         </div>
 
                         <div v-if="doughnutReady" class="col-xl-4 col-12 mb-4 mb-lg-0">
@@ -162,12 +161,12 @@ import SocialsDiv from './dashboardCharts/socialsIcons.vue';
 import Button from './dashboardCharts/button.vue';
 import { useAuth } from '../lib/auth'
 import { ref, watchEffect } from 'vue';
+import { Bubble } from 'vue-chartjs';
+import BubbleChart from './dashboardCharts/bubbleChart.vue';
 
 const { userName } = useAuth();
 var currUser = userName;
 console.log(userName);
-
-
 
 
 export default {
@@ -207,6 +206,7 @@ export default {
             // for Bubble 
             bubbleReady: false,
             bubbleData: [],
+            index: 0,
 
             // for radar 
             radarReady: false,
@@ -231,7 +231,6 @@ export default {
     async created() {
         // fetch data from Supabase
         await this.fetchAllData();
-
     },
     computed: {
         currRankingFormatted() {
@@ -477,8 +476,12 @@ export default {
                 // make bubble bigger according to total_trees_saved
                 const scalingFactor = 50;
                 for (let object of BubbleChartView) {
+                    if (object.username == this.username) {
+                        this.index = BubbleChartView.indexOf(object);
+                    }
                     this.bubbleData.push({ x: object.total_co2_emission_reduction, y: object.total_trees_saved, r: object.total_trees_saved * scalingFactor });
                 };
+                console.log(this.index);
 
                 console.log(this.bubbleData);
 
@@ -806,12 +809,34 @@ export default {
 </script>
 
 <style scoped>
+/* Bento Scrolling Animation */
+@keyframes appear {
+    from {
+        opacity: 0;
+        scale: 0.5
+    }
+
+    to {
+        opacity: 1;
+        scale: 1;
+    }
+}
+
 /* Dashboard Numbers Styling */
 h1 {
     color: #788645;
     font-weight: bold;
 }
 
+.ml2 {
+    font-weight: 900;
+    font-size: 3.5em;
+}
+
+.ml2 .letter {
+    display: inline-block;
+    line-height: 1em;
+}
 
 /* 1ST ROW */
 
@@ -830,6 +855,19 @@ h1 {
     cursor: pointer;
     box-shadow: 0 7px 25px rgb(0, 0, 0, 0.08);
     background-color: #E7F5EE;
+    animation: appear linear; 
+    animation-timeline: view();
+    animation-range: entry 0% cover 40%;
+
+}
+
+.bento {
+    animation: appear linear; 
+    animation-timeline: view();
+    animation-range: entry 0% cover 40%;
+
+    
+
 
 }
 

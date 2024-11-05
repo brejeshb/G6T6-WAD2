@@ -11,9 +11,6 @@
 </template>
 
 <script>
-
-
-
 export default {
     name: "bubble",
     data() {
@@ -27,6 +24,10 @@ export default {
             type: Array,
             required: true
         },
+        isUser: {
+            type: Number,
+            required: true
+        }
     },
     mounted() {
         this.createBubbleChart();
@@ -45,8 +46,19 @@ export default {
                     datasets: [
                         {
                             label: "Everyone's Trees Saved (All Time)",
-                            data: this.data_values,
-                            borderWidth: 1
+                            data: this.data_values.map((point) => ({
+                                x: point.x,
+                                y: point.y,
+                                r: point.r,
+                            })),
+                            borderWidth: 3,
+                            // Define backgroundColor and borderColor as arrays to apply different colors
+                            backgroundColor: this.data_values.map((_, index) =>
+                                index === this.isUser ? '#EDFCED' : '#FEFAE1'
+                            ),
+                            borderColor: this.data_values.map((_, index) =>
+                                index === this.isUser ? '#A6C4A7' : '#788645'
+                            )
                         }
                     ]
                 },

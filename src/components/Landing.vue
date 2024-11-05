@@ -1,0 +1,81 @@
+<template>
+    <div id="scene" class="">
+        <h1 id="text" class="">Welcome Back <br> @{{ currUser }}</h1>
+        <img src="../assets/images/imgm1.png" alt="" class="img-layer" style="z-index: 2; mix-blend-mode: multiply;"
+            id="img1">
+        <img src="../assets/images/imgm2.png" alt="" class="img-layer" style="z-index: 1; mix-blend-mode: multiply;"
+            id="img2">
+        <img src="../assets/images/imgm3.png" alt="" class="img-layer" style="z-index: 3; mix-blend-mode: multiply;"
+            id="img3">
+        <img src="../assets/images/imgm4.png" alt="" class="img-layer" style="z-index: 4; mix-blend-mode: multiply;"
+            id="img4">
+
+    </div>
+</template>
+
+<script>
+import { useAuth } from '../lib/auth'
+const { userName } = useAuth();
+
+export default {
+    name: "Landing",
+    data() {
+        return {
+            currUser: userName
+        }
+    },
+    mounted() {
+        let text = document.getElementById("text");
+        let img1 = document.getElementById('img1');
+        let img2 = document.getElementById('img2');
+        let img3 = document.getElementById('img3');
+
+        window.addEventListener('scroll', function () {
+            let value = window.scrollY;
+            text.style.marginTop = value * -1.5 + 'px';
+            img1.style.top = value * 0.75 + "px";
+            img2.style.top = value * 0.5 + "px";
+            img3.style.top = value * 0.25 + "px";
+
+        });
+
+
+
+    }
+}
+</script>
+
+<style scoped>
+#scene {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+#text {
+    position: absolute;
+    top: 20%;
+    color: #FEFAE1;
+    font-weight: bolder;
+    font-size: 5vw;
+    white-space: nowrap;
+    text-align: center;
+    z-index: 5;
+    /* Ensure text is above all images */
+}
+
+.img-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+    transition: opacity 1s ease;
+}
+</style>
