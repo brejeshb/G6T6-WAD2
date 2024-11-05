@@ -8,34 +8,20 @@
       <div class="login-container">
         <h2>Login</h2>
         <div class="input-group">
-          <input type="email" placeholder="Petter@gmail.com" v-model="email"/>
-          <input type="password" placeholder="Password" v-model="password"/>
+          <input type="text" placeholder="Username" v-model="username" />
+          <input type="password" placeholder="Password" v-model="password" />
           <p v-if="errMsg">{{ errMsg }}</p>
         </div>
 
-        <div class="options">
-          <div class="remember-me">
-            <input type="checkbox" id="remember" />
-            <label for="remember">Remember Password</label>
-          </div>
-          <a href="#" class="forgot-password">Forgot Password?</a>
-        </div>
-
-        <button class="login-button" @click="login">Login</button>
+        <button class="login-button" @click="handleLogin">Login</button>
 
         <div class="register-link">
           No account yet? <router-link to="/Register">Register</router-link>
         </div>
-
-        <div class="social-login">
-          <p>Or Login With:</p>
-          <div class="social-icons">
-            <button class="google" @click="signInWithGoogle">Google</button>
-          </div>
-        </div>
       </div>
     </div>
 
+    <!-- Illustration Section -->
     <div class="illustration">
       <img src="../assets/images/recyclebin.png" alt="Login Illustration" />
     </div>
@@ -43,49 +29,29 @@
 </template>
 
 <script setup>
-  console.log('Login component mounted');
-  import {ref} from "vue";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { ref } from "vue";
 import { useRouter } from "vue-router";
+import { useAuth } from '../../src/lib/auth'; // Import the auth store
 
-const email = ref("");
-const password = ref(""); 
-const errMsg = ref()
+const username = ref("");
+const password = ref("");
+const errMsg = ref("");
 const router = useRouter();
-const login = () =>{
-    signInWithEmailAndPassword(getAuth(), email.value, password.value)
-    .then((data) => {
-        console.log("Successfully Signed in!");
-        router.push('/Home')
-    })
-    .catch((error) => {
-        console.log(error.code);
-        // alert(error.message);
-        switch (error.code){
-          case "auth/invalid-email":
-            errMsg.value = "Invalid email";
-            break;
-          case "auth/user-not-found":
-            errMsg.value = "No account with that email was found";
-            break;
-          case "auth/wrong-password":
-            errMsg.value = "Incorrect Password";
-            break;
-          default:
-            errMsg.value = "Email or password was incorrect";
-            break;
-        }
-    });
+const { login } = useAuth();
+
+const handleLogin = async () => {
+  const success = await login(username.value.trim(), password.value.trim());
+  if (success) {
+    console.log("Successfully signed in!");
+    router.push('/Home');
+  } else {
+    errMsg.value = "Invalid username or password.";
+  }
 };
-
-const signInWithGoogle = () =>{
-
-};
-
-
 </script>
 
 <style scoped>
+/* Layout for the login page */
 .login-page {
   display: flex;
   justify-content: center;
@@ -95,6 +61,7 @@ const signInWithGoogle = () =>{
   background-color: #fefae0; /* Light background color */
 }
 
+/* Login box styling */
 .login-box {
   width: 350px;
   padding: 30px;
@@ -103,18 +70,21 @@ const signInWithGoogle = () =>{
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Login header styling */
 .login-header {
   text-align: center;
   margin-bottom: 20px;
   color: #798645; /* Header color */
 }
 
+/* Title in login container */
 .login-container h2 {
   text-align: center;
   margin-bottom: 20px;
   color: #626f47; /* Title color */
 }
 
+/* Styling for the input fields */
 .input-group {
   display: flex;
   flex-direction: column;
@@ -133,18 +103,7 @@ const signInWithGoogle = () =>{
   border-color: #626f47; /* Focus border color */
 }
 
-.options {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 15px;
-}
-
-.forgot-password {
-  color: #626f47; /* Link color */
-  text-decoration: none;
-  font-size: 0.9rem;
-}
-
+/* Styling for the login button */
 .login-button {
   width: 100%;
   padding: 10px;
@@ -160,11 +119,29 @@ const signInWithGoogle = () =>{
   background-color: #626f47; /* Darker shade on hover */
 }
 
+/* Styling for the registration link */
 .register-link {
   text-align: center;
   margin-top: 10px;
 }
 
+/* Illustration styling */
+.illustration {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 400px;
+  margin-left: 20px; /* Add space between form and illustration */
+}
+
+.illustration img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px; /* Optional: Add rounded corners to image */
+}
+
+/* Layout styling for the social login, if required in future */
 .social-login {
   text-align: center;
   margin-top: 20px;
@@ -190,7 +167,19 @@ const signInWithGoogle = () =>{
   color: white;
 }
 
-.illustration img {
-  max-width: 400px;
+@media (max-width: 768px) {
+  .login-page {
+    flex-direction: column;
+  }
+
+  .login-box {
+    width: 100%;
+  }
+
+  .illustration {
+    margin-left: 0;
+    margin-top: 20px;
+  }
 }
+
 </style>
