@@ -65,7 +65,7 @@ export default {
                             data: this.data_values,
                             borderWidth: 1,
                             cutout: '60%', 
-                            hoverOffset: 40
+                            hoverOffset: 40, 
                         }
                     ]
                 },

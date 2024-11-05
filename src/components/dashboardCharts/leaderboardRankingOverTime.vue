@@ -51,8 +51,9 @@ export default {
                         label: "Leaderboard Ranking Over Time",
                         data: this.data_values,
                         tension: 0.2, // adjust rounded corners
-                        borderColor: "#A6C4A7", // adjust line color 
-                        backgroundColor: '#EDFCED', // adjust dot color
+                        borderWidth: 4,
+                        borderColor: "#2F5F48", // adjust line color 
+                        backgroundColor: '#AFAAFF', // adjust dot color
                         fill: 'start'
 
                     }],
@@ -75,7 +76,13 @@ export default {
                     },
                     plugins: {
                         legend: {
-                            display: false
+                            display: false,
+                            labels: {
+                                font: {
+                                    weight: "bold"
+                                }
+                            }
+
                         }
                     },
                     interaction: {
@@ -93,12 +100,17 @@ export default {
                             },
                             title: {
                                 display: true,
-                                text: 'Leaderboard Ranking'
+                                text: 'Leaderboard Ranking',
+                                font: {
+                                    weight: "bold"
+                                }
                             }
                         },
                         x: {
                             ticks: {
-
+                                font: {
+                                    weight: "bold"
+                                }
                             },
                             grid: {
                                 display: false,

@@ -1,6 +1,6 @@
 <template>
     <div id="scene" class="">
-        <h1 id="text" class="">Welcome Back <br> @{{ currUser }}</h1>
+        <h1 id="text" class="animated-text">Welcome Back <br> @{{ currUser }}</h1>
         <img src="../assets/images/imgm1.png" alt="" class="img-layer" style="z-index: 2; mix-blend-mode: multiply;"
             id="img1">
         <img src="../assets/images/imgm2.png" alt="" class="img-layer" style="z-index: 1; mix-blend-mode: multiply;"
@@ -46,6 +46,45 @@ export default {
 </script>
 
 <style scoped>
+/* Text Animation */
+.animated-text {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333;
+    opacity: 0;
+    transform: translateY(20px);
+    letter-spacing: -2px;
+    animation: classyFadeLoop 3.5s ease-out infinite;
+}
+
+/* Keyframes for a classy fade-in, spacing change, and fade-out loop */
+@keyframes classyFadeLoop {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+        letter-spacing: -2px;
+    }
+
+    20% {
+        opacity: 1;
+        transform: translateY(0);
+        letter-spacing: 1px;
+    }
+
+    80% {
+        opacity: 1;
+        transform: translateY(0);
+        letter-spacing: 1px;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(20px);
+        letter-spacing: -2px;
+    }
+}
+
+
 #scene {
     position: relative;
     width: 100%;
@@ -58,10 +97,10 @@ export default {
 
 #text {
     position: absolute;
-    top: 20%;
+    top: 30%;
     color: #FEFAE1;
     font-weight: bolder;
-    font-size: 5vw;
+    font-size: 6vw;
     white-space: nowrap;
     text-align: center;
     z-index: 5;

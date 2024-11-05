@@ -48,7 +48,6 @@ export default {
                             label: "Recycled Materials",
                             data: this.data_values,
                             hoverOffset: 40,
-                            borderWidth: 1
                         }
                     ]
                 },
@@ -63,7 +62,7 @@ export default {
                             labels: {
                                 padding: 10,
                                 font: {
-                                    weight: "bl"
+                                    weight: "bold"
                                 }
                             }
                         },

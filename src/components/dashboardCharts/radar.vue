@@ -68,7 +68,13 @@ export default {
 
                     plugins: {
                         legend: {
-                            display: true
+                            display: true,
+                            labels: {
+                                font: {
+                                    weight: "bold"
+                                }
+                            }
+
                         },
 
                     },

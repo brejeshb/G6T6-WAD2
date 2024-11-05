@@ -11,6 +11,10 @@
 </template>
 
 <script>
+import { plugins } from 'chart.js';
+
+
+
 
 export default {
     name: "TreesSaved",
@@ -36,7 +40,7 @@ export default {
     mounted() {
         this.createStackedChart();
     },
-    
+
 
     methods: {
         createStackedChart() {
@@ -49,10 +53,13 @@ export default {
                     datasets: [{
                         label: "Number of Trees Saved",
                         data: this.data_values,
-                        borderWidth: 1,
+                        borderWidth: 4,
                         borderRadius: 80, // rounded bar graphs
                         borderSkipped: false,
-                        yAxisID: 'yTrees' // Link to the first y-axis
+                        backgroundColor: "#AFAAFF",
+                        borderColor: "#DBD9FF",
+                        order: 1,
+                        yAxisID: 'yTrees', // Link to the first y-axis
 
                     },
                     {
@@ -60,6 +67,9 @@ export default {
                         data: this.data_values1,
                         type: 'line',
                         yAxisID: 'yCO2', // Link to the second y-axis
+                        backgroundColor: "#2F5F48",
+                        borderColor: "#2F5F48",
+                        borderWidth: 4, 
                         order: 0,
                         tension: 0.4
                     }]
@@ -102,6 +112,13 @@ export default {
                             beginAtZero: true, // Start from zero
                             grid: {
                                 drawOnChartArea: false // Prevent grid lines on the right axis overlapping
+                            },
+                            title: {
+                                display: true,
+                                text: 'Trees Saved',
+                                font: {
+                                    weight: "bold" // Make the y-axis labels bold
+                                }
                             }
 
                         },
@@ -116,16 +133,40 @@ export default {
                             beginAtZero: true, // Start from zero
                             grid: {
                                 drawOnChartArea: false // Prevent grid lines on the right axis overlapping
+                            },
+                            title: {
+                                display: true,
+                                text: 'CO2 Savings',
+                                font: {
+                                    weight: "bold" // Make the y-axis labels bold
+                                }
                             }
                         },
                         x: {
                             grid: {
                                 drawOnChartArea: false // Prevent grid lines on the right axis overlapping
+                            },
+                            ticks: {
+                                font: {
+                                    weight: "bold"
+                                }
                             }
                         }
                     },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                padding: 10,
+                                font: {
+                                    weight: "bold"
+                                }
+                            }
+                        },
+                    }
 
                 },
+
+
 
             });
         }

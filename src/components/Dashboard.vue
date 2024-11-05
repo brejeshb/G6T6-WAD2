@@ -4,9 +4,9 @@
     <!--https://ui-libs.vercel.app/-->
     <!--https://www.justinmind.com/ui-design/cards-->
 
-    <div class="container-fluid" v-if="allChartsReady">
+    <div class="container-fluid" v-if="allChartsReady" style="background-color:  #F3F2EC;">
         <div class="container-fluid p-0 ps-xl-5 pe-xl-5 pt-xl-5 pb-xs-0 dashboard h-100"
-            style="background-color: white;">
+            style="background-color: #F3F2EC ;"> <!-- Adjust dashboard div color-->
             <div class="pb-0 p-xl-5 pb-0">
                 <h1>Recycle Right, Feel Right!</h1>
                 <p class="fw-bold" style="color:#788645 ;font-style: italic;">Here's the recycling statistics in your
@@ -17,7 +17,8 @@
             <div id="dashboard" class="p-0 p-xl-5 pt-0">
 
                 <div style="background-color: #788645;padding: 5px;margin-bottom: 3em;">
-                    <h1 style="text-align: center;font-weight: 900;color: #FEFAE1" class="m12">୨⎯ your dashboard ⎯୧</h1>
+                    <h1 style="text-align: center;font-weight: 900;color: #FEFAE1;" class="title">୨⎯ your dashboard ⎯୧
+                    </h1>
                 </div>
 
                 <div class="container-fluid" style="margin-bottom: 3em">
@@ -822,6 +823,10 @@ export default {
     }
 }
 
+
+
+
+
 /* Dashboard Numbers Styling */
 h1 {
     color: #788645;
@@ -855,19 +860,18 @@ h1 {
     cursor: pointer;
     box-shadow: 0 7px 25px rgb(0, 0, 0, 0.08);
     background-color: #E7F5EE;
-    animation: appear linear; 
+    animation: appear linear;
     animation-timeline: view();
     animation-range: entry 0% cover 40%;
+
 
 }
 
 .bento {
-    animation: appear linear; 
+    background-color: #FFF;
+    animation: appear linear;
     animation-timeline: view();
     animation-range: entry 0% cover 40%;
-
-    
-
 
 }
 
@@ -911,7 +915,9 @@ h1 {
     background-color: #DBD9FF;
     cursor: pointer;
     position: relative;
-    transition: all 0.4s;
+    transition: all 0.7s;
+    transform: scale(1.05);
+    cursor: pointer;
 }
 
 #dashboard .col {
@@ -927,7 +933,8 @@ h1 {
 
 .bento:hover {
     background-color: #E7F5EE;
-    transition: all 0.4s;
-
+    transition: all 0.7s;
+    transform: scale(1.05);
+    cursor: pointer;
 }
 </style>

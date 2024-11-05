@@ -46,19 +46,19 @@ export default {
                     datasets: [
                         {
                             label: "Everyone's Trees Saved (All Time)",
-                            data: this.data_values.map((point) => ({
+                            data: this.data_values.map((point, index) => ({
                                 x: point.x,
                                 y: point.y,
-                                r: point.r,
+                                r: index === this.isUser ? point.r * 2 : point.r // Double the size for the user's dot
                             })),
-                            borderWidth: 3,
-                            // Define backgroundColor and borderColor as arrays to apply different colors
+                            // borderWidth: 3,
                             backgroundColor: this.data_values.map((_, index) =>
-                                index === this.isUser ? '#EDFCED' : '#FEFAE1'
+                                index === this.isUser ? '#B7E5AB' : "#76A0AE"
                             ),
-                            borderColor: this.data_values.map((_, index) =>
-                                index === this.isUser ? '#A6C4A7' : '#788645'
-                            )
+                            // borderColor: this.data_values.map((_, index) =>
+                            //     index === this.isUser ? '#A6C4A7' : '#A6C4A7'
+                            // ),
+
                         }
                     ]
                 },
@@ -73,7 +73,8 @@ export default {
                             },
                             display: false
                         },
-                        tooltip: { intersect: true }
+                        tooltip: { intersect: true },
+
 
                     },
                     scales: {
@@ -81,18 +82,35 @@ export default {
                             title: {
                                 display: true,
                                 text: 'Co2 Savings',
+                                font: {
+                                    weight: "bold" // Make the y-axis labels bold
+                                }
                             },
                             grid: {
                                 display: false,
                             },
+                            ticks: {
+                                font: {
+                                    weight: "bold" // Make the y-axis labels bold
+                                }
+                            },
+
                         },
                         y: {
                             title: {
                                 display: true,
-                                text: 'Number of Trees Saved'
+                                text: 'Number of Trees Saved',
+                                font: {
+                                    weight: "bold" // Make the y-axis labels bold
+                                }
                             },
                             grid: {
                                 display: false,
+                            },
+                            ticks: {
+                                font: {
+                                    weight: "bold" // Make the y-axis labels bold
+                                }
                             },
                         },
                     },
