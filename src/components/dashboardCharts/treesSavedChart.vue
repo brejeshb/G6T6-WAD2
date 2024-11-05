@@ -36,6 +36,7 @@ export default {
     mounted() {
         this.createStackedChart();
     },
+    
 
     methods: {
         createStackedChart() {

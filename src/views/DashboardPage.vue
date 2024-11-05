@@ -4,6 +4,7 @@
 </template>
 
 <script>
+
 // import Navbar from '../components/navbar.vue';
 import Dashboard from '../components/Dashboard.vue';
 
@@ -14,6 +15,7 @@ export default {
     Dashboard,
   }
 }
+
 </script>
 
 <style scoped></style>
