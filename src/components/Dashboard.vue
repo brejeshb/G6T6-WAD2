@@ -160,11 +160,14 @@ import Radar from './dashboardCharts/radar.vue';
 import Doughnut from './dashboardCharts/doughnut.vue';
 import SocialsDiv from './dashboardCharts/socialsIcons.vue';
 import Button from './dashboardCharts/button.vue';
-import {useAuth} from '../lib/auth'
+import { useAuth } from '../lib/auth'
 import { ref, watchEffect } from 'vue';
 
 const { userName } = useAuth();
-var currUser = userName
+var currUser = userName;
+console.log(userName);
+
+
 
 
 export default {
@@ -225,7 +228,7 @@ export default {
 
         }
     },
-    async mounted() {
+    async created() {
         // fetch data from Supabase
         await this.fetchAllData();
 
@@ -260,12 +263,14 @@ export default {
             await this.fetchRadarData();
 
             // Set `allChartsReady` only when all individual flags are ready
+
             this.allChartsReady = true;
         },
         // Number Metrics 
         async fetchUserStats() {
             this.totalCo2Reduction = 0;
             this.totalTreesSaved = 0;
+            console.log(this.username);
             try {
                 // Get CO2 EMISSION DATA + TREES SAVED
                 let { data: UserOverallStatsTable, error: error1 } = await supabase
@@ -279,8 +284,9 @@ export default {
                     return;
                 }
                 else {
-                    console.log(UserOverallStatsTable[0]); // <Object>
+                    console.log(UserOverallStatsTable); // <Object>
 
+                    console.log(UserOverallStatsTable);
                     this.totalCo2Reduction = UserOverallStatsTable[0].total_co2_emission_reduction;
                     this.totalTreesSaved = UserOverallStatsTable[0].total_trees_saved;
 
@@ -294,13 +300,13 @@ export default {
                 let { data: HistoricalLeaderboardTable, error: error2 } = await supabase
                     .from('HistoricalLeaderboardTable')
                     .select("*")
-                    .eq("username", currUser)
+                    .eq("username", this.username)
                     .order('updated_at', { ascending: false })
                     .limit(1);
 
                 // console.log("HistoricalLeaderboardTable");
                 // console.log(HistoricalLeaderboardTable);
-
+                console.log(HistoricalLeaderboardTable);
                 if (error2) {
                     console.log("Can't fetch from HistoricalLeaderboardTable");
                     console.log(error2);
@@ -312,7 +318,7 @@ export default {
                         this.currRanking = HistoricalLeaderboardTable[0].rank;
 
                         // Testing Purposes
-                        // console.log(`Current Ranking: ${this.currRanking}`);
+                        console.log(`Current Ranking: ${this.currRanking}`);
                     }
                 }
 
@@ -335,7 +341,7 @@ export default {
                 let { data: allUserRecycledItems, error1 } = await supabase
                     .from('UserActivitiesTable')
                     .select('*')
-                    .eq('username', currUser) // return <Arr> of <Object>
+                    .eq('username', this.username) // return <Arr> of <Object>
 
                 if (error1) {
                     console.log("Can't fetch from UserOverallStatsTable");
@@ -380,7 +386,7 @@ export default {
                 let { data: UsernameMonthlyTreesSavedView, error2 } = await supabase
                     .from('MonthlyTreesSavedView')
                     .select('*')
-                    .eq('username', currUser)
+                    .eq('username', this.username)
                     .order('month_number');
 
                 if (error2) {
@@ -426,7 +432,7 @@ export default {
                 let { data: UserRankOverTime, error3 } = await supabase
                     .from('UserRankOverTime')
                     .select('*')
-                    .eq('username', currUser)
+                    .eq('username', this.username)
                     .order('month_number')
 
                 for (let month of this.timeX) {
@@ -442,6 +448,8 @@ export default {
                         this.highestRankData.push(0);
                     }
                 }
+                console.log(this.timeX);
+                console.log(this.highestRankData);
                 this.leaderboardReady = true;
 
                 if (error3) {
@@ -510,7 +518,7 @@ export default {
                     this.doughnutX.push("Yours Truly");
 
                     for (let object of AllUserStatsTable) {
-                        if (object.username == currUser) {
+                        if (object.username == this.username) {
                             this.co2SavingsY.push(object.total_co2_emission_reduction)
                         }
                         else {
@@ -556,7 +564,7 @@ export default {
                         if (obj.total_points_accumulated > maxTotal) {
                             maxTotal = obj.total_points_accumulated;
                         }
-                        if (obj.username == currUser) {
+                        if (obj.username == this.username) {
                             userTotal = obj.total_points_accumulated;
                         }
                         totalPoints += obj.total_points_accumulated;
@@ -584,7 +592,7 @@ export default {
 
                             // for each username, know the number of quizzes completed (find avg user numQuiz completed + max)
                             for (let obj of radarQuizDimension) {
-                                if (obj.username == currUser) {
+                                if (obj.username == this.username) {
                                     userQuizCount = obj.count;
                                 }
                                 if (obj.count > maxCount) {
@@ -613,7 +621,7 @@ export default {
                         if (obj.total_trees_saved > maxTreesSaved) {
                             maxTreesSaved = obj.total_trees_saved;
                         }
-                        if (obj.username == currUser) {
+                        if (obj.username == this.username) {
                             userTreesSaved = obj.total_trees_saved;
                         }
                         totalTreesSaved += obj.total_trees_saved;
@@ -646,7 +654,7 @@ export default {
                     let max = 0;
                     console.log(UserTreesStats);
                     for (let object of UserTreesStats) {
-                        if (object.username == currUser) {
+                        if (object.username == this.username) {
                             userCurrPoints = object.curr_points;
                         }
                         if (object.curr_points > max) {
@@ -675,7 +683,7 @@ export default {
                 let { data: HistoricalLeaderboardTableUser, error } = await supabase
                     .from('HistoricalLeaderboardTable')
                     .select('*')
-                    .eq('username', currUser)
+                    .eq('username', this.username)
 
                 if (error) {
                     console.log(error);

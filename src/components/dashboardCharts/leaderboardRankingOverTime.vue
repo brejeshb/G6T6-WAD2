@@ -34,12 +34,6 @@ export default {
     mounted() {
         this.createStackedChart();
     },
-    beforeUnmount() {
-        // Destroy the chart when the component is unmounted
-        if (this.chart) {
-            this.chart.destroy();
-        }
-    },
 
     methods: {
         createStackedChart() {
