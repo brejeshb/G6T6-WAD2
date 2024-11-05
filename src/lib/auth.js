@@ -1,7 +1,6 @@
 import { ref } from 'vue';
 import { supabase } from '../lib/supabaseClient'; // Adjust the import path as needed
 
-const userEmail = ref(null);
 const userName = ref(null);
 
 export const useAuth = () => {
@@ -36,8 +35,7 @@ export const useAuth = () => {
       const isPasswordValid = data.password === password || data.password === null;
 
       if (isPasswordValid) {
-        userEmail.value = data.email;
-        userName.value = data.username || username;
+        userName.value = data.username || username; // Store the username
         return true;
       }
     }
@@ -46,9 +44,8 @@ export const useAuth = () => {
   };
 
   const logout = () => {
-    userEmail.value = null;
-    userName.value = null;
+    userName.value = null; // Just clear the username
   };
 
-  return { userEmail, userName, login, logout };
+  return { userName, login, logout };
 };

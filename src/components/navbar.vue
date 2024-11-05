@@ -71,10 +71,7 @@
         <v-list>
           <v-list-item>
             <v-list-item-title>Signed in as</v-list-item-title>
-            <v-list-item-subtitle>{{ userEmail }}</v-list-item-subtitle>
-          </v-list-item>
-          <v-list-item>
-            <v-list-item-title>Username: {{ userName }}</v-list-item-title>
+            <v-list-item-subtitle>{{ userName }}</v-list-item-subtitle>
           </v-list-item>
           <v-list-item @click="handleSignOut" class="red--text">
             <v-list-item-title>Log Out</v-list-item-title>
@@ -102,7 +99,7 @@ import {
   VAvatar
 } from 'vuetify/components'
 
-const { userEmail, userName, logout } = useAuth()
+const { userName, logout } = useAuth() // Only access userName now
 const router = useRouter()
 const menuVisible = ref(false)
 const isMobile = ref(window.innerWidth < 960)

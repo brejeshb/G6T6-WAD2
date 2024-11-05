@@ -143,8 +143,7 @@
 </template>
 
 <script>
-// src/supabase.js
-var currUser = "ann1";
+
 
 
 
@@ -159,6 +158,11 @@ import Radar from './dashboardCharts/radar.vue';
 import Doughnut from './dashboardCharts/doughnut.vue';
 import SocialsDiv from './dashboardCharts/socialsIcons.vue';
 import Button from './dashboardCharts/button.vue';
+import {useAuth} from '../lib/auth'
+import { ref, watchEffect } from 'vue';
+
+const { userName } = useAuth();
+var currUser = userName
 
 
 export default {
