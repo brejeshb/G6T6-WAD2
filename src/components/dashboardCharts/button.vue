@@ -11,7 +11,8 @@
 
 .type--C {
     --line_color: #00135c;
-    --back_color: #defffa;
+    --back_color: #D9E787;
+    /** Change color of animation  */
 }
 
 .button {
