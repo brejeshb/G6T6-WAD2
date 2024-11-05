@@ -43,7 +43,7 @@ const handleLogin = async () => {
   const success = await login(username.value.trim(), password.value.trim());
   if (success) {
     console.log("Successfully signed in!");
-    router.push('/Home');
+    router.push('/Dashboard');
   } else {
     errMsg.value = "Invalid username or password.";
   }
