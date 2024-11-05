@@ -5,139 +5,141 @@
     <!--https://www.justinmind.com/ui-design/cards-->
     <!--Socials Animation https://www.youtube.com/watch?v=yU3giDe-N6c&list=PLpwngcHZlPacgMG_APw961UEBAmN18h8B-->
 
+    <div class="container-fluid" v-if="allChartsReady">
+        <div class="container-fluid p-0 ps-xl-5 pe-xl-5 pt-xl-5 pb-xs-0 dashboard h-100"
+            style="background-color: white;">
+            <div class="pb-0 p-xl-5 pb-0">
+                <h1>Welcome Home, {{ username }}!</h1>
+                <p class="fw-bold" style="color:#788645 ;font-style: italic;">Here's the recycling statistics in your
+                    current lifetime ♥︎
+                </p>
+            </div>
 
-    <div class="container-fluid p-0 ps-xl-5 pe-xl-5 pt-xl-5 pb-xs-0 dashboard h-100">
-        <div class="pb-0 p-xl-5 pb-0">
-            <h1>Welcome Home, {{ username }}!</h1>
-            <p class="fw-bold" style="color:#788645 ;font-style: italic;">Here's the recycling statistics in your
-                current lifetime ♥︎
-            </p>
+            <div id="dashboard" class="p-0 p-xl-5 pt-0">
+
+                <div style="background-color: #788645;padding: 5px;margin-bottom: 3em;">
+                    <h1 style="text-align: center;font-weight: 900;color: #FEFAE1">your dashboard</h1>
+                </div>
+
+                <div class="container-fluid" style="margin-bottom: 3em">
+                    <div class="row gx-5">
+                        <div class="col-md-3 col-sm-6 mb-4 mb-lg-0">
+                            <div class="col1 rounded-4 d-flex justify-content-between h-100 ">
+                                <div class="w-75">
+                                    <h1 class="stats text-wrap">{{ username }}</h1>
+                                    <div class="cardName">Username ࣪ ִֶָ☾.</div>
+                                </div>
+
+                                <div class="iconBox">
+                                    <ion-icon name="people" class="d-block d-sm-none  d-md-none d-lg-block"></ion-icon>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-3 col-sm-6 mb-4 mb-lg-0">
+                            <div class="col1 rounded-4 d-flex justify-content-between h-100 ">
+                                <div class="w-75">
+                                    <h1 class="stats text-wrap">{{ totalCo2Reduction }} kg</h1>
+                                    <div class="cardName">Total CO2 Reduction ✧₊⁺</div>
+                                </div>
+
+                                <div class="iconBox">
+                                    <ion-icon name="earth" class="d-block d-sm-none  d-md-none d-lg-block"></ion-icon>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-3 col-sm-6 mb-4 mb-lg-0">
+                            <div class="col1 rounded-4 d-flex justify-content-between h-100">
+                                <div class="w-75">
+                                    <h1 class="stats text-wrap">{{ totalTreesSaved }}</h1>
+                                    <div class="cardName">Total Trees Saved 𖡼𖤣𖥧</div>
+                                </div>
+
+                                <div class="iconBox">
+                                    <ion-icon name="leaf" class="d-block d-sm-none  d-md-none d-lg-block"></ion-icon>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-3 col-sm-6 mb-4 mb-lg-0">
+                            <div class="col1 rounded-4 d-flex justify-content-between h-100 ">
+                                <div class="w-75">
+                                    <h1 class="stats text-wrap">{{ currRankingFormatted }}</h1>
+                                    <div class="cardName">Current Ranking ♛ </div>
+                                </div>
+
+                                <div class="iconBox">
+                                    <ion-icon name="ribbon" class="d-block d-sm-none d-md-none d-lg-block"></ion-icon>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pie Chart + Trees Saved Stacked (Done Responsiveness) -->
+                <div class="container-fluid" style="margin-bottom: 3em;"> <!-- Outer container has h-100 -->
+                    <div class="row gx-5">
+                        <!-- Row has h-100 and align-items-stretch -->
+
+                        <!-- Left Column with Pie Chart -->
+                        <div v-if="dataLoaded" class="col-xl-4 col-12 mb-4 mb-lg-0 mx-auto" style="margin-right: 3em;">
+                            <PieChart :labels="recycledLabels" :data_values="recycledDataValues" />
+                        </div>
+
+
+                        <!-- Right Column with Trees Saved Chart -->
+                        <div v-if="treesReady" class="col-xl-8 col-12 mx-auto mb-4 mb-lg-0">
+                            <TreesSaved :labels="timeX" :data_values="treesSaved" :data_values1="co2Savings" />
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Leaderboard Ranking + Radar (Done Responsiveness) -->
+                <div class="container-fluid" style="margin-bottom: 3em;">
+                    <div class="row gx-5">
+
+                        <div v-if="leaderboardReady" class="col-xl-7 col-12 mb-4 mb-lg-0 mx-auto"
+                            style="margin-right: 3em;">
+                            <leaderboardRanking :labels="timeX" :data_values="highestRankData" />
+                        </div>
+
+
+                        <div v-if="radarReady" class="col-xl-5 col-12 mb-4 mb-lg-0 mx-auto">
+                            <Radar :labels="radarCat" :data_values="radarUser" :data_values1="radarAvgUser" />
+                        </div>
+                    </div>
+                </div>
+
+                <!--Last Row-->
+                <div class="container-fluid" style="margin-bottom: 3em;">
+                    <div class="row gx-5">
+                        <div v-if="bubbleReady" class="col-xl-4 col-12 mb-4 mb-lg-0">
+                            <bubble :data_values="bubbleData" />
+                        </div>
+
+                        <div v-if="doughnutReady" class="col-xl-4 col-12 mb-4 mb-lg-0">
+                            <Doughnut :labels="doughnutX" :data_values="co2SavingsY" />
+
+                        </div>
+
+                        <div v-if="socialsReady" class="col-xl-4 col-12 mb-4 mb-lg-0">
+                            <SocialsDiv />
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+            <div class="w-25 mx-auto">
+                <Button v-on:click="captureAndDownload" />
+            </div>
+
         </div>
-
-        <div id="dashboard" class="p-0 p-xl-5 pt-0">
-
-            <div style="background-color: #788645;padding: 5px;margin-bottom: 3em;">
-                <h1 style="text-align: center;font-weight: 900;color: #FEFAE1">your dashboard</h1>
-            </div>
-
-            <div class="container-fluid" style="margin-bottom: 3em">
-                <div class="row gx-5">
-                    <div class="col-md-3 col-sm-6 mb-4 mb-lg-0">
-                        <div class="col1 rounded-4 d-flex justify-content-between h-100 ">
-                            <div class="w-75">
-                                <h1 class="stats text-wrap">{{ username }}</h1>
-                                <div class="cardName">Username ࣪ ִֶָ☾.</div>
-                            </div>
-
-                            <div class="iconBox">
-                                <ion-icon name="people" class="d-block d-sm-none  d-md-none d-lg-block"></ion-icon>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="col-md-3 col-sm-6 mb-4 mb-lg-0">
-                        <div class="col1 rounded-4 d-flex justify-content-between h-100 ">
-                            <div class="w-75">
-                                <h1 class="stats text-wrap">{{ totalCo2Reduction }} kg</h1>
-                                <div class="cardName">Total CO2 Reduction ✧₊⁺</div>
-                            </div>
-
-                            <div class="iconBox">
-                                <ion-icon name="earth" class="d-block d-sm-none  d-md-none d-lg-block"></ion-icon>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="col-md-3 col-sm-6 mb-4 mb-lg-0">
-                        <div class="col1 rounded-4 d-flex justify-content-between h-100">
-                            <div class="w-75">
-                                <h1 class="stats text-wrap">{{ totalTreesSaved }}</h1>
-                                <div class="cardName">Total Trees Saved 𖡼𖤣𖥧</div>
-                            </div>
-
-                            <div class="iconBox">
-                                <ion-icon name="leaf" class="d-block d-sm-none  d-md-none d-lg-block"></ion-icon>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="col-md-3 col-sm-6 mb-4 mb-lg-0">
-                        <div class="col1 rounded-4 d-flex justify-content-between h-100 ">
-                            <div class="w-75">
-                                <h1 class="stats text-wrap">{{ currRankingFormatted }}</h1>
-                                <div class="cardName">Current Ranking ♛ </div>
-                            </div>
-
-                            <div class="iconBox">
-                                <ion-icon name="ribbon" class="d-block d-sm-none d-md-none d-lg-block"></ion-icon>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <!-- Pie Chart + Trees Saved Stacked (Done Responsiveness) -->
-            <div class="container-fluid" style="margin-bottom: 3em;"> <!-- Outer container has h-100 -->
-                <div class="row gx-5">
-                    <!-- Row has h-100 and align-items-stretch -->
-
-                    <!-- Left Column with Pie Chart -->
-                    <div v-if="dataLoaded" class="col-xl-4 col-12 mb-4 mb-lg-0 mx-auto" style="margin-right: 3em;">
-                        <PieChart :labels="recycledLabels" :data_values="recycledDataValues" />
-                    </div>
-
-
-                    <!-- Right Column with Trees Saved Chart -->
-                    <div v-if="treesReady" class="col-xl-8 col-12 mx-auto mb-4 mb-lg-0">
-                        <TreesSaved :labels="timeX" :data_values="treesSaved" :data_values1="co2Savings" />
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- Leaderboard Ranking + Radar (Done Responsiveness) -->
-            <div class="container-fluid" style="margin-bottom: 3em;">
-                <div class="row gx-5">
-
-                    <div v-if="leaderboardReady" class="col-xl-7 col-12 mb-4 mb-lg-0 mx-auto"
-                        style="margin-right: 3em;">
-                        <leaderboardRanking :labels="timeX" :data_values="highestRankData" />
-                    </div>
-
-
-                    <div v-if="radarReady" class="col-xl-5 col-12 mb-4 mb-lg-0 mx-auto">
-                        <Radar :labels="radarCat" :data_values="radarUser" :data_values1="radarAvgUser" />
-                    </div>
-                </div>
-            </div>
-
-            <!--Last Row-->
-            <div class="container-fluid" style="margin-bottom: 3em;">
-                <div class="row gx-5">
-                    <div v-if="bubbleReady" class="col-xl-4 col-12 mb-4 mb-lg-0">
-                        <bubble :data_values="bubbleData" />
-                    </div>
-
-                    <div v-if="doughnutReady" class="col-xl-4 col-12 mb-4 mb-lg-0">
-                        <Doughnut :labels="doughnutX" :data_values="co2SavingsY" />
-
-                    </div>
-
-                    <div v-if="socialsReady" class="col-xl-4 col-12 mb-4 mb-lg-0">
-                        <SocialsDiv />
-                    </div>
-                </div>
-            </div>
-
-
-
-        </div>
-        <div class="w-25 mx-auto">
-            <Button v-on:click="captureAndDownload" />
-        </div>
-
     </div>
 
 </template>
@@ -215,20 +217,18 @@ export default {
             co2SavingsY: [],
 
             // Socials: 
-            socialsReady: true
+            socialsReady: true,
+
+            // Overall
+            allChartsReady: false
 
 
         }
     },
-    async created() {
+    async mounted() {
         // fetch data from Supabase
-        await this.fetchUserStats();
-        await this.fetchUserRecycledMaterials();
-        await this.fetchNumTreesSavedOverTime();
-        await this.fetchLeaderboardOverTime();
-        await this.fetchBubbleChartData();
-        await this.fetchDoughnutData();
-        await this.fetchRadarData();
+        await this.fetchAllData();
+
     },
     computed: {
         currRankingFormatted() {
@@ -250,6 +250,18 @@ export default {
         }
     },
     methods: {
+        async fetchAllData() {
+            await this.fetchUserStats();
+            await this.fetchUserRecycledMaterials();
+            await this.fetchNumTreesSavedOverTime();
+            await this.fetchLeaderboardOverTime();
+            await this.fetchBubbleChartData();
+            await this.fetchDoughnutData();
+            await this.fetchRadarData();
+
+            // Set `allChartsReady` only when all individual flags are ready
+            this.allChartsReady = true;
+        },
         // Number Metrics 
         async fetchUserStats() {
             this.totalCo2Reduction = 0;
