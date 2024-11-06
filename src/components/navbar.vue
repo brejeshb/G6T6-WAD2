@@ -130,11 +130,20 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
+/* Fix navbar at the top of the screen */
 .navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
   z-index: 1000;
   width: 100%;
+  background-color: #ffffff; /* Optional: Set a background color */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for clarity */
+  padding: 0;
+  height: 64px; /* Set height for the navbar */
 }
 
+/* Optional: style the navbar links and other elements */
 .navbar-logo {
   height: 40px;
   width: auto;
@@ -151,6 +160,7 @@ onUnmounted(() => {
   z-index: 1001;
 }
 
+/* Ensure that the burger icon only shows up on mobile */
 .burger {
   position: relative;
   width: 40px;
@@ -203,15 +213,11 @@ onUnmounted(() => {
   transform: rotate(-45deg);
 }
 
-@media (max-width: 960px) {
-  .hide-nav {
-    display: none;
-  }
-}
-
+/* Make sure burger menu is hidden on desktop */
 @media (min-width: 961px) {
   .burger {
     display: none;
   }
 }
+
 </style>
