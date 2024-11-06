@@ -1,94 +1,116 @@
   <template>
-  <div class="body">
-    <div>
-      <div class="banner">
-        <img src="" alt="Banner Image" class="banner-img" />
-        <div class="banner-text">
-          <h1 class="display-3">Welcome to RecycleNow!</h1>
-          <p class="lead">Your guide to smart recycling and sustainable living</p>
-        </div>
-      </div>
-
-      <div class="info-section">
-        <div class="row">
-          <div class="col" v-for="card in infoCards" :key="card.id">
-            <div class="card">
-              <img :src="card.image" class="card-img-top" alt="Map Image" />
-              <div class="card-body">
-                <h3>{{ card.title }}</h3>
-                <p>{{ card.text }}</p>
-                <button type="button" class="btn btn-primary" :data-bs-target="card.modalTarget" data-bs-toggle="modal">
-                  {{ card.buttonText }}
-                </button>
-              </div>
-            </div>
+    <div class="body">
+      <div>
+        <div class="banner">
+          <img src="" alt="Banner Image" class="banner-img" />
+          <div class="banner-text">
+            <h1 class="display-3">Welcome to RecycleNow!</h1>
+            <p class="lead">Your guide to smart recycling and sustainable living</p>
           </div>
         </div>
-      </div>
 
-      <!-- Modals -->
-      <div class="modal fade" id="modalLocateBins" tabindex="-1" aria-labelledby="modalLocateBinsLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="modalLocateBinsLabel">Locate Recycling Bins</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <h3>Find Recycling Bins Nearby</h3>
-              <div class="container">
-                <div class="row">
-                  <div class="col-3">
-                    <label for="search-location" class="form-label">Location</label>
-                    <input type="text" class="form-control" v-model="searchText" placeholder="Search your location" />
-                    <button class="btn btn-primary mt-2" @click="performSearch">Search</button>
-                  </div>
-                  <div class="col-9">
-                    <div id="map" style="width: 100%; height: 500px;"></div>
-                  </div>
+        <div class="info-section">
+          <div class="row">
+            <div class="col" v-for="card in infoCards" :key="card.id">
+              <div class="card">
+                <img :src="card.image" class="card-img-top" alt="Map Image" />
+                <div class="card-body">
+                  <h3>{{ card.title }}</h3>
+                  <p>{{ card.text }}</p>
+                  <button type="button" class="btn btn-primary" :data-bs-target="card.modalTarget"
+                    data-bs-toggle="modal">
+                    {{ card.buttonText }}
+                  </button>
                 </div>
               </div>
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+
+        <!-- Modals -->
+        <div class="modal fade" id="modalLocateBins" tabindex="-1" aria-labelledby="modalLocateBinsLabel"
+          aria-hidden="true">
+          <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="modalLocateBinsLabel">Locate Recycling Bins</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <h3>Find Recycling Bins Nearby</h3>
+                <div class="container">
+                  <div class="row">
+                    <div class="col-3">
+                      <label for="search-location" class="form-label">Location</label>
+                      <input type="text" class="form-control" v-model="searchText" placeholder="Search your location" />
+                      <button class="btn btn-primary mt-2" @click="performSearch()">Search</button>
+                    </div>
+                    <div class="col-9">
+                      <div id="map" style="width: 100%; height: 500px;"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              </div>
             </div>
           </div>
         </div>
+
+        <div class="modal fade" id="addImgModal" tabindex="-1" aria-labelledby="addImgModal" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5">Upload Item Image</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body text-center">
+                <!-- <div class="upload-container" @click="triggerImageUpload">
+                  <p id="uploadText">Drop image or click to select<br>JPG, PNG, BMP, or WEBP</p>
+                  <img v-if="imagePreviewUrl" :src="imagePreviewUrl" alt="Image Preview" id="imagePreview"
+                    :style="{ display: imagePreviewUrl ? 'block' : 'none' }" />
+                </div>
+                <input type="file" ref="fileInput" accept="image/*" style="display: none" @change="previewImageModal" /> -->
+                <div class="upload-container" @click="triggerImageUpload">
+                  <!-- Only show this text if no image preview is available -->
+                  <p id="uploadText" v-if="!imagePreviewUrl">Drop image or click to select<br>JPG, PNG, BMP, or WEBP</p>
+
+                  <!-- Image preview, fills the container and hides the text when visible -->
+                  <img v-if="imagePreviewUrl" :src="imagePreviewUrl" alt="Image Preview" id="imagePreview" />
+                </div>
+                <input type="file" ref="fileInput" accept="image/*" style="display: none" @change="previewImageModal" />
+
+                <!-- Display loading spinner if loading is true -->
+                <div v-if="loading" class="spinner-border text-primary" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+
+
+                <p id="result" style="margin-top: 10px;">{{ resultMessage }}</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn main-btns" @click="analyseImage">Check Recyclability</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
       </div>
 
-      <div class="modal fade" id="addImgModal" tabindex="-1" aria-labelledby="addImgModal" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="addImgModal">Upload Item Image</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body text-center">
-              <div class="upload-container" @click="triggerImageUpload">
-                <p id="uploadText">Drop image or click to select<br>JPG, PNG, BMP, or WEBP</p>
-                <img v-if="imagePreviewUrl" :src="imagePreviewUrl" alt="Image Preview" id="imagePreview" />
-              </div>
-              <input type="file" id="imageInput" accept="image/*" style="display: none" @change="previewImageModal" />
-              <p id="result" style="margin-top: 10px;">{{ resultMessage }}</p>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn main-btns" @click="analyseImage">Check Recyclability</button>
-            </div>
-          </div>
-        </div>
-      </div>
+
+
+
     </div>
 
-
-  </div>
-
-</template>
+  </template>
 
 <script>
 
 const cs_key = import.meta.env.VITE_MAPS_API_KEY;
+const nyckelClientId = import.meta.env.VITE_NYCKEL_CLIENT_ID;
+const nyckelClientSecret = import.meta.env.VITE_NYCKEL_CLIENT_SECRET;
 import MAP_JSON from './RecyclingBins.json';
 
 
@@ -96,6 +118,9 @@ export default {
   data() {
     return {
       map: null,
+      loading: false, // Loading state for the spinner
+      recyclablesArr: ["cloth", "metal", "plastic", "paper", "glass"],
+      nyckelKey: undefined,
       mapJson: MAP_JSON,
       recyclingBins: [],
       mapMarkers: [],
@@ -233,36 +258,117 @@ export default {
       this.mapMarkers.forEach((marker) => marker.setMap(null));
       this.mapMarkers = [];
     },
-    previewImageModal() {
-      const file = this.$refs.imageInput.files[0];
 
-      if (file) {
-        this.imagePreviewUrl = URL.createObjectURL(file);
-        this.resultMessage = '';
-      }
-    },
     triggerImageUpload() {
-      this.$refs.imageInput.click();
+      // Programmatically click the file input
+      this.$refs.fileInput.click();
     },
-    async analyseImage() {
-      const file = this.$refs.imageInput.files[0];
-      const url = 'https://www.nyckel.com/v1/functions/recycling-image/analyze';
-      const key = 'YOUR_NYCKEL_API_KEY';
-
-      const formData = new FormData();
-      formData.append('image', file);
-
-      try {
-        const response = await axios.post(url, formData, {
-          headers: { Authorization: `Bearer ${key}` }
-        });
-        const result = response.data.labelName;
-        this.resultMessage = result === 'Recyclable' ? 'Good news! It’s recyclable!' : 'Not recyclable. Please dispose of responsibly.';
-      } catch (error) {
-        console.error('Error analyzing image:', error);
-        this.resultMessage = 'Image analysis failed. Please try again.';
+    previewImageModal(event) {
+      const file = event.target.files[0];
+      if (file) {
+        this.imagePreviewUrl = URL.createObjectURL(file); // Creates preview URL for the image
+        this.resultMessage = ''; // Optionally clear the result message
       }
+    },
+    getAccessToken() {
+
+      fetch('https://www.nyckel.com/connect/token', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: `grant_type=client_credentials&client_id=${nyckelClientId}&client_secret=${nyckelClientSecret}`
+      })
+        .then(response => response.json())
+        .then(data => {
+          this.nyckelKey = data["access_token"];
+        })
+    },
+    analyseImage() {
+      let file = this.$refs.fileInput.files[0];
+      let url = 'https://www.nyckel.com/v1/functions/recycling-identifier/invoke';
+      this.getAccessToken();
+
+      if (!file) {
+        alert('Please select an image to upload');
+        return;
+      }
+
+      this.loading = true;
+      const form = new FormData();
+      form.append('data', file);
+
+      axios
+        .post(
+          url,
+          form,
+          {
+            headers: {
+              'Authorization': `Bearer ${this.nyckelKey}`,
+              'Content-Type': 'multipart/form-data'
+            }
+          }
+        )
+        .then(response => {
+          let obj = response.data;
+          console.log(obj);
+          let firstDashIndex = obj.labelName.indexOf("-");
+
+          // Extract the category and item name
+          let outputCategory = obj.labelName.substring(0, firstDashIndex).trim();
+          outputCategory = outputCategory.charAt(0).toLowerCase() + outputCategory.slice(1);
+          outputCategory = outputCategory.replace(/\s*\(Recyclable\)$/, "").trim();
+
+
+          if (!this.recyclablesArr.includes(outputCategory)) {
+            this.resultMessage = `Your item is categorized as ${outputCategory}. This item is NOT recyclable!`
+          } else {
+            this.resultMessage = `Your item is categorized as ${outputCategory}. Will you like to recycle it and earn points?`
+          }
+        })
+        .catch(error => {
+          console.log(error.message);
+          this.resultMessage = "Check failed"
+        })
+        .finally(() => {
+          // Hide the spinner after the API call completes
+          this.loading = false;
+        });
     }
+
+    // analyseImage() {
+
+    //   fetch('https://www.nyckel.com/connect/token', {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/x-www-form-urlencoded'
+    //     },
+    //     body: `grant_type=client_credentials&client_id=${nyckelClientId}&client_secret=${nyckelClientSecret}`
+    //   })
+    //     .then(response => response.json())
+    //     .then(data => {
+    //       const file = this.$refs.fileInput.files[0];
+    //       const url = 'https://www.nyckel.com/v1/functions/recycling-image/analyze';
+
+
+    //       const formData = new FormData();
+    //       formData.append('image', file);
+
+    //       try {
+    //         const response = axios.post(url, formData, {
+    //           headers: { Authorization: 'Bearer' + data["access_token"] }
+    //         });
+    //         const result = response.data["labelName"];
+    //         console.log(result);
+    //         this.resultMessage = result === 'Recyclable' ? 'Good news! It’s recyclable!' : 'Not recyclable. Please dispose of responsibly.';
+    //       } catch (error) {
+    //         console.error('Error analyzing image:', error);
+    //         this.resultMessage = 'Image analysis failed. Please try again.';
+    //       }
+
+    //     });
+
+    // }
   }
 };
 </script>
@@ -333,24 +439,35 @@ export default {
 .upload-container {
   border: 2px dashed #798645;
   border-radius: 10px;
-  padding: 20px;
+  padding: 0;
   position: relative;
-  text-align: center;
   color: #798645;
+  cursor: pointer;
+  margin: auto;
+  height: 450px;
+  /* Adjust height as needed */
+  width: 450px;
   overflow: hidden;
+  text-align: center;
 }
 
 .upload-container p {
-  margin: 0;
   font-weight: bold;
   color: #798645;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
 }
 
-.upload-container img {
+#imagePreview {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  display: none;
+  object-fit: contain;
   border-radius: 10px;
 }
 </style>
