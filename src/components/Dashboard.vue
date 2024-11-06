@@ -185,8 +185,8 @@ export default {
     data() {
         return {
             // button 
-            buttonText :"Download Now",
-            
+            buttonText: "Download Now",
+
             username: currUser,
             totalCo2Reduction: 0,
             totalTreesSaved: 0,

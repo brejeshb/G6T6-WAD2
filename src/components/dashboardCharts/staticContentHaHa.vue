@@ -55,7 +55,7 @@
         </div>
 
         <!-- Tree Animation  -->
-        <div class="container p-5 text-center rounded-5 box" style="background-color: #F3F4F6;height: 80vh">
+        <div class="container p-5 text-center rounded-5 box" style="background-color: #F3F4F6;min-height: 80vh;height: fit-content;">
             <h1 style="font-weight: bold;color: #788645;">Lush Greenery?</h1><br>
             <h3 style="font-weight: bold;">
                 <mark style="background-color: #D9EA9A;">Fading Fast ...</mark>
@@ -109,7 +109,7 @@
         </div>
 
         <!-- Dead Tree Animation  -->
-        <div class="container p-5 text-center rounded-5 box" style="background-color: #F3F4F6;height: 80vh;">
+        <div class="container p-5 text-center rounded-5 box" style="background-color: #F3F4F6;min-height: 80vh;height: fit-content;">
             <h1 style="font-weight: bold;color: #788645;">Don't You </h1><br>
             <h3 style="font-weight: bold;">
                 <mark style="background-color: #D9EA9A;">Just Hate Dead Trees</mark>
@@ -150,6 +150,15 @@
                     </div>
                     <span class="shadow"></span>
                 </div>
+            </div><br><br><br>
+            <div class="text-start fw-bold">
+                Certainly you don't want a world full of dead trees, and extreme heat waves, especially how hot
+                Singapore is don't you ... How can we do our part so that the world remains an ethereal beauty for our
+                future generations?
+                You surely do't want a future plagued by dead trees and scorching heatwaves, given how hot Singapore is,
+                don't you? To ensure that our planet remains an enchanting paradise for our future generations, we must
+                take immediate action.
+
             </div>
         </div>
 
@@ -426,5 +435,52 @@ export default {
     transform: scale(1.02);
     /* Scale up the card when scrolling */
 
+}
+@media (max-width: 375px) {
+    .container-fluid {
+        padding: 0.5rem;
+    }
+
+    .container.p-5 {
+        padding: 1rem;
+    }
+
+    .scroll-section {
+        min-height: 100vh;
+        overflow-y: auto;
+    }
+
+    .box {
+        padding: 1rem;
+        height: auto;
+        min-height: fit-content;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    h3 {
+        font-size: 1rem;
+    }
+
+    .d-flex {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .container1 .tree,
+    .container1 .tree .branch span,
+    .container1 .tree .stem span {
+        transform: scale(0.8); /* Scale down the tree graphic */
+    }
+
+    .metric {
+        font-size: 1.25rem;
+    }
+
+    .btn {
+        padding: 0.5rem 1rem;
+    }
 }
 </style>

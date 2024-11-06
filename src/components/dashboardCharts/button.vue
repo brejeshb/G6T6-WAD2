@@ -103,6 +103,7 @@
 
 .button:hover {
     letter-spacing: 6px;
+    cursor: pointer;
 }
 
 .button:hover::before,
