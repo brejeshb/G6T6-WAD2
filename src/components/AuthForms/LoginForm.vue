@@ -58,7 +58,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import { supabase } from '../../lib/supabaseClient';
+import { useAuth } from '../../lib/auth'; // Adjust the path to auth.js
 
 const emit = defineEmits(['switch-mode', 'auth-success']);
 
@@ -67,38 +67,26 @@ const password = ref('');
 const isLoading = ref(false);
 const error = ref('');
 
+const { login } = useAuth(); // Access the login function from useAuth()
+
 async function handleSubmit() {
   isLoading.value = true;
   error.value = ''; // Clear any previous errors
 
   try {
-    // Using supabase login function to validate user credentials
-    const { data, error: loginError } = await supabase
-      .from('AuthTable')
-      .select()
-      .eq('username', username.value.trim())
-      .eq('password', password.value.trim())
-      .single();
+    // Attempt to login
+    const success = await login(username.value.trim(), password.value.trim());
 
-    if (loginError) {
-      // Handle login error (invalid username/password)
-      throw loginError;
-    }
-
-    // If user data exists, emit 'auth-success'
-    if (data) {
-      emit('auth-success');
+    if (success) {
+      emit('auth-success'); // If login is successful, emit auth-success
     } else {
-      // If no matching user found
-      error.value = 'Invalid username or password';
+      error.value = 'Invalid username or password'; // Handle invalid credentials
     }
   } catch (err) {
-    // General error handler (for network issues or query errors)
     console.error('Login error:', err);
-    error.value = 'An error occurred during login';
+    error.value = 'An error occurred during login'; // Handle any network or query errors
   } finally {
-    // Stop the loading state
-    isLoading.value = false;
+    isLoading.value = false; // Stop loading
   }
 }
 </script>
