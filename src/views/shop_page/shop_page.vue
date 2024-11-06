@@ -142,7 +142,7 @@ const fact_box = ref({
   img: '',
   description: '',
 });
-const cart = ref('./src/views/shop_page/img/cart.png');
+const cart = ref('/src/views/shop_page/img/cart.png');
 const size = ref(5);
 const trees = ref({
   cherry_blossom_tree: 500,
@@ -200,7 +200,7 @@ async function update_tree() {
 function facts(name) {
   fact_box.value.status = true;
   fact_box.value.description = item_facts.value[name].description;
-  fact_box.value.img = `./src/views/shop_page/img/real_tree/${name}.jpg`;
+  fact_box.value.img = `/src/views/shop_page/img/real_tree/${name}.jpg`;
 }
 
 function toggleMenu() {
@@ -286,7 +286,7 @@ function shop_display() {
   jsondata.forEach(thing => {
     let two = thing.item.split("_").map(i => i[0]).join('');
     thing.tree_png = thing.item.includes("tree") ?
-      `./src/views/shop_page/img/${thing.item}/${two}5.png` : `./src/views/shop_page/img/${thing.item}/${two}6.png`;
+      `/src/views/shop_page/img/${thing.item}/${two}5.png` : `/src/views/shop_page/img/${thing.item}/${two}6.png`;
   });
 
   return jsondata.filter(obj =>
