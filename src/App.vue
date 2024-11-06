@@ -1,12 +1,19 @@
 <script setup lang="ts">
 import Navbar from './components/navbar.vue';
-import DashboardPage from './views/DashboardPage.vue';
-
+import { defineComponent } from 'vue';
 </script>
-
 
 <template>
   <div id="app">
+    <Navbar />
+    <!-- Content should be pushed down by the height of the navbar -->
+    <div class="content-wrapper">
+      <router-view />
+    </div>
+  </div>
+
+
+ 
     <!-- <nav>
       <router-link to="/Home">Home</router-link>
       <router-link to="/Forest">Forest</router-link>
@@ -16,11 +23,19 @@ import DashboardPage from './views/DashboardPage.vue';
     </nav> -->
     <!-- <router-link to="/Dashboard">Dashboard Page</router-link> -->
 
-    <Navbar />
     <!-- <DashboardPage/>> -->
-    <router-view />
-  </div>
+
 </template>
+
+<style scoped>
+/* Add padding or margin to the content area */
+.content-wrapper {
+  margin-top: 64px; /* Adjust based on the height of your navbar */
+}
+</style>
+
+
+
 
 
 

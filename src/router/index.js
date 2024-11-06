@@ -8,10 +8,11 @@ import Quiz from '../views/Education/Quiz.vue';
 import Video from '../views/Education/Video.vue';
 import Leaderboard from '../views/Leaderboard.vue';
 import DashboardPage from '../views/DashboardPage.vue';
+import AuthContainer from '../components/AuthContainer.vue'
 
 
 const routes = [
-  { path: '/', component: Login },
+  { path: '/', component: AuthContainer },
   { path: '/Register', component: Register },
   { path: '/Dashboard', component: DashboardPage },
   { path: '/Forest', component: Forest },
