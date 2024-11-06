@@ -1,6 +1,6 @@
 <template>
     <div id="scene" class="">
-        <h1 id="text" class="animated-text">Welcome Back <br> @{{ currUser }}</h1>
+        <h1 id="text" class="animated-text">Welcome Back <br> {{ currUser }}</h1>
         <img src="../assets/images/imgm1.png" alt="" class="img-layer" style="z-index: 2; mix-blend-mode: multiply;"
             id="img1">
         <img src="../assets/images/imgm2.png" alt="" class="img-layer" style="z-index: 1; mix-blend-mode: multiply;"
