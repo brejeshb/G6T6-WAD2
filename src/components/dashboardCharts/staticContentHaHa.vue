@@ -1,5 +1,6 @@
 <template>
-    <div class="container-fluid p-lg-5 p-0 h-100 scroll-section" style="background-color: #D9EA9A; ">
+    <div class="container-fluid p-lg-5 p-0 h-100 scroll-section"
+        style="background-color: #D9EA9A; min-height: fit-content;">
         <!-- Globe -->
         <div class="container p-5 text-center rounded-5 box"
             style="background-color: #F3F4F6;margin-bottom: 1em;height: 80vh;overflow-y:scroll;scroll-snap-type: y mandatory;">
@@ -108,7 +109,7 @@
         </div>
 
         <!-- Dead Tree Animation  -->
-        <div class="container p-5 text-center rounded-5 box" style="background-color: #F3F4F6;">
+        <div class="container p-5 text-center rounded-5 box" style="background-color: #F3F4F6;height: 80vh;">
             <h1 style="font-weight: bold;color: #788645;">Don't You </h1><br>
             <h3 style="font-weight: bold;">
                 <mark style="background-color: #D9EA9A;">Just Hate Dead Trees</mark>
@@ -239,12 +240,6 @@ export default {
 
 .box:nth-child(4) {
     top: 80px
-}
-
-.box1 {
-    position: sticky;
-    top: 80px;
-
 }
 
 
@@ -425,6 +420,7 @@ export default {
         opacity: 1;
     }
 }
+
 
 .scroll-section:hover .box {
     transform: scale(1.02);
