@@ -79,10 +79,10 @@
                   <!-- Image preview, fills the container and hides the text when visible -->
                   <img v-if="imagePreviewUrl" :src="imagePreviewUrl" alt="Image Preview" id="imagePreview" />
                 </div>
-                <input type="file" ref="fileInput" accept="image/*" style="display: none" @change="previewImageModal" />
+                <input type="file" ref="fileInput" accept="image/*" style="display: none" @change="analyseImage" />
 
                 <!-- Display loading spinner if loading is true -->
-                <div v-if="loading" class="spinner-border text-primary" role="status">
+                <div style="margin-top: 10px ;" v-if="loading" class="spinner-border text-primary" role="status">
                   <span class="visually-hidden">Loading...</span>
                 </div>
 
@@ -90,7 +90,7 @@
                 <p id="result" style="margin-top: 10px;">{{ resultMessage }}</p>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn main-btns" @click="analyseImage">Check Recyclability</button>
+                <!-- <button type="button" class="btn main-btns" @click="analyseImage">Check Recyclability</button> -->
               </div>
             </div>
           </div>
@@ -129,7 +129,7 @@ export default {
       directionsRenderer: null,
       searchText: '',
       imagePreviewUrl: null,
-      resultMessage: 'Please upload an image of your item',
+      resultMessage: 'Please upload an image of your item to ensure it is recyclable before you can submit and earn points',
       infoCards: [
         {
           id: 1,
@@ -263,13 +263,13 @@ export default {
       // Programmatically click the file input
       this.$refs.fileInput.click();
     },
-    previewImageModal(event) {
-      const file = event.target.files[0];
-      if (file) {
-        this.imagePreviewUrl = URL.createObjectURL(file); // Creates preview URL for the image
-        this.resultMessage = ''; // Optionally clear the result message
-      }
-    },
+    // previewImageModal(event) {
+    //   const file = event.target.files[0];
+    //   if (file) {
+    //     this.imagePreviewUrl = URL.createObjectURL(file); // Creates preview URL for the image
+    //     this.resultMessage = ''; // Optionally clear the result message
+    //   }
+    // },
     getAccessToken() {
 
       fetch('https://www.nyckel.com/connect/token', {
@@ -284,7 +284,14 @@ export default {
           this.nyckelKey = data["access_token"];
         })
     },
-    analyseImage() {
+    
+    analyseImage(event) {
+      const fileItem = event.target.files[0];
+      if (fileItem) {
+        this.imagePreviewUrl = URL.createObjectURL(fileItem); // Creates preview URL for the image
+        this.resultMessage = ''; // Optionally clear the result message
+      }
+
       let file = this.$refs.fileInput.files[0];
       let url = 'https://www.nyckel.com/v1/functions/recycling-identifier/invoke';
       this.getAccessToken();
@@ -323,7 +330,7 @@ export default {
           if (!this.recyclablesArr.includes(outputCategory)) {
             this.resultMessage = `Your item is categorized as ${outputCategory}. This item is NOT recyclable!`
           } else {
-            this.resultMessage = `Your item is categorized as ${outputCategory}. Will you like to recycle it and earn points?`
+            this.resultMessage = `Your item is categorized as ${outputCategory}. It is recyclable! Will you like to recycle it and earn points?`
           }
         })
         .catch(error => {
