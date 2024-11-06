@@ -4,7 +4,7 @@
             <!-- Adjust card height-->
             <!-- Pressable Link-->
             <h1 style="font-weight: bold;">Dashboard Tutorial</h1>
-            <p>Scroll below!</p>
+            <p>Scroll horizontally below!</p>
             <hr>
 
 
@@ -160,6 +160,7 @@ export default {
 .item {
     scroll-snap-align: start;
     flex-shrink: 0;
+    
 }
 
 .card-img-top {
@@ -170,6 +171,8 @@ export default {
     background-position: center;
     border-top-left-radius: 10%;
     border-top-right-radius: 10%;
+    border-width: 0px;
+    
 
 }
 
@@ -180,12 +183,12 @@ export default {
 .card-body {
     padding: 6%;
     font-weight: 550;
-
     color: gray;
 }
 
 .card {
-    box-shadow: 0 7px 25px rgb(0, 0, 0, 0.08);
+    border-width: 0px;
     border-radius: 10%;
+
 }
 </style>

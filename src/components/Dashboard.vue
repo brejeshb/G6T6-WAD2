@@ -26,7 +26,7 @@
                         <div class="col-md-3 col-sm-6 mb-4 mb-lg-0">
                             <div class="col1 rounded-4 d-flex justify-content-between h-100 ">
                                 <div class="w-75">
-                                    <h1 class="stats text-wrap">{{ username }}</h1>
+                                    <h1 class="stats text-wrap text-truncate">{{ username }}</h1>
                                     <div class="cardName">Username ࣪ ִֶָ☾.</div>
                                 </div>
 
@@ -136,7 +136,7 @@
 
             </div>
             <div class="w-25 mx-auto">
-                <Button v-on:click="captureAndDownload" />
+                <Button v-on:click="captureAndDownload" :text="buttonText" />
             </div>
 
         </div>
@@ -180,10 +180,13 @@ export default {
         Radar,
         Doughnut,
         SocialsDiv,
-        Button
+        Button,
     },
     data() {
         return {
+            // button 
+            buttonText :"Download Now",
+            
             username: currUser,
             totalCo2Reduction: 0,
             totalTreesSaved: 0,
