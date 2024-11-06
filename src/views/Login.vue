@@ -2,7 +2,7 @@
   <div class="login-page" @click="handleOutsideClick">
     <!-- Video Background -->
     <video autoplay muted loop playsinline class="background-video">
-      <source src="../assets/batteryvid.mp4" type="video/mp4">
+      <source src="/public/vids/batteryvid.mp4" type="video/mp4">
     </video>
     
     <!-- Main container -->
