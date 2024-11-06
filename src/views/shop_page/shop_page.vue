@@ -35,7 +35,7 @@
     </div>
 
     <button id="shopping_cart" v-on:click="clicky">
-      <img src="../../assets/img/cart.png" style="width: 60px" />
+      <img src="./img/cart.png" style="width: 60px" />
     </button>
     <div class="shop" v-if="shop_open">
       <div class="sidebar" :style="menuVisible ? { width: '250px' } : {}">
@@ -142,7 +142,7 @@ const fact_box = ref({
   img: '',
   description: '',
 });
-const cart = ref('../../assets/img/cart.png');
+const cart = ref('./src/views/shop_page/img/cart.png');
 const size = ref(5);
 const trees = ref({
   cherry_blossom_tree: 500,
@@ -200,7 +200,7 @@ async function update_tree() {
 function facts(name) {
   fact_box.value.status = true;
   fact_box.value.description = item_facts.value[name].description;
-  fact_box.value.img = `../../assets/img/real_tree/${name}.jpg`;
+  fact_box.value.img = `./src/views/shop_page/img/real_tree/${name}.jpg`;
 }
 
 function toggleMenu() {
@@ -286,7 +286,7 @@ function shop_display() {
   jsondata.forEach(thing => {
     let two = thing.item.split("_").map(i => i[0]).join('');
     thing.tree_png = thing.item.includes("tree") ?
-      `../../assets/img/thing.item}/${two}5.png` : `../../assets/img/${thing.item}/${two}6.png`;
+      `./src/views/shop_page/img/${thing.item}/${two}5.png` : `./src/views/shop_page/img/${thing.item}/${two}6.png`;
   });
 
   return jsondata.filter(obj =>
@@ -353,8 +353,8 @@ async function fetchCalculationData() {
         const two = thing.split("_").map(i => i[0]).join('');
         cal_data.value.trees_planted.push(
           thing.includes("tree")
-            ? `../../assets/img/${thing}/${two}5.png`
-            : `../../assets/img/${thing}/${two}6.png`
+            ? `src/views/shop_page/img/${thing}/${two}5.png`
+            : `src/views/shop_page/img/${thing}/${two}6.png`
         );
       });
       }
@@ -367,7 +367,7 @@ async function fetchCalculationData() {
 
       const name = cal_data.value.current_tree.split("_").map(i => i[0]).join('');
       console.log(counter)
-      cal_data.value.picture = `../../assets/img/${cal_data.value.current_tree}/${name}${counter}.png`;
+      cal_data.value.picture = `src/views/shop_page/img/${cal_data.value.current_tree}/${name}${counter}.png`;
 
 
       start = true;
@@ -450,7 +450,7 @@ update_tree()
 .box {
   width: 7vw;
   height: 7vw;
-  background-image: url('../../assets/img/grass.png');
+  background-image: url('/src/views/shop_page/img/grass.png');
   background-size: auto 100%;
 
 }
