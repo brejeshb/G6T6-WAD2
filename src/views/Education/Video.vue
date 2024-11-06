@@ -1,7 +1,7 @@
 <template>
   <div id="app">
       <div id="header"></div>
-      <section class="py-5 text-center container top_section">
+      <section class="py-5 text-center top_section">
           <div class="row py-lg-5">
             <div class="col-lg-6 col-md-8 mx-auto">
               <h1 class="fw-light">Welcome to Our Recycling Education Hub!</h1>
@@ -67,6 +67,8 @@
 
 <script setup>
 import { ref, onMounted, computed } from 'vue';
+
+
 
 
 // Environment variables
@@ -337,5 +339,9 @@ transition: background-color 0.3s ease, color 0.3s ease;
 .nav-link:hover {
 background-color: #e0f7f4;
 color: #333;
+}
+#app{
+  background-color: #E7F5EE;
+  min-height: 100vh;
 }
 </style>

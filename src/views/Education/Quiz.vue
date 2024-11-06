@@ -103,6 +103,11 @@
   <script setup>
   import { reactive, ref, computed } from 'vue'
   import { supabase } from '/src/lib/supabaseClient.js'
+  import { useAuth } from '../../lib/auth'
+  const { userName } = useAuth();
+
+var currUser = userName;
+
   
   const quizzes = [
     { 
@@ -299,7 +304,7 @@ async function updatePoint(add_point){
   }
 console.log(tree_data)
   for(let user of tree_data){
-    if(user.username=='ann2'){
+    if(user.username==currUser.value){
         let curr_point = user.curr_points +add_point
         const { update_curr_point } = await supabase
       .from('UserTreesStats')
