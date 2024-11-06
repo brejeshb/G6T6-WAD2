@@ -61,10 +61,10 @@
   
   // Define video file paths (use public/assets path for Vue project)
   const vids = [
-  "/src/assets/batteryvid.mp4", 
-  "/src/assets/picktrash.mp4", 
-  "/src/assets/picktrash2.mp4",
-  "/src/assets/movingtrash.mp4"
+  "/vids/batteryvid.mp4", 
+  "/vids/picktrash.mp4", 
+  "/vids/picktrash2.mp4",
+  "/vids/movingtrash.mp4"
 ];
 
   // Select a random video
