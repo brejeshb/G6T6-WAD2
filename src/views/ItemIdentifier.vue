@@ -1,4 +1,4 @@
-<template>
+  <template>
   <div class="body">
     <div>
       <div class="banner">

@@ -1,8 +1,7 @@
 <!-- src/dashboardCharts/PieChart.vue -->
 <template>
-    <div class="border rounded-5 w-100 h-100 p-5 p-sm-5 p-md-5 p-lg-5 p-xl-5"
-        style="margin-right: 3em; background-color: white;">
-        <div>
+    <div class="bento rounded-5 w-100 h-100 p-1 p-md-3 p-lg-5 p-xl-5 border" style="min-height: 600px;">
+        <div class="mb-4">
             <h1 class="text-center">Your Recycled Materials Distribution</h1>
         </div>
 
@@ -48,14 +47,14 @@ export default {
                         {
                             label: "Recycled Materials",
                             data: this.data_values,
-
-                            borderWidth: 1
+                            hoverOffset: 40,
                         }
                     ]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: true, // Allows it to stretch to fill container
+                    aspectRatio: 1,
 
                     plugins: {
                         legend: {
@@ -63,7 +62,7 @@ export default {
                             labels: {
                                 padding: 10,
                                 font: {
-                                    weight: "bl"
+                                    weight: "bold"
                                 }
                             }
                         },
@@ -126,24 +125,25 @@ h1 {
     /* Adjusts the height automatically to maintain aspect ratio */
     max-width: 100%;
     /* Prevents overflow */
-    max-height: 100%;
+    max-height: 80%;
     margin-right: auto;
     margin-left: auto;
     position: relative;
     display: flex;
+    justify-content: center;
     align-items: center;
-    min-height: 400px;
+    min-height: 200px;
     /* overflow: hidden; */
 }
 
-canvas {
+/* canvas {
     min-height: 200px;
     min-width: 200px;
     width: 100%;
     height: auto;
-}
+} */
 
-.pieLine1 {
+.bento {
     /* Card */
     cursor: pointer;
     box-shadow: 0 7px 25px rgb(0, 0, 0, 0.08);

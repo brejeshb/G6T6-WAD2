@@ -1,6 +1,6 @@
 <template>
-    <div class="border rounded-5 p-5 w-100 h-100">
-        <div>
+    <div class="border rounded-5 p-2 p-md-3 p-lg-5 p-xl-5 w-100 h-100 bento" style="min-height: 600px;">
+        <div class="mb-4">
             <h1 style="text-align: center;">Your Trees & Co2 Savings Over Time </h1>
         </div>
 
@@ -11,6 +11,10 @@
 </template>
 
 <script>
+import { plugins } from 'chart.js';
+
+
+
 
 export default {
     name: "TreesSaved",
@@ -37,6 +41,7 @@ export default {
         this.createStackedChart();
     },
 
+
     methods: {
         createStackedChart() {
             const stackedChart = document.getElementById("stackedChart");
@@ -48,10 +53,13 @@ export default {
                     datasets: [{
                         label: "Number of Trees Saved",
                         data: this.data_values,
-                        borderWidth: 1,
+                        borderWidth: 4,
                         borderRadius: 80, // rounded bar graphs
                         borderSkipped: false,
-                        yAxisID: 'yTrees' // Link to the first y-axis
+                        backgroundColor: "#AFAAFF",
+                        borderColor: "#DBD9FF",
+                        order: 1,
+                        yAxisID: 'yTrees', // Link to the first y-axis
 
                     },
                     {
@@ -59,6 +67,9 @@ export default {
                         data: this.data_values1,
                         type: 'line',
                         yAxisID: 'yCO2', // Link to the second y-axis
+                        backgroundColor: "#2F5F48",
+                        borderColor: "#2F5F48",
+                        borderWidth: 4, 
                         order: 0,
                         tension: 0.4
                     }]
@@ -66,7 +77,15 @@ export default {
                 options: {
                     responsive: true,
                     maintainAspectRatio: true, // Allows it to stretch to fill container
-
+                    animations: {
+                        tension: {
+                            duration: 2000,
+                            easing: 'easeInQuad',
+                            from: 1,
+                            to: 0,
+                            loop: true
+                        }
+                    },
                     title: {
                         text: "Trees and Co2 Savings Over Time",
                         display: true,
@@ -93,6 +112,13 @@ export default {
                             beginAtZero: true, // Start from zero
                             grid: {
                                 drawOnChartArea: false // Prevent grid lines on the right axis overlapping
+                            },
+                            title: {
+                                display: true,
+                                text: 'Trees Saved',
+                                font: {
+                                    weight: "bold" // Make the y-axis labels bold
+                                }
                             }
 
                         },
@@ -107,16 +133,40 @@ export default {
                             beginAtZero: true, // Start from zero
                             grid: {
                                 drawOnChartArea: false // Prevent grid lines on the right axis overlapping
+                            },
+                            title: {
+                                display: true,
+                                text: 'CO2 Savings',
+                                font: {
+                                    weight: "bold" // Make the y-axis labels bold
+                                }
                             }
                         },
                         x: {
                             grid: {
                                 drawOnChartArea: false // Prevent grid lines on the right axis overlapping
+                            },
+                            ticks: {
+                                font: {
+                                    weight: "bold"
+                                }
                             }
                         }
                     },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                padding: 10,
+                                font: {
+                                    weight: "bold"
+                                }
+                            }
+                        },
+                    }
 
                 },
+
+
 
             });
         }
@@ -139,10 +189,11 @@ h1 {
     max-width: 100%;
     /* Prevents overflow */
     position: relative;
-    max-height: 100%;
+    max-height: 80%;
     margin: auto;
     display: flex;
     justify-content: center;
+    align-items: center;
     min-height: 400px;
 
 }
@@ -154,14 +205,10 @@ canvas {
     height: auto;
 }
 
-.pieLine1 {
+
+
+.bento {
     /* Card */
-    position: relative;
-    padding: 30px;
-    height: 100%;
-    /* background-color: #d3e4cd; */
-    display: flex;
-    justify-content: space-between;
     cursor: pointer;
     box-shadow: 0 7px 25px rgb(0, 0, 0, 0.08);
 }
