@@ -1,109 +1,115 @@
 <template>
-    <div id="app">
-      <section class="py-5 text-center container top_section">
-        <div class="row py-lg-5">
-          <div class="col-lg-6 col-md-8 mx-auto">
-            <h1 class="fw-light">Quiz Application</h1>
-            <p class="lead text-muted">
-              Challenge yourself with quizzes on recycling and upcycling. Earn
-              points by testing your knowledge!
-            </p>
-            <p>
-              <router-link to="./video" class="btn btn-primary my-2">Watch some educational videos</router-link>
-              <router-link to="./quiz" class="btn btn-secondary my-2">Do some quizzes for points</router-link>
-            </p>
-          </div>
+  <div id="app">
+    <!-- Top Section with AOS animation -->
+    <section class="py-5 text-center container top_section" data-aos="fade-up">
+      <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+          <h1 class="fw-light">Quiz Application</h1>
+          <p class="lead text-muted">
+            Challenge yourself with quizzes on recycling and upcycling. Earn points by testing your knowledge!
+          </p>
+          <p>
+            <router-link to="./video" class="btn btn-primary my-2" data-aos="zoom-in">Watch some educational videos</router-link>
+            <router-link to="./quiz" class="btn btn-secondary my-2" data-aos="zoom-in">Do some quizzes for points</router-link>
+          </p>
         </div>
-      </section>
-      <div id="main_content" class="container mt-2">
-        <div id="nav-bar">
-          <nav class="navbar navbar-expand-lg bg-body-tertiary flex-column">
-            <div class="container-fluid">
-              <a class="navbar-brand ms-5" href="#">Filter</a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <li class="nav-item">
-                    <a href="#" class="nav-link" 
-                       :class="{ 'active-filter': activeFilter === 'all' }" 
-                       @click.prevent="activeFilter = 'all'">All</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="#" class="nav-link" 
-                       :class="{ 'active-filter': activeFilter === 'recycling' }" 
-                       @click.prevent="activeFilter = 'recycling'">Recycle</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="#" class="nav-link" 
-                       :class="{ 'active-filter': activeFilter === 'upcycling' }" 
-                       @click.prevent="activeFilter = 'upcycling'">Upcycle</a>
-                  </li>
-                </ul>
-                <form class="d-flex" role="search" @submit.prevent>
-                  <input class="form-control me-3" type="search" placeholder="Search" aria-label="Search" v-model="search">
-                  <button class="btn btn-outline-success" type="button" @click="search = ''">Reset</button>
-                </form>
-              </div>
+      </div>
+    </section>
+
+    <!-- Main Content Section with Filter and Search Bar -->
+    <div id="main_content" class="container mt-2" data-aos="fade-up">
+      <div id="nav-bar">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary flex-column" data-aos="fade-left">
+          <div class="container-fluid">
+            <a class="navbar-brand ms-5" href="#">Filter</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item" data-aos="fade-right">
+                  <a href="#" class="nav-link" :class="{ 'active-filter': activeFilter === 'all' }" @click.prevent="activeFilter = 'all'">All</a>
+                </li>
+                <li class="nav-item" data-aos="fade-right">
+                  <a href="#" class="nav-link" :class="{ 'active-filter': activeFilter === 'recycling' }" @click.prevent="activeFilter = 'recycling'">Recycle</a>
+                </li>
+                <li class="nav-item" data-aos="fade-right">
+                  <a href="#" class="nav-link" :class="{ 'active-filter': activeFilter === 'upcycling' }" @click.prevent="activeFilter = 'upcycling'">Upcycle</a>
+                </li>
+              </ul>
+              <form class="d-flex" role="search" @submit.prevent data-aos="fade-left">
+                <input class="form-control me-3" type="search" placeholder="Search" aria-label="Search" v-model="search">
+                <button class="btn btn-outline-success" type="button" @click="search = ''">Reset</button>
+              </form>
             </div>
-          </nav>
-        </div>
-  
-        <div class="mt-4 shadow p-3 mb-5 bg-body-tertiary rounded">
-          <!-- Quiz selection or results section -->
-          <div v-if="!isQuizActive">
-            <h2 class="text-center">Available Quizzes</h2>
-            <div class="row">
-              <div class="col-lg-3 col-md-4 mb-4" v-for="quiz in filteredQuizzes" :key="quiz.id">
-                <div class="card">
-                  <div class="card-body">
-                    <h5 class="card-title">{{ quiz.category.charAt(0).toUpperCase() + quiz.category.slice(1) }} Quiz</h5>
-                    <p class="card-text">{{ quiz.title }}</p>
-                    <div v-if="quizAttempts[quiz.id]" class="mb-3">
-                      <p class="text-info mb-1">
-                        Attempts: {{ quizAttempts[quiz.id].attempts }} | Last Score: {{ quizAttempts[quiz.id].score }}/{{ quiz.questions.length }}
-                      </p>
-                      <div class="progress">
-                        <div class="progress-bar" :style="{ width: getScorePercentage(quiz.id) + '%' }" role="progressbar"
-                             :aria-valuenow="getScorePercentage(quiz.id)" aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                      <p v-if="quizAttempts[quiz.id].completed" class="text-warning mt-2">You can no longer gain points from completing this quiz until next month</p>
+          </div>
+        </nav>
+      </div>
+
+      <!-- Quiz Card Section with AOS animation -->
+      <div class="mt-4 shadow p-3 mb-5 bg-body-tertiary rounded" data-aos="fade-up">
+        <div v-if="!isQuizActive">
+          <h2 class="text-center" data-aos="fade-in">Available Quizzes</h2>
+          <div class="row">
+            <div class="col-lg-3 col-md-4 mb-4" v-for="quiz in filteredQuizzes" :key="quiz.id" data-aos="zoom-in">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">{{ quiz.category.charAt(0).toUpperCase() + quiz.category.slice(1) }} Quiz</h5>
+                  <p class="card-text">{{ quiz.title }}</p>
+                  <div v-if="quizAttempts[quiz.id]" class="mb-3">
+                    <p class="text-info mb-1">
+                      Attempts: {{ quizAttempts[quiz.id].attempts }} | Last Score: {{ quizAttempts[quiz.id].score }}/{{ quiz.questions.length }}
+                    </p>
+                    <div class="progress">
+                      <div class="progress-bar" :style="{ width: getScorePercentage(quiz.id) + '%' }" role="progressbar" :aria-valuenow="getScorePercentage(quiz.id)" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
-                    <!-- Disable the button if the quiz is completed -->
-                    <button class="btn btn-primary mt-2" @click="startQuiz(quiz)" :disabled="quizAttempts[quiz.id] && quizAttempts[quiz.id].completed">Start Quiz</button>
+                    <p v-if="quizAttempts[quiz.id].completed" class="text-warning mt-2">You can no longer gain points from completing this quiz until next month</p>
                   </div>
+                  <button class="btn btn-primary mt-2" @click="startQuiz(quiz)" :disabled="quizAttempts[quiz.id] && quizAttempts[quiz.id].completed">Start Quiz</button>
                 </div>
               </div>
             </div>
           </div>
-  
-          <!-- Quiz question section -->
-          <div v-else>
-            <h2 class="text-center">{{ currentQuiz.title }}</h2>
-            <div v-for="(question, index) in currentQuiz.questions" :key="index" class="mb-4">
-              <h5>{{ question.question }}</h5>
-              <div v-for="(option, idx) in question.options" :key="idx">
-                <label>
-                  <input type="radio" :name="'question' + index" :value="option" v-model="selectedAnswers[index]">
-                  {{ option }}
-                </label>
-              </div>
+        </div>
+
+        <!-- Quiz Question Section with AOS animation -->
+        <div v-else>
+          <h2 class="text-center" data-aos="fade-down">{{ currentQuiz.title }}</h2>
+          <div v-for="(question, index) in currentQuiz.questions" :key="index" class="mb-4" data-aos="fade-right">
+            <h5>{{ question.question }}</h5>
+            <div v-for="(option, idx) in question.options" :key="idx">
+              <label>
+                <input type="radio" :name="'question' + index" :value="option" v-model="selectedAnswers[index]">
+                {{ option }}
+              </label>
             </div>
-            <button class="btn btn-success" @click="submitQuiz">Submit Quiz</button>
-            <button class="btn btn-secondary ms-2" @click="goBack">Back to Quizzes</button>
           </div>
+          <button class="btn btn-success" @click="submitQuiz" data-aos="zoom-in">Submit Quiz</button>
+          <button class="btn btn-secondary ms-2" @click="goBack" data-aos="zoom-in">Back to Quizzes</button>
         </div>
       </div>
     </div>
-  </template>
+  </div>
+</template>
+
   
 
   
   <script setup>
-  import { reactive, ref, computed } from 'vue'
+  import { reactive, ref, computed,onMounted } from 'vue'
   import { supabase } from '/src/lib/supabaseClient.js'
   import { useAuth } from '../../lib/auth'
+  import AOS from "aos";
+import "aos/dist/aos.css";
+
+onMounted(() => {
+  AOS.init({
+    duration: 1000,  // Animation duration in ms
+    easing: "ease-in-out",  // Animation easing style
+    once: true,  // Whether animation should happen only once
+  });
+});
+
   const { userName } = useAuth();
 
 var currUser = userName;
