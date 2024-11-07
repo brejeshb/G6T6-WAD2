@@ -75,7 +75,7 @@ onMounted(() => {
   AOS.init({
     duration: 800, // Animation duration in milliseconds
     easing: 'ease-in-out', // Animation easing
-    once: true, // Only animate once
+    once: false,
   });
 });
 

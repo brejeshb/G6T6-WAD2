@@ -186,19 +186,19 @@ async function update_tree() {
   const { remove_tree } = await supabase
       .from('UserTreesStats')
       .update({ curr_tree_growing: '' })
-      .eq('username', currUser)
+      .eq('username', currUser.value)
     const { remove_curr_points } = await supabase
       .from('UserTreesStats')
       .update({ curr_points: new_points })
-      .eq('username', currUser)
+      .eq('username', currUser.value)
       const { remove_tree_points } = await supabase
       .from('UserTreesStats')
       .update({ curr_trees_points: 0 })
-      .eq('username', currUser)
+      .eq('username', currUser.value)
       const { update_tree_list } = await supabase
       .from('UserTreesStats')
       .update({ trees_owned: cal_data.value.name_of_trees_planted })
-      .eq('username', currUser)
+      .eq('username', currUser.value)
     fetchCalculationData()
 }
 
@@ -234,15 +234,15 @@ async function purchase(item) {
     const { add_tree } = await supabase
       .from('UserTreesStats')
       .update({ curr_tree_growing: new_tree })
-      .eq('username', currUser)
+      .eq('username', currUser.value)
     const { minus_point } = await supabase
       .from('UserTreesStats')
       .update({ curr_points: new_points })
-      .eq('username', currUser)
+      .eq('username', currUser.value)
       const { update_tree_points } = await supabase
       .from('UserTreesStats')
       .update({ curr_trees_points: item.growth_points })
-      .eq('username', currUser)
+      .eq('username', currUser.value)
     fetchCalculationData()
     alert('Item purchased, please exit the shop to view it');
   }
@@ -319,7 +319,9 @@ async function fetchCalculationData() {
     // Process and find specific user data
     for (let name of data) {
       if (name.username === currUser.value) {
+
         jsondata = {
+
           point: name.curr_points,
           current_tree: name.curr_tree_growing,
           trees_planted: name.trees_owned,
