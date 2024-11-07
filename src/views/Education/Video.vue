@@ -1,21 +1,21 @@
 <template>
   <div id="app">
       <div id="header"></div>
-      <section class="py-5 text-center top_section">
+      <section class="py-5 text-center top_section" data-aos="fade-up">
           <div class="row py-lg-5">
             <div class="col-lg-6 col-md-8 mx-auto">
               <h1 class="fw-light">Welcome to Our Recycling Education Hub!</h1>
               <p class="lead text-body-secondary">Recycling is a simple, powerful way to create a cleaner planet. In this hub, explore what can and can’t be recycled, learn tips for reducing waste, and discover how small actions can make a big impact. Together, let’s build a more sustainable future—one recycled item at a time!</p>
               <p>
-                <router-link to="./video" class="btn btn-primary my-2">Watch some educational videos</router-link>
-                <router-link to="./quiz" class="btn btn-secondary my-2">Do some quizzes for points</router-link>
+                <router-link to="./video" class="btn btn-primary my-2" data-aos="zoom-in">Watch some educational videos</router-link>
+                <router-link to="./quiz" class="btn btn-secondary my-2" data-aos="zoom-in">Do some quizzes for points</router-link>
               </p>
             </div>
           </div>
         </section>
       <div id="main_content" class="container mt-2">
-          <div id="sidebar ">
-              <nav class="navbar rounded shadow navbar-expand-lg bg-body-tertiary flex-column">
+          <div id="sidebar">
+              <nav class="navbar rounded shadow navbar-expand-lg bg-body-tertiary flex-column" data-aos="fade-right">
                   <div class="container-fluid">
                     <a class="navbar-brand ms-5" href="#">Filter</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,7 +46,7 @@
           </div>
           <div id="videos" class="mt-4 shadow p-3 mb-5 bg-body-tertiary rounded">
               <div class="row">
-                  <div class="col-lg-4 col-md-6 col-sm-12 mb-4" v-for="video in videoFiltering()" >
+                  <div class="col-lg-4 col-md-6 col-sm-12 mb-4" v-for="video in videoFiltering()" :key="video.videoId" data-aos="fade-up">
                       <div class="card h-100" style="width: 100%;">
                           <iframe 
                           class="card-img-top"
@@ -67,8 +67,17 @@
 
 <script setup>
 import { ref, onMounted, computed } from 'vue';
+import AOS from 'aos';
+import 'aos/dist/aos.css';  // Import the AOS styles
 
-
+// Initialize AOS on component mount
+onMounted(() => {
+  AOS.init({
+    duration: 800, // Animation duration in milliseconds
+    easing: 'ease-in-out', // Animation easing
+    once: true, // Only animate once
+  });
+});
 
 
 // Environment variables
