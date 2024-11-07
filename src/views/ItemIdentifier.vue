@@ -163,7 +163,7 @@ export default {
         },
         {
           id: 2,
-          image: './public/img/plastic_bottle_on_pavement.jpg',
+          image: './public/img/newspaper_bundle.jpg',
           title: 'Recycling For Points!',
           text: 'Recycle right! Snap a picture and upload it here. If it is recyclable, you can recycle it and earn points!',
           buttonText: 'Add Image',
