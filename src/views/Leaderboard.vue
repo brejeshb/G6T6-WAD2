@@ -1,17 +1,45 @@
 <!-- src/components/RecyclingLeaderboard.vue -->
+
 <template>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <div>
-        <div class="leaderboard-head">
-            <div class="leaderboard-container">
-                <h1 class="leaderboard-title">Leaderboard</h1>
+    <div class="container">
+        <section class="section" id="section-1">
+            <div class="leaderboard-head">
+                <div class="leaderboard-container">
+                    <h1 id="leaderboard-title">Leaderboard</h1>
+                </div>
             </div>
-        </div>
+
+            <div class="leaderboard-body">
+
+
+                <!-- Podium -->
+                <div class="row">
+                    <div class="col-lg-4">
+                    </div>
+                    <div class="col-lg-4">
+                        <div id="podium" class="podium">
+                            <div v-for="player in topPlayers" :key="player.rank"
+                                :class="['podium-step', getPodiumClass(player.rank)]">
+                                <h2 class='podium-number'>{{ player.rank }}</h2>
+                                <h5 class="podium-name">{{ player.name }}</h5>
+                                <!-- <img :src="player.avatar" alt="Avatar"> -->
+                                <p>{{ player.score }} points</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
 
         <div class="svg-container">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="#626F47">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="#FEFAE0">
                 <rect fill="#798645" width="100%" height="100%" />
                 <path
                     d="M0 0v99.7C62 69 122.4 48.7 205 66c83.8 17.6 160.5 20.4 240-12 54-22 110-26 173-10a392.2 392.2 0 0 0 222-5c55-17 110.3-36.9 160-27.2V0H0Z"
@@ -22,79 +50,77 @@
             </svg>
         </div>
 
-        <div class="leaderboard-body">
-            <!-- <div class="d-flex justify-content-center">
-                <div class="btn-group btn-group-toggle mb-4 text-center">
-                    <button type="button" class="btn btn-primary btn-lg"
-                        @click="sortLeaderboard('weekly')">Weekly</button>
-                    <button type="button" class="btn btn-secondary btn-lg" @click="sortLeaderboard('allTime')">All
-                        Time</button>
-                </div>
-            </div> -->
-
-            <!-- Podium -->
+        <!-- Leaderboard List -->
+        <section class="section" id="section-2">
             <div class="row">
-                <div class="col-lg-1">
-                </div>
-                <div class="col-lg-4">
-                    <div id="podium" class="podium">
-                        <div v-for="player in topPlayers" :key="player.rank"
-                            :class="['podium-step', getPodiumClass(player.rank)]">
-                            <h2 class='podium-number'>{{ player.rank }}</h2>
-                            <h5 class="podium-name">{{ player.name }}</h5>
-                            <!-- <img :src="player.avatar" alt="Avatar"> -->
-                            <p>{{ isWeekly ? player.weeklyScore : player.score }} points</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-1">
-                </div>
-                <!-- Leaderboard List -->
-                <div class="col-lg-5">
-                    <ul class="leaderboard-list mt-4">
+                <div class="col-lg-3 col-sm-1"></div>
+                <div class="col-lg-6">
+                    <ul class="leaderboard-list mt-4 hidden">
                         <li v-for="player in sortedPlayers" :key="player.rank"
                             class="list-group-item d-flex align-items-center">
                             <div class="player-info">
-                                <span>{{ player.rank }}.&nbsp;</span>
-                                <!-- <img :src="player.avatar" alt="Avatar"> -->
+                                <span class="p-3">{{ player.rank }}.&nbsp;</span>
                                 <span>{{ player.name }}</span>
                             </div>
-                            <span>{{ isWeekly ? player.weeklyScore : player.score }} points</span>
+                            <span>{{ player.score }} points</span>
                         </li>
                     </ul>
-                </div>
-            </div>
 
-        </div>
+                </div>
+                <div class="hidden"><span id="climb">Climb the leaderboard!</span></div>
+                <div class="col-lg-3 col-sm-1"></div>
+            </div>
+        </section>
+
+
+
 
         <div class="svg-container">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="#798645">
-                <rect fill="#FEFAE0" width="100%" height="100%" />
-                <path d="M0 0v100c250 0 375-24 500-48 125 24 250 48 500 48V0H0Z" opacity=".5"></path>
-                <path d="M0 0v4c250 0 375 24 500 48C625 28 750 4 1000 4V0H0Z"></path>
+                <rect fill="#626F47" width="100%" height="100%" />
+                <path d="M0 0v100l500-48 500 48V0H0z" opacity=".5"></path>
+                <path d="M0 0h1000v52H0z" opacity=".5"></path>
+                <path d="M0 0v4l500 48 500-48V0H0z" opacity=".5"></path>
+                <path d="M0 0v4l500 48 500-48V0H0z"></path>
             </svg>
         </div>
 
-        <div class="bar-chart">
+        <section class="section" id="section-3">
+            <div class="bar-chart hidden">
+                <div class="py-5 mx-auto">
+                    <div class="card">
+                        <div class="card-title hidden">
+                            <h1>Overall user ranking</h1>
+                        </div>
+                        <div class="card-body chart hidden">
+                            <hr>
+                            <BarChart />
+                        </div>
 
-            <div class="col-8 offset-2 py-5">
-                <div class="card">
-                    <div class="card-body">
-                        <h1>Overall user ranking</h1>
-                        <hr>
-
-                        <!-- <BarChart /> -->
-                        <BarChart />
                     </div>
 
-                </div>
 
+                </div>
+            </div>
+        </section>
+
+        <div class="svg-container">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="#626F47">
+                <rect fill="#FEFAE0" width="100%" height="100%" />
+                <path d="M500 4c-125 0-125 96-250 96S125 4 0 4V0h1000v4c-125 0-125 96-250 96S625 4 500 4Z"></path>
+            </svg>
+        </div>
+
+        <div id="section-4 ">
+            <LeaderboardCarousel />
 
             </div>
+
+
         </div>
 
 
-    </div>
+    <!-- </div> -->
 
 
 </template>
@@ -104,10 +130,12 @@
 import { ref, computed, onMounted } from 'vue';
 import { supabase } from '../lib/supabaseClient';
 import BarChart from '../views/barchart.vue';
+import LeaderboardCarousel from '../components/LeaderboardCarousel.vue';
+// import { Interaction } from 'chart.js';
+
 
 // Data and state
 const players = ref([]);
-const isWeekly = ref(true);
 
 // Computed properties
 const topPlayers = computed(() => players.value.filter(player => player.rank <= 3));
@@ -138,22 +166,255 @@ async function fetchLeaderboardData() {
     players.value = UserOverallStatsTable.map((record, index) => ({
         rank: index + 1,
         name: record.username,
-        weeklyScore: record.total_points_accumulated,
+        score: record.total_points_accumulated,
     }));
 }
 
-// Lifecycle hook
 onMounted(async () => {
     await fetchLeaderboardData();
     sortLeaderboard();
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("show"); // Add 'show' class when element is in view
+            }
+            else {
+                entry.target.classList.remove("show"); // Add 'show' class when element is in view
+            }
+        });
+    });
+
+    // Select all elements with the 'hidden' class
+    const hiddenSections = document.querySelectorAll('.hidden');
+
+    // Observe each hidden section
+    hiddenSections.forEach((el) => observer.observe(el));
 });
+
 </script>
 
 
 <style scoped>
+.container {
+    width: 100%;
+    height: 100vh;
+    max-width: 100vw;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.section {
+    height: 100vh;
+    width: 100vw;
+    scroll-snap-align: start;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+#section-1 {
+    background-color: #FEFAE0;
+}
+
+#section-2 {
+    background-color: #798645;
+
+}
+
+#section-3 {
+    background-color: #626F47;
+    display: flex;
+    align-items: center;
+}
+
+#section-4 {
+    background-color: #FEFAE0;
+    
+}
+
+.hidden {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateX(-100%);
+    transition: all 1s;
+
+}
+
+.show {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateX(0);
+}
+
+.leaderboard-list {
+    display: inline-block;
+    background-color: #EFECC6;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    padding: 20px;
+    width: 80%;
+    padding: 30px;
+}
+
+/* Leaderboard List Items */
+.leaderboard-list li {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #ccc;
+    transition: background-color 0.3s ease;
+}
+
+.leaderboard-list li:hover {
+    background-color: #f0f8ff;
+}
+
+.chart {
+    display: grid;
+    align-items: center;
+}
+
 .bar-chart {
-    margin-top: 0px;
-    background-color: #FEFAE0
+    /* display: inline-block;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); */
+    width: 80%;
+    max-width: 1000px;
+}
+
+#leaderboard-title {
+    animation: animated-text 2s steps(11, end) 0.5s 1 normal both,
+        animated-cursor 750ms steps(11, end) infinite;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 2px solid;
+    /* Creates the cursor */
+    color: #798645;
+    font-weight: bold;
+    margin-left: 100px;
+}
+
+/* Cursor animations */
+@keyframes animated-cursor {
+    from {
+        border-right-color: rgba(0, 0, 0, 0.75);
+    }
+
+    to {
+        border-right-color: transparent;
+    }
+}
+
+@keyframes animated-text {
+    from {
+        width: 0%;
+    }
+
+    to {
+        width: 285px;
+    }
+}
+
+/* cursor animations */
+
+@keyframes animated-cursor {
+    from {
+        border-right-color: rgba(0, 0, 0, 0.75);
+    }
+
+    to {
+        border-right-color: transparent;
+    }
+}
+
+@keyframes popIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+
+.podium {
+    animation: popIn 2s ease-out forwards;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 15px;
+}
+
+.podium-step {
+    /* animation: popIn 0.8s ease-out forwards;
+    animation-fill-mode: forwards; */
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+    border-radius: 15px;
+    color: white;
+    font-weight: bold;
+    font-size: large;
+    position: relative;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.podium-step:hover {
+    transform: translateY(-20px);
+}
+
+.first-place {
+    /* animation-delay: 0.1s; */
+    height: 350px;
+    background: linear-gradient(145deg, #f4d03f, #f1c40f);
+    box-shadow: 0 8px 16px rgba(255, 223, 0, 0.5);
+    order: 2;
+    width: 160px;
+    position: relative;
+
+}
+
+.second-place {
+    height: 300px;
+    background: linear-gradient(145deg, #c0c0c0, #b0b0b0);
+    box-shadow: 0 8px 16px rgba(192, 192, 192, 0.5);
+    order: 1;
+    width: 160px;
+
+}
+
+.third-place {
+    /* animation-delay: 1s; */
+    height: 250px;
+    background: linear-gradient(145deg, #cd7f32, #c97127);
+    box-shadow: 0 8px 16px rgba(205, 127, 50, 0.5);
+    order: 3;
+    width: 160px;
+
+
+}
+
+
+
+.bar-chart.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .navbar {
@@ -184,7 +445,7 @@ onMounted(async () => {
 }
 
 .leaderboard-head {
-    background-color: #626F47;
+    /* background-color: #626F47; */
     height: 200px;
     width: 100vw;
     margin: 0px;
@@ -195,16 +456,13 @@ onMounted(async () => {
 }
 
 .leaderboard-body {
-    background-color: #798645;
+    /* background-color: #798645; */
     height: 100vh;
     width: 100vw;
     max-width: 100%;
 }
 
-.leaderboard-title {
-    color: white;
-    margin-left: 100px;
-}
+
 
 h1 {
     text-align: left;
@@ -212,80 +470,6 @@ h1 {
     font-size: 3rem;
     font-weight: bold;
     margin-left: 30px;
-}
-
-
-.podium {
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    gap: 15px;
-}
-
-.podium-step {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    padding: 20px;
-    border-radius: 15px;
-    color: white;
-    font-weight: bold;
-    font-size: large;
-    position: relative;
-    border: 2px solid rgba(255, 255, 255, 0.4);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    transition: transform 0.3s ease;
-}
-
-.podium-step:hover {
-    transform: translateY(-10px);
-}
-
-/* .podium-step img {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    margin-bottom: 10px;
-    /* border: 3px solid white; }*/
-
-.first-place {
-    height: 350px;
-    background: linear-gradient(145deg, #f4d03f, #f1c40f);
-    box-shadow: 0 8px 16px rgba(255, 223, 0, 0.5);
-    order: 2;
-    width: 160px;
-    position: relative;
-}
-
-/* .first-place::after {
-    content: '';
-    position: absolute;
-    top: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    z-index: -1;
-} */
-
-.second-place {
-    height: 300px;
-    background: linear-gradient(145deg, #c0c0c0, #b0b0b0);
-    box-shadow: 0 8px 16px rgba(192, 192, 192, 0.5);
-    order: 1;
-    width: 160px;
-}
-
-.third-place {
-    height: 250px;
-    background: linear-gradient(145deg, #cd7f32, #c97127);
-    box-shadow: 0 8px 16px rgba(205, 127, 50, 0.5);
-    order: 3;
-    width: 160px;
-
 }
 
 .podium-number {
@@ -306,32 +490,12 @@ h1 {
     color: rgba(255, 255, 255, 0.8);
 }
 
+.leaderboard-list span {
+    font-size: large;
+}
 
 .podium-step span {
     font-weight: bold;
-}
-
-.leaderboard-list {
-    background-color: #EDEBF7;
-    padding: 20px;
-    border-radius: 10px;
-    color: black;
-}
-
-.leaderboard-list li {
-    list-style-type: none;
-    padding: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid #ccc;
-}
-
-.leaderboard-list img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-right: 10px;
 }
 
 .player-info {
@@ -339,22 +503,60 @@ h1 {
     align-items: center;
 }
 
-.btn-group-toggle .btn {
-    background-color: #9087E5;
-    color: white;
-    border-radius: 10px;
-}
 
-.highlight {
+#climb {
     font-weight: bold;
-    background-color: #EFECC6;
+    color: #EFECC6;
+    font-size: xxx-large;
 }
 
-.score-timer {
-    margin-top: 10px;
-    font-size: 0.9rem;
-    background-color: #A1A4D2;
-    padding: 10px;
-    border-radius: 8px;
+.carousel-container {
+    position: relative;
 }
+
+.carousel {
+    display: flex;
+    gap: 16px; 
+    width: 100vw;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory; 
+    white-space: nowrap;
+    padding: 20px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.item {
+    flex-shrink: 0;
+    width: 600px; 
+    /* scroll-snap-align: start;  */
+    box-sizing: border-box;
+}
+
+.card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.card-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.card-img-top {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.card-body {
+    font-size: 0.9em;
+    color: #666;
+}
+
 </style>
