@@ -478,7 +478,7 @@ export default {
                     .select('*');
 
                 // make bubble bigger according to total_trees_saved
-                const scalingFactor = 50;
+                const scalingFactor = 15;
                 for (let object of BubbleChartView) {
                     if (object.username == this.username) {
                         this.index = BubbleChartView.indexOf(object);
@@ -862,7 +862,7 @@ h1 {
     justify-content: space-between;
     cursor: pointer;
     box-shadow: 0 7px 25px rgb(0, 0, 0, 0.08);
-    background-color: #E7F5EE;
+    background-color: #FEFAE1;
     animation: appear linear;
     animation-timeline: view();
     animation-range: entry 0% cover 40%;

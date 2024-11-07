@@ -69,7 +69,7 @@ export default {
                         yAxisID: 'yCO2', // Link to the second y-axis
                         backgroundColor: "#2F5F48",
                         borderColor: "#2F5F48",
-                        borderWidth: 4, 
+                        borderWidth: 4,
                         order: 0,
                         tension: 0.4
                     }]
@@ -169,7 +169,8 @@ export default {
 
 
             });
-        }
+        }, 
+        
     },
 };
 </script>
