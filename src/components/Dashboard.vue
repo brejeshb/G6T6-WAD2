@@ -242,7 +242,7 @@ export default {
 
             }
             else if (this.currRanking == 1) {
-                return this.currRanking + "th";
+                return this.currRanking + "st";
             }
             else if (this.currRanking == 2) {
                 return this.currRanking + "nd";
