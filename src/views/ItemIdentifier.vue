@@ -1,15 +1,20 @@
   <template>
-    <div class="body">
-      <div>
-        <div class="banner">
-          <img src="" alt="Banner Image" class="banner-img" />
-          <div class="banner-text">
-            <h1 class="display-3">Welcome to RecycleNow!</h1>
-            <p class="lead">Your guide to smart recycling and sustainable living</p>
+    <div class="template">
+      <div class="body">
+
+        <div class="section1">
+          <div class="text">RECYCLENOW</div>
+        </div>
+
+        
+        <div class="section2">
+          <div class="sub-text">Not sure where to recycle? Find the nearest recycling bin to you! 
+            Don't just leave your recyclables behind!
+            You can earn points for every recycled item!
           </div>
         </div>
 
-        <div class="info-section">
+        <div class="info-section container">
           <div class="row">
             <div class="col" v-for="card in infoCards" :key="card.id">
               <div class="card">
@@ -26,6 +31,8 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
 
         <!-- Modals -->
         <div class="modal fade" id="modalLocateBins" tabindex="-1" aria-labelledby="modalLocateBinsLabel"
@@ -41,12 +48,33 @@
                 <div class="container">
                   <div class="row">
                     <div class="col-3">
-                      <label for="search-location" class="form-label">Location</label>
-                      <input type="text" class="form-control" v-model="searchText" placeholder="Search your location" />
-                      <button class="btn btn-primary mt-2" @click="performSearch()">Search</button>
+                      <div>
+                        1. Input your current location and search
+                        <br>
+                        <br>
+                        2. Blue marker will be your current location
+                        <br>
+                        <br>
+                        3. Red markers will be the recycling bins that are within 1km from you
+                        <br>
+                        <br>
+                        4. Mouseover the red markers to have a look at the walking route!
+                        <br>
+                        <br>
+                        5. Click on your desired marker to start journey
+                        <br>
+                        <br>
+                      </div>
                     </div>
                     <div class="col-9">
                       <div id="map" style="width: 100%; height: 500px;"></div>
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col">
+                      
+                      <input type="text" class="form-control" v-model="searchText" placeholder="Search your location" />
+                      <button class="btn btn-primary mt-2" @click="performSearch()">Search</button>
                     </div>
                   </div>
                 </div>
@@ -66,12 +94,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body text-center">
-                <!-- <div class="upload-container" @click="triggerImageUpload">
-                  <p id="uploadText">Drop image or click to select<br>JPG, PNG, BMP, or WEBP</p>
-                  <img v-if="imagePreviewUrl" :src="imagePreviewUrl" alt="Image Preview" id="imagePreview"
-                    :style="{ display: imagePreviewUrl ? 'block' : 'none' }" />
-                </div>
-                <input type="file" ref="fileInput" accept="image/*" style="display: none" @change="previewImageModal" /> -->
+
                 <div class="upload-container" @click="triggerImageUpload">
                   <!-- Only show this text if no image preview is available -->
                   <p id="uploadText" v-if="!imagePreviewUrl">Drop image or click to select<br>JPG, PNG, BMP, or WEBP</p>
@@ -90,19 +113,12 @@
                 <p id="result" style="margin-top: 10px;">{{ resultMessage }}</p>
               </div>
               <div class="modal-footer">
-                <!-- <button type="button" class="btn main-btns" @click="analyseImage">Check Recyclability</button> -->
+                <button type="button" class="btn btn-primary" @click="addPoints()" disabled>I want to recycle
+                  this!</button>
               </div>
             </div>
           </div>
         </div>
-
-
-      </div>
-
-
-
-
-    </div>
 
   </template>
 
@@ -112,6 +128,11 @@ const cs_key = import.meta.env.VITE_MAPS_API_KEY;
 const nyckelClientId = import.meta.env.VITE_NYCKEL_CLIENT_ID;
 const nyckelClientSecret = import.meta.env.VITE_NYCKEL_CLIENT_SECRET;
 import MAP_JSON from './RecyclingBins.json';
+import { useAuth } from '../lib/auth'
+
+const { userName } = useAuth();
+var currUser = userName;
+console.log(userName);
 
 
 export default {
@@ -142,8 +163,8 @@ export default {
         },
         {
           id: 2,
-          image: '',
-          title: 'Get the GREENLIGHT!',
+          image: '../../public/img/plastic_bottle_on_pavement.jpg',
+          title: 'Recycling For Points!',
           text: 'Recycle right! Snap a picture and upload it here. If it is recyclable, you can recycle it and earn points!',
           buttonText: 'Add Image',
           modalTarget: '#addImgModal'
@@ -160,7 +181,7 @@ export default {
     loadGoogleMapsScript() {
       return new Promise((resolve, reject) => {
         if (typeof google !== "undefined" && google.maps) {
-          resolve(); // Script is already loaded
+          resolve();
         } else {
           const script = document.createElement("script");
           script.src = `https://maps.googleapis.com/maps/api/js?key=${cs_key}&libraries=geometry`;
@@ -260,16 +281,9 @@ export default {
     },
 
     triggerImageUpload() {
-      // Programmatically click the file input
       this.$refs.fileInput.click();
     },
-    // previewImageModal(event) {
-    //   const file = event.target.files[0];
-    //   if (file) {
-    //     this.imagePreviewUrl = URL.createObjectURL(file); // Creates preview URL for the image
-    //     this.resultMessage = ''; // Optionally clear the result message
-    //   }
-    // },
+
     getAccessToken() {
 
       fetch('https://www.nyckel.com/connect/token', {
@@ -284,12 +298,12 @@ export default {
           this.nyckelKey = data["access_token"];
         })
     },
-    
+
     analyseImage(event) {
       const fileItem = event.target.files[0];
       if (fileItem) {
-        this.imagePreviewUrl = URL.createObjectURL(fileItem); // Creates preview URL for the image
-        this.resultMessage = ''; // Optionally clear the result message
+        this.imagePreviewUrl = URL.createObjectURL(fileItem);
+        this.resultMessage = '';
       }
 
       let file = this.$refs.fileInput.files[0];
@@ -338,82 +352,103 @@ export default {
           this.resultMessage = "Check failed"
         })
         .finally(() => {
-          // Hide the spinner after the API call completes
+
           this.loading = false;
         });
     }
-
-    // analyseImage() {
-
-    //   fetch('https://www.nyckel.com/connect/token', {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/x-www-form-urlencoded'
-    //     },
-    //     body: `grant_type=client_credentials&client_id=${nyckelClientId}&client_secret=${nyckelClientSecret}`
-    //   })
-    //     .then(response => response.json())
-    //     .then(data => {
-    //       const file = this.$refs.fileInput.files[0];
-    //       const url = 'https://www.nyckel.com/v1/functions/recycling-image/analyze';
-
-
-    //       const formData = new FormData();
-    //       formData.append('image', file);
-
-    //       try {
-    //         const response = axios.post(url, formData, {
-    //           headers: { Authorization: 'Bearer' + data["access_token"] }
-    //         });
-    //         const result = response.data["labelName"];
-    //         console.log(result);
-    //         this.resultMessage = result === 'Recyclable' ? 'Good news! It’s recyclable!' : 'Not recyclable. Please dispose of responsibly.';
-    //       } catch (error) {
-    //         console.error('Error analyzing image:', error);
-    //         this.resultMessage = 'Image analysis failed. Please try again.';
-    //       }
-
-    //     });
-
-    // }
   }
 };
 </script>
 
 <style scoped>
-/* Include relevant CSS here */
+.template {
+  height: 100vh;
+  overflow: hidden;
+} 
+
 .body {
   background-color: #FEFAE0;
   color: #333;
+  width: 100vw;
+  height: 100vh;
+  perspective: 1px;
+  transform-style: preserve-3d;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
-.banner {
-  position: relative;
-  height: 500px;
-  overflow: hidden;
+.section1::before {
+  content: "";
+  width: 100vw;
+  height: 100lvh;
+  position: absolute;
+  /* background: url("../../public/img/carton.jpg") top center; */
+  background: url("../../public/img/plastic_bottles.jpg") top center;
+  background-size: cover;
+  transform: translateZ(-1px) scale(2.5);
+  filter: blur(2px);
+  z-index: 1;
 }
 
-.banner img {
+.section2::before {
+  content: "";
+  overflow:hidden;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  background-size: cover;
+  transform: translateZ(-2px) scale(2.25);
+  filter: blur(2px);
+  /* z-index: 2; */
+
+}
+
+.section1,
+.section2 {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.7;
-  position: absolute;
-  top: 0;
-  left: 0;
+  min-height: 100vh;
+  position: relative;
+  transform-style: preserve-3d;
+
+}
+.section1 .text {
+  top: 10%;
+  transform: translateZ(-0.5px) scale(1.5,1.6) translate(-33%, 10%);
 }
 
-.banner-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: black;
-  text-align: center;
-  z-index: 2;
-  padding: 20px;
-  border-radius: 10px;
+.section2 {
+  background: url("../../public/img/carton.jpg") top center;
 }
+.section1 .sub-text {
+  top: 10%;
+  transform: translateZ(-0.5px) scale(1.5,1.6) translate(-33%, 10%);
+}
+.text {
+  left: 50%;
+  top: 30%;
+  position: absolute;
+  font-size: 10vw;
+  text-align: center;
+  font-family: 'Franklin Gothic Heavy';
+  color: white;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3),
+    5px 5px 70px rgba(255, 255, 255, 0.5);
+  transform: scale(1, 1.1) translate(-50%, 10%);
+}
+
+.sub-text {
+  top: 30%;
+  left: 50%;
+  position: absolute;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  font-size: 3vw;
+  color: white;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3),
+    5px 5px 70px rgba(255, 255, 255, 0.5);
+  transform: scale(1, 1.1) translate(-50%, 10%);
+}
+
 
 .info-section {
   padding: 50px 20px;
@@ -428,15 +463,44 @@ export default {
   width: 30%;
   margin: 10px;
   text-align: center;
+  
 }
 
+/* Ensure all cards have the same height */
+.card {
+  height: 100%; /* Allows consistent height within each column */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-img-top {
+  height: 300px; /* Set a consistent height for all images */
+  object-fit: cover; /* Ensures image fills the space without distortion */
+  border-radius: 10px 10px 0 0;
+}
+
+.card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card h3, .card p, .card button {
+  margin-top: auto;
+  text-align: center;
+}
+
+
+
 .btn-primary {
-  background-color: #d32f2f;
+  background-color: #626F47;
   border: none;
 }
 
 .btn-primary:hover {
-  background-color: #c62828;
+  background-color: #798645;
 }
 
 .card-img-top {
