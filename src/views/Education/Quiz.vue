@@ -56,16 +56,18 @@
                 <div class="card-body">
                   <h5 class="card-title">{{ quiz.category.charAt(0).toUpperCase() + quiz.category.slice(1) }} Quiz</h5>
                   <p class="card-text">{{ quiz.title }}</p>
-                  <div v-if="quizAttempts[quiz.id]" class="mb-3">
+                  <div class="mb-3">
                     <p class="text-info mb-1">
                       Attempts: {{ quizAttempts[quiz.id].attempts }} | Last Score: {{ quizAttempts[quiz.id].score }}/{{ quiz.questions.length }}
                     </p>
                     <div class="progress">
                       <div class="progress-bar" :style="{ width: getScorePercentage(quiz.id) + '%' }" role="progressbar" :aria-valuenow="getScorePercentage(quiz.id)" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
-                    <p v-if="quizAttempts[quiz.id].completed" class="text-warning mt-2">You can no longer gain points from completing this quiz until next month</p>
+                    
                   </div>
-                  <button class="btn btn-primary mt-2" @click="startQuiz(quiz)" :disabled="quizAttempts[quiz.id] && quizAttempts[quiz.id].completed">Start Quiz</button>
+                  <button class="btn btn-primary mt-2" @click="startQuiz(quiz)" v-if="!quizAttempts[quiz.id]?.completed" :disabled="quizAttempts[quiz.id] && quizAttempts[quiz.id].completed">Start Quiz</button>
+                  <span class="d-inline-block" v-else data-bs-toggle="tooltip" data-bs-placement="top" tabindex="0" data-bs-custom-class="custom-tooltip" data-bs-title="You can no longer gain points from completing this quiz until next month">
+                  <button class="btn btn-primary mt-2" @click="startQuiz(quiz)"  :disabled="quizAttempts[quiz.id] && quizAttempts[quiz.id].completed"         >Start Quiz</button></span>
                 </div>
               </div>
             </div>
@@ -106,8 +108,10 @@ onMounted(() => {
   AOS.init({
     duration: 1000,  // Animation duration in ms
     easing: "ease-in-out",  // Animation easing style
-    once: true,  // Whether animation should happen only once
+    once: false,  // Whether animation should happen only once
   });
+  const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+  const tooltipList = Array.from(tooltipTriggerList).map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
 });
 
   const { userName } = useAuth();
@@ -376,6 +380,16 @@ async function readData() {
   let reset = false;
   let d = new Date()
 
+  for (let i of quizzes){
+  quizAttempts[i.id] = {
+          attempts: 0,
+          score: 0,
+          lastScore: 0,
+          completed: false, // Check if full score was achieved
+          month_done: -1
+}
+console.log(quizAttempts)
+}
   // Process data for each user
   data.forEach(user => {
     if (user.username === 'ann2') {
@@ -404,12 +418,14 @@ async function readData() {
         // Log the updated entry for debugging
         console.log(`Updated quizAttempts for quiz '${quiz_name}':`, quizAttempts[quiz.id]);
       }
+
       
 
     }
   }
 
 )
+
 if(reset){
     readData()
   };
