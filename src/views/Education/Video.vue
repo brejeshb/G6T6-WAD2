@@ -44,7 +44,7 @@
                   </div>
                 </nav>
           </div>
-          <div id="videos" class="mt-4 shadow p-3 mb-5 bg-body-tertiary rounded">
+          <div id="videos" class="mt-4 shadow p-3  rounded">
               <div class="row">
                   <div class="col-lg-4 col-md-6 col-sm-12 mb-4" v-for="video in videoFiltering()" :key="video.videoId" data-aos="fade-up">
                       <div class="card h-100" style="width: 100%;">
@@ -350,7 +350,13 @@ background-color: #e0f7f4;
 color: #333;
 }
 #app{
-  background-color: #E7F5EE;
+  background-color: #fffce4;
   min-height: 100vh;
+}
+.card{
+  background-color: #fffce4;
+}
+#videos{
+  background-color: #798645;
 }
 </style>
