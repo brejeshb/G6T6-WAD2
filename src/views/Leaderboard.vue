@@ -21,9 +21,9 @@
                 <!-- Podium -->
                 <div class="row">
                     <div class="col-lg-4">
-                        <h1 id="podium">Podium</h1>
+                        <h1 class="hidden" id="podium">Podium</h1>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-4 hidden">
                         <div id="podium" class="podium">
                             <div v-for="player in topPlayers" :key="player.rank"
                                 :class="['podium-step', getPodiumClass(player.rank)]">
@@ -332,21 +332,10 @@ onMounted(async () => {
     }
 
     to {
-        width: 570px;
+        width: 550px;
     }
 }
 
-/* cursor animations */
-
-@keyframes animated-cursor {
-    from {
-        border-right-color: rgba(0, 0, 0, 0.75);
-    }
-
-    to {
-        border-right-color: transparent;
-    }
-}
 
 @keyframes popIn {
     from {
@@ -433,7 +422,7 @@ onMounted(async () => {
 }
 
 .navbar {
-    background-color: transparent !important;
+    background-color: transparent;
     /* Ensures no background */
     outline: none;
 }
