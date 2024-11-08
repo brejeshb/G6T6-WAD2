@@ -1,49 +1,51 @@
 <template>
-    <div class="container-fluid p-5 h-100" style="background-color: #FEFAE0;color: #788645;">
-        <div class="container-fluid ps-5 pe-5 pt-5 carousel-container" style="height: 100%;position: relative mx-auto;">
+    <div class="d-flex flex-column align-items-center p-5 h-100" style="background-color: #FEFAE0;color: #788645;">
+        <div class="ps-5 pe-5 pt-5 carousel-container" style="height: 100%;position: relative;">
             <h1 style="font-weight: bold;">How to earn more points?</h1>
             <hr>
 
-
-            <div class="appleCarousel row-cols-1 row-cols-md-4 g-5 w-100 mx-auto">
-                <div class="item col">
-                    <div class="card h-100">
-                        <div>
-                            <img src="../assets/images/recycling bin many items.jpg" class="card-img-top " alt="">
-                        </div>
-                        <div class="card-body">
+            <div class="row">
+                <div class="appleCarousel col-lg-4 row-cols-1 row-cols-md-4 g-5 w-100 mx-auto">
+                    <div class="item col">
+                        <div class="card h-100">
                             <div>
-                                <h3 class="card-title fw-bold">Recycle items</h3>
+                                <img src="../assets/images/recycling bin many items.jpg" class="card-img-top " alt="">
                             </div>
-                            <p class="card-text">
-                                Recycle right! Snap a picture and upload it under our Item Identifier page. 
-                                If it is recyclable, you can recycle it and earn points!
+                            <div class="card-body">
+                                <div>
+                                    <h3 class="card-title fw-bold">Recycle items</h3>
+                                </div>
+                                <p class="card-text">
+                                    Recycle right! Snap a picture and upload it under our Item Identifier page.
+                                    If it is recyclable, you can recycle it and earn points!
 
 
-                            </p>
+                                </p>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="item col">
-                    <div class="card h-100 text-bg-light">
-                        <div>
-                            <img src="../assets/images/quiz.jpg" class="card-img-top " alt="">
-                        </div>
-                        <div class="card-body">
+                    <div class="item col">
+                        <div class="card h-100 text-bg-light">
                             <div>
-                                <h3 class="card-title fw-bold">Complete Quizzes</h3>
+                                <img src="../assets/images/quiz.jpg" class="card-img-top " alt="">
                             </div>
-                            <p class="card-text"> 
-                                Watch our educational videos and test your knowledge with quizzes.
-                                Complete quizzes, gain knowledge, earn points, and make a positive impact on the planet!
-                            </p>
+                            <div class="card-body">
+                                <div>
+                                    <h3 class="card-title fw-bold">Complete Quizzes</h3>
+                                </div>
+                                <p class="card-text">
+                                    Watch our educational videos and test your knowledge with quizzes.
+                                    Complete quizzes, gain knowledge, earn points, and make a positive impact on the
+                                    planet!
+                                </p>
+                            </div>
                         </div>
                     </div>
+
+
+
                 </div>
-
-
-
             </div>
         </div>
     </div>
@@ -58,7 +60,10 @@ export default {
 
 <style scoped>
 .carousel-container {
-    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 }
 
 .appleCarousel {
@@ -66,7 +71,9 @@ export default {
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     gap: 1rem;
-    justify-content: center;
+    width: max-content;
+    margin: 0 auto;
+    padding: 0 1rem;
     /* scrollbar-width: none; */
     /* Hides scrollbar */
     /* Hide scrollbar in Firefox */
@@ -76,6 +83,7 @@ export default {
 .item {
     scroll-snap-align: start;
     flex-shrink: 0;
+    flex: 0 0 auto;
 }
 
 .card-img-top {

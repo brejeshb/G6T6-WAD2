@@ -5,12 +5,15 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <div class="container">
-        <section class="section" id="section-1">
+
+        <section id="section-0">
             <div class="leaderboard-head">
-                <div class="leaderboard-container">
                     <h1 id="leaderboard-title">Leaderboard</h1>
-                </div>
             </div>
+
+        </section>
+        <section class="section" id="section-1">
+            
 
             <div class="leaderboard-body">
 
@@ -18,8 +21,9 @@
                 <!-- Podium -->
                 <div class="row">
                     <div class="col-lg-4">
+                        <h1 class="hidden" id="podium">Podium</h1>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-4 hidden">
                         <div id="podium" class="podium">
                             <div v-for="player in topPlayers" :key="player.rank"
                                 :class="['podium-step', getPodiumClass(player.rank)]">
@@ -67,7 +71,7 @@
                     </ul>
 
                 </div>
-                <div class="hidden"><span id="climb">Climb the leaderboard!</span></div>
+                <div class="hidden"><h1 id="climb">Climb the leaderboard!</h1></div>
                 <div class="col-lg-3 col-sm-1"></div>
             </div>
         </section>
@@ -199,7 +203,7 @@ onMounted(async () => {
     width: 100%;
     height: 100vh;
     max-width: 100vw;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
     scroll-behavior: smooth;
     margin: 0;
     padding: 0;
@@ -298,10 +302,19 @@ onMounted(async () => {
     border-right: 2px solid;
     /* Creates the cursor */
     color: #798645;
-    font-weight: bold;
+    font-weight: bolder;
     margin-left: 100px;
+    font-size: 6vw;
+    position: absolute;
+    top: 30%;
+    left: 25%;
+    letter-spacing: -2px;
 }
 
+#podium{
+    color: #798645;
+    text-align: center;
+}
 /* Cursor animations */
 @keyframes animated-cursor {
     from {
@@ -319,21 +332,10 @@ onMounted(async () => {
     }
 
     to {
-        width: 285px;
+        width: 550px;
     }
 }
 
-/* cursor animations */
-
-@keyframes animated-cursor {
-    from {
-        border-right-color: rgba(0, 0, 0, 0.75);
-    }
-
-    to {
-        border-right-color: transparent;
-    }
-}
 
 @keyframes popIn {
     from {
@@ -351,9 +353,11 @@ onMounted(async () => {
 .podium {
     animation: popIn 2s ease-out forwards;
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: flex-end;
     gap: 15px;
+    justify-content: space-around;
+    margin-top: 220px;
 }
 
 .podium-step {
@@ -418,7 +422,7 @@ onMounted(async () => {
 }
 
 .navbar {
-    background-color: transparent !important;
+    background-color: transparent;
     /* Ensures no background */
     outline: none;
 }
@@ -436,7 +440,6 @@ onMounted(async () => {
 
 .leaderboard-container {
     margin: 0px;
-    padding: 20px;
     color: white;
 }
 
@@ -444,14 +447,22 @@ onMounted(async () => {
     justify-content: center;
 }
 
+#section-0{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
 .leaderboard-head {
     /* background-color: #626F47; */
-    height: 200px;
+    position: relative;
+    height: 100vh;
     width: 100vw;
     margin: 0px;
     padding: 0px;
-    max-width: 100%;
-    overflow-x: hidden;
+    background: url(../assets/images/leaderboard.jpg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 
 }
 
@@ -465,7 +476,6 @@ onMounted(async () => {
 
 
 h1 {
-    text-align: left;
     margin-top: 30px;
     font-size: 3rem;
     font-weight: bold;
@@ -507,7 +517,6 @@ h1 {
 #climb {
     font-weight: bold;
     color: #EFECC6;
-    font-size: xxx-large;
 }
 
 .carousel-container {
