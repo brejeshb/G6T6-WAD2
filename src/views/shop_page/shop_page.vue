@@ -1,8 +1,22 @@
 <template>
-  <div id="app" class="pt-5">
+  <div style="background-color:#f5ffe4;">
+  <div id="header" 
+  class="text-center "
+  style="
+    height: 50vw;    
+    background-image: url('/public/img/forest_background.png');
+    background-attachment: fixed;
+    background-size: 100% auto;
+    
+  " >
+  <p class="text-pos"> Welcome to Your Forest Page</p>
+ 
+  </div>
+  <div id="app" >
+    
     <div class="row">
       <div class="container col-lg-6 col-12 my-3">
-        <div class="title py-4 rounded mb-5">Forest</div>
+        <div class="title py-4 rounded mb-5 " style="box-shadow: 5px 5px 10px 2px rgb(0 0 0 / 0.8);">Forest</div>
         <div class="forest">
           <table style="box-shadow: 5px 5px 10px 2px rgb(0 0 0 / 0.8); background-color: brown;"
             class="align-content-center mx-auto">
@@ -20,7 +34,7 @@
         </div>
       </div>
       <div class="container-fluid col my-3">
-        <div class="title py-4 rounded mb-5">Start growing today</div>
+        <div class="title py-4 rounded mb-5" style="box-shadow: 5px 5px 10px 2px rgb(0 0 0 / 0.8);">Start growing today</div>
         <div class="growing">
           <div class="circle_tree justify-content-center align-items-center d-flex">
             <img v-if="cal_data.current_tree != ''" :src="cal_data.picture" id="tree" style="height: 70%; width: 70%" />
@@ -97,6 +111,7 @@
       </div>
     </div>
   </div>
+</div>
 </template>
 
 <script setup>
@@ -396,9 +411,20 @@ update_tree()
 
 
 <style scoped>
-#app{
+.text-pos{
+  position: relative;
+  top:40%;
+  font-weight: bold;
+}
+
+#header{
+  font-size: 6vw;
+}
+  #app{
   background-color:#f5ffe4;
   min-height: 100vh;
+  padding-top: 5%;
+  
 }
 
 .content {
@@ -491,6 +517,7 @@ update_tree()
 .forest {}
 
 .title {
+  color:#fffce4;
   font-family: cursive;
   width: 70%;
   font-size: 40px;
@@ -797,5 +824,7 @@ update_tree()
   .sidebar {
     width: 10%
   }
+
 }
+
 </style>
