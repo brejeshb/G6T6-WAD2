@@ -9,13 +9,14 @@
     background-size: 100% auto;
     
   " >
-  <p class="text-pos"> Welcome to Your Forest Page</p>
+  <p class="text-pos" data-aos="zoom-in-up" data-aos-duration="1200"> Welcome back to Your Forest </p>
+  <p class="text-pos" data-aos="zoom-in-up" data-aos-duration="1200">{{ currUser }}</p>
  
   </div>
-  <div id="app" >
+  <div id="app" style="position: relative;">
     
     <div class="row">
-      <div class="container col-lg-6 col-12 my-3">
+      <div class="container col-lg-6 col-12 my-3" data-aos="fade-right" data-aos-duration="1500">
         <div class="title py-4 rounded mb-5 " style="box-shadow: 5px 5px 10px 2px rgb(0 0 0 / 0.8);">Forest</div>
         <div class="forest">
           <table style="box-shadow: 5px 5px 10px 2px rgb(0 0 0 / 0.8); background-color: brown;"
@@ -33,7 +34,7 @@
           </table>
         </div>
       </div>
-      <div class="container-fluid col my-3">
+      <div class="container-fluid col my-3 "data-aos="fade-left" data-aos-duration="1500">
         <div class="title py-4 rounded mb-5" style="box-shadow: 5px 5px 10px 2px rgb(0 0 0 / 0.8);">Start growing today</div>
         <div class="growing">
           <div class="circle_tree justify-content-center align-items-center d-flex">
@@ -137,7 +138,18 @@ async function readData() {
 }
 
 
-import { ref, computed, watchEffect } from 'vue';
+import { ref, computed, watchEffect,onMounted } from 'vue';
+import AOS from 'aos';
+import 'aos/dist/aos.css';  // Import the AOS styles
+
+// Initialize AOS on component mount
+onMounted(() => {
+  AOS.init({
+    duration: 800, // Animation duration in milliseconds
+    easing: 'ease-in-out', // Animation easing
+    once: false,
+  });
+});
 let start = ref(false)
 const sort = ref('Sort by: Highest price');
 const search = ref('');
@@ -413,7 +425,7 @@ update_tree()
 <style scoped>
 .text-pos{
   position: relative;
-  top:40%;
+  top:30%;
   font-weight: bold;
 }
 
@@ -450,7 +462,7 @@ update_tree()
 }
 
 #shopping_cart {
-  position: fixed;
+  position: absolute;
   bottom: 20px;
   right: 20px;
   background-color: transparent;
@@ -527,7 +539,7 @@ update_tree()
 }
 
 .shop {
-  position: fixed;
+  position: absolute;
   width: 80vw;
   height: 80vh;
   top: 50vh;
