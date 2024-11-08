@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <!-- Top Section with AOS animation -->
-    <section class="py-5 text-center container top_section" data-aos="fade-up">
+    <section class="py-5 text-center top_section" data-aos="fade-up">
       <div class="row py-lg-5">
         <div class="col-lg-6 col-md-8 mx-auto">
           <h1 class="fw-light">Quiz Application</h1>
@@ -47,11 +47,11 @@
       </div>
 
       <!-- Quiz Card Section with AOS animation -->
-      <div class="mt-4 shadow p-3 mb-5 bg-body-tertiary rounded" data-aos="fade-up">
+      <div id="videos" class="mt-4 shadow p-3 mb-5 rounded" data-aos="fade-up">
         <div v-if="!isQuizActive">
           <h2 class="text-center" data-aos="fade-in">Available Quizzes</h2>
           <div class="row">
-            <div class="col-lg-3 col-md-4 mb-4" v-for="quiz in filteredQuizzes" :key="quiz.id" data-aos="zoom-in">
+            <div class="col-xl-3 col-lg-4 col-md-6 mb-4" v-for="quiz in filteredQuizzes" :key="quiz.id" data-aos="zoom-in">
               <div class="card">
                 <div class="card-body">
                   <h5 class="card-title">{{ quiz.category.charAt(0).toUpperCase() + quiz.category.slice(1) }} Quiz</h5>
@@ -65,7 +65,7 @@
                     </div>
                     
                   </div>
-                  <button class="btn btn-primary mt-2" @click="startQuiz(quiz)" v-if="!quizAttempts[quiz.id]?.completed" :disabled="quizAttempts[quiz.id] && quizAttempts[quiz.id].completed">Start Quiz</button>
+                  <button class="btn btn-primary mt-2" @click="startQuiz(quiz)" v-if="!quizAttempts[quiz.id]?.completed" >Start Quiz</button>
                   <span class="d-inline-block" v-else data-bs-toggle="tooltip" data-bs-placement="top" tabindex="0" data-bs-custom-class="custom-tooltip" data-bs-title="You can no longer gain points from completing this quiz until next month">
                   <button class="btn btn-primary mt-2" @click="startQuiz(quiz)"  :disabled="quizAttempts[quiz.id] && quizAttempts[quiz.id].completed"         >Start Quiz</button></span>
                 </div>
@@ -86,8 +86,8 @@
               </label>
             </div>
           </div>
-          <button class="btn btn-success" @click="submitQuiz" data-aos="zoom-in">Submit Quiz</button>
-          <button class="btn btn-secondary ms-2" @click="goBack" data-aos="zoom-in">Back to Quizzes</button>
+          <button class="btn btn-success" @click="submitQuiz" >Submit Quiz</button>
+          <button class="btn btn-secondary ms-2" @click="goBack" >Back to Quizzes</button>
         </div>
       </div>
     </div>
@@ -98,18 +98,26 @@
 
   
   <script setup>
-  import { reactive, ref, computed,onMounted } from 'vue'
+  import { reactive, ref, computed,onMounted, nextTick,onUpdated  } from 'vue'
   import { supabase } from '/src/lib/supabaseClient.js'
   import { useAuth } from '../../lib/auth'
   import AOS from "aos";
 import "aos/dist/aos.css";
 
-onMounted(() => {
+onMounted(async() => {
   AOS.init({
     duration: 1000,  // Animation duration in ms
     easing: "ease-in-out",  // Animation easing style
     once: false,  // Whether animation should happen only once
   });
+  await nextTick();
+  
+  const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+  const tooltipList = Array.from(tooltipTriggerList).map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+  
+
+});
+onUpdated(() => {
   const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
   const tooltipList = Array.from(tooltipTriggerList).map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
 });
@@ -284,6 +292,17 @@ const quizAttempts = reactive({});
 const activeFilter = ref('all');
 const search = ref('');
 
+for (let i of quizzes){
+  quizAttempts[i.id] = {
+          attempts: 0,
+          score: 0,
+          lastScore: 0,
+          completed: false, // Check if full score was achieved
+          month_done: -1
+}
+
+}
+
 // Computed properties
 const filteredQuizzes = computed(() => {
   return quizzes.filter(quiz => {
@@ -312,7 +331,7 @@ async function updatePoint(add_point){
     console.error("Error fetching cumulative data:", culError);
     return;
   }
-console.log(tree_data)
+
   for(let user of tree_data){
     if(user.username==currUser.value){
         let curr_point = user.curr_points +add_point
@@ -367,7 +386,7 @@ async function updateDate(quiz,date){
 }
 readData();
 async function readData() {
-  console.log("Fetching data from UserQuizDataTable...");
+
 
   let { data, error } = await supabase
     .from('UserQuizDataTable')
@@ -380,16 +399,7 @@ async function readData() {
   let reset = false;
   let d = new Date()
 
-  for (let i of quizzes){
-  quizAttempts[i.id] = {
-          attempts: 0,
-          score: 0,
-          lastScore: 0,
-          completed: false, // Check if full score was achieved
-          month_done: -1
-}
-console.log(quizAttempts)
-}
+
   // Process data for each user
   data.forEach(user => {
     if (user.username === 'ann2') {
@@ -416,7 +426,7 @@ console.log(quizAttempts)
             reset =true;
         }
         // Log the updated entry for debugging
-        console.log(`Updated quizAttempts for quiz '${quiz_name}':`, quizAttempts[quiz.id]);
+
       }
 
       
@@ -430,7 +440,7 @@ if(reset){
     readData()
   };
 
-  console.log("Data processed:", data);
+
   return data;
 }
 
@@ -672,6 +682,16 @@ function getScorePercentage(quizId) {
 .nav-link:hover {
     background-color: #e0f7f4;
     color: #333;
+}
+#app{
+  background-color: #fffce4;
+  min-height: 100vh;
+}
+.card{
+  background-color: #fffce4;
+}
+#videos{
+  background-color: #798645;
 }
   </style>
   
