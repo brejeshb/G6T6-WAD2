@@ -9,8 +9,8 @@
             Challenge yourself with quizzes on recycling and upcycling. Earn points by testing your knowledge!
           </p>
           <p>
-            <router-link to="./video" class="btn btn-primary my-2" data-aos="zoom-in">Watch some educational videos</router-link>
-            <router-link to="./quiz" class="btn btn-secondary my-2" data-aos="zoom-in">Do some quizzes for points</router-link>
+            <router-link to="./video" class="btn btn-primary my-2 mx-4" data-aos="zoom-in">Watch some educational videos</router-link>
+            <router-link to="./quiz" class="btn btn-secondary my-2 mx-4" data-aos="zoom-in">Do some quizzes for points</router-link>
           </p>
         </div>
       </div>

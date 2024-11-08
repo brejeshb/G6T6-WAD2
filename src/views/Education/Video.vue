@@ -7,14 +7,14 @@
               <h1 class="fw-light">Welcome to Our Recycling Education Hub!</h1>
               <p class="lead text-body-secondary">Recycling is a simple, powerful way to create a cleaner planet. In this hub, explore what can and can’t be recycled, learn tips for reducing waste, and discover how small actions can make a big impact. Together, let’s build a more sustainable future—one recycled item at a time!</p>
               <p>
-                <router-link to="./video" class="btn btn-primary my-2" data-aos="zoom-in">Watch some educational videos</router-link>
-                <router-link to="./quiz" class="btn btn-secondary my-2" data-aos="zoom-in">Do some quizzes for points</router-link>
+                <router-link to="./video" class="btn btn-primary my-2 mx-4" data-aos="zoom-in">Watch some educational videos</router-link>
+                <router-link to="./quiz" class="btn btn-secondary my-2 mx-4" data-aos="zoom-in">Do some quizzes for points</router-link>
               </p>
             </div>
           </div>
         </section>
       <div id="main_content" class="container mt-2">
-          <div id="sidebar">
+          <div id="nav-bar">
               <nav class="navbar rounded shadow navbar-expand-lg bg-body-tertiary flex-column" data-aos="fade-right">
                   <div class="container-fluid">
                     <a class="navbar-brand ms-5" href="#">Filter</a>
@@ -357,6 +357,6 @@ color: #333;
   background-color: #fffce4;
 }
 #videos{
-  background-color: #798645;
+  background-color: #808444;
 }
 </style>
