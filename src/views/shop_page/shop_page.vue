@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="pt-5">
     <div class="row">
       <div class="container col-lg-6 col-12 my-3">
         <div class="title py-4 rounded mb-5">Forest</div>
@@ -396,8 +396,8 @@ update_tree()
 
 
 <style scoped>
-#app {
-  background-color: #54a186;
+#app{
+  background-color:#f5ffe4;
   min-height: 100vh;
 }
 
@@ -495,7 +495,7 @@ update_tree()
   width: 70%;
   font-size: 40px;
   margin: auto;
-  background-color: lightgreen;
+  background-color: #798645;
   text-align: center;
 }
 
