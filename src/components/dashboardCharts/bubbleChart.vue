@@ -72,7 +72,27 @@ export default {
                 options: {
                     responsive: true,
                     maintainAspectRatio: true, // Allows it to stretch to fill container
+                    animations: {
+                        loop: true,
+                        // y: {
+                        //     easing: 'easeInOutBounce',
+                        //     duration: 2000,
 
+                        //     from: (context) => context.chart.scales.y.getPixelForValue(0)
+                        // },
+                        // x: {
+                        //     easing: 'easeOutElastic',
+                        //     duration: 2000,
+                        //     from: (context) => context.chart.scales.x.getPixelForValue(0)
+                        // },
+                        radius: {
+                            easing: 'easeInOutQuint',
+                            duration: 1000,
+                            from: 5,
+                            loop: true,
+                            delay: (context) => context.dataIndex * 200
+                        }
+                    },
                     plugins: {
                         legend: {
                             position: 'top',

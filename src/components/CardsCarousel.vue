@@ -1,6 +1,7 @@
 <template>
     <div class="container-fluid p-5 h-75" style="background-color: #FEFAE0;color: #788645;" id="thirdDiv">
-        <div class="container-fluid ps-5 pe-5 pt-5 carousel-container" style="height: 100%;position: relative;">
+        <div class="container-fluid ps-5 pe-5 pt-5 carousel-container" style="height: 100%;position: relative;"
+            data-aos="fade-right">
             <!-- Adjust card height-->
             <!-- Pressable Link-->
             <h1 style="font-weight: bold;">Dashboard Tutorial</h1>
@@ -8,7 +9,7 @@
             <hr>
 
 
-            <div class="appleCarousel row-cols-1 row-cols-md-4 g-5 w-100 mx-auto">
+            <div class="appleCarousel row-cols-1 row-cols-md-4 g-5 w-100 mx-auto" data-aos="zoom-in-right">
                 <div class="item col">
                     <div class="card h-100">
                         <div>
@@ -134,11 +135,20 @@
     </div>
 </template>
 <script>
+
+import AOS from 'aos';
+import 'aos/dist/aos.css';  // Import the AOS styles
+
 export default {
     name: "CardsCarousel",
-
-
-}
+    mounted() {
+        AOS.init({
+            duration: 1000, // Animation duration in milliseconds
+            easing: 'ease-in-out', // Animation easing
+            once: false,
+        });
+    },
+};
 </script>
 
 <style scoped>
@@ -160,7 +170,7 @@ export default {
 .item {
     scroll-snap-align: start;
     flex-shrink: 0;
-    
+
 }
 
 .card-img-top {
@@ -172,7 +182,7 @@ export default {
     border-top-left-radius: 10%;
     border-top-right-radius: 10%;
     border-width: 0px;
-    
+
 
 }
 
@@ -189,6 +199,7 @@ export default {
 .card {
     border-width: 0px;
     border-radius: 10%;
+
 
 }
 </style>

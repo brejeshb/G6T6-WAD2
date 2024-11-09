@@ -2,7 +2,7 @@
     <div class="container-fluid p-lg-5 p-0 h-100 scroll-section"
         style="background-color: #D9EA9A; min-height: fit-content;">
         <!-- Globe -->
-        <div class="container p-5 text-center rounded-5 box"
+        <div class="container p-5 text-center rounded-5 box" data-aos="zoom-out-up"
             style="background-color: #F3F4F6;margin-bottom: 1em;height: 80vh;overflow-y:scroll;scroll-snap-type: y mandatory;">
             <h1 style="font-weight: bold;color: #788645;">Global Crisis Alert</h1><br>
             <h3 style="font-weight: bold;">
@@ -15,7 +15,7 @@
                 </div>
             </div><br><br>
 
-            <div class="text-start fw-bold">
+            <div class="text-start fw-bold ">
                 Global warming is not just a looming issue. It's right here. With rapid urbanisation and burgeoning
                 consumerism, it's changing the world in ways we absolutely can't ignore. Rising temperatures aren't just
                 a Number on a thermometer. They translate to supercharged storms, longer droughts and disrupted
@@ -55,7 +55,8 @@
         </div>
 
         <!-- Tree Animation  -->
-        <div class="container p-5 text-center rounded-5 box" style="background-color: #F3F4F6;min-height: 80vh;height: fit-content;">
+        <div class="container p-5 text-center rounded-5 box"
+            style="background-color: #F3F4F6;min-height: 80vh;height: fit-content;">
             <h1 style="font-weight: bold;color: #788645;">Lush Greenery?</h1><br>
             <h3 style="font-weight: bold;">
                 <mark style="background-color: #D9EA9A;">Fading Fast ...</mark>
@@ -97,7 +98,7 @@
                 </div>
             </div>
             <br><br><br>
-            <div class="text-start fw-bold">
+            <div class="text-start fw-bold fs-4">
                 Just imagine a future where every city you go is filled with lush greenery and aesthetic trees like the
                 one above!
                 Wouldn't that be lovely ... But global warming is making it harder to achieve this utopia ...
@@ -109,7 +110,8 @@
         </div>
 
         <!-- Dead Tree Animation  -->
-        <div class="container p-5 text-center rounded-5 box" style="background-color: #F3F4F6;min-height: 80vh;height: fit-content;">
+        <div class="container p-5 text-center rounded-5 box"
+            style="background-color: #F3F4F6;min-height: 80vh;height: fit-content;">
             <h1 style="font-weight: bold;color: #788645;">Don't You </h1><br>
             <h3 style="font-weight: bold;">
                 <mark style="background-color: #D9EA9A;">Just Hate Dead Trees</mark>
@@ -151,7 +153,7 @@
                     <span class="shadow"></span>
                 </div>
             </div><br><br><br>
-            <div class="text-start fw-bold">
+            <div class="text-start fw-bold fs-4">
                 Certainly you don't want a world full of dead trees, and extreme heat waves, especially how hot
                 Singapore is don't you ... How can we do our part so that the world remains an ethereal beauty for our
                 future generations?
@@ -170,7 +172,7 @@
                     <mark style="background-color: #D9EA9A;">Recycle Today For A Better Tomorrow </mark>
                 </h3><br>
                 <img src="../../assets/images/logo.png" style="max-width: 100%;">
-                <div class="text-start fw-bold">
+                <div class="text-start fw-bold fs-5">
 
                     Do you know that as you commit to the lovely habit of recycling,
                     you contribute to a ripple effect that leads to significant environmental benefits on a larger
@@ -201,13 +203,24 @@
 </template>
 <script>
 import Button from '../dashboardCharts/button.vue';
+import AOS from 'aos';
+import 'aos/dist/aos.css';  // Import the AOS styles
+
 export default {
     name: "staticContentHaHa",
+
     methods: {
         navigateToChenSang() {
             this.$router.push('/ItemIdentifier'); // Navigate to the 'About' page
         }
-    }
+    },
+    mounted() {
+        AOS.init({
+            duration: 1500, // Animation duration in milliseconds
+            easing: 'ease-in-out', // Animation easing
+            once: false,
+        });
+    },
 }
 </script>
 <style scoped>
@@ -231,7 +244,7 @@ export default {
 .box {
     box-shadow: 0 -5px 10px #D9EB9A, 0 5px 10px #D9EB9A;
     position: sticky;
-    top: 20px;
+    top: 80px;
     transition: transform 0.3s ease-out;
     transform-origin: top;
     scroll-snap-align: start;
@@ -240,15 +253,15 @@ export default {
 }
 
 .box:nth-child(2) {
-    top: 40px
+    top: 100px
 }
 
 .box:nth-child(3) {
-    top: 60px
+    top: 120px
 }
 
 .box:nth-child(4) {
-    top: 80px
+    top: 140px
 }
 
 
@@ -436,6 +449,7 @@ export default {
     /* Scale up the card when scrolling */
 
 }
+
 @media (max-width: 375px) {
     .container-fluid {
         padding: 0.5rem;
@@ -472,7 +486,8 @@ export default {
     .container1 .tree,
     .container1 .tree .branch span,
     .container1 .tree .stem span {
-        transform: scale(0.8); /* Scale down the tree graphic */
+        transform: scale(0.8);
+        /* Scale down the tree graphic */
     }
 
     .metric {

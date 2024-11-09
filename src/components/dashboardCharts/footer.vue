@@ -1,11 +1,11 @@
 <template>
     <footer class="footer">
-        <div class="footer__addr">
+        <div class="footer__addr" data-aos="fade-right">
             <h1 class="footer__logo fw-bold">Recycle Lah</h1>
 
             <h2>Address</h2>
 
-            <address>
+            <address data-aos="fade-right">
                 81 Victoria St, Singapore 188065
                 <br><br>
 
@@ -13,7 +13,7 @@
             </address>
         </div>
 
-        <ul class="footer__nav">
+        <ul class="footer__nav" data-aos="fade-right">
             <li class="nav__item">
                 <h2 class="nav__title">Members</h2>
 
@@ -38,7 +38,7 @@
                 </ul>
             </li>
 
-            <li class="nav__item nav__item--extra">
+            <li class="nav__item nav__item--extra" data-aos="fade-right">
                 <h2 class="nav__title">Languages Used</h2>
 
                 <ul class="nav__ul nav__ul--extra">
@@ -68,7 +68,7 @@
                 </ul>
             </li>
 
-            <li class="nav__item">
+            <li class="nav__item" data-aos="fade-right">
                 <h2 class="nav__title">Features</h2>
 
                 <ul class="nav__ul">
@@ -93,7 +93,7 @@
             </li>
         </ul>
 
-        <div class="legal">
+        <div class="legal" data-aos="fade-right">
             <p>&copy; 2024 WAD II Project. All rights reserved.</p>
 
             <div class="legal__links">
@@ -105,8 +105,18 @@
 </template>
 
 <script>
+import AOS from 'aos';
+import 'aos/dist/aos.css';  // Import the AOS styles
+
 export default {
     name: "Footer",
+    mounted() {
+        AOS.init({
+            duration: 600, // Animation duration in milliseconds
+            easing: 'ease-in-out', // Animation easing
+            once: false,
+        });
+    },
 };
 </script>
 
