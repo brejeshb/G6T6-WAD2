@@ -30,7 +30,7 @@
                 </div>
 
                 <div class="item col">
-                    <div class="card h-100 text-bg-light">
+                    <div class="card h-100 ">
                         <div>
                             <img src="../assets/images/bub.png" class="card-img-top " alt="">
                         </div>
@@ -47,7 +47,7 @@
                 </div>
 
                 <div class="item col">
-                    <div class="card h-100 text-bg-light">
+                    <div class="card h-100 ">
                         <div>
                             <img src="../assets/images/socials.jpeg" class="card-img-top " alt="">
                         </div>
@@ -64,7 +64,7 @@
                 </div>
 
                 <div class="item col">
-                    <div class="card text-bg-light h-100 ">
+                    <div class="card  h-100 ">
                         <div>
                             <img src="../assets/images/piechart.png" class="card-img-top " alt="">
                         </div>
@@ -80,7 +80,7 @@
                 </div>
 
                 <div class="item col">
-                    <div class="card h-100 text-bg-light">
+                    <div class="card h-100 ">
                         <div>
                             <img src="../assets/images/stack.png" class="card-img-top " alt="">
                         </div>
@@ -96,7 +96,7 @@
                 </div>
 
                 <div class="item col">
-                    <div class="card h-100 text-bg-light">
+                    <div class="card h-100 ">
                         <div>
                             <img src="../assets/images/ranking.png" class="card-img-top " alt="">
                         </div>
@@ -114,7 +114,7 @@
 
 
                 <div class="item col">
-                    <div class="card h-100 text-bg-light">
+                    <div class="card h-100 ">
                         <div>
                             <img src="../assets/images/doughnut.png" class="card-img-top " alt="">
                         </div>
@@ -194,6 +194,7 @@ export default {
     padding: 6%;
     font-weight: 550;
     color: gray;
+
 }
 
 .card {
