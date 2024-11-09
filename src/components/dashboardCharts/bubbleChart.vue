@@ -4,7 +4,7 @@
         <div class="text-center mb-4 w-100">
             <h1>Community's Trees Saved</h1>
         </div>
-        <div class="chart-container">
+        <div class="chart-container h-100">
             <canvas id="bubble"></canvas>
         </div>
     </div>
@@ -38,6 +38,12 @@ export default {
 
             const bubble = document.getElementById("bubble");
 
+            // Define the plugin object
+            const youPlugin = {
+                id: 'you',
+                beforeDatasetsDraw: this.drawYouLabel // Call the method defined in `methods`
+            };
+
             this.chart = new Chart(bubble, {
                 type: "bubble",
                 data: {
@@ -62,6 +68,7 @@ export default {
                         }
                     ]
                 },
+                plugins: [youPlugin],
                 options: {
                     responsive: true,
                     maintainAspectRatio: true, // Allows it to stretch to fill container
@@ -71,10 +78,11 @@ export default {
                             position: 'top',
                             labels: {
                             },
-                            display: false
+                            display: false,
                         },
-                        tooltip: { intersect: true },
-
+                        labelPlugin: {
+                            display: true
+                        },
 
                     },
                     scales: {
@@ -116,8 +124,42 @@ export default {
                     },
                 },
 
+
             });
         },
+        drawYouLabel(chart) {
+            const { ctx } = chart;
+            const userIndex = this.isUser;
+
+            // Save the context state
+            ctx.save();
+
+            // Find the data point for "You" using `userIndex`
+            const datasetIndex = 0; // Assuming "You" is in the first dataset
+            const meta = chart.getDatasetMeta(datasetIndex);
+            const userDataPoint = meta.data[userIndex];
+
+            if (userDataPoint) {
+                const xCoor = userDataPoint.x;
+                const yCoor = userDataPoint.y;
+
+                // Set font properties and alignment for the "You" label
+                ctx.font = 'bold 20px sans-serif';
+                ctx.fillStyle = '#788645';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'bottom';
+
+                // Draw "You" label above the data point
+                const offset = 20; // Adjust offset to position above the point
+                ctx.fillText('You!', xCoor, yCoor - offset);
+
+            }
+
+
+
+            // Restore the context state
+            ctx.restore();
+        }
     },
 
 };

@@ -23,7 +23,7 @@
 
                 <div class="container-fluid" style="margin-bottom: 3em">
                     <div class="row gx-5">
-                        <div class="col-md-3 col-sm-6 mb-4 mb-lg-0">
+                        <div class="col-lg-3 col-sm-6 mb-4 mb-lg-0">
                             <div class="col1 rounded-4 d-flex justify-content-between h-100 ">
                                 <div class="w-75">
                                     <h1 class="stats text-wrap text-truncate">{{ username }}</h1>
@@ -37,7 +37,7 @@
                         </div>
 
 
-                        <div class="col-md-3 col-sm-6 mb-4 mb-lg-0">
+                        <div class="col-lg-3 col-sm-6 mb-4 mb-lg-0">
                             <div class="col1 rounded-4 d-flex justify-content-between h-100 ">
                                 <div class="w-75">
                                     <h1 class="stats text-wrap">{{ totalCo2Reduction }} kg</h1>
@@ -50,7 +50,7 @@
                             </div>
 
                         </div>
-                        <div class="col-md-3 col-sm-6 mb-4 mb-lg-0">
+                        <div class="col-lg-3 col-sm-6 mb-4 mb-lg-0">
                             <div class="col1 rounded-4 d-flex justify-content-between h-100">
                                 <div class="w-75">
                                     <h1 class="stats text-wrap">{{ totalTreesSaved }}</h1>
@@ -63,7 +63,7 @@
                             </div>
 
                         </div>
-                        <div class="col-md-3 col-sm-6 mb-4 mb-lg-0">
+                        <div class="col-lg-3 col-sm-6 mb-4 mb-lg-0">
                             <div class="col1 rounded-4 d-flex justify-content-between h-100 ">
                                 <div class="w-75">
                                     <h1 class="stats text-wrap">{{ currRankingFormatted }}</h1>
@@ -478,7 +478,7 @@ export default {
                     .select('*');
 
                 // make bubble bigger according to total_trees_saved
-                const scalingFactor = 15;
+                const scalingFactor = 20;
                 for (let object of BubbleChartView) {
                     if (object.username == this.username) {
                         this.index = BubbleChartView.indexOf(object);
