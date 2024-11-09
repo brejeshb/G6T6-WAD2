@@ -373,6 +373,6 @@ color: #333;
 .title{
   font-size: 6vw;
   font-weight: bold;
-  color:;
+
 }
 </style>
