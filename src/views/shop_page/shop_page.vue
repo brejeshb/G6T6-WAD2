@@ -4,7 +4,7 @@
   class="text-center "
   style="
     height: 50vw;    
-    background-image: url('/public/img/forest_background.png');
+    background-image: url('/img/forest_background.png');
     background-attachment: fixed;
     background-size: 100% auto;
     
@@ -240,6 +240,10 @@ function facts(name) {
   fact_box.value.status = true;
   fact_box.value.description = item_facts.value[name].description;
   fact_box.value.img = `/img/real_tree/${name}.jpg`;
+
+
+  // I checking the paths
+  console.log(`Image Path for ${name}: /img/real_tree/${name}.jpg`);
 }
 
 function toggleMenu() {
@@ -279,6 +283,9 @@ async function purchase(item) {
       .eq('username', currUser.value)
     fetchCalculationData()
     alert('Item purchased, please exit the shop to view it');
+    console.log(`Purchased item: ${new_tree}`);
+    console.log(`Image Path for purchased item: ${item.tree_png}`);
+
   }
 
 }
