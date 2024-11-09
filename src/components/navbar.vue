@@ -26,15 +26,14 @@
       <v-spacer></v-spacer>
 
       <!-- Burger Menu (Mobile) -->
-      <div v-if="isMobile" class="burger" @click="toggleMenu">
-        <input type="checkbox" id="menu-toggle" v-model="menuVisible">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-
-      <!-- Mobile Dropdown -->
-      <v-menu v-model="menuVisible" :close-on-content-click="false" offset-y>
+      <v-menu v-if="isMobile" offset-y>
+        <template v-slot:activator="{ props }">
+          <div class="burger" v-bind="props">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </template>
         <v-list>
           <v-list-item to="/Dashboard">
             <v-list-item-title>Home</v-list-item-title>
@@ -71,7 +70,10 @@
         <v-list>
           <v-list-item>
             <v-list-item-title>Signed in as</v-list-item-title>
-            <v-list-item-subtitle>{{ userName }}</v-list-item-subtitle>
+            <v-list-item-subtitle>{{ userEmail }}</v-list-item-subtitle>
+          </v-list-item>
+          <v-list-item>
+            <v-list-item-title>Username: {{ userName }}</v-list-item-title>
           </v-list-item>
           <v-list-item @click="handleSignOut" class="red--text">
             <v-list-item-title>Log Out</v-list-item-title>
@@ -99,25 +101,20 @@ import {
   VAvatar
 } from 'vuetify/components'
 
-const { userName, logout } = useAuth() // Only access userName now
+const { userEmail, userName, logout } = useAuth()
 const router = useRouter()
-const menuVisible = ref(false)
 const isMobile = ref(window.innerWidth < 960)
 
 const primaryColor = '#798645'
 const textColor = '#FEFAE0'
 
+const handleResize = () => {
+  isMobile.value = window.innerWidth < 960
+}
+
 const handleSignOut = async () => {
   await logout()
   router.push('/')
-}
-
-const toggleMenu = () => {
-  menuVisible.value = !menuVisible.value
-}
-
-const handleResize = () => {
-  isMobile.value = window.innerWidth < 960
 }
 
 onMounted(() => {
@@ -128,22 +125,24 @@ onUnmounted(() => {
   window.removeEventListener('resize', handleResize)
 })
 </script>
-
 <style scoped>
-/* Fix navbar at the top of the screen */
 .navbar {
+  width: 100%;
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1000;
-  width: 100%;
-  background-color: #ffffff; /* Optional: Set a background color */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for clarity */
+  right: 0;
   padding: 0;
-  height: 64px; /* Set height for the navbar */
+  z-index: 9999; /* Ensures navbar is in front of all other elements */
 }
 
-/* Optional: style the navbar links and other elements */
+.v-toolbar {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
 .navbar-logo {
   height: 40px;
   width: auto;
@@ -157,67 +156,37 @@ onUnmounted(() => {
 .user-avatar {
   margin-left: 16px;
   cursor: pointer;
-  z-index: 1001;
 }
 
-/* Ensure that the burger icon only shows up on mobile */
 .burger {
-  position: relative;
   width: 40px;
   height: 30px;
   margin-right: 16px;
   cursor: pointer;
-  z-index: 1000;
-}
-
-.burger input {
-  display: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 5px 0;
 }
 
 .burger span {
   display: block;
-  position: absolute;
   height: 4px;
   width: 100%;
   background: #FEFAE0;
   border-radius: 9px;
-  opacity: 1;
-  left: 0;
-  transform: rotate(0deg);
   transition: .25s ease-in-out;
 }
 
-.burger span:nth-of-type(1) {
-  top: 0px;
+@media (max-width: 960px) {
+  .hide-nav {
+    display: none;
+  }
 }
 
-.burger span:nth-of-type(2) {
-  top: 12px;
-}
-
-.burger span:nth-of-type(3) {
-  top: 24px;
-}
-
-.burger input:checked ~ span:nth-of-type(1) {
-  top: 12px;
-  transform: rotate(45deg);
-}
-
-.burger input:checked ~ span:nth-of-type(2) {
-  opacity: 0;
-}
-
-.burger input:checked ~ span:nth-of-type(3) {
-  top: 12px;
-  transform: rotate(-45deg);
-}
-
-/* Make sure burger menu is hidden on desktop */
 @media (min-width: 961px) {
   .burger {
     display: none;
   }
 }
-
 </style>
