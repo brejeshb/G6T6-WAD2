@@ -1,6 +1,6 @@
   <template>
     <div class="container">
-      <!-- <div class="body"> -->
+
 
       <div id="section-0">
         <div class="leaderboard-head">
@@ -9,25 +9,28 @@
       </div>
 
 
-      <div class="info-section">
-        <div class="row">
-          <div class="col" v-for="card in infoCards" :key="card.id">
-            <div class="card">
-              <img :src="card.image" class="card-img-top">
-              <div class="card-body">
-                <h3>{{ card.title }}</h3>
-                <p>{{ card.text }}</p>
-                <button type="button" class="btn btn-primary" :data-bs-target="card.modalTarget" data-bs-toggle="modal">
-                  {{ card.buttonText }}
-                </button>
+      <section class="section" id="section-1">
+        <div class="info-section">
+          <div class="row">
+            <div class="col" v-for="card in infoCards" :key="card.id">
+              <div class="card">
+                <img :src="card.image" class="card-img-top">
+                <div class="card-body">
+                  <h3>{{ card.title }}</h3>
+                  <p>{{ card.text }}</p>
+                  <button type="button" class="btn btn-primary" :data-bs-target="card.modalTarget"
+                    data-bs-toggle="modal">
+                    {{ card.buttonText }}
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
 
-      <!-- </div> -->
+
     </div>
 
 
@@ -370,11 +373,17 @@ export default {
   padding: 0;
   text-align: center;
 }
-#section-0{
-    margin: 0px;
-    padding: 0px;
-    box-sizing: border-box;
+
+#section-0 {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
 }
+
+#section-1 {
+    background-color: #FEFAE0;
+}
+
 .section {
   height: 100vh;
   width: 100vw;
@@ -400,7 +409,7 @@ export default {
 }
 
 #half-title {
-  color: white;
+  color: #FEFAE0;
 }
 
 #leaderboard-title {
@@ -412,7 +421,7 @@ export default {
   /* Creates the cursor */
   color: #798645;
   font-weight: bolder;
-  margin-left: 100px;
+  margin-left: 50px;
   font-size: 6vw;
   position: absolute;
   top: 30%;
@@ -421,110 +430,37 @@ export default {
 }
 
 @keyframes animated-cursor {
-    from {
-        border-right-color: rgba(0, 0, 0, 0.75);
-    }
+  from {
+    border-right-color: rgba(0, 0, 0, 0.75);
+  }
 
-    to {
-        border-right-color: transparent;
-    }
+  to {
+    border-right-color: transparent;
+  }
 }
 
 @keyframes animated-text {
-    from {
-        width: 0%;
-    }
+  from {
+    width: 0%;
+  }
 
-    to {
-        width: 700px;
-    }
+  to {
+    width: 700px;
+  }
 }
 
 
 @keyframes popIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px) scale(0.9);
-    }
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
+  }
 
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
-
-/* .template {
-  height: 100vh;
-  overflow: hidden;
-} 
-
-.body {
-  background-color: #FEFAE0;
-  color: #333;
-  width: 100vw;
-  height: 100vh;
-  perspective: 1px;
-  transform-style: preserve-3d;
-  overflow-x: hidden;
-  overflow-y: scroll;
-}
-
-.section1::before {
-  content: "";
-  width: 100vw;
-  height: 100lvh;
-  position: absolute;
-  background: url("../../public/img/plastic_bottles.jpg") top center;
-  background-size: cover;
-  transform: translateZ(-1px) scale(2.5);
-  filter: blur(2px);
-  z-index: 1;
-}
-
-
-.section1,
-.section2 {
-  width: 100%;
-  min-height: 100vh;
-  position: relative;
-  transform-style: preserve-3d;
-
-}
-.section1 .text {
-  top: 10%;
-  transform: translateZ(-0.5px) scale(1.5,1.6) translate(-33%, 10%);
-}
-
-
-.section1 .sub-text {
-  top: 10%;
-  transform: translateZ(-0.5px) scale(1.5,1.6) translate(-33%, 10%);
-}
-.text {
-  left: 50%;
-  top: 30%;
-  position: absolute;
-  font-size: 10vw;
-  text-align: center;
-  font-family: 'Franklin Gothic Heavy';
-  color: white;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3),
-    5px 5px 70px rgba(255, 255, 255, 0.5);
-  transform: scale(1, 1.1) translate(-50%, 10%);
-}
-
-.sub-text {
-  top: 30%;
-  left: 50%;
-  position: absolute;
-  font-family: Arial, Helvetica, sans-serif;
-  text-align: center;
-  font-size: 3vw;
-  color: white;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3),
-    5px 5px 70px rgba(255, 255, 255, 0.5);
-  transform: scale(1, 1.1) translate(-50%, 10%);
-} */
 
 
 .info-section {
@@ -565,6 +501,8 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  background-color: #626F47;
+  color: #FEFAE0;
 }
 
 .card h3,
@@ -573,16 +511,21 @@ export default {
   margin-top: auto;
   text-align: center;
 }
-
-
+/* 
+.modal-content {
+  background-color: #626F47;
+  color: #FEFAE0;
+} */
 
 .btn-primary {
-  background-color: #626F47;
+  background-color: #F2EED7 ;
+  color:#626F47;
   border: none;
 }
 
 .btn-primary:hover {
   background-color: #798645;
+  color: #FEFAE0;
 }
 
 .card-img-top {
