@@ -18,7 +18,7 @@
           <div class="row">
             <div class="col" v-for="card in infoCards" :key="card.id">
               <div class="card">
-                <img :src="card.image" class="card-img-top" alt="Map Image" />
+                <img :src="card.image" class="card-img-top">
                 <div class="card-body">
                   <h3>{{ card.title }}</h3>
                   <p>{{ card.text }}</p>
@@ -163,7 +163,7 @@ export default {
         },
         {
           id: 2,
-          image: './public/img/newspaper_bundle.jpg',
+          image: './src/assets/images/newspaper_bundle.jpg',
           title: 'Recycling For Points!',
           text: 'Recycle right! Snap a picture and upload it here. If it is recyclable, you can recycle it and earn points!',
           buttonText: 'Add Image',
