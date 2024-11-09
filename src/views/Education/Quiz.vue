@@ -1,5 +1,5 @@
 <template>
-    <div style="  background-color: #fffce4;   background-attachment: fixed;
+    <div style="  background-color: #f8f4ec;   background-attachment: fixed;
   background-image: url('/img/quiz.webp');
   background-size: 100vw auto;">
       <section class="py-5 text-center top_section" data-aos="fade-up">
@@ -23,20 +23,20 @@
       <div id="nav-bar">
         <nav class="navbar navbar-expand-lg bg-body-tertiary flex-column" data-aos="fade-left">
           <div class="container-fluid">
-            <a class="navbar-brand ms-5" href="#">Filter</a>
+            <a class="navbar-brand ms-5" href="#" style="color:#686c44">Filter</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item" data-aos="fade-right">
-                  <a href="#" class="nav-link" :class="{ 'active-filter': activeFilter === 'all' }" @click.prevent="activeFilter = 'all'">All</a>
+                  <a href="#" class="nav-link" :class="{ 'active-filter': activeFilter === 'all' }" :style=" activeFilter === 'all'? {color:'white'}:{}" @click.prevent="activeFilter = 'all'">All</a>
                 </li>
                 <li class="nav-item" data-aos="fade-right">
-                  <a href="#" class="nav-link" :class="{ 'active-filter': activeFilter === 'recycling' }" @click.prevent="activeFilter = 'recycling'">Recycle</a>
+                  <a href="#" class="nav-link" :class="{ 'active-filter': activeFilter === 'recycling' }" :style=" activeFilter === 'recycling'? {color:'white'}:{}" @click.prevent="activeFilter = 'recycling'">Recycle</a>
                 </li>
                 <li class="nav-item" data-aos="fade-right">
-                  <a href="#" class="nav-link" :class="{ 'active-filter': activeFilter === 'upcycling' }" @click.prevent="activeFilter = 'upcycling'">Upcycle</a>
+                  <a href="#" class="nav-link" :class="{ 'active-filter': activeFilter === 'upcycling' }" :style=" activeFilter === 'upcycling'? {color:'white'}:{}" @click.prevent="activeFilter = 'upcycling'">Upcycle</a>
                 </li>
               </ul>
               <form class="d-flex" role="search" @submit.prevent data-aos="fade-left">
@@ -56,10 +56,10 @@
             <div class="col-xl-3 col-lg-4 col-md-6 mb-4" v-for="quiz in filteredQuizzes" :key="quiz.id" data-aos="zoom-in">
               <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title">{{ quiz.category.charAt(0).toUpperCase() + quiz.category.slice(1) }} Quiz</h5>
-                  <p class="card-text">{{ quiz.title }}</p>
+                  <h5 class="card-title" style="color:#f8f4ec">{{ quiz.category.charAt(0).toUpperCase() + quiz.category.slice(1) }} Quiz</h5>
+                  <p class="card-text" style="color:#f8f4ec">{{ quiz.title }}</p>
                   <div class="mb-3">
-                    <p class="text-info mb-1">
+                    <p class=" mb-1" style="color:#f8f4ec">
                       Attempts: {{ quizAttempts[quiz.id].attempts }} | Last Score: {{ quizAttempts[quiz.id].score }}/{{ quiz.questions.length }}
                     </p>
                     <div class="progress">
@@ -558,24 +558,26 @@ function getScorePercentage(quizId) {
       font-weight: bold;
       color: #4CAF50;
   }
+  #nav-bar .nav-link.active {
+      background-color: #686c44;
+      color: white;
+  }
+
   
   #nav-bar .nav-link {
       color: #555;
       padding: 0.5rem 1rem;
       border-radius: 20px;
       transition: background-color 0.2s ease;
+      
   }
   
   #nav-bar .nav-link:hover {
-      background-color: #e0f7f4;
-      color: #333;
-  }
-  
-  #nav-bar .nav-link.active {
-      background-color: #4CAF50;
+      background-color: #808444;
       color: white;
   }
   
+
   /* Search and Reset Button */
   #nav-bar .form-control {
       border-radius: 20px;
@@ -590,9 +592,9 @@ function getScorePercentage(quizId) {
   }
   
   #nav-bar .btn-outline-success:hover {
-      background-color: #4CAF50;
+      background-color: #808444;
       color: white;
-      border-color: #4CAF50;
+      border-color: #808444;
   }
   
   /* Quiz Cards */
@@ -619,14 +621,15 @@ function getScorePercentage(quizId) {
   
   /* Start Quiz Button */
   .btn-primary {
-      background-color: #4CAF50;
+      background-color: #f4ecd4;
       border: none;
       border-radius: 8px;
       padding: 0.5rem 1rem;
+      color: #666;
   }
   
   .btn-primary:hover {
-      background-color: #388E3C;
+      background-color: #808444;
       color: #fff;
   }
   .btn-secondary:hover {
@@ -641,7 +644,7 @@ function getScorePercentage(quizId) {
   }
   
   .progress-bar {
-      background-color: #4CAF50;
+    background-color: #b8affa;
   }
   
   /* Submit and Back Buttons */
@@ -670,13 +673,7 @@ function getScorePercentage(quizId) {
       }
   }
   /* Active Filter Styling */
-.active-filter {
-    background-color: #4CAF50; /* Green fill for active filter */
-    color: white; /* White text for better contrast */
-    border-radius: 20px;
-    padding: 0.5rem 1rem;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
+
 
 /* Standard nav-link styling (non-active state) */
 .nav-link {
@@ -685,20 +682,28 @@ function getScorePercentage(quizId) {
     border-radius: 20px;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
+.active-filter {
+    background-color: #686c44; /* Green fill for active filter */
+    color: white; /* White text for better contrast */
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
 
 .nav-link:hover {
-    background-color: #e0f7f4;
-    color: #333;
+    background-color: #808444;
+    color: white;
 }
 #app{
-  background-color: #fffce4;
+  background-color:#f8f4ec;
   min-height: 100vh;
 }
 .card{
-  background-color: #fffce4;
+  background-color: #686c44;
+  color:white
 }
 #videos{
-  background-color: #798645;
+  background-color: #fffce4;
 }
 .quiz_active{
   background-color: #e0f7f4;

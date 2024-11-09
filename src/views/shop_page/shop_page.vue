@@ -81,9 +81,9 @@
         <div class="item-grid">
           <div class="item" v-for="item of shop_display()" @click="purchase(item)">
             <img :src="item.tree_png" alt="FAMAS Pulse" />
-            <h3>{{ formattedItem(item.item) }}</h3>
+            <h3  class='text-color'>{{ formattedItem(item.item) }}</h3>
             <p class="price"><span style="color: white;"></span>Cost: {{ item.price }}</p>
-            <p class="time" ><span style="color: white;">Cost to grow: </span>{{ item.growth_points }}</p>
+            <p class="time text-color" ><span >Cost to grow: </span>{{ item.growth_points }}</p>
           </div>
         </div>
       </div>
@@ -618,14 +618,14 @@ update_tree()
 
 .shop {
   display: flex;
-  background-color: #1c1c1c;
+  background-color: #686c44;
   color: white;
 }
 
 .sidebar {
   width: 250px;
   transition: width 0.3s ease;
-  background-color: #2a2a2a;
+  background-color: #888a79;
   padding: 20px;
 }
 
@@ -706,7 +706,7 @@ update_tree()
 
 
 .item {
-  background-color: #333;
+  background-color: #f8f4ec;
   width: 100%;
   padding: 15px;
   border-radius: 10px;
@@ -716,6 +716,7 @@ update_tree()
 .item:hover {
   transform: scale(1.3) rotateZ(10deg);
   transition-duration: 500ms;
+  background-color: #e0dcfc;
 
 }
 
@@ -854,6 +855,9 @@ update_tree()
 }
 .no-scroll {
   overflow: hidden;
+}
+.text-color{
+  color:#686c44;
 }
 
 
