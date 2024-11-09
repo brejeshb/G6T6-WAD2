@@ -5,12 +5,12 @@
         <section class="py-5 text-center top_section" data-aos="fade-up " >
           <div class="row py-lg-5">
             <div class="col-lg-6 col-md-8 mx-auto">
-              <h1 class="fw-light">Welcome to Our Recycling Education Hub!</h1>
-              <p class="lead text-body-secondary">Recycling is a simple, powerful way to create a cleaner planet. In this hub, explore what can and can’t be recycled, learn tips for reducing waste, and discover how small actions can make a big impact. Together, let’s build a more sustainable future—one recycled item at a time!</p>
-              <p>
+              <p class="title">Welcome to Our Recycling Education Hub!</p>
+              <p class="lead text-body-secondary bg-warning rounded-5">Recycling is a simple, powerful way to create a cleaner planet. In this hub, explore what can and can’t be recycled, learn tips for reducing waste, and discover how small actions can make a big impact. Together, let’s build a more sustainable future—one recycled item at a time!</p>
+              <!--<p>
                 <router-link to="./video" class="btn btn-primary my-2 mx-4" data-aos="zoom-in">Watch some educational videos</router-link>
                 <router-link to="./quiz" class="btn btn-secondary my-2 mx-4" data-aos="zoom-in">Do some quizzes for points</router-link>
-              </p>
+              </p>-->
             </div>
           </div>
         </section>
@@ -369,5 +369,10 @@ color: #333;
 }
 #videos{
   background-color: #808444;
+}
+.title{
+  font-size: 6vw;
+  font-weight: bold;
+  color:;
 }
 </style>

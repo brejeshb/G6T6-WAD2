@@ -5,14 +5,12 @@
       <section class="py-5 text-center top_section" data-aos="fade-up">
       <div class="row py-lg-5">
         <div class="col-lg-6 col-md-8 mx-auto">
-          <h1 class="fw-light">Quiz Application</h1>
-          <p class="lead text-muted">
-            Challenge yourself with quizzes on recycling and upcycling. Earn points by testing your knowledge!
-          </p>
-          <p>
+          <p class="title">Quiz Application</p>
+
+          <!--<p>
             <router-link to="./video" class="btn btn-primary my-2 mx-4" data-aos="zoom-in">Watch some educational videos</router-link>
             <router-link to="./quiz" class="btn btn-secondary my-2 mx-4" data-aos="zoom-in">Do some quizzes for points</router-link>
-          </p>
+          </p>-->
         </div>
       </div>
     </section>
@@ -343,19 +341,19 @@ async function updatePoint(add_point){
         const { update_curr_point } = await supabase
       .from('UserTreesStats')
       .update({ curr_points:curr_point })
-      .eq('username', 'ann2')
+      .eq('username', currUser.value)
       break;
 
 }
 
     }
     for(let user of cul_data){
-    if(user.username=='ann2'){
+    if(user.username==currUser.value){
         let cul_point = user.total_points_accumulated +add_point
         const { update_total_point } = await supabase
       .from('UserOverallStatsTable')
       .update({ total_points_accumulated:cul_point })
-      .eq('username', 'ann2')
+      .eq('username', currUser.value)
       break;
 
 }
@@ -375,7 +373,7 @@ async function insertCol(name,attempt,score){
     const { data, error } = await supabase
   .from('UserQuizDataTable')
   .upsert([
-    { username: 'ann2', quiz_name: name,num_attempts:attempt,last_recorded_quiz_score:0,current_quiz_score:score,month:month },
+    { username: currUser.value, quiz_name: name,num_attempts:attempt,last_recorded_quiz_score:0,current_quiz_score:score,month:month },
   ])
   .select()
 
@@ -386,7 +384,7 @@ async function updateDate(quiz,date){
     const { update_tree_list } = await supabase
       .from('UserQuizDataTable')
       .update({ current_quiz_score: 0 ,month:date})
-      .eq('username', 'ann2')
+      .eq('username', currUser.value)
       .eq('quiz_name', quiz);
 }
 readData();
@@ -407,7 +405,7 @@ async function readData() {
 
   // Process data for each user
   data.forEach(user => {
-    if (user.username === 'ann2') {
+    if (user.username === currUser.value) {
       // Extract relevant data
       const { current_quiz_score, last_recorded_quiz_score, num_attempts, quiz_name, month } = user;
 
@@ -515,6 +513,7 @@ function getScorePercentage(quizId) {
   /* Top Section - Banner */
   .top_section {
     height: 50vw;  
+  
   }
   
   .top_section h1 {
@@ -700,6 +699,17 @@ function getScorePercentage(quizId) {
 }
 #videos{
   background-color: #798645;
+}
+.quiz_active{
+  background-color: #e0f7f4;
+
+}
+.title{
+  font-size: 10vw;
+  font-weight: bold;
+}
+.title-text{
+  font-size: 2.9vw;
 }
   </style>
   
