@@ -18,7 +18,7 @@
           <div class="row">
             <div class="col" v-for="card in infoCards" :key="card.id">
               <div class="card">
-                <img :src="card.image" class="card-img-top" alt="Map Image" />
+                <img :src="card.image" class="card-img-top">
                 <div class="card-body">
                   <h3>{{ card.title }}</h3>
                   <p>{{ card.text }}</p>
