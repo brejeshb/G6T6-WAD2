@@ -1,7 +1,8 @@
 <template>
-  <div id="app">
-    <!-- Top Section with AOS animation -->
-    <section class="py-5 text-center top_section" data-aos="fade-up">
+    <div style="  background-color: #fffce4;   background-attachment: fixed;
+  background-image: url('/public/img/quiz.webp');
+  background-size: 100vw auto;">
+      <section class="py-5 text-center top_section" data-aos="fade-up">
       <div class="row py-lg-5">
         <div class="col-lg-6 col-md-8 mx-auto">
           <h1 class="fw-light">Quiz Application</h1>
@@ -15,9 +16,12 @@
         </div>
       </div>
     </section>
+  <div id="app">
+    <!-- Top Section with AOS animation -->
+
 
     <!-- Main Content Section with Filter and Search Bar -->
-    <div id="main_content" class="container mt-2" data-aos="fade-up">
+    <div id="main_content" class="container pt-5" data-aos="fade-up">
       <div id="nav-bar">
         <nav class="navbar navbar-expand-lg bg-body-tertiary flex-column" data-aos="fade-left">
           <div class="container-fluid">
@@ -92,6 +96,7 @@
       </div>
     </div>
   </div>
+</div>
 </template>
 
   
@@ -509,9 +514,7 @@ function getScorePercentage(quizId) {
   
   /* Top Section - Banner */
   .top_section {
-      background-color: #e0f7f4;
-      padding: 2rem;
-      border-radius: 8px;
+    height: 50vw;  
   }
   
   .top_section h1 {
@@ -539,6 +542,11 @@ function getScorePercentage(quizId) {
   }
   
   /* Navbar and Filter Buttons */
+  #nav-bar{
+  position: sticky;
+  top: 60px;
+  z-index: 20;
+}
   #nav-bar .navbar {
       background-color: #fff;
       border-radius: 8px;

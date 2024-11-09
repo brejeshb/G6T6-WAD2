@@ -9,8 +9,7 @@
     background-size: 100% auto;
     
   " >
-  <p class="text-pos" data-aos="zoom-in-up" data-aos-duration="1200"> Welcome back to Your Forest </p>
-  <p class="text-pos" data-aos="zoom-in-up" data-aos-duration="1200">{{ currUser }}</p>
+  <p class="text-pos" data-aos="zoom-in-up" data-aos-duration="1200">{{ currUser }}'s Forest</p>
  
   </div>
   <div id="app" style="position: relative;">

@@ -1,7 +1,8 @@
 <template>
-  <div id="app">
-      <div id="header"></div>
-      <section class="py-5 text-center top_section" data-aos="fade-up">
+  <div style="  background-color: #fffce4;   background-attachment: fixed;
+  background-image: url('/public/img/education_hub.webp');
+  background-size: 100vw auto;">
+        <section class="py-5 text-center top_section" data-aos="fade-up " >
           <div class="row py-lg-5">
             <div class="col-lg-6 col-md-8 mx-auto">
               <h1 class="fw-light">Welcome to Our Recycling Education Hub!</h1>
@@ -13,7 +14,10 @@
             </div>
           </div>
         </section>
-      <div id="main_content" class="container mt-2">
+  <div id="app">
+      
+
+      <div id="main_content" class="container pt-5">
           <div id="nav-bar">
               <nav class="navbar rounded shadow navbar-expand-lg bg-body-tertiary flex-column" data-aos="fade-right">
                   <div class="container-fluid">
@@ -63,6 +67,7 @@
           </div>
       </div>
   </div>
+</div>
 </template>
 
 <script setup>
@@ -175,9 +180,10 @@ body {
 
 /* Top Section - Banner */
 .top_section {
-  background-color: #e0f7f4;
-  padding: 2rem;
-  border-radius: 8px;
+
+  height: 50vw;  
+
+
 }
 
 .top_section h1 {
@@ -205,6 +211,11 @@ body {
 }
 
 /* Navbar and Filter Buttons */
+#nav-bar{
+  position: sticky;
+  top: 60px;
+  z-index: 20;
+}
 #nav-bar .navbar {
   background-color: #fff;
   border-radius: 8px;
