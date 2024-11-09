@@ -1,6 +1,6 @@
 <template>
     <div style="  background-color: #fffce4;   background-attachment: fixed;
-  background-image: url('/public/img/quiz.webp');
+  background-image: url('/img/quiz.webp');
   background-size: 100vw auto;">
       <section class="py-5 text-center top_section" data-aos="fade-up">
       <div class="row py-lg-5">
