@@ -52,8 +52,7 @@ import Dashboard from '../components/Dashboard.vue';
 import CardsCarousel from '../components/CardsCarousel.vue';
 import staticContentHaHa from '../components/dashboardCharts/staticContentHaHa.vue';
 import Footer from '../components/dashboardCharts/footer.vue';
-import AOS from 'aos';
-import 'aos/dist/aos.css';  // Import the AOS styles
+
 
 export default {
   name: "DashboardPage",
@@ -64,6 +63,7 @@ export default {
     staticContentHaHa,
     Footer
   },
+  
 
 }
 

@@ -2,8 +2,8 @@
     <div class="container-fluid p-lg-5 p-0 h-100 scroll-section"
         style="background-color: #D9EA9A; min-height: fit-content;">
         <!-- Globe -->
-        <div class="container p-5 text-center rounded-5 box" data-aos="zoom-out-up"
-            style="background-color: #F3F4F6;margin-bottom: 1em;height: 80vh;overflow-y:scroll;scroll-snap-type: y mandatory;">
+        <div class="container p-5 text-center rounded-5 box"  
+            style="background-color: #F3F4F6;margin-bottom: 1em;height: 90vh;overflow-y:scroll;scroll-snap-type: y mandatory;">
             <h1 style="font-weight: bold;color: #788645;">Global Crisis Alert</h1><br>
             <h3 style="font-weight: bold;">
                 <mark style="background-color: #D9EA9A;">A Warming World, A Fading Future</mark>
@@ -15,11 +15,13 @@
                 </div>
             </div><br><br>
 
-            <div class="text-start fw-bold ">
+            <div class="text-start fw-bold fs-5">
                 Global warming is not just a looming issue. It's right here. With rapid urbanisation and burgeoning
-                consumerism, it's changing the world in ways we absolutely can't ignore. Rising temperatures aren't just
-                a Number on a thermometer. They translate to supercharged storms, longer droughts and disrupted
-                ecosystems.
+                consumerism, it's changing the world in ways we absolutely can't ignore. <mark id="highlight">Rising
+                    temperatures aren't just
+                    a Number on a thermometer.</mark> They translate to <mark id="highlight">supercharged storms, longer
+                    droughts and disrupted
+                    ecosystems</mark>.
 
                 Its effects are rippling across every continent, every mote of soil.
                 We aren't going to destroy our homeland, aren't we ...
@@ -99,11 +101,11 @@
             </div>
             <br><br><br>
             <div class="text-start fw-bold fs-4">
-                Just imagine a future where every city you go is filled with lush greenery and aesthetic trees like the
+                Just imagine a future where every city you go is filled with <mark id="highlight">lush greenery and aesthetic trees</mark> like the
                 one above!
                 Wouldn't that be lovely ... But global warming is making it harder to achieve this utopia ...
-                Unpredictable weather
-                conditions are depleted our forests, leaving Mother Earth vulnerable to carcogenic UV rays attributed to
+                <mark id="highlight">Unpredictable weather
+                conditions</mark> are depleting our forests, leaving <mark id="highlight">Mother Earth vulnerable to carcogenic UV rays</mark> attributed to
                 the
                 depletion of the ozone layer.
             </div>
@@ -154,12 +156,12 @@
                 </div>
             </div><br><br><br>
             <div class="text-start fw-bold fs-4">
-                Certainly you don't want a world full of dead trees, and extreme heat waves, especially how hot
-                Singapore is don't you ... How can we do our part so that the world remains an ethereal beauty for our
+                Certainly you don't want a world full of <mark id="highlight">dead trees</mark> , and <mark id="highlight">extreme heat waves</mark>, especially how hot
+                Singapore is don't you ... How can we do our part so that the world remains an <mark id="highlight">ethereal beauty</mark> for our
                 future generations?
                 You surely do't want a future plagued by dead trees and scorching heatwaves, given how hot Singapore is,
-                don't you? To ensure that our planet remains an enchanting paradise for our future generations, we must
-                take immediate action.
+                don't you? To ensure that our planet remains an <mark id="highlight">enchanting paradise</mark> for our future generations, we must
+                <mark id="highlight">take immediate action</mark> .
 
             </div>
         </div>
@@ -175,21 +177,21 @@
                 <div class="text-start fw-bold fs-5">
 
                     Do you know that as you commit to the lovely habit of recycling,
-                    you contribute to a ripple effect that leads to significant environmental benefits on a larger
+                    you contribute to a <mark id="highlight">ripple effect</mark> that leads to significant environmental benefits on a larger
                     scale?
-                    Recycling just 1 tonne of paper saves nearly 17 trees, 26,500 litres of H<sub>2</sub>O, 4000kw of
+                    Recycling just <mark id="highlight">1 tonne of paper saves nearly 17 trees, 26,500 litres of H<sub>2</sub>O, 4000kw of
                     electricity
-                    and reduces GHG emissions by 1 tonne of CO2<sub>2</sub>! We can then divert thousands of waste from
+                    and reduces GHG emissions by 1 tonne of CO2<sub>2</sub></mark>! We can then divert thousands of waste from
                     landfills, reduce pollution
-                    and conserve vast amounts of energy and water! If every person in Singapore recycles diligently, the
+                    and conserve vast amounts of energy and water! <mark id="highlight">If every person in Singapore recycles diligently, the
                     cumulative impact
-                    would amount up to an everlasting utopia for our future generations, isn't that wholesome and vibey?
+                    would amount up to an everlasting utopia for our future generations</mark>, isn't that wholesome and vibey?
                     Hey, just hop on this ride with us and just ...
                 </div>
                 <br><br>
 
                 <div class="w-100 mx-auto h-100">
-                    <button class="btn fw-bold buttonLol rounded-pill" @click=navigateToChenSang>
+                    <button class="btn fw-bolder fs-4 buttonLol rounded-pill" @click=navigateToChenSang>
                         Recycle Now
                         Lah
                     </button>
@@ -256,6 +258,10 @@ export default {
     top: 100px
 }
 
+span #highlight {
+    background-color: #D9EA9A;
+}
+
 .box:nth-child(3) {
     top: 120px
 }
@@ -264,6 +270,9 @@ export default {
     top: 140px
 }
 
+#highlight {
+    background-color: #D9EA9A;
+}
 
 /* Tree */
 .container1 {
