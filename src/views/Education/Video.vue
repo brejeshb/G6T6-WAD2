@@ -1,5 +1,5 @@
 <template>
-      <div class="suggestion-form text-center p-5" v-if="form_open" >
+      <div class="suggestion-form container text-center p-5" v-if="form_open" >
         <h2 style="color: #f8f4ec;">Enter the youtube link below</h2>
         <input type="url" id="website" class="rounded" name="website" placeholder="https://example.com" required>
         <br>
@@ -420,8 +420,7 @@ body {
 }
 .suggestion-form{
   position: fixed;
-  width: 80vw;
-  height: 20vh;
+
   top: 50vh;
   left: 50%;
   -ms-transform: translate(-50%, -50%);
