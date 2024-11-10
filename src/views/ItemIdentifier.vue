@@ -131,7 +131,7 @@ console.log(userName);
 export default {
   data() {
     return {
-      username: currUser, 
+      username: currUser,
       map: null,
       isTrue: true,
       ifInsertSuccess: false,
@@ -314,10 +314,7 @@ export default {
     async recycleNow() {
 
       const timeStamp = new Date().toISOString();
-      console.log(timeStamp);
       var mat = this.uploadedMaterial.toLowerCase();
-      console.log(mat);
-      console.log(this.username);
 
       const { data, error } = await supabase
         .from('UserActivitiesTable')
@@ -325,13 +322,17 @@ export default {
           { 'username': this.username, 'date_uploaded': timeStamp, 'recycled_material': mat },
         ])
         .select()
-        this.isTrue = true;
-        if (error) {
-          console.log(error);
-        } else {
-          console.log(data);
-          this.ifInsertSuccess = true;
-        }
+      this.isTrue = true;
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(data);
+        this.ifInsertSuccess = true;
+      }
+
+      if (this.ifInsertSuccess) {
+        this.resultMessage = `Congratulations! You are on fire! Come back and recycle again!`;
+      } 
 
     },
 
@@ -375,10 +376,7 @@ export default {
           if (isRecyclable) {
             this.resultMessage = `Your item is Recyclable! It is categorized as ${this.uploadedMaterial}. Would you like to recycle it?`
             this.isTrue = false
-            if (this.ifInsertSuccess) {
-              this.resultMessage = `Congratulations! You are on fire! Come back and recycle again!`;
-            }
-            
+
           } else {
             this.resultMessage = `Your item is not Recyclable! Do not recycle it!`
             this.isTrue = true
@@ -399,7 +397,6 @@ export default {
 </script>
 
 <style scoped>
-
 #container {
   width: 100%;
   height: 100vh;
