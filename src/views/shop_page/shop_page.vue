@@ -113,6 +113,9 @@
       </div>
     </div>
   </div>
+  <div class="mt-5">
+    <Footer2/>
+  </div>
 </div>
 </template>
 
@@ -120,6 +123,7 @@
 import { supabase } from '/src/lib/supabaseClient.js'
 import { useAuth } from '../../lib/auth'
 const { userName } = useAuth();
+import Footer2 from '../../components/footer2.vue'
 
 var currUser = userName;
 

@@ -90,15 +90,20 @@
           </div>
         </div>
       </div>
+      <div class="mt-5">
+    <Footer2/>
+  </div>
     </div>
 
   </div>
+
 </template>
 
 <script setup>
 import { ref, onMounted, computed } from 'vue';
 import AOS from 'aos';
 import 'aos/dist/aos.css';  // Import the AOS styles
+import Footer2 from '../../components/footer2.vue'
 
 // Initialize AOS on component mount
 onMounted(() => {

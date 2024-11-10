@@ -110,8 +110,13 @@
           </div>
         </div>
       </div>
-    </div>
+      <div class="mt-5">
+    <Footer2/>
   </div>
+    </div>
+    
+  </div>
+  
 </template>
 
 
@@ -123,6 +128,7 @@ import { supabase } from '/src/lib/supabaseClient.js'
 import { useAuth } from '../../lib/auth'
 import AOS from "aos";
 import "aos/dist/aos.css";
+import Footer2 from '../../components/footer2.vue'
 
 onMounted(async () => {
   AOS.init({
