@@ -40,6 +40,7 @@ const ChartOptions = {
         }
     },
     responsive: true,
+    maintainAspectRatio: true,
     plugins: {
         legend: {
             position: 'top' //  legend position
