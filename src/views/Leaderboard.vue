@@ -7,7 +7,7 @@
     <div class="container">
 
         <section id="section-0">
-            <div class="leaderboard-head text-center" style="padding-top: 25vw;">
+            <div class="leaderboard-head" style="padding-top: 17vw;">
                 <h1 id="leaderboard-title">Leaderboard</h1>
             </div>
 
@@ -24,7 +24,7 @@
                         <h1 class="hidden" id="podium">Podium</h1>
                     </div>
                     <div class="col-lg-4 hidden">
-                        <div id="podium" class="podium">
+                        <div class="podium">
                             <div v-for="player in topPlayers" :key="player.rank"
                                 :class="['podium-step', getPodiumClass(player.rank)]">
                                 <h2 class='podium-number'>{{ player.rank }}</h2>
@@ -301,29 +301,18 @@ onMounted(async () => {
 
 #leaderboard-title {
     padding: none;
-    border-right: 2px solid;
     color: #798645;
     font-weight: bolder;
     font-size: 6vw;
-    margin: auto;
     letter-spacing: -2px;
 }
 
 
 #podium {
     color: #798645;
-    text-align: center;
-}
-
-/* Cursor animations */
-@keyframes animated-cursor {
-    from {
-        border-right-color: rgba(0, 0, 0, 0.75);
-    }
-
-    to {
-        border-right-color: transparent;
-    }
+    margin-top: 2vw;
+    margin-left: 2vw;
+    
 }
 
 
@@ -465,10 +454,10 @@ onMounted(async () => {
 
 
 h1 {
-    margin-top: 30px;
+    /* margin-top: 1vw; */
     font-size: 3rem;
     font-weight: bold;
-    margin-left: 30px;
+    /* margin-left: 3vw; */
 }
 
 .podium-number {
