@@ -171,8 +171,9 @@ async function fetchLeaderboardData() {
 
     var playerCount = 0
 
-    while (playerCount <= 10) {
+    while (playerCount < 10) {
         playerCount += 1
+        console.log(playerCount)
         players.value = UserOverallStatsTable.map((record, index) => ({
             rank: index + 1,
             name: record.username,
@@ -236,6 +237,7 @@ onMounted(async () => {
 
 #section-2 {
     background-color: #798645;
+    height: 110vh;
 
 }
 
@@ -371,8 +373,6 @@ onMounted(async () => {
 }
 
 .podium-step {
-    /* animation: popIn 0.8s ease-out forwards;
-    animation-fill-mode: forwards; */
     transition: transform 0.3s ease;
     display: flex;
     flex-direction: column;
@@ -528,6 +528,7 @@ h1 {
 #climb {
     font-weight: bold;
     color: #EFECC6;
+    padding-bottom: 50px;
 }
 
 .carousel-container {
