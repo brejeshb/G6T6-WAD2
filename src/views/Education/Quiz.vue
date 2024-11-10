@@ -743,12 +743,9 @@ body {
   font-size: 6vw;
   font-weight: bold;
   color: #FEFAE0;
-<<<<<<< Updated upstream
   margin-top: 15vw;
-=======
   position: absolute;
-  top: 30%;
->>>>>>> Stashed changes
+
 }
 
 .title-text {
