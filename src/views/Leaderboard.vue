@@ -7,8 +7,8 @@
     <div class="container">
 
         <section id="section-0">
-            <div class="leaderboard-head">
-                <h1 id="leaderboard-title">Leaderboard</h1>
+            <div class="leaderboard-head text-center" style="padding-top: 25vw;">
+                <h1 id="leaderboard-title" >Leaderboard</h1>
             </div>
 
         </section>
@@ -310,17 +310,21 @@ onMounted(async () => {
         animated-cursor 750ms steps(11, end) infinite;
     overflow: hidden;
     white-space: nowrap;
+
+    padding: none;
     border-right: 2px solid;
     /* Creates the cursor */
     color: #798645;
     font-weight: bolder;
-    margin-left: 100px;
+
     font-size: 6vw;
-    position: absolute;
-    top: 30%;
-    left: 25%;
+
+    margin: auto;
+
     letter-spacing: -2px;
+    width: 20vw;
 }
+
 
 #podium {
     color: #798645;

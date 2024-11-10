@@ -1,4 +1,7 @@
 <template>
+      <div class="suggestion-form " >
+      fsdgsdfg
+    </div>
   <div style="  background-color: #f8f4ec;   background-attachment: fixed;
   background-image: url('/img/education_hub.webp');
   background-size: 100vw auto;">
@@ -14,7 +17,9 @@
         </div>
       </div>
     </section>
+
     <div id="app">
+
 
 
       <div id="main_content" class="container pt-5">
@@ -46,6 +51,12 @@
                       @click.prevent="activeFilter = 'upcycling'" href="#"
                       @click="filter_recycle = false; filter_upcycle = true; videoFiltering()">Upcycle</a>
                   </li>
+                  
+                  <li class="nav-item">
+                    <a class="nav-link" aria-current="page" 
+                      href ='#'
+                      @click="open_form">Click me to suggest videos</a>
+                  </li>
                 </ul>
                 <form class="d-flex" role="search">
                   <input class="form-control me-3" type="search" placeholder="Search" @input="videoFiltering()"
@@ -73,6 +84,7 @@
         </div>
       </div>
     </div>
+
   </div>
 </template>
 
@@ -110,6 +122,7 @@ const recycle_videos = ref([]);
 const filter_recycle = ref(false);
 const filter_upcycle = ref(false);
 const activeFilter = ref('all');
+let form_open = ref(false);
 // Fetch videos on mount
 onMounted(fetchVideos);
 const filteredQuizzes = computed(() => {
@@ -175,6 +188,10 @@ function videoFiltering() {
 
   // Return filtered videos
   return videos.value.filter(video => video.status);
+}
+function open_form(){
+  form_open.value = !form_open.value;
+  console.log(form_open.value)
 }
 </script>
 <style scoped>
@@ -388,5 +405,17 @@ body {
   font-size: 6vw;
   font-weight: bold;
 
+}
+.suggestion-form{
+  position: fixed;
+  width: 80vw;
+  height: 80vh;
+  top: 50vh;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  border-radius: 10%;
+  z-index: 100;
+ background-color:#808444;
 }
 </style>

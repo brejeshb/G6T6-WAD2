@@ -4,9 +4,9 @@
             <h1 style="font-weight: bold;">How to earn more points?</h1>
             <hr>
 
-            <div class="appleCarousel row-cols-1 row-cols-lg-4 g-5 w-100 mx-auto">
+            <div class="appleCarousel  w-100 mx-auto">
 
-                <div class="item col">
+                <div class="item col-lg-6 col-12">
                     <div class="card h-100">
                         <div>
                             <img src="../assets/images/bin.jpg" class="card-img-top " alt="">
@@ -25,7 +25,7 @@
                     </div>
                 </div>
 
-                <div class="item col">
+                <div class="item col-lg-6 col-12">
                     <div class="card h-100">
                         <div>
                             <img src="../assets/images/quiz.jpg" class="card-img-top " alt="">
