@@ -51,7 +51,6 @@ import Landing from '../components/Landing.vue';
 import Dashboard from '../components/Dashboard.vue';
 import CardsCarousel from '../components/CardsCarousel.vue';
 import staticContentHaHa from '../components/dashboardCharts/staticContentHaHa.vue';
-import Footer from '../components/dashboardCharts/footer.vue';
 import Footer2 from '../components/footer2.vue';
 
 
