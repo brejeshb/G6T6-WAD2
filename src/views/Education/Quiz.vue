@@ -713,6 +713,7 @@ function getScorePercentage(quizId) {
   font-size: 6vw;
   font-weight: bold;
   color: #FEFAE0;
+  margin-top: 15vw;
 }
 .title-text{
   font-size: 2.9vw;
