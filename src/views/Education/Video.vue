@@ -14,7 +14,7 @@
     <section class="py-5 text-center top_section" data-aos="fade-up ">
       <div class="row py-lg-5">
         <div class="col-lg-6 col-md-8 mx-auto">
-          <p class="title">Welcome to Our Recycling Education Hub!</p>
+          <p class="title" style="padding-top: 16vw;">Education Hub</p>
 
           <!--<p>
                 <router-link to="./video" class="btn btn-primary my-2 mx-4" data-aos="zoom-in">Watch some educational videos</router-link>
@@ -414,6 +414,7 @@ body {
 .title {
   font-size: 6vw;
   font-weight: bold;
+  letter-spacing: -2px;
 
 }
 .suggestion-form{
