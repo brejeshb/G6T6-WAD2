@@ -1,5 +1,5 @@
   <template>
-    <div class="container">
+    <div id="container">
 
 
       <div id="section-0">
@@ -12,7 +12,7 @@
       <section class="section" id="section-1">
         <div class="info-section">
           <div class="row">
-            <div class="col" v-for="card in infoCards" :key="card.id">
+            <div class="col-12 col-md-6" v-for="card in infoCards" :key="card.id">
               <div class="card">
                 <img :src="card.image" class="card-img-top">
                 <div class="card-body">
@@ -37,6 +37,7 @@
 
 
     <!-- Modals -->
+    <!-- Modal structure for Locate Bins -->
     <div class="modal fade" id="modalLocateBins" tabindex="-1" aria-labelledby="modalLocateBinsLabel"
       aria-hidden="true">
       <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -45,51 +46,47 @@
             <h5 class="modal-title" id="modalLocateBinsLabel">Locate Recycling Bins</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
+
           <div class="modal-body">
             <h3>Find Recycling Bins Nearby</h3>
+
             <div class="container">
               <div class="row">
-                <div class="col-3">
+                <div class="col-md-3">
                   <div>
-                    1. Input your current location and search
-                    <br>
-                    <br>
-                    2. Blue marker will be your current location
-                    <br>
-                    <br>
-                    3. Red markers will be the recycling bins that are within 1km from you
-                    <br>
-                    <br>
-                    4. Mouseover the red markers to have a look at the walking route!
-                    <br>
-                    <br>
-                    5. Click on your desired marker to start journey
-                    <br>
-                    <br>
+                    <p>1. Input your current location and search</p>
+                    <p>2. Blue marker will be your current location</p>
+                    <p>3. Red markers will be recycling bins within 1km</p>
+                    <p>4. Mouseover red markers to view walking route</p>
+                    <p>5. Click your desired marker to start journey</p>
                   </div>
                 </div>
-                <div class="col-9">
+                <div class="col-md-9">
                   <div id="map" style="width: 100%; height: 500px;"></div>
                 </div>
               </div>
-              <div class="row mt-3">
-                <div class="col">
-
+              <div class="row g-0 mt-3">
+                <div class="col-md-12">
                   <input type="text" class="form-control" v-model="searchText" placeholder="Search your location" />
-                  <button class="btn btn-primary mt-2" @click="performSearch()">Search</button>
                 </div>
+                <!-- <div class="col text-center">
+                  <button class="btn btn-primary" @click="performSearch()">Search</button>
+                </div> -->
               </div>
             </div>
           </div>
+
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+            <button class="btn btn-primary" @click="performSearch()">Search</button>
           </div>
         </div>
       </div>
     </div>
 
+
     <div class="modal fade" id="addImgModal" tabindex="-1" aria-labelledby="addImgModal" aria-hidden="true">
-      <div class="modal-dialog">
+      <div class="modal-dialog modal-dialog-centered ">
         <div class="modal-content">
           <div class="modal-header">
             <h1 class="modal-title fs-5">Upload Item Image</h1>
@@ -142,7 +139,7 @@ export default {
     return {
       map: null,
       loading: false, // Loading state for the spinner
-      recyclablesArr: ["cloth", "metal", "plastic", "paper", "glass"],
+      recyclablesArr: ["Cloth", "Metal", "Plastic", "Paper", "Glass"],
       nyckelKey: undefined,
       mapJson: MAP_JSON,
       recyclingBins: [],
@@ -209,6 +206,9 @@ export default {
       });
 
 
+    },
+    findWord(word, str) {
+      return RegExp('\\b' + word + '\\b').test(str)
     },
     performSearch() {
       const geocoder = new google.maps.Geocoder();
@@ -334,20 +334,18 @@ export default {
         )
         .then(response => {
           let obj = response.data;
-          console.log(obj);
-          let firstDashIndex = obj.labelName.indexOf("-");
+          // console.log(obj);
+          // let firstDashIndex = obj.labelName.indexOf("-");
 
           // Extract the category and item name
-          let outputCategory = obj.labelName.substring(0, firstDashIndex).trim();
-          outputCategory = outputCategory.charAt(0).toLowerCase() + outputCategory.slice(1);
-          outputCategory = outputCategory.replace(/\s*\(Recyclable\)$/, "").trim();
+          // String 
+          let outputCategory = obj.labelName
+          // let outputCategory = obj.labelName.substring(0, firstDashIndex).trim();
+          // outputCategory = outputCategory.charAt(0).toLowerCase() + outputCategory.slice(1);
+          // outputCategory = outputCategory.replace(/\s*\(Recyclable\)$/, "").trim();
 
-
-          if (!this.recyclablesArr.includes(outputCategory)) {
-            this.resultMessage = `Your item is categorized as ${outputCategory}. This item is NOT recyclable!`
-          } else {
-            this.resultMessage = `Your item is categorized as ${outputCategory}. It is recyclable! Will you like to recycle it and earn points?`
-          }
+           
+          
         })
         .catch(error => {
           console.log(error.message);
@@ -363,7 +361,12 @@ export default {
 </script>
 
 <style scoped>
-.container {
+
+/* body {
+  background-color: #FEFAE0;
+} */
+
+#container {
   width: 100%;
   height: 100vh;
   max-width: 100vw;
@@ -381,7 +384,7 @@ export default {
 }
 
 #section-1 {
-    background-color: #FEFAE0;
+  background-color: #FEFAE0;
 }
 
 .section {
@@ -395,17 +398,16 @@ export default {
 }
 
 .leaderboard-head {
-  /* background-color: #626F47; */
   position: relative;
   height: 100vh;
   width: 100vw;
-  margin: 0px;
-  padding: 0px;
+  margin: 0;
+  padding: 0;
   background: url(../assets/images/recycle-now-lah-header.jpg);
-  background-size: cover;
+  background-size: auto 100%;
+  /* min-width: 100%; */
   background-position: center;
   background-attachment: fixed;
-
 }
 
 #half-title {
@@ -418,10 +420,8 @@ export default {
   overflow: hidden;
   white-space: nowrap;
   border-right: 2px solid;
-  /* Creates the cursor */
   color: #798645;
   font-weight: bolder;
-  margin-left: 50px;
   font-size: 6vw;
   position: absolute;
   top: 30%;
@@ -429,7 +429,31 @@ export default {
   letter-spacing: -2px;
 }
 
-@keyframes animated-cursor {
+@media (max-width: 768px) {
+  .leaderboard-head {
+    background-size: cover;
+    background-position: center;
+  }
+
+  #leaderboard-title {
+    font-size: 8vw;
+    top: 20%;
+    left: 10%;
+    text-align: center;
+    width: 80%;
+    /* Make the title wrap instead of using white-space: nowrap */
+  }
+}
+
+@media (max-width: 576px) {
+  #leaderboard-title {
+    font-size: 10vw;
+    top: 15%;
+    left: 5%;
+  }
+}
+
+/* @keyframes animated-cursor {
   from {
     border-right-color: rgba(0, 0, 0, 0.75);
   }
@@ -447,7 +471,7 @@ export default {
   to {
     width: 700px;
   }
-}
+} */
 
 
 @keyframes popIn {
@@ -511,15 +535,25 @@ export default {
   margin-top: auto;
   text-align: center;
 }
-/* 
+
 .modal-content {
   background-color: #626F47;
   color: #FEFAE0;
-} */
+}
+
+.modal-dialog-centered {
+  margin-top: 70px;
+  /* Adjust based on navbar height */
+}
+
+/* Remove extra space below search button */
+.modal .container .row:last-of-type {
+  margin-bottom: 0;
+}
 
 .btn-primary {
-  background-color: #F2EED7 ;
-  color:#626F47;
+  background-color: #F2EED7;
+  color: #626F47;
   border: none;
 }
 
@@ -537,7 +571,7 @@ export default {
   border-radius: 10px;
   padding: 0;
   position: relative;
-  color: #798645;
+  color: #FEFAE0;
   cursor: pointer;
   margin: auto;
   height: 450px;
@@ -546,6 +580,10 @@ export default {
   overflow: hidden;
   text-align: center;
 }
+
+/* #uploadtext{
+  color: #FEFAE0;
+} */
 
 .upload-container p {
   font-weight: bold;
