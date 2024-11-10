@@ -399,14 +399,14 @@ export default {
 
 .leaderboard-head {
   position: relative;
-  height: 100vh;
-  width: 100vw;
+  height: 60vw;
+
   margin: 0;
   padding: 0;
   background: url(../assets/images/recycle-now-lah-header.jpg);
-  background-size: auto 100%;
+  background-size: 100% auto;
+  background-repeat: no-repeat;
   /* min-width: 100%; */
-  background-position: center;
   background-attachment: fixed;
 }
 
@@ -430,10 +430,7 @@ export default {
 }
 
 @media (max-width: 768px) {
-  .leaderboard-head {
-    background-size: cover;
-    background-position: center;
-  }
+
 
   #leaderboard-title {
     font-size: 8vw;
