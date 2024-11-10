@@ -14,7 +14,6 @@
                         <div class="card-body">
                             <div>
                                 <h3 class="card-title fw-bold">Recycle items</h3>
-                                <img src="../assets/images/bin.jpg" class="card-img-top " alt="">
                             </div>
                             <p class="card-text">
                                 Recycle right! Snap a picture and upload it under our Item Identifier page.
@@ -73,14 +72,13 @@ export default {
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     gap: 1rem;
-    <<<<<<< HEAD
     /* scrollbar-width: none; */
     /* Hides scrollbar */
     /* Hide scrollbar in Firefox */
-    =======width: max-content;
+    width: max-content;
     margin: 0 auto;
     padding: 0 1rem;
-    >>>>>>>fae0b446215385b4a94ea790bceaaa403e2dde77
+
 }
 
 
