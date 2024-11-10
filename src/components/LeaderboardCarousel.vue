@@ -9,7 +9,7 @@
                     <div class="item col">
                         <div class="card h-100">
                             <div>
-                                <img src="../assets/images/recycling bin many items.jpg" class="card-img-top " alt="">
+                                <img src="../assets/images/bin.jpg" class="card-img-top " alt="">
                             </div>
                             <div class="card-body">
                                 <div>
@@ -74,9 +74,6 @@ export default {
     width: max-content;
     margin: 0 auto;
     padding: 0 1rem;
-    /* scrollbar-width: none; */
-    /* Hides scrollbar */
-    /* Hide scrollbar in Firefox */
 }
 
 

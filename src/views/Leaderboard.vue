@@ -8,12 +8,12 @@
 
         <section id="section-0">
             <div class="leaderboard-head">
-                    <h1 id="leaderboard-title">Leaderboard</h1>
+                <h1 id="leaderboard-title">Leaderboard</h1>
             </div>
 
         </section>
         <section class="section" id="section-1">
-            
+
 
             <div class="leaderboard-body">
 
@@ -71,7 +71,9 @@
                     </ul>
 
                 </div>
-                <div class="hidden"><h1 id="climb">Climb the leaderboard!</h1></div>
+                <div class="hidden">
+                    <h1 id="climb">Climb the leaderboard!</h1>
+                </div>
                 <div class="col-lg-3 col-sm-1"></div>
             </div>
         </section>
@@ -118,10 +120,10 @@
         <div id="section-4 ">
             <LeaderboardCarousel />
 
-            </div>
-
-
         </div>
+
+
+    </div>
 
 
     <!-- </div> -->
@@ -167,11 +169,19 @@ async function fetchLeaderboardData() {
         return;
     }
 
-    players.value = UserOverallStatsTable.map((record, index) => ({
-        rank: index + 1,
-        name: record.username,
-        score: record.total_points_accumulated,
-    }));
+    var playerCount = 0
+
+    while (playerCount <= 10) {
+        playerCount += 1
+        players.value = UserOverallStatsTable.map((record, index) => ({
+            rank: index + 1,
+            name: record.username,
+            score: record.total_points_accumulated,
+        }));
+
+    }
+
+
 }
 
 onMounted(async () => {
@@ -237,7 +247,7 @@ onMounted(async () => {
 
 #section-4 {
     background-color: #FEFAE0;
-    
+
 }
 
 .hidden {
@@ -259,9 +269,8 @@ onMounted(async () => {
     background-color: #EFECC6;
     border-radius: 15px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    padding: 20px;
+    padding: 10px;
     width: 80%;
-    padding: 30px;
 }
 
 /* Leaderboard List Items */
@@ -270,7 +279,7 @@ onMounted(async () => {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 0;
+    padding: 5px 0;
     border-bottom: 1px solid #ccc;
     transition: background-color 0.3s ease;
 }
@@ -311,10 +320,11 @@ onMounted(async () => {
     letter-spacing: -2px;
 }
 
-#podium{
+#podium {
     color: #798645;
     text-align: center;
 }
+
 /* Cursor animations */
 @keyframes animated-cursor {
     from {
@@ -447,11 +457,12 @@ onMounted(async () => {
     justify-content: center;
 }
 
-#section-0{
+#section-0 {
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
 }
+
 .leaderboard-head {
     /* background-color: #626F47; */
     position: relative;
@@ -525,10 +536,10 @@ h1 {
 
 .carousel {
     display: flex;
-    gap: 16px; 
+    gap: 16px;
     width: 100vw;
     overflow-x: auto;
-    scroll-snap-type: x mandatory; 
+    scroll-snap-type: x mandatory;
     white-space: nowrap;
     padding: 20px 0;
     display: flex;
@@ -537,7 +548,7 @@ h1 {
 
 .item {
     flex-shrink: 0;
-    width: 600px; 
+    width: 600px;
     /* scroll-snap-align: start;  */
     box-sizing: border-box;
 }
@@ -567,5 +578,4 @@ h1 {
     font-size: 0.9em;
     color: #666;
 }
-
 </style>
