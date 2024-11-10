@@ -33,7 +33,7 @@ const ChartData = ref({
 
 
 const ChartOptions = {
-    indexAxis: 'y', // Set indexAxis to 'y' for horizontal bars
+    indexAxis: 'x', // Set indexAxis to 'y' for horizontal bars
     elements: {
         bar: {
             borderWidth: 2,
@@ -63,6 +63,8 @@ const generateColors = (numColors) => {
 };
 
 
+const maxUsernameLength = 10;
+
 const fetchData = async () => {
     try {
         const { data: UserOverallStatsTable, error } = await supabase
@@ -75,7 +77,14 @@ const fetchData = async () => {
             return;
         }
 
-        playerschart.value = UserOverallStatsTable;
+        playerschart.value = UserOverallStatsTable
+            .filter(player => player.total_points_accumulated > 0)
+            .map(player => ({
+                ...player,
+                username: player.username.length > maxUsernameLength 
+                    ? player.username.slice(0, maxUsernameLength) + '...' 
+                    : player.username
+            }));
 
         const numPlayers = playerschart.value.length;
         const dynamicColors = generateColors(numPlayers);

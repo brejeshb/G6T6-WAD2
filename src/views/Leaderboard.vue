@@ -299,6 +299,7 @@ onMounted(async () => {
 .chart {
     display: grid;
     align-items: center;
+    min-height: 400px;
 }
 
 .bar-chart {
