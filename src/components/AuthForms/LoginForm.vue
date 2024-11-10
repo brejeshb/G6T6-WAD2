@@ -8,19 +8,19 @@
           type="text"
           placeholder="Username" 
           v-model="username"
-          class="auth-input"
+          class="auth-input my-2"
         />
         <input 
           type="password" 
           placeholder="Password"
           v-model="password"
-          class="auth-input"
+          class="auth-input my-2"
         />
         <p v-if="error" class="error-message">{{ error }}</p>
       </div>
 
       <button 
-        class="login-button"
+        class="login-button my-2"
         :disabled="isLoading"
         @click="handleSubmit"
       >
