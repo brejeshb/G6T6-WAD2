@@ -38,6 +38,10 @@ export default {
     methods: {
         createStackedChart() {
             const leaderboard = document.getElementById("leaderboardRanking");
+            const lowestRank = Math.min(...this.data_values.filter(value => value > 0));
+
+            // Replace zeros with the lowest rank
+            const adjustedDataValues = this.data_values.map(value => (value === 0 ? lowestRank : value));
 
             if (this.chart) {
                 this.chart.destroy();
@@ -49,7 +53,7 @@ export default {
                     labels: this.labels,
                     datasets: [{
                         label: "Leaderboard Ranking Over Time",
-                        data: this.data_values,
+                        data: adjustedDataValues,
                         tension: 0.2, // adjust rounded corners
                         borderWidth: 4,
                         borderColor: "#2F5F48", // adjust line color 
@@ -93,7 +97,9 @@ export default {
                             ticks: {
                                 font: {
                                     weight: "bold"
-                                }
+                                },
+                                stepSize: 1
+
                             },
                             grid: {
                                 display: false
@@ -104,7 +110,11 @@ export default {
                                 font: {
                                     weight: "bold"
                                 }
-                            }
+                            },
+                            reverse: true,
+                            suggestedMin: Math.max(...adjustedDataValues), // Suggested min as the lowest rank
+                            suggestedMax: Math.min(...adjustedDataValues), // Suggested max as the highest rank
+
                         },
                         x: {
                             ticks: {

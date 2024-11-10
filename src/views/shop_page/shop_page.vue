@@ -1,10 +1,10 @@
 <template>
-  <div style="background-color:#f5ffe4;">
+  <div style="background-color:#f5ffe4;" >
   <div id="header" 
   class="text-center "
   style="
     height: 50vw;    
-    background-image: url('/public/img/forest_background.png');
+    background-image: url('/img/forest_background.png');
     background-attachment: fixed;
     background-size: 100% auto;
     
@@ -38,6 +38,7 @@
         <div class="growing">
           <div class="circle_tree justify-content-center align-items-center d-flex">
             <img v-if="cal_data.current_tree != ''" :src="cal_data.picture" id="tree" style="height: 70%; width: 70%" />
+            <p v-else class="text-center fs-3 m-2">Please open the shop to buy a tree to plant :)</p>
           </div>
           <div class="progress w-50 mx-auto" role="progressbar" aria-label="Success example" aria-valuenow="25" aria-valuemin="0"
             aria-valuemax="100">
@@ -80,9 +81,9 @@
         <div class="item-grid">
           <div class="item" v-for="item of shop_display()" @click="purchase(item)">
             <img :src="item.tree_png" alt="FAMAS Pulse" />
-            <h3>{{ item.item }}</h3>
+            <h3  class='text-color'>{{ formattedItem(item.item) }}</h3>
             <p class="price"><span style="color: white;"></span>Cost: {{ item.price }}</p>
-            <p class="time" ><span style="color: white;">Cost to grow: </span>{{ item.growth_points }}</p>
+            <p class="time text-color" ><span >Cost to grow: </span>{{ item.growth_points }}</p>
           </div>
         </div>
       </div>
@@ -121,18 +122,18 @@ const { userName } = useAuth();
 
 var currUser = userName;
 
-
+console.log(currUser.value)
 readData()
 fetchCalculationData()
 
 
 async function readData() {
-  console.log("trying")
+
   const { data } = await supabase
     .from('UserTreesStats')
     .select('*')
 
-  console.log(data)
+
   return data
 }
 
@@ -149,6 +150,11 @@ onMounted(() => {
     once: false,
   });
 });
+
+
+
+
+
 let start = ref(false)
 const sort = ref('Sort by: Highest price');
 const search = ref('');
@@ -197,12 +203,12 @@ const display_tree = ref(true);
 const display_pet = ref(true);
 const display_background = ref(true);
 const menuVisible = ref(false);
-console.log('data:', cal_data)
+
 
 
 async function update_tree() {
   let new_points = cal_data.value.current_points-cal_data.value.current_tree_points;
-  console.log('Cal_data',cal_data.value)
+
   if(cal_data.value.name_of_trees_planted ==null || cal_data.value.name_of_trees_planted ==undefined){
     cal_data.value.name_of_trees_planted = [cal_data.value.current_tree];
   }else{
@@ -227,11 +233,17 @@ async function update_tree() {
       .eq('username', currUser.value)
     fetchCalculationData()
 }
-
+function    formattedItem(thing) {
+  return thing.replaceAll('_', ' ');
+}
 function facts(name) {
   fact_box.value.status = true;
   fact_box.value.description = item_facts.value[name].description;
   fact_box.value.img = `/img/real_tree/${name}.jpg`;
+
+
+  // I checking the paths
+  console.log(`Image Path for ${name}: /img/real_tree/${name}.jpg`);
 }
 
 function toggleMenu() {
@@ -271,6 +283,9 @@ async function purchase(item) {
       .eq('username', currUser.value)
     fetchCalculationData()
     alert('Item purchased, please exit the shop to view it');
+    console.log(`Purchased item: ${new_tree}`);
+    console.log(`Image Path for purchased item: ${item.tree_png}`);
+
   }
 
 }
@@ -338,7 +353,7 @@ const max_tree_points = computed(() => {
 async function fetchCalculationData() {
   try {
     const data = await readData(); // Simulate async data fetching
-    console.log(data);
+
 
     let jsondata = null;
 
@@ -356,7 +371,7 @@ async function fetchCalculationData() {
         break;
       }
     }
-    console.log(jsondata)
+
 
     // If data was found, perform further calculations
     if (jsondata) {
@@ -376,7 +391,7 @@ async function fetchCalculationData() {
         cal_data.value.current_tree_points = 0;
         cal_data.value.percent = 0;
       }
-      console.log(jsondata)
+
       // Calculate image paths based on tree names
       if(jsondata.trees_planted == null){
         jsondata.trees_planted =[]
@@ -399,12 +414,12 @@ async function fetchCalculationData() {
         : Math.floor(cal_data.value.percent / (100 / 6)) + 1;
 
       const name = cal_data.value.current_tree.split("_").map(i => i[0]).join('');
-      console.log(counter)
+
       cal_data.value.picture = `/img/${cal_data.value.current_tree}/${name}${counter}.png`;
 
 
       start = true;
-      console.log(cal_data)
+
       if(cal_data.value.current_points >=cal_data.value.current_tree_points && cal_data.value.current_tree!=''){
 update_tree()
         
@@ -538,7 +553,7 @@ update_tree()
 }
 
 .shop {
-  position: absolute;
+  position: fixed;
   width: 80vw;
   height: 80vh;
   top: 50vh;
@@ -603,14 +618,14 @@ update_tree()
 
 .shop {
   display: flex;
-  background-color: #1c1c1c;
+  background-color: #686c44;
   color: white;
 }
 
 .sidebar {
   width: 250px;
   transition: width 0.3s ease;
-  background-color: #2a2a2a;
+  background-color: #888a79;
   padding: 20px;
 }
 
@@ -691,7 +706,7 @@ update_tree()
 
 
 .item {
-  background-color: #333;
+  background-color: #f8f4ec;
   width: 100%;
   padding: 15px;
   border-radius: 10px;
@@ -701,6 +716,7 @@ update_tree()
 .item:hover {
   transform: scale(1.3) rotateZ(10deg);
   transition-duration: 500ms;
+  background-color: #e0dcfc;
 
 }
 
@@ -837,5 +853,12 @@ update_tree()
   }
 
 }
+.no-scroll {
+  overflow: hidden;
+}
+.text-color{
+  color:#686c44;
+}
+
 
 </style>

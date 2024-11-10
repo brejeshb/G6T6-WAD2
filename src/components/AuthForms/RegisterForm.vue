@@ -75,19 +75,22 @@
   
   <script setup>
   import { ref } from 'vue';
+  import { useAuth } from '../../lib/auth'; // Import useAuth
   import { supabase } from '../../lib/supabaseClient';
   
   const emit = defineEmits(['switch-mode', 'auth-success']);
-  
   const username = ref('');
   const password = ref('');
   const confirmPassword = ref('');
   const isLoading = ref(false);
   const passwordError = ref('');
   
+  const { login } = useAuth(); // Destructure login from useAuth
+  
   async function handleSubmit() {
     passwordError.value = '';
   
+    // Ensure passwords match
     if (password.value !== confirmPassword.value) {
       passwordError.value = 'Passwords do not match';
       return;
@@ -101,14 +104,20 @@
         .from('AuthTable')
         .insert([{ 
           username: username.value, 
-          password: password.value,
-          date_registered: date_registered
+          password: password.value || null, // Allow empty or null passwords
+          date_registered
         }])
         .select();
   
       if (error) throw error;
   
-      emit('auth-success');
+      // Log in user immediately after successful registration
+      const success = await login(username.value.trim(), password.value.trim());
+      if (success) {
+        emit('auth-success');
+      } else {
+        console.error('Automatic login failed');
+      }
     } catch (error) {
       console.error('Registration error:', error);
     } finally {
@@ -116,6 +125,7 @@
     }
   }
   </script>
+  
   
   <style scoped>
   /* General Container */
@@ -149,12 +159,13 @@
     border-radius: 8px;
     font-size: 16px;
     background: rgba(255, 255, 255, 0.1);
-    color: #626f47;
+    color: white;
     width: 100%;
   }
   
   .auth-input::placeholder {
-    color: rgba(121, 134, 69, 0.7);
+    /* color: rgba(121, 134, 69, 0.7); */
+    color:white;
   }
   
   /* Submit Button Styling (Matching LoginForm) */

@@ -8,13 +8,14 @@
         <div class="container-fluid p-0 ps-xl-5 pe-xl-5 pt-xl-5 pb-xs-0 dashboard h-100"
             style="background-color: #F3F2EC ;"> <!-- Adjust dashboard div color-->
             <div class="pb-0 p-xl-5 pb-0">
-                <h1>Recycle Right, Feel Right!</h1>
-                <p class="fw-bold" style="color:#788645 ;font-style: italic;">Here's the recycling statistics in your
+                <h1 data-aos="fade-right">Recycle Right, Feel Right!</h1>
+                <p class="fw-bold" style="color:#788645 ;font-style: italic;" data-aos="fade-right">Here's the recycling
+                    statistics in your
                     current lifetime ♥︎
                 </p>
             </div>
 
-            <div id="dashboard" class="p-0 p-xl-5 pt-0">
+            <div id="dashboard" class="p-0 p-xl-5 pt-0" data-aos="fade-right">
 
                 <div style="background-color: #788645;padding: 5px;margin-bottom: 3em;">
                     <h1 style="text-align: center;font-weight: 900;color: #FEFAE1;" class="title">୨⎯ your dashboard ⎯୧
@@ -23,7 +24,7 @@
 
                 <div class="container-fluid" style="margin-bottom: 3em">
                     <div class="row gx-5">
-                        <div class="col-md-3 col-sm-6 mb-4 mb-lg-0">
+                        <div class="col-lg-3 col-sm-6 mb-4 mb-lg-0">
                             <div class="col1 rounded-4 d-flex justify-content-between h-100 ">
                                 <div class="w-75">
                                     <h1 class="stats text-wrap text-truncate">{{ username }}</h1>
@@ -37,7 +38,7 @@
                         </div>
 
 
-                        <div class="col-md-3 col-sm-6 mb-4 mb-lg-0">
+                        <div class="col-lg-3 col-sm-6 mb-4 mb-lg-0">
                             <div class="col1 rounded-4 d-flex justify-content-between h-100 ">
                                 <div class="w-75">
                                     <h1 class="stats text-wrap">{{ totalCo2Reduction }} kg</h1>
@@ -50,7 +51,7 @@
                             </div>
 
                         </div>
-                        <div class="col-md-3 col-sm-6 mb-4 mb-lg-0">
+                        <div class="col-lg-3 col-sm-6 mb-4 mb-lg-0">
                             <div class="col1 rounded-4 d-flex justify-content-between h-100">
                                 <div class="w-75">
                                     <h1 class="stats text-wrap">{{ totalTreesSaved }}</h1>
@@ -63,7 +64,7 @@
                             </div>
 
                         </div>
-                        <div class="col-md-3 col-sm-6 mb-4 mb-lg-0">
+                        <div class="col-lg-3 col-sm-6 mb-4 mb-lg-0">
                             <div class="col1 rounded-4 d-flex justify-content-between h-100 ">
                                 <div class="w-75">
                                     <h1 class="stats text-wrap">{{ currRankingFormatted }}</h1>
@@ -164,6 +165,8 @@ import { useAuth } from '../lib/auth'
 import { ref, watchEffect } from 'vue';
 import { Bubble } from 'vue-chartjs';
 import BubbleChart from './dashboardCharts/bubbleChart.vue';
+import AOS from 'aos';
+import 'aos/dist/aos.css';  // Import the AOS styles
 
 const { userName } = useAuth();
 var currUser = userName;
@@ -478,7 +481,7 @@ export default {
                     .select('*');
 
                 // make bubble bigger according to total_trees_saved
-                const scalingFactor = 15;
+                const scalingFactor = 20;
                 for (let object of BubbleChartView) {
                     if (object.username == this.username) {
                         this.index = BubbleChartView.indexOf(object);
@@ -808,7 +811,14 @@ export default {
                 })
         }
 
-    }
+    },
+    mounted() {
+        AOS.init({
+            duration: 1000, // Animation duration in milliseconds
+            easing: 'ease-in-out', // Animation easing
+            once: false,
+        });
+    },
 }; 
 </script>
 

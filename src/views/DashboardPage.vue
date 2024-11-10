@@ -53,6 +53,7 @@ import CardsCarousel from '../components/CardsCarousel.vue';
 import staticContentHaHa from '../components/dashboardCharts/staticContentHaHa.vue';
 import Footer from '../components/dashboardCharts/footer.vue';
 
+
 export default {
   name: "DashboardPage",
   components: {
@@ -62,8 +63,8 @@ export default {
     staticContentHaHa,
     Footer
   },
-  mounted() {
-  },
+  
+
 }
 
 </script>

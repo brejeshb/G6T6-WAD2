@@ -1,24 +1,20 @@
   <template>
-    <div class="template">
-      <div class="body">
+    <div class="container">
 
-        <div class="section1">
-          <div class="text">RECYCLENOW</div>
+
+      <div id="section-0">
+        <div class="leaderboard-head">
+          <h1 id="leaderboard-title"><span id="half-title">Recycle</span> Now Lah!</h1>
         </div>
+      </div>
 
-        
-        <div class="section2">
-          <div class="sub-text">Not sure where to recycle? Find the nearest recycling bin to you! 
-            Don't just leave your recyclables behind!
-            You can earn points for every recycled item!
-          </div>
-        </div>
 
-        <div class="info-section container">
+      <section class="section" id="section-1">
+        <div class="info-section">
           <div class="row">
             <div class="col" v-for="card in infoCards" :key="card.id">
               <div class="card">
-                <img :src="card.image" class="card-img-top" alt="Map Image" />
+                <img :src="card.image" class="card-img-top">
                 <div class="card-body">
                   <h3>{{ card.title }}</h3>
                   <p>{{ card.text }}</p>
@@ -31,94 +27,100 @@
             </div>
           </div>
         </div>
+      </section>
+
+
+
+    </div>
+
+
+
+
+    <!-- Modals -->
+    <div class="modal fade" id="modalLocateBins" tabindex="-1" aria-labelledby="modalLocateBinsLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalLocateBinsLabel">Locate Recycling Bins</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <h3>Find Recycling Bins Nearby</h3>
+            <div class="container">
+              <div class="row">
+                <div class="col-3">
+                  <div>
+                    1. Input your current location and search
+                    <br>
+                    <br>
+                    2. Blue marker will be your current location
+                    <br>
+                    <br>
+                    3. Red markers will be the recycling bins that are within 1km from you
+                    <br>
+                    <br>
+                    4. Mouseover the red markers to have a look at the walking route!
+                    <br>
+                    <br>
+                    5. Click on your desired marker to start journey
+                    <br>
+                    <br>
+                  </div>
+                </div>
+                <div class="col-9">
+                  <div id="map" style="width: 100%; height: 500px;"></div>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col">
+
+                  <input type="text" class="form-control" v-model="searchText" placeholder="Search your location" />
+                  <button class="btn btn-primary mt-2" @click="performSearch()">Search</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
       </div>
     </div>
 
-        <!-- Modals -->
-        <div class="modal fade" id="modalLocateBins" tabindex="-1" aria-labelledby="modalLocateBinsLabel"
-          aria-hidden="true">
-          <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="modalLocateBinsLabel">Locate Recycling Bins</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <h3>Find Recycling Bins Nearby</h3>
-                <div class="container">
-                  <div class="row">
-                    <div class="col-3">
-                      <div>
-                        1. Input your current location and search
-                        <br>
-                        <br>
-                        2. Blue marker will be your current location
-                        <br>
-                        <br>
-                        3. Red markers will be the recycling bins that are within 1km from you
-                        <br>
-                        <br>
-                        4. Mouseover the red markers to have a look at the walking route!
-                        <br>
-                        <br>
-                        5. Click on your desired marker to start journey
-                        <br>
-                        <br>
-                      </div>
-                    </div>
-                    <div class="col-9">
-                      <div id="map" style="width: 100%; height: 500px;"></div>
-                    </div>
-                  </div>
-                  <div class="row mt-3">
-                    <div class="col">
-                      
-                      <input type="text" class="form-control" v-model="searchText" placeholder="Search your location" />
-                      <button class="btn btn-primary mt-2" @click="performSearch()">Search</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              </div>
+    <div class="modal fade" id="addImgModal" tabindex="-1" aria-labelledby="addImgModal" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5">Upload Item Image</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body text-center">
+
+            <div class="upload-container" @click="triggerImageUpload">
+              <!-- Only show this text if no image preview is available -->
+              <p id="uploadText" v-if="!imagePreviewUrl">Drop image or click to select<br>JPG, PNG, BMP, or WEBP</p>
+
+              <!-- Image preview, fills the container and hides the text when visible -->
+              <img v-if="imagePreviewUrl" :src="imagePreviewUrl" alt="Image Preview" id="imagePreview" />
             </div>
+            <input type="file" ref="fileInput" accept="image/*" style="display: none" @change="analyseImage" />
+
+            <!-- Display loading spinner if loading is true -->
+            <div style="margin-top: 10px ;" v-if="loading" class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+
+
+            <p id="result" style="margin-top: 10px;">{{ resultMessage }}</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" @click="addPoints()" disabled>I want to recycle
+              this!</button>
           </div>
         </div>
-
-        <div class="modal fade" id="addImgModal" tabindex="-1" aria-labelledby="addImgModal" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5">Upload Item Image</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body text-center">
-
-                <div class="upload-container" @click="triggerImageUpload">
-                  <!-- Only show this text if no image preview is available -->
-                  <p id="uploadText" v-if="!imagePreviewUrl">Drop image or click to select<br>JPG, PNG, BMP, or WEBP</p>
-
-                  <!-- Image preview, fills the container and hides the text when visible -->
-                  <img v-if="imagePreviewUrl" :src="imagePreviewUrl" alt="Image Preview" id="imagePreview" />
-                </div>
-                <input type="file" ref="fileInput" accept="image/*" style="display: none" @change="analyseImage" />
-
-                <!-- Display loading spinner if loading is true -->
-                <div style="margin-top: 10px ;" v-if="loading" class="spinner-border text-primary" role="status">
-                  <span class="visually-hidden">Loading...</span>
-                </div>
-
-
-                <p id="result" style="margin-top: 10px;">{{ resultMessage }}</p>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-primary" @click="addPoints()" disabled>I want to recycle
-                  this!</button>
-              </div>
-            </div>
-          </div>
-        </div>
+      </div>
+    </div>
 
   </template>
 
@@ -163,7 +165,7 @@ export default {
         },
         {
           id: 2,
-          image: './public/img/newspaper_bundle.jpg',
+          image: `./src/assets/images/newspaper_bundle.jpg`,
           title: 'Recycling For Points!',
           text: 'Recycle right! Snap a picture and upload it here. If it is recyclable, you can recycle it and earn points!',
           buttonText: 'Add Image',
@@ -361,92 +363,103 @@ export default {
 </script>
 
 <style scoped>
-.template {
-  height: 100vh;
-  overflow: hidden;
-} 
-
-.body {
-  background-color: #FEFAE0;
-  color: #333;
-  width: 100vw;
-  height: 100vh;
-  perspective: 1px;
-  transform-style: preserve-3d;
-  overflow-x: hidden;
-  overflow-y: scroll;
-}
-
-.section1::before {
-  content: "";
-  width: 100vw;
-  height: 100lvh;
-  position: absolute;
-  /* background: url("../../public/img/carton.jpg") top center; */
-  background: url("../../public/img/plastic_bottles.jpg") top center;
-  background-size: cover;
-  transform: translateZ(-1px) scale(2.5);
-  filter: blur(2px);
-  z-index: 1;
-}
-
-.section2::before {
-  content: "";
-  overflow:hidden;
-  width: 100vw;
-  height: 100vh;
-  position: absolute;
-  background-size: cover;
-  transform: translateZ(-2px) scale(2.25);
-  filter: blur(2px);
-  /* z-index: 2; */
-
-}
-
-.section1,
-.section2 {
+.container {
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
+  max-width: 100vw;
+  /* overflow-y: scroll; */
+  scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+#section-0 {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+#section-1 {
+    background-color: #FEFAE0;
+}
+
+.section {
+  height: 100vh;
+  width: 100vw;
+  scroll-snap-align: start;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.leaderboard-head {
+  /* background-color: #626F47; */
   position: relative;
-  transform-style: preserve-3d;
+  height: 100vh;
+  width: 100vw;
+  margin: 0px;
+  padding: 0px;
+  background: url(../assets/images/recycle-now-lah-header.jpg);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 
 }
-.section1 .text {
-  top: 10%;
-  transform: translateZ(-0.5px) scale(1.5,1.6) translate(-33%, 10%);
+
+#half-title {
+  color: #FEFAE0;
 }
 
-.section2 {
-  background: url("../../public/img/carton.jpg") top center;
-}
-.section1 .sub-text {
-  top: 10%;
-  transform: translateZ(-0.5px) scale(1.5,1.6) translate(-33%, 10%);
-}
-.text {
-  left: 50%;
-  top: 30%;
+#leaderboard-title {
+  animation: animated-text 2s steps(11, end) 0.5s 1 normal both,
+    animated-cursor 750ms steps(11, end) infinite;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid;
+  /* Creates the cursor */
+  color: #798645;
+  font-weight: bolder;
+  margin-left: 50px;
+  font-size: 6vw;
   position: absolute;
-  font-size: 10vw;
-  text-align: center;
-  font-family: 'Franklin Gothic Heavy';
-  color: white;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3),
-    5px 5px 70px rgba(255, 255, 255, 0.5);
-  transform: scale(1, 1.1) translate(-50%, 10%);
+  top: 30%;
+  left: 25%;
+  letter-spacing: -2px;
 }
 
-.sub-text {
-  top: 30%;
-  left: 50%;
-  position: absolute;
-  font-family: Arial, Helvetica, sans-serif;
-  text-align: center;
-  font-size: 3vw;
-  color: white;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3),
-    5px 5px 70px rgba(255, 255, 255, 0.5);
-  transform: scale(1, 1.1) translate(-50%, 10%);
+@keyframes animated-cursor {
+  from {
+    border-right-color: rgba(0, 0, 0, 0.75);
+  }
+
+  to {
+    border-right-color: transparent;
+  }
+}
+
+@keyframes animated-text {
+  from {
+    width: 0%;
+  }
+
+  to {
+    width: 700px;
+  }
+}
+
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 
@@ -463,20 +476,23 @@ export default {
   width: 30%;
   margin: 10px;
   text-align: center;
-  
+
 }
 
 /* Ensure all cards have the same height */
 .card {
-  height: 100%; /* Allows consistent height within each column */
+  height: 100%;
+  /* Allows consistent height within each column */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
 .card-img-top {
-  height: 300px; /* Set a consistent height for all images */
-  object-fit: cover; /* Ensures image fills the space without distortion */
+  height: 300px;
+  /* Set a consistent height for all images */
+  object-fit: cover;
+  /* Ensures image fills the space without distortion */
   border-radius: 10px 10px 0 0;
 }
 
@@ -485,22 +501,31 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  background-color: #626F47;
+  color: #FEFAE0;
 }
 
-.card h3, .card p, .card button {
+.card h3,
+.card p,
+.card button {
   margin-top: auto;
   text-align: center;
 }
-
-
+/* 
+.modal-content {
+  background-color: #626F47;
+  color: #FEFAE0;
+} */
 
 .btn-primary {
-  background-color: #626F47;
+  background-color: #F2EED7 ;
+  color:#626F47;
   border: none;
 }
 
 .btn-primary:hover {
   background-color: #798645;
+  color: #FEFAE0;
 }
 
 .card-img-top {

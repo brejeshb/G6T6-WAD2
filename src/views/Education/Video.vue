@@ -1,16 +1,16 @@
 <template>
-  <div style="  background-color: #fffce4;   background-attachment: fixed;
-  background-image: url('/public/img/education_hub.webp');
+  <div style="  background-color: #f8f4ec;   background-attachment: fixed;
+  background-image: url('/img/education_hub.webp');
   background-size: 100vw auto;">
         <section class="py-5 text-center top_section" data-aos="fade-up " >
           <div class="row py-lg-5">
             <div class="col-lg-6 col-md-8 mx-auto">
-              <h1 class="fw-light">Welcome to Our Recycling Education Hub!</h1>
-              <p class="lead text-body-secondary">Recycling is a simple, powerful way to create a cleaner planet. In this hub, explore what can and can’t be recycled, learn tips for reducing waste, and discover how small actions can make a big impact. Together, let’s build a more sustainable future—one recycled item at a time!</p>
-              <p>
+              <p class="title">Welcome to Our Recycling Education Hub!</p>
+
+              <!--<p>
                 <router-link to="./video" class="btn btn-primary my-2 mx-4" data-aos="zoom-in">Watch some educational videos</router-link>
                 <router-link to="./quiz" class="btn btn-secondary my-2 mx-4" data-aos="zoom-in">Do some quizzes for points</router-link>
-              </p>
+              </p>-->
             </div>
           </div>
         </section>
@@ -21,22 +21,22 @@
           <div id="nav-bar">
               <nav class="navbar rounded shadow navbar-expand-lg bg-body-tertiary flex-column" data-aos="fade-right">
                   <div class="container-fluid">
-                    <a class="navbar-brand ms-5" href="#">Filter</a>
+                    <a class="navbar-brand ms-5" href="#" style="color:#686c44">Filter</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                       <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                          <a class="nav-link" aria-current="page" :class="{ 'active-filter': activeFilter === 'all' }" 
+                          <a class="nav-link" aria-current="page" :class="{ 'active-filter': activeFilter === 'all' }"  :style=" activeFilter === 'all'? {color:'white'}:{}"
                           @click.prevent="activeFilter = 'all'" href="#"  @click="filter_recycle=false; filter_upcycle=false;videoFiltering() ">All</a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link" aria-current="page" :class="{ 'active-filter': activeFilter === 'recycling' }" 
+                          <a class="nav-link" aria-current="page" :class="{ 'active-filter': activeFilter === 'recycling' }" :style=" activeFilter === 'recycling'? {color:'white'}:{}"
                           @click.prevent="activeFilter = 'recycling'" href="#" @click="filter_recycle=true; filter_upcycle=false;videoFiltering()">Recycle</a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link" aria-current="page" :class="{ 'active-filter': activeFilter === 'upcycling' }" 
+                          <a class="nav-link" aria-current="page" :class="{ 'active-filter': activeFilter === 'upcycling' }" :style=" activeFilter === 'upcycling'? {color:'white'}:{}"
                           @click.prevent="activeFilter = 'upcycling'" href="#" @click="filter_recycle=false; filter_upcycle=true;videoFiltering()">Upcycle</a>
                         </li>
                       </ul>
@@ -59,7 +59,7 @@
                           frameborder="0" allowfullscreen>
                       </iframe>
                           <div class="card-body">
-                            <h5 class="card-title">{{ video.title }}</h5>
+                            <h5 class="card-title" style="color:#f8f4ec">{{ video.title }}</h5>
                           </div>
                         </div>
                   </div>
@@ -271,11 +271,13 @@ body {
   border-radius: 8px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background-color: #686c44;
 }
 
 .card:hover {
   transform: translateY(-4px);
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
+
 }
 
 .card-title {
@@ -341,11 +343,11 @@ body {
 }
 /* Active Filter Styling */
 .active-filter {
-background-color: #4CAF50; /* Green fill for active filter */
-color: white; /* White text for better contrast */
-border-radius: 20px;
-padding: 0.5rem 1rem;
-transition: background-color 0.3s ease, color 0.3s ease;
+    background-color: #686c44; /* Green fill for active filter */
+    color: white; /* White text for better contrast */
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Standard nav-link styling (non-active state) */
@@ -355,19 +357,21 @@ padding: 0.5rem 1rem;
 border-radius: 20px;
 transition: background-color 0.3s ease, color 0.3s ease;
 }
-
-.nav-link:hover {
-background-color: #e0f7f4;
-color: #333;
-}
+#nav-bar .nav-link:hover {
+      background-color: #808444;
+      color: white;
+  }
 #app{
-  background-color: #fffce4;
+  background-color:#f8f4ec;
   min-height: 100vh;
 }
-.card{
+
+#videos{
   background-color: #fffce4;
 }
-#videos{
-  background-color: #808444;
+.title{
+  font-size: 6vw;
+  font-weight: bold;
+
 }
 </style>
