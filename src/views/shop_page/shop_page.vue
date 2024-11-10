@@ -45,7 +45,7 @@
             
             <div class="progress-bar bg-success" :style="{width:cal_data.percent+'%'}"><span v-if="cal_data.current_points / cal_data.current_tree_points!=0">{{ cal_data.current_points }}/{{ cal_data.current_tree_points }}</span></div>
           </div>
-          <button v-if="check_admin(currUser)" class="btn btn-primary" @click="adminHack()">add 100 points(only for admins)</button>
+          <button v-if="check_admin(currUser)" class="btn btn-primary mt-2" @click="adminHack()">add 100 points(only for admins)</button>
         </div>
       </div>
     </div>
