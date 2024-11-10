@@ -8,7 +8,7 @@
 
         <section id="section-0">
             <div class="leaderboard-head" style="padding-top: 17vw;">
-                <h1 id="leaderboard-title">Leaderboard</h1>
+                <h1 id="leaderboard-title" data-aos="flip-left">Leaderboard</h1>
             </div>
 
         </section>
@@ -137,7 +137,8 @@ import { ref, computed, onMounted } from 'vue';
 import { supabase } from '../lib/supabaseClient';
 import BarChart from '../views/barchart.vue';
 import LeaderboardCarousel from '../components/LeaderboardCarousel.vue';
-// import { Interaction } from 'chart.js';
+import AOS from 'aos';
+import 'aos/dist/aos.css';  
 
 
 // Data and state
@@ -200,6 +201,13 @@ onMounted(async () => {
 
     // Observe each hidden section
     hiddenSections.forEach((el) => observer.observe(el));
+
+    AOS.init({
+    duration: 800, // Animation duration in milliseconds
+    easing: 'ease-in-out', // Animation easing
+    once: false,
+  });
+
 });
 
 </script>
