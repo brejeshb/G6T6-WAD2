@@ -96,7 +96,7 @@
           <!-- Quiz Question Section with AOS animation -->
           <div v-else>
             <h2 class="text-center" data-aos="fade-down">{{ currentQuiz.title }}</h2>
-            <div v-for="(question, index) in currentQuiz.questions" :key="index" class="mb-4" data-aos="fade-right">
+            <div v-for="(question, index) in currentQuiz.questions" :key="index" class="mb-4">
               <h5>{{ question.question }}</h5>
               <div v-for="(option, idx) in question.options" :key="idx">
                 <label>
@@ -105,8 +105,8 @@
                 </label>
               </div>
             </div>
-            <button class="btn btn-success" @click="submitQuiz">Submit Quiz</button>
-            <button class="btn btn-secondary ms-2" @click="goBack">Back to Quizzes</button>
+            <button class="btn btn-primary" @click="submitQuiz">Submit Quiz</button>
+            <button class="btn btn-primary ms-2" @click="goBack">Back to Quizzes</button>
           </div>
         </div>
       </div>
