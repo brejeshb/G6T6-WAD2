@@ -64,9 +64,9 @@
                             class="list-group-item d-flex align-items-center">
                             <div class="player-info">
                                 <span class="p-3">{{ player.rank }}.&nbsp;</span>
-                                <span>{{ player.name }}</span>
+                                <span class="player_name">{{ player.name }}</span>
                             </div>
-                            <span>{{ player.score }} points</span>
+                            <span class="player-info">{{ player.score }} points</span>
                         </li>
                     </ul>
 
@@ -96,7 +96,7 @@
                 <div class="py-5 mx-auto">
                     <div class="card">
                         <div class="card-title hidden">
-                            <h1>Overall user ranking</h1>
+                            <h2 style="font-weight: bold;">Overall user ranking</h2>
                         </div>
                         <div class="card-body chart hidden">
                             <hr>
@@ -122,6 +122,9 @@
 
         </div>
 
+        <div>
+            <Footer2/>
+        </div>
 
     </div>
 
@@ -139,6 +142,7 @@ import BarChart from '../views/barchart.vue';
 import LeaderboardCarousel from '../components/LeaderboardCarousel.vue';
 import AOS from 'aos';
 import 'aos/dist/aos.css';  
+import Footer2 from '../components/footer2.vue'
 
 
 // Data and state
@@ -295,6 +299,7 @@ onMounted(async () => {
 .chart {
     display: grid;
     align-items: center;
+    min-height: 400px;
 }
 
 .bar-chart {
@@ -304,7 +309,6 @@ onMounted(async () => {
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); */
     width: 80%;
-    max-width: 1000px;
 }
 
 #leaderboard-title {
@@ -312,7 +316,6 @@ onMounted(async () => {
     color: #798645;
     font-weight: bolder;
     font-size: 6vw;
-    letter-spacing: -2px;
 }
 
 
@@ -344,10 +347,13 @@ onMounted(async () => {
     align-items: flex-end;
     gap: 15px;
     justify-content: space-around;
-    margin-top: 220px;
+    margin-top: 14vw;
+    flex-wrap: wrap;
 }
 
 .podium-step {
+    flex: 1 1 30%; /* Each item takes up 30% of the row by default */
+    min-width: 100px; /* Ensures items don’t get too small */
     transition: transform 0.3s ease;
     display: flex;
     flex-direction: column;
@@ -362,6 +368,7 @@ onMounted(async () => {
     border: 2px solid rgba(255, 255, 255, 0.4);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     text-align: center;
+
 }
 
 .podium-step:hover {
@@ -464,7 +471,7 @@ onMounted(async () => {
 
 h1 {
     /* margin-top: 1vw; */
-    font-size: 3rem;
+    font-size: 3.5vw;
     font-weight: bold;
     /* margin-left: 3vw; */
 }
@@ -479,6 +486,18 @@ h1 {
 .podium-name {
     font-size: xx-large;
     font-weight: bold;
+    overflow: hidden; /* Hides overflow text */
+    text-overflow: ellipsis; /* Adds "..." at the end of the truncated text */
+    max-width: 100px; /* Set a maximum width for truncation to work */
+    display: inline-block; /* Ensure the ellipsis works within a block context */
+}
+
+.player_name{
+    white-space: nowrap; /* Prevents text from wrapping */
+    overflow: hidden; /* Hides overflow text */
+    text-overflow: ellipsis; /* Adds "..." at the end of the truncated text */
+    max-width: 100px; /* Set a maximum width for truncation to work */
+    display: inline-block; /* Ensure the ellipsis works within a block context */
 }
 
 .podium-points {
@@ -487,9 +506,6 @@ h1 {
     color: rgba(255, 255, 255, 0.8);
 }
 
-.leaderboard-list span {
-    font-size: large;
-}
 
 .podium-step span {
     font-weight: bold;
@@ -498,6 +514,7 @@ h1 {
 .player-info {
     display: flex;
     align-items: center;
+    font-size: medium;
 }
 
 
@@ -534,25 +551,16 @@ h1 {
     background-color: #ffffff;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
+    padding-top: 5px;
     text-align: center;
     overflow: hidden;
 }
 
 .card-title {
-    font-size: 1.2em;
     font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.card-img-top {
-    width: 100%;
-    height: auto;
-    margin-bottom: 10px;
 }
 
 .card-body {
-    font-size: 0.9em;
     color: #666;
 }
 </style>
