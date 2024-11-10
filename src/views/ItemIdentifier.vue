@@ -402,6 +402,7 @@ export default {
   height: 100vh;
   max-width: 100vw;
   /* overflow-y: scroll; */
+  /* min-height: min-content; */
   background-color: #FEFAE0;
   scroll-behavior: smooth;
   /* margin: 0;
@@ -416,6 +417,7 @@ export default {
 }
 
 #section-1 {
+  min-height: min-content;
   background-color: #FEFAE0;
 }
 
@@ -447,8 +449,7 @@ export default {
 }
 
 #leaderboard-title {
-  /* animation: animated-text 2s steps(11, end) 0.5s 1 normal both,
-    animated-cursor 750ms steps(11, end) infinite; */
+  animation: animated-cursor 750ms infinite;
   overflow: hidden;
   white-space: nowrap;
   border-right: 2px solid;
@@ -482,7 +483,7 @@ export default {
   }
 }
 
-/* @keyframes animated-cursor {
+@keyframes animated-cursor {
   from {
     border-right-color: rgba(0, 0, 0, 0.75);
   }
@@ -492,7 +493,7 @@ export default {
   }
 }
 
-@keyframes animated-text {
+/* @keyframes animated-text {
   from {
     width: 0%;
   }
