@@ -10,12 +10,12 @@
         <div class="info-section">
           <div class="row">
             <div class="col-12 col-md-6" v-for="card in infoCards" :key="card.id">
-              <div class="card">
+              <div class="card rounded-5">
                 <img :src="card.image" class="card-img-top">
-                <div class="card-body">
-                  <h3>{{ card.title }}</h3>
+                <div class="card-body  rounded-bottom">
+                  <h3 class="fw-bold">{{ card.title }}</h3>
                   <p>{{ card.text }}</p>
-                  <button type="button" class="btn btn-primary" :data-bs-target="card.modalTarget"
+                  <button type="button" class="btn btn-primary fw-bold" :data-bs-target="card.modalTarget"
                     data-bs-toggle="modal">
                     {{ card.buttonText }}
                   </button>
@@ -332,7 +332,7 @@ export default {
 
       if (this.ifInsertSuccess) {
         this.resultMessage = `Congratulations! You are on fire! Come back and recycle again!`;
-      } 
+      }
 
     },
 
@@ -517,7 +517,7 @@ export default {
 
 
 .info-section {
-  padding: 50px 20px;
+  padding: 50px 50px;
   text-align: center;
 }
 
