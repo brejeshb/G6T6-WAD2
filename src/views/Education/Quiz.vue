@@ -1,6 +1,6 @@
 <template>
     <div style="  background-color: #f8f4ec;   background-attachment: fixed;
-  background-image: url('../src/assets/images/moreblocks.jpg');
+  background-image: url('/img/moreblocks.jpg');
   background-size: 100vw auto;">
       <section class="py-5 text-center top_section" data-aos="fade-up">
       <div class="row py-lg-5">
