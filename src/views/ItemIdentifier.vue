@@ -9,7 +9,7 @@
       <section class="section" id="section-1">
         <div class="info-section">
           <div class="row">
-            <div class="col-12 col-md-6" v-for="card in infoCards" :key="card.id">
+            <div class="col-12 col-md-6" v-for="card in infoCards" :key="card.id" v-bind:data-aos="'fade-up'" >
               <div class="card rounded-5">
                 <img :src="card.image" class="card-img-top">
                 <div class="card-body  rounded-bottom">
@@ -33,12 +33,12 @@
         <div class="modal-dialog modal-lg modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="modalLocateBinsLabel">Locate Recycling Bins</h5>
+              <h5 class="modal-title fw-bold" id="modalLocateBinsLabel">Locate Recycling Bins</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
             <div class="modal-body">
-              <h3>Find Recycling Bins Nearby</h3>
+              <h3 class=" fw-bold">Find Recycling Bins Nearby</h3>
 
               <div class="container">
                 <div class="row">
@@ -59,15 +59,11 @@
                   <div class="col-md-12">
                     <input type="text" class="form-control" v-model="searchText" placeholder="Search your location" />
                   </div>
-                  <!-- <div class="col text-center">
-                  <button class="btn btn-primary" @click="performSearch()">Search</button>
-                </div> -->
                 </div>
               </div>
             </div>
 
             <div class="modal-footer">
-              <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
               <button class="btn btn-primary" @click="performSearch()">Search</button>
             </div>
           </div>
@@ -120,7 +116,8 @@ const cs_key = import.meta.env.VITE_MAPS_API_KEY;
 const nyckelClientId = import.meta.env.VITE_NYCKEL_CLIENT_ID;
 const nyckelClientSecret = import.meta.env.VITE_NYCKEL_CLIENT_SECRET;
 import MAP_JSON from './RecyclingBins.json';
-
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import { supabase } from '../lib/supabaseClient';
 import { useAuth } from '../lib/auth'
 const { userName } = useAuth();
@@ -170,6 +167,11 @@ export default {
     };
   },
   mounted() {
+    AOS.init({
+      duration: 800,
+      easing: 'ease-in-out',
+      once: false,
+    });
     this.loadGoogleMapsScript().then(() => {
       this.initMap();
     });
@@ -400,13 +402,9 @@ export default {
 #container {
   width: 100%;
   height: 100vh;
-  max-width: 100vw;
-  /* overflow-y: scroll; */
-  /* min-height: min-content; */
+  min-height: min-content;
   background-color: #FEFAE0;
   scroll-behavior: smooth;
-  /* margin: 0;
-  padding: 0; */
   text-align: center;
 }
 
@@ -434,13 +432,11 @@ export default {
 .leaderboard-head {
   position: relative;
   height: 60vw;
-  /* width: 100vw; */
   margin: 0;
   padding: 0;
   background: url(../assets/images/recycle-now-lah-header.jpg);
   background-size: 100% auto;
   background-repeat: no-repeat;
-  /* min-width: 100%; */
   background-attachment: fixed;
 }
 
@@ -492,17 +488,6 @@ export default {
     border-right-color: transparent;
   }
 }
-
-/* @keyframes animated-text {
-  from {
-    width: 0%;
-  }
-
-  to {
-    width: 700px;
-  }
-} */
-
 
 @keyframes popIn {
   from {
@@ -609,10 +594,6 @@ export default {
   overflow: hidden;
   text-align: center;
 }
-
-/* #uploadtext{
-  color: #FEFAE0;
-} */
 
 .upload-container p {
   font-weight: bold;
