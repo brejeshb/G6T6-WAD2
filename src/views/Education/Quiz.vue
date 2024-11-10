@@ -1,11 +1,11 @@
 <template>
     <div style="  background-color: #f8f4ec;   background-attachment: fixed;
-  background-image: url('/img/quiz.webp');
+  background-image: url('/img/moreblocks.jpg');
   background-size: 100vw auto;">
       <section class="py-5 text-center top_section" data-aos="fade-up">
       <div class="row py-lg-5">
         <div class="col-lg-6 col-md-8 mx-auto">
-          <p class="title">Quiz Application</p>
+          <p class="title ">Quiz Application</p>
 
           <!--<p>
             <router-link to="./video" class="btn btn-primary my-2 mx-4" data-aos="zoom-in">Watch some educational videos</router-link>
@@ -710,8 +710,9 @@ function getScorePercentage(quizId) {
 
 }
 .title{
-  font-size: 10vw;
+  font-size: 6vw;
   font-weight: bold;
+  color: #FEFAE0;
 }
 .title-text{
   font-size: 2.9vw;
