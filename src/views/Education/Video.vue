@@ -1,6 +1,12 @@
 <template>
-      <div class="suggestion-form " >
-      fsdgsdfg
+      <div class="suggestion-form text-center p-5" v-if="form_open" >
+        <h2 style="color: #f8f4ec;">Enter the youtube link below</h2>
+        <input type="url" id="website" class="rounded" name="website" placeholder="https://example.com" required>
+        <br>
+
+        <button class="btn btn-primary m-3" @click="open_form" >Submit form</button>
+        <button class="btn btn-primary m-3" @click="open_form" >Cancel</button>
+
     </div>
   <div style="  background-color: #f8f4ec;   background-attachment: fixed;
   background-image: url('/img/education_hub.webp');
@@ -53,8 +59,9 @@
                   </li>
                   
                   <li class="nav-item">
-                    <a class="nav-link" aria-current="page" 
+                    <a class="nav-link" 
                       href ='#'
+                      @click.prevent="activeFilter = 'upcycling'"
                       @click="open_form">Click me to suggest videos</a>
                   </li>
                 </ul>
@@ -315,16 +322,19 @@ body {
 
 /* Start Quiz Button */
 .btn-primary {
-  background-color: #4CAF50;
-  border: none;
-  border-radius: 8px;
-  padding: 0.5rem 1rem;
-}
+      background-color: #f4ecd4;
+      border: none;
+      border-radius: 8px;
+      padding: 0.5rem 1rem;
+      color: #666;
+  }
+  
+  .btn-primary:hover {
+      background-color: #808444;
+      color: #fff;
+  }
 
-.btn-primary:hover {
-  background-color: #388E3C;
-  color: #fff;
-}
+
 
 .btn-secondary:hover {
   background-color: orange;
@@ -409,13 +419,19 @@ body {
 .suggestion-form{
   position: fixed;
   width: 80vw;
-  height: 80vh;
+  height: 20vh;
   top: 50vh;
   left: 50%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   border-radius: 10%;
   z-index: 100;
- background-color:#808444;
+ background-color:darkolivegreen;
+}
+#website{
+  width: 80%;
+  background-color: #fffce4;
+  height: 40px;
+
 }
 </style>
