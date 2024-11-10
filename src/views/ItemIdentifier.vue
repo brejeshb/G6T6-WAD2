@@ -1,13 +1,10 @@
   <template>
     <div id="container">
-
-
       <div id="section-0">
         <div class="leaderboard-head">
           <h1 id="leaderboard-title"><span id="half-title">Recycle</span> Now Lah!</h1>
         </div>
       </div>
-
 
       <section class="section" id="section-1">
         <div class="info-section">
@@ -29,94 +26,90 @@
         </div>
       </section>
 
+      <!-- Modals -->
+      <!-- Modal structure for Locate Bins -->
+      <div class="modal fade" id="modalLocateBins" tabindex="-1" aria-labelledby="modalLocateBinsLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalLocateBinsLabel">Locate Recycling Bins</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
 
+            <div class="modal-body">
+              <h3>Find Recycling Bins Nearby</h3>
 
-    </div>
-
-
-
-
-    <!-- Modals -->
-    <!-- Modal structure for Locate Bins -->
-    <div class="modal fade" id="modalLocateBins" tabindex="-1" aria-labelledby="modalLocateBinsLabel"
-      aria-hidden="true">
-      <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="modalLocateBinsLabel">Locate Recycling Bins</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-
-          <div class="modal-body">
-            <h3>Find Recycling Bins Nearby</h3>
-
-            <div class="container">
-              <div class="row">
-                <div class="col-md-3">
-                  <div>
-                    <p>1. Input your current location and search</p>
-                    <p>2. Blue marker will be your current location</p>
-                    <p>3. Red markers will be recycling bins within 1km</p>
-                    <p>4. Mouseover red markers to view walking route</p>
-                    <p>5. Click your desired marker to start journey</p>
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-3">
+                    <div>
+                      <p>1. Input your current location and search</p>
+                      <p>2. Blue marker will be your current location</p>
+                      <p>3. Red markers will be recycling bins within 1km</p>
+                      <p>4. Mouseover red markers to view walking route</p>
+                      <p>5. Click your desired marker to start journey</p>
+                    </div>
+                  </div>
+                  <div class="col-md-9">
+                    <div id="map" style="width: 100%; height: 500px;"></div>
                   </div>
                 </div>
-                <div class="col-md-9">
-                  <div id="map" style="width: 100%; height: 500px;"></div>
-                </div>
-              </div>
-              <div class="row g-0 mt-3">
-                <div class="col-md-12">
-                  <input type="text" class="form-control" v-model="searchText" placeholder="Search your location" />
-                </div>
-                <!-- <div class="col text-center">
+                <div class="row g-0 mt-3">
+                  <div class="col-md-12">
+                    <input type="text" class="form-control" v-model="searchText" placeholder="Search your location" />
+                  </div>
+                  <!-- <div class="col text-center">
                   <button class="btn btn-primary" @click="performSearch()">Search</button>
                 </div> -->
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="modal-footer">
-            <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
-            <button class="btn btn-primary" @click="performSearch()">Search</button>
+            <div class="modal-footer">
+              <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+              <button class="btn btn-primary" @click="performSearch()">Search</button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
 
-    <div class="modal fade" id="addImgModal" tabindex="-1" aria-labelledby="addImgModal" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered ">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5">Upload Item Image</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body text-center">
-
-            <div class="upload-container" @click="triggerImageUpload">
-              <!-- Only show this text if no image preview is available -->
-              <p id="uploadText" v-if="!imagePreviewUrl">Drop image or click to select<br>JPG, PNG, BMP, or WEBP</p>
-
-              <!-- Image preview, fills the container and hides the text when visible -->
-              <img v-if="imagePreviewUrl" :src="imagePreviewUrl" alt="Image Preview" id="imagePreview" />
+      <div class="modal fade" id="addImgModal" tabindex="-1" aria-labelledby="addImgModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered ">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5">Upload Item Image</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <input type="file" ref="fileInput" accept="image/*" style="display: none" @change="analyseImage" />
+            <div class="modal-body text-center">
 
-            <!-- Display loading spinner if loading is true -->
-            <div style="margin-top: 10px ;" v-if="loading" class="spinner-border text-primary" role="status">
-              <span class="visually-hidden">Loading...</span>
+              <div class="upload-container" @click="triggerImageUpload">
+                <!-- Only show this text if no image preview is available -->
+                <p id="uploadText" v-if="!imagePreviewUrl">Drop image or click to select<br>JPG, PNG, BMP, or WEBP</p>
+
+                <!-- Image preview, fills the container and hides the text when visible -->
+                <img v-if="imagePreviewUrl" :src="imagePreviewUrl" alt="Image Preview" id="imagePreview" />
+              </div>
+              <input type="file" ref="fileInput" accept="image/*" style="display: none" @change="analyseImage" />
+
+              <!-- Display loading spinner if loading is true -->
+              <div style="margin-top: 10px ;" v-if="loading" class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+
+
+              <p id="result" style="margin-top: 10px;">{{ resultMessage }}</p>
             </div>
-
-
-            <p id="result" style="margin-top: 10px;">{{ resultMessage }}</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary" @click="addPoints()" disabled>I want to recycle
-              this!</button>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" @click="recycleNow()" :class="{ 'disabled': isTrue }">I want
+                to recycle
+                this!</button>
+            </div>
           </div>
         </div>
       </div>
+
     </div>
 
   </template>
@@ -127,8 +120,9 @@ const cs_key = import.meta.env.VITE_MAPS_API_KEY;
 const nyckelClientId = import.meta.env.VITE_NYCKEL_CLIENT_ID;
 const nyckelClientSecret = import.meta.env.VITE_NYCKEL_CLIENT_SECRET;
 import MAP_JSON from './RecyclingBins.json';
-import { useAuth } from '../lib/auth'
 
+import { supabase } from '../lib/supabaseClient';
+import { useAuth } from '../lib/auth'
 const { userName } = useAuth();
 var currUser = userName;
 console.log(userName);
@@ -137,9 +131,13 @@ console.log(userName);
 export default {
   data() {
     return {
+      username: currUser, 
       map: null,
+      isTrue: true,
+      ifInsertSuccess: false,
       loading: false, // Loading state for the spinner
       recyclablesArr: ["Cloth", "Metal", "Plastic", "Paper", "Glass"],
+      uploadedMaterial: undefined,
       nyckelKey: undefined,
       mapJson: MAP_JSON,
       recyclingBins: [],
@@ -162,7 +160,7 @@ export default {
         },
         {
           id: 2,
-          image: `./src/assets/images/newspaper_bundle.jpg`,
+          image: `/img/newspaper_bundle.jpg`,
           title: 'Recycling For Points!',
           text: 'Recycle right! Snap a picture and upload it here. If it is recyclable, you can recycle it and earn points!',
           buttonText: 'Add Image',
@@ -206,9 +204,6 @@ export default {
       });
 
 
-    },
-    findWord(word, str) {
-      return RegExp('\\b' + word + '\\b').test(str)
     },
     performSearch() {
       const geocoder = new google.maps.Geocoder();
@@ -301,6 +296,45 @@ export default {
         })
     },
 
+    findWord(word, str) {
+      return new RegExp(`\\(${word}\\)`).test(str);  // Check for the word inside parentheses
+    },
+
+    checkMaterial(input) {
+      for (let material of this.recyclablesArr) {
+        // Use a regular expression to match the exact word
+        let regex = new RegExp(`\\b${material}\\b`, 'i');  // 'i' makes it case-insensitive
+        if (regex.test(input)) {
+          return material;
+        }
+      }
+      return null;  // Return null if no match is found
+    },
+
+    async recycleNow() {
+
+      const timeStamp = new Date().toISOString();
+      console.log(timeStamp);
+      var mat = this.uploadedMaterial.toLowerCase();
+      console.log(mat);
+      console.log(this.username);
+
+      const { data, error } = await supabase
+        .from('UserActivitiesTable')
+        .insert([
+          { 'username': this.username, 'date_uploaded': timeStamp, 'recycled_material': mat },
+        ])
+        .select()
+        this.isTrue = true;
+        if (error) {
+          console.log(error);
+        } else {
+          console.log(data);
+          this.ifInsertSuccess = true;
+        }
+
+    },
+
     analyseImage(event) {
       const fileItem = event.target.files[0];
       if (fileItem) {
@@ -334,18 +368,22 @@ export default {
         )
         .then(response => {
           let obj = response.data;
-          // console.log(obj);
-          // let firstDashIndex = obj.labelName.indexOf("-");
+          let output = obj.labelName
+          let isRecyclable = this.findWord("Recyclable", output)
+          this.uploadedMaterial = this.checkMaterial(output)
 
-          // Extract the category and item name
-          // String 
-          let outputCategory = obj.labelName
-          // let outputCategory = obj.labelName.substring(0, firstDashIndex).trim();
-          // outputCategory = outputCategory.charAt(0).toLowerCase() + outputCategory.slice(1);
-          // outputCategory = outputCategory.replace(/\s*\(Recyclable\)$/, "").trim();
+          if (isRecyclable) {
+            this.resultMessage = `Your item is Recyclable! It is categorized as ${this.uploadedMaterial}. Would you like to recycle it?`
+            this.isTrue = false
+            if (this.ifInsertSuccess) {
+              this.resultMessage = `Congratulations! You are on fire! Come back and recycle again!`;
+            }
+            
+          } else {
+            this.resultMessage = `Your item is not Recyclable! Do not recycle it!`
+            this.isTrue = true
+          }
 
-           
-          
         })
         .catch(error => {
           console.log(error.message);
@@ -362,18 +400,15 @@ export default {
 
 <style scoped>
 
-/* body {
-  background-color: #FEFAE0;
-} */
-
 #container {
   width: 100%;
   height: 100vh;
   max-width: 100vw;
   /* overflow-y: scroll; */
+  background-color: #FEFAE0;
   scroll-behavior: smooth;
-  margin: 0;
-  padding: 0;
+  /* margin: 0;
+  padding: 0; */
   text-align: center;
 }
 
@@ -400,7 +435,7 @@ export default {
 .leaderboard-head {
   position: relative;
   height: 60vw;
-
+  /* width: 100vw; */
   margin: 0;
   padding: 0;
   background: url(../assets/images/recycle-now-lah-header.jpg);
@@ -415,8 +450,8 @@ export default {
 }
 
 #leaderboard-title {
-  animation: animated-text 2s steps(11, end) 0.5s 1 normal both,
-    animated-cursor 750ms steps(11, end) infinite;
+  /* animation: animated-text 2s steps(11, end) 0.5s 1 normal both,
+    animated-cursor 750ms steps(11, end) infinite; */
   overflow: hidden;
   white-space: nowrap;
   border-right: 2px solid;
@@ -564,16 +599,15 @@ export default {
 }
 
 .upload-container {
-  border: 2px dashed #798645;
+  border: 2px dashed #FEFAE0;
   border-radius: 10px;
   padding: 0;
   position: relative;
-  color: #FEFAE0;
   cursor: pointer;
   margin: auto;
   height: 450px;
   /* Adjust height as needed */
-  width: 450px;
+  width: auto;
   overflow: hidden;
   text-align: center;
 }
@@ -584,7 +618,7 @@ export default {
 
 .upload-container p {
   font-weight: bold;
-  color: #798645;
+  color: #FEFAE0;
   position: absolute;
   top: 50%;
   left: 50%;
