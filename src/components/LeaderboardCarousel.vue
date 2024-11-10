@@ -4,49 +4,52 @@
             <h1 style="font-weight: bold;">How to earn more points?</h1>
             <hr>
 
-            <div class="row">
-                <div class="appleCarousel col-lg-4 row-cols-1 row-cols-md-4 g-5 w-100 mx-auto">
-                    <div class="item col">
-                        <div class="card h-100">
+            <div class="appleCarousel  w-100 mx-auto">
+
+                <div class="item col-lg-6 col-12">
+                    <div class="card h-100">
+                        <div>
+                            <img src="../assets/images/bin.jpg" class="card-img-top " alt="">
+                        </div>
+                        <div class="card-body">
                             <div>
-                                <img src="../assets/images/bin.jpg" class="card-img-top " alt="">
+                                <h3 class="card-title fw-bold">Recycle items</h3>
                             </div>
-                            <div class="card-body">
-                                <div>
-                                    <h3 class="card-title fw-bold">Recycle items</h3>
-                                </div>
-                                <p class="card-text">
-                                    Recycle right! Snap a picture and upload it under our Item Identifier page.
-                                    If it is recyclable, you can recycle it and earn points!
+                            <p class="card-text">
+                                Recycle right! Snap a picture and upload it under our Item Identifier page.
+                                If it is recyclable, you can recycle it and earn points!
 
 
-                                </p>
-                            </div>
+                            </p>
                         </div>
                     </div>
-
-                    <div class="item col">
-                        <div class="card h-100 text-bg-light">
-                            <div>
-                                <img src="../assets/images/quiz.jpg" class="card-img-top " alt="">
-                            </div>
-                            <div class="card-body">
-                                <div>
-                                    <h3 class="card-title fw-bold">Complete Quizzes</h3>
-                                </div>
-                                <p class="card-text">
-                                    Watch our educational videos and test your knowledge with quizzes.
-                                    Complete quizzes, gain knowledge, earn points, and make a positive impact on the
-                                    planet!
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-
-
                 </div>
+
+                <div class="item col-lg-6 col-12">
+                    <div class="card h-100">
+                        <div>
+                            <img src="../assets/images/quiz.jpg" class="card-img-top " alt="">
+                        </div>
+                        <div class="card-body">
+                            <div>
+                                <h3 class="card-title fw-bold">Complete Quizzes</h3>
+                            </div>
+                            <p class="card-text">
+                                Watch our educational videos and test your knowledge with quizzes.
+                                Complete quizzes, gain knowledge, earn points, and make a positive impact on the
+                                planet!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
             </div>
+
         </div>
     </div>
 </template>
@@ -60,21 +63,24 @@ export default {
 
 <style scoped>
 .carousel-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
+    position: relative;
 }
+
 
 .appleCarousel {
     display: flex;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     gap: 1rem;
+    /* scrollbar-width: none; */
+    /* Hides scrollbar */
+    /* Hide scrollbar in Firefox */
     width: max-content;
     margin: 0 auto;
     padding: 0 1rem;
+
 }
+
 
 
 .item {

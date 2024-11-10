@@ -1,4 +1,13 @@
 <template>
+      <div class="suggestion-form text-center p-5" v-if="form_open" >
+        <h2 style="color: #f8f4ec;">Enter the youtube link below</h2>
+        <input type="url" id="website" class="rounded" name="website" placeholder="https://example.com" required>
+        <br>
+
+        <button class="btn btn-primary m-3" @click="open_form" >Submit form</button>
+        <button class="btn btn-primary m-3" @click="open_form" >Cancel</button>
+
+    </div>
   <div style="  background-color: #f8f4ec;   background-attachment: fixed;
   background-image: url('/img/education_hub.webp');
   background-size: 100vw auto;">
@@ -14,7 +23,9 @@
         </div>
       </div>
     </section>
+
     <div id="app">
+
 
 
       <div id="main_content" class="container pt-5">
@@ -46,6 +57,13 @@
                       @click.prevent="activeFilter = 'upcycling'" href="#"
                       @click="filter_recycle = false; filter_upcycle = true; videoFiltering()">Upcycle</a>
                   </li>
+                  
+                  <li class="nav-item">
+                    <a class="nav-link" 
+                      href ='#'
+                      @click.prevent="activeFilter = 'upcycling'"
+                      @click="open_form">Click me to suggest videos</a>
+                  </li>
                 </ul>
                 <form class="d-flex" role="search">
                   <input class="form-control me-3" type="search" placeholder="Search" @input="videoFiltering()"
@@ -73,6 +91,7 @@
         </div>
       </div>
     </div>
+
   </div>
 </template>
 
@@ -110,6 +129,7 @@ const recycle_videos = ref([]);
 const filter_recycle = ref(false);
 const filter_upcycle = ref(false);
 const activeFilter = ref('all');
+let form_open = ref(false);
 // Fetch videos on mount
 onMounted(fetchVideos);
 const filteredQuizzes = computed(() => {
@@ -175,6 +195,10 @@ function videoFiltering() {
 
   // Return filtered videos
   return videos.value.filter(video => video.status);
+}
+function open_form(){
+  form_open.value = !form_open.value;
+  console.log(form_open.value)
 }
 </script>
 <style scoped>
@@ -298,16 +322,19 @@ body {
 
 /* Start Quiz Button */
 .btn-primary {
-  background-color: #4CAF50;
-  border: none;
-  border-radius: 8px;
-  padding: 0.5rem 1rem;
-}
+      background-color: #f4ecd4;
+      border: none;
+      border-radius: 8px;
+      padding: 0.5rem 1rem;
+      color: #666;
+  }
+  
+  .btn-primary:hover {
+      background-color: #808444;
+      color: #fff;
+  }
 
-.btn-primary:hover {
-  background-color: #388E3C;
-  color: #fff;
-}
+
 
 .btn-secondary:hover {
   background-color: orange;
@@ -387,6 +414,24 @@ body {
 .title {
   font-size: 6vw;
   font-weight: bold;
+
+}
+.suggestion-form{
+  position: fixed;
+  width: 80vw;
+  height: 20vh;
+  top: 50vh;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  border-radius: 10%;
+  z-index: 100;
+ background-color:darkolivegreen;
+}
+#website{
+  width: 80%;
+  background-color: #fffce4;
+  height: 40px;
 
 }
 </style>
