@@ -4,7 +4,7 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <div class="container">
+    <div class="container" style="background-color: #FEFAE0;">
 
         <section id="section-0">
             <div class="leaderboard-head" style="padding-top: 17vw;">
@@ -433,13 +433,14 @@ onMounted(async () => {
 .leaderboard-head {
     /* background-color: #626F47; */
     position: relative;
-    height: 100vh;
-    width: 100vw;
+    height: 70vw;
+
     margin: 0px;
     padding: 0px;
     background: url(../assets/images/leaderboard.jpg);
-    background-size: cover;
-    background-position: center;
+    background-size: 100vw;
+    background-repeat: no-repeat;
+
     background-attachment: fixed;
 
 }
