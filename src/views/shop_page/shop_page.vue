@@ -544,7 +544,7 @@ update_tree()
 
 .title {
   color:#fffce4;
-  font-family: cursive;
+
   width: 70%;
   font-size: 40px;
   margin: auto;
