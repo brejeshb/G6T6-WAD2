@@ -415,6 +415,7 @@ body {
   font-size: 6vw;
   font-weight: bold;
   letter-spacing: -2px;
+  color: #000000;
 
 }
 .suggestion-form{
