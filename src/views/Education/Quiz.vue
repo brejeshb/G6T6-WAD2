@@ -744,7 +744,7 @@ body {
   font-weight: bold;
   color: #FEFAE0;
   margin-top: 15vw;
-  position: absolute;
+
 
 }
 
