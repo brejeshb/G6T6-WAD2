@@ -123,7 +123,7 @@ const { userName } = useAuth();
 
 var currUser = userName;
 
-console.log(currUser.value)
+
 readData()
 fetchCalculationData()
 
@@ -244,7 +244,7 @@ function facts(name) {
 
 
   // I checking the paths
-  console.log(`Image Path for ${name}: /img/real_tree/${name}.jpg`);
+
 }
 
 function toggleMenu() {
@@ -284,8 +284,7 @@ async function purchase(item) {
       .eq('username', currUser.value)
     fetchCalculationData()
     alert('Item purchased, please exit the shop to view it');
-    console.log(`Purchased item: ${new_tree}`);
-    console.log(`Image Path for purchased item: ${item.tree_png}`);
+
 
   }
 
@@ -304,7 +303,7 @@ async function purchase(item) {
     .from('UserOverallStatsTable')
     .update({ total_points_accumulated:new_points })
     .eq('username', currUser.value)
-    console.log('points added')
+
     fetchCalculationData()
 
 

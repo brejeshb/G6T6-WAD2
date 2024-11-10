@@ -115,7 +115,7 @@ const youtube_api = import.meta.env.VITE_YOUTUBE_API_KEY;
 const recycle_id = import.meta.env.VITE_RECYCLE_PLAYLIST_ID;
 const upcycle_id = import.meta.env.VITE_UPCYCLE_PLAYLIST_ID;
 
-console.log(youtube_api)
+
 
 // API URLs
 const API_URL = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=20&playlistId=${recycle_id}&key=${youtube_api}`;
@@ -198,7 +198,7 @@ function videoFiltering() {
 }
 function open_form(){
   form_open.value = !form_open.value;
-  console.log(form_open.value)
+
 }
 </script>
 <style scoped>
