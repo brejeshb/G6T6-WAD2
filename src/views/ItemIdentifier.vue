@@ -9,7 +9,7 @@
       <section class="section" id="section-1">
         <div class="info-section">
           <div class="row">
-            <div class="col-12 col-md-6" v-for="card in infoCards" :key="card.id" v-bind:data-aos="'fade-up'" >
+            <div class="col-12 col-md-6" v-for="card in infoCards" :key="card.id" v-bind:data-aos="'fade-up'">
               <div class="card rounded-5">
                 <img :src="card.image" class="card-img-top">
                 <div class="card-body  rounded-bottom">
@@ -82,7 +82,7 @@
 
               <div class="upload-container" @click="triggerImageUpload">
                 <!-- Only show this text if no image preview is available -->
-                <p id="uploadText" v-if="!imagePreviewUrl">Drop image or click to select<br>JPG, PNG, BMP, or WEBP</p>
+                <p id="uploadText" v-if="!imagePreviewUrl">Click to select<br>JPG, PNG, BMP, or WEBP Only</p>
 
                 <!-- Image preview, fills the container and hides the text when visible -->
                 <img v-if="imagePreviewUrl" :src="imagePreviewUrl" alt="Image Preview" id="imagePreview" />
@@ -122,7 +122,6 @@ import { supabase } from '../lib/supabaseClient';
 import { useAuth } from '../lib/auth'
 const { userName } = useAuth();
 var currUser = userName;
-console.log(userName);
 
 
 export default {
@@ -177,7 +176,7 @@ export default {
     });
   },
   methods: {
-    loadGoogleMapsScript() {
+     async loadGoogleMapsScript() {
       return new Promise((resolve, reject) => {
         if (typeof google !== "undefined" && google.maps) {
           resolve();
@@ -208,16 +207,26 @@ export default {
 
     },
     performSearch() {
+      
       const geocoder = new google.maps.Geocoder();
 
+      this.initMap();
+
+      // Clear existing markers at the start of each new search
+      this.clearMarkers();
+      this.clearRoute();
+
+
+      // Start a new search for the entered location
       geocoder.geocode({ address: this.searchText }, (results, status) => {
         if (status === 'OK') {
           const searchLocation = results[0].geometry.location;
           this.map.setCenter(searchLocation);
-          this.clearMarkers();
-          this.clearRoute();
 
+          // Clear the previous search location marker if it exists
           if (this.searchLocationMarker) this.searchLocationMarker.setMap(null);
+
+          // Add new search location marker
           this.searchLocationMarker = new google.maps.Marker({
             position: searchLocation,
             map: this.map,
@@ -228,6 +237,7 @@ export default {
           const bounds = new google.maps.LatLngBounds();
           bounds.extend(searchLocation);
 
+          // Iterate over recycling bins and add markers within 1km
           this.mapJson.features.forEach((feature) => {
             const [lng, lat] = feature.geometry.coordinates;
             const binLocation = new google.maps.LatLng(lat, lng);
@@ -247,6 +257,7 @@ export default {
                 window.open(directionsUrl, '_blank');
               });
 
+              // Store the marker for clearing later
               this.mapMarkers.push(marker);
               bounds.extend(binLocation);
             }
@@ -274,9 +285,17 @@ export default {
     clearRoute() {
       this.directionsRenderer.setDirections({ routes: [] });
     },
+
     clearMarkers() {
+      // Remove all markers from the map
       this.mapMarkers.forEach((marker) => marker.setMap(null));
-      this.mapMarkers = [];
+      this.mapMarkers = []; // Reset the marker array
+
+      // Clear the search location marker as well
+      if (this.searchLocationMarker) {
+        this.searchLocationMarker.setMap(null);
+        this.searchLocationMarker = null;
+      }
     },
 
     triggerImageUpload() {
@@ -328,7 +347,6 @@ export default {
       if (error) {
         console.log(error);
       } else {
-        console.log(data);
         this.ifInsertSuccess = true;
       }
 
@@ -386,7 +404,6 @@ export default {
 
         })
         .catch(error => {
-          console.log(error.message);
           this.resultMessage = "Check failed"
         })
         .finally(() => {
