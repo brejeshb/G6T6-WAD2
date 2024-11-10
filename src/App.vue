@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Footer2 from './components/footer2.vue';
 import Navbar from './components/navbar.vue';
 import { defineComponent } from 'vue';
 </script>
@@ -10,6 +11,7 @@ import { defineComponent } from 'vue';
     <div class="content-wrapper">
       <router-view />
     </div>
+    <!-- <Footer2/> -->
   </div>
 
 

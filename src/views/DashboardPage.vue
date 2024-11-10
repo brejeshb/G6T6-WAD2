@@ -39,6 +39,7 @@
     <path d="M0 100V0h1000v84L0 100z" opacity=".2"></path>
   </svg>
 
+  <Footer2 />
 
 
 </template>
@@ -50,7 +51,8 @@ import Landing from '../components/Landing.vue';
 import Dashboard from '../components/Dashboard.vue';
 import CardsCarousel from '../components/CardsCarousel.vue';
 import staticContentHaHa from '../components/dashboardCharts/staticContentHaHa.vue';
-
+import Footer from '../components/dashboardCharts/footer.vue';
+import Footer2 from '../components/footer2.vue';
 
 
 export default {
@@ -60,6 +62,7 @@ export default {
     Landing,
     CardsCarousel,
     staticContentHaHa,
+    Footer2
   },
 
 

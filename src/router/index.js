@@ -1,15 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Login from '../views/Login.vue';
 import Register from '../views/Register.vue';
-// import Home from '../views/DashboardPage.vue';
 import Forest from '../views/shop_page/shop_page.vue';
 import ItemIdentifier from '../views/ItemIdentifier.vue';
 import Quiz from '../views/Education/Quiz.vue';
 import Video from '../views/Education/Video.vue';
 import Leaderboard from '../views/Leaderboard.vue';
 import DashboardPage from '../views/DashboardPage.vue';
-import AuthContainer from '../components/AuthContainer.vue'
-
+import AuthContainer from '../components/AuthContainer.vue';
 
 const routes = [
   { path: '/', component: AuthContainer },
@@ -25,6 +23,9 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
+  scrollBehavior(to, from, savedPosition) {
+    return { top: 0, left: 0 };
+  }
 });
 
 export default router;
