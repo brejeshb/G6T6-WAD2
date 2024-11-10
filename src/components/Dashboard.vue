@@ -170,7 +170,7 @@ import 'aos/dist/aos.css';  // Import the AOS styles
 
 const { userName } = useAuth();
 var currUser = userName;
-console.log(userName);
+
 
 
 export default {
@@ -276,7 +276,6 @@ export default {
         async fetchUserStats() {
             this.totalCo2Reduction = 0;
             this.totalTreesSaved = 0;
-            console.log(this.username);
             try {
                 // Get CO2 EMISSION DATA + TREES SAVED
                 let { data: UserOverallStatsTable, error: error1 } = await supabase
@@ -290,9 +289,9 @@ export default {
                     return;
                 }
                 else {
-                    console.log(UserOverallStatsTable); // <Object>
+                    // console.log(UserOverallStatsTable); // <Object>
 
-                    console.log(UserOverallStatsTable);
+                    // console.log(UserOverallStatsTable);
                     this.totalCo2Reduction = UserOverallStatsTable[0].total_co2_emission_reduction;
                     this.totalTreesSaved = UserOverallStatsTable[0].total_trees_saved;
 
@@ -312,7 +311,7 @@ export default {
 
                 // console.log("HistoricalLeaderboardTable");
                 // console.log(HistoricalLeaderboardTable);
-                console.log(HistoricalLeaderboardTable);
+                // console.log(HistoricalLeaderboardTable);
                 if (error2) {
                     console.log("Can't fetch from HistoricalLeaderboardTable");
                     console.log(error2);
@@ -324,7 +323,7 @@ export default {
                         this.currRanking = HistoricalLeaderboardTable[0].rank;
 
                         // Testing Purposes
-                        console.log(`Current Ranking: ${this.currRanking}`);
+                        // console.log(`Current Ranking: ${this.currRanking}`);
                     }
                 }
 
@@ -356,24 +355,24 @@ export default {
                 }
                 else {
                     // Testing 
-                    console.log("From Supabase: All of User's Recycled Items:");
-                    console.log(allUserRecycledItems); // Arr of <Object>
+                    // console.log("From Supabase: All of User's Recycled Items:");
+                    // console.log(allUserRecycledItems); // Arr of <Object>
 
                     for (let obj of allUserRecycledItems) {
                         userRecycledItemsDict[obj.recycled_material] = (userRecycledItemsDict[obj.recycled_material] || 0) + 1;
                     }
 
                     // Test Dictionary 
-                    console.log("Dictionary Created:");
-                    console.log(userRecycledItemsDict); // <Dict>
+                    // console.log("Dictionary Created:");
+                    // console.log(userRecycledItemsDict); // <Dict>
 
                     this.recycledLabels = Object.keys(userRecycledItemsDict).slice();
                     this.recycledDataValues = Object.values(userRecycledItemsDict).slice();
 
 
-                    console.log("This RecycledLabels + RecycledDataValues: ");
-                    console.log(this.recycledLabels);
-                    console.log(this.recycledDataValues);
+                    // console.log("This RecycledLabels + RecycledDataValues: ");
+                    // console.log(this.recycledLabels);
+                    // console.log(this.recycledDataValues);
                     this.dataLoaded = true;
 
                 }
@@ -399,7 +398,7 @@ export default {
                     console.log(error2);
                 }
                 else {
-                    console.log(UsernameMonthlyTreesSavedView);
+                    // console.log(UsernameMonthlyTreesSavedView);
 
                     for (let month of this.timeX) {
                         let found = false;
@@ -454,15 +453,15 @@ export default {
                         this.highestRankData.push(0);
                     }
                 }
-                console.log(this.timeX);
-                console.log(this.highestRankData);
+                // console.log(this.timeX);
+                // console.log(this.highestRankData);
                 this.leaderboardReady = true;
 
                 if (error3) {
                     console.log(error3);
                 }
                 else {
-                    console.log(UserRankOverTime);
+                    // console.log(UserRankOverTime);
                 }
 
             } catch (error) {
@@ -488,9 +487,9 @@ export default {
                     }
                     this.bubbleData.push({ x: object.total_co2_emission_reduction, y: object.total_trees_saved, r: object.total_trees_saved * scalingFactor });
                 };
-                console.log(this.index);
+                // console.log(this.index);
 
-                console.log(this.bubbleData);
+                // console.log(this.bubbleData);
 
                 this.bubbleReady = true;
 
@@ -499,7 +498,7 @@ export default {
                     console.log("Error Message: " + error);
                 }
                 else {
-                    console.log(BubbleChartView);
+                    // console.log(BubbleChartView);
                 }
 
             } catch (error) {
@@ -521,8 +520,8 @@ export default {
                     console.log(error);
                 }
                 else {
-                    console.log("User Stats:");
-                    console.log(AllUserStatsTable);
+                    // console.log("User Stats:");
+                    // console.log(AllUserStatsTable);
 
                     let otherPpleCo2Savings = 0;
                     this.doughnutX.push("Yours Truly");
@@ -582,7 +581,7 @@ export default {
 
                     this.radarUser.push(userTotal / maxTotal * 100);
                     this.radarAvgUser.push((totalPoints / UserOverallStatsTable11.length) / maxTotal * 100);
-                    console.log((totalPoints / UserOverallStatsTable11.length) / maxTotal);
+                    // console.log((totalPoints / UserOverallStatsTable11.length) / maxTotal);
 
                     // 2. settle Quizzes Completed 
                     try {
@@ -625,7 +624,7 @@ export default {
                     let maxTreesSaved = 0;
                     let userTreesSaved = 0;
 
-                    console.log(UserOverallStatsTable11);
+                    // console.log(UserOverallStatsTable11);
 
                     for (let obj of UserOverallStatsTable11) {
                         if (obj.total_trees_saved > maxTreesSaved) {
@@ -662,7 +661,7 @@ export default {
                     let userCurrPoints = 0;
                     let total = 0;
                     let max = 0;
-                    console.log(UserTreesStats);
+                    // console.log(UserTreesStats);
                     for (let object of UserTreesStats) {
                         if (object.username == this.username) {
                             userCurrPoints = object.curr_points;
@@ -678,7 +677,7 @@ export default {
                     this.radarAvgUser.push(avgCurrPoints / max * 100);
                     this.radarUser.push(userCurrPoints / max * 100);
 
-                    console.log(this.radarUser);
+                    // console.log(this.radarUser);
 
                 }
             } catch (error) {
@@ -700,13 +699,13 @@ export default {
                 }
                 else {
                     // User 
-                    console.log(HistoricalLeaderboardTableUser);
+                    // console.log(HistoricalLeaderboardTableUser);
                     let growthRateArr = [];
                     for (let i = 1; i < HistoricalLeaderboardTableUser.length; i++) {
                         let currGrowth = (HistoricalLeaderboardTableUser[i].rank - HistoricalLeaderboardTableUser[i - 1].rank) / HistoricalLeaderboardTableUser[i - 1].rank * 100;
                         growthRateArr.push(currGrowth);
                     }
-                    console.log(growthRateArr);
+                    // console.log(growthRateArr);
 
                     let userAvgRankGrowth = growthRateArr.reduce((a, b) => a + b) / growthRateArr.length;
                     // this.radarUser.push(userAvgRankGrowth);
@@ -732,7 +731,7 @@ export default {
                                 }
                             }
 
-                            console.log(growthRateDict);
+                            // console.log(growthRateDict);
 
                             let finalGrowthRateDict = {};
                             for (let person in growthRateDict) {
@@ -746,12 +745,12 @@ export default {
                                     totalLol += elem;
                                 }
                                 let avgRankGrowthOfPerson = totalLol / growRateArrPerson.length;
-                                console.log(avgRankGrowthOfPerson);
+                                // console.log(avgRankGrowthOfPerson);
                                 finalGrowthRateDict[person] = avgRankGrowthOfPerson;
 
                             }
 
-                            console.log(finalGrowthRateDict);
+                            // console.log(finalGrowthRateDict);
                             let total = 0;
                             let count1 = 0;
                             let maxAvgGrowth = 0;
@@ -763,15 +762,15 @@ export default {
                                 count1 += 1
                             }
                             let avgGrowthRateAvgUser = total / count1;
-                            console.log(maxAvgGrowth);
-                            console.log(avgGrowthRateAvgUser);
+                            // console.log(maxAvgGrowth);
+                            // console.log(avgGrowthRateAvgUser);
 
                             // push to radar 
                             this.radarUser.push(userAvgRankGrowth / maxAvgGrowth * 100);
                             this.radarAvgUser.push(avgGrowthRateAvgUser / maxAvgGrowth * 100);
 
-                            console.log(avgGrowthRateAvgUser);
-                            console.log(userAvgRankGrowth);
+                            // console.log(avgGrowthRateAvgUser);
+                            // console.log(userAvgRankGrowth);
 
                         }
 
@@ -788,8 +787,8 @@ export default {
 
 
 
-            console.log(this.radarAvgUser);
-            console.log(this.radarUser);
+            // console.log(this.radarAvgUser);
+            // console.log(this.radarUser);
 
 
 
