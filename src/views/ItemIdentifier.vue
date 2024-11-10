@@ -105,8 +105,9 @@
           </div>
         </div>
       </div>
-
+      <Footer2/>
     </div>
+
 
   </template>
 
@@ -120,11 +121,18 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { supabase } from '../lib/supabaseClient';
 import { useAuth } from '../lib/auth'
+
+import Footer2 from '../components/footer2.vue';
+
 const { userName } = useAuth();
 var currUser = userName;
 
 
 export default {
+  components: {
+    Footer2
+  },
+
   data() {
     return {
       username: currUser,
@@ -176,7 +184,7 @@ export default {
     });
   },
   methods: {
-     async loadGoogleMapsScript() {
+     loadGoogleMapsScript() {
       return new Promise((resolve, reject) => {
         if (typeof google !== "undefined" && google.maps) {
           resolve();
