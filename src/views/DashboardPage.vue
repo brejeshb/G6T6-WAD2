@@ -31,7 +31,7 @@
   </svg>
   <staticContentHaHa class="" style="height: fit-content;" />
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="#D9EB9A">
-    <rect fill="#F6F6F6" width="100%" height="100%" />
+    <rect fill="#626F47" width="100%" height="100%" />
     <path d="M0 100V0h1000v4L0 100z"></path>
     <path d="M0 100V0h1000v24L0 100z" opacity=".5"></path>
     <path d="M0 100V0h1000v44L0 100z" opacity=".4"></path>
@@ -39,7 +39,6 @@
     <path d="M0 100V0h1000v84L0 100z" opacity=".2"></path>
   </svg>
 
-  <Footer />
 
 
 </template>
@@ -51,7 +50,7 @@ import Landing from '../components/Landing.vue';
 import Dashboard from '../components/Dashboard.vue';
 import CardsCarousel from '../components/CardsCarousel.vue';
 import staticContentHaHa from '../components/dashboardCharts/staticContentHaHa.vue';
-import Footer from '../components/dashboardCharts/footer.vue';
+
 
 
 export default {
@@ -61,9 +60,8 @@ export default {
     Landing,
     CardsCarousel,
     staticContentHaHa,
-    Footer
   },
-  
+
 
 }
 

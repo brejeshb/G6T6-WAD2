@@ -424,7 +424,7 @@ body {
   left: 50%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  border-radius: 10%;
+  border-radius: 40px;
   z-index: 100;
  background-color:darkolivegreen;
 }
