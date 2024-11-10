@@ -8,7 +8,7 @@
 
         <section id="section-0">
             <div class="leaderboard-head text-center" style="padding-top: 25vw;">
-                <h1 id="leaderboard-title" >Leaderboard</h1>
+                <h1 id="leaderboard-title">Leaderboard</h1>
             </div>
 
         </section>
@@ -169,18 +169,14 @@ async function fetchLeaderboardData() {
         return;
     }
 
-    var playerCount = 0
 
-    while (playerCount < 10) {
-        playerCount += 1
-        console.log(playerCount)
-        players.value = UserOverallStatsTable.map((record, index) => ({
-            rank: index + 1,
-            name: record.username,
-            score: record.total_points_accumulated,
-        }));
+    players.value = UserOverallStatsTable.slice(0,13).map((record, index) => ({
+        rank: index + 1,
+        name: record.username,
+        score: record.total_points_accumulated,
+    }));
 
-    }
+
 
 
 }
@@ -222,7 +218,6 @@ onMounted(async () => {
 }
 
 .section {
-    height: 100vh;
     width: 100vw;
     scroll-snap-align: start;
     align-items: center;
@@ -237,7 +232,6 @@ onMounted(async () => {
 
 #section-2 {
     background-color: #798645;
-    height: 110vh;
 
 }
 
@@ -306,23 +300,13 @@ onMounted(async () => {
 }
 
 #leaderboard-title {
-    animation: animated-text 2s steps(11, end) 0.5s 1 normal both,
-        animated-cursor 750ms steps(11, end) infinite;
-    overflow: hidden;
-    white-space: nowrap;
-
     padding: none;
     border-right: 2px solid;
-    /* Creates the cursor */
     color: #798645;
     font-weight: bolder;
-
     font-size: 6vw;
-
     margin: auto;
-
     letter-spacing: -2px;
-    width: 20vw;
 }
 
 
@@ -339,16 +323,6 @@ onMounted(async () => {
 
     to {
         border-right-color: transparent;
-    }
-}
-
-@keyframes animated-text {
-    from {
-        width: 0%;
-    }
-
-    to {
-        width: 550px;
     }
 }
 
