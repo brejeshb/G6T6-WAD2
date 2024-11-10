@@ -33,7 +33,7 @@ const ChartData = ref({
 
 
 const ChartOptions = {
-    indexAxis: 'x', // Set indexAxis to 'y' for horizontal bars
+    indexAxis: 'y', // Set indexAxis to 'y' for horizontal bars
     elements: {
         bar: {
             borderWidth: 2,
