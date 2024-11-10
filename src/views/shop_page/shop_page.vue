@@ -396,16 +396,20 @@ async function fetchCalculationData() {
         break;
       }
     }
-    if(jsondata.trees_planted.length>25){
-      jsondata.trees_planted =jsondata.trees_planted.slice(jsondata.trees_planted.length-25)
-    }
 
     // If data was found, perform further calculations
     if (jsondata) {
       if (jsondata.current_tree == undefined || jsondata.current_tree == null) {
         jsondata.current_tree = '';
       }
+    if(jsondata.trees_planted!=null){
+      if(jsondata.trees_planted.length>25){
+      jsondata.trees_planted =jsondata.trees_planted.slice(jsondata.trees_planted.length-25)
+    }
+    }
+
       cal_data.value.name_of_trees_planted = jsondata.trees_planted;
+
       const point = jsondata.point;
       const required_point = trees.value[jsondata.current_tree];
       cal_data.value.percent = Math.floor((point / required_point) * 100);
@@ -588,7 +592,7 @@ update_tree()
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   border-radius: 10%;
-  z-index: 10;
+  z-index: 100;
 }
 
 .sort {
