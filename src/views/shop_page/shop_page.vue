@@ -396,7 +396,9 @@ async function fetchCalculationData() {
         break;
       }
     }
-
+    if(jsondata.trees_planted.length>25){
+      jsondata.trees_planted =jsondata.trees_planted.slice(jsondata.trees_planted.length-25)
+    }
 
     // If data was found, perform further calculations
     if (jsondata) {
