@@ -44,7 +44,7 @@
                 v-model="confirmPassword"
                 type="password"
                 required
-                class="auth-input"
+                class="auth-input mb-4"
                 placeholder="Confirm your password"
               />
               <p v-if="passwordError" class="mt-1 text-xs text-red-500">{{ passwordError }}</p>

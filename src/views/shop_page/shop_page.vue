@@ -9,7 +9,7 @@
     background-size: 100% auto;
     
   " >
-  <p class="text-pos" data-aos="zoom-in-up" data-aos-duration="1200">{{ currUser }}'s Forest</p>
+  <p class="text-pos" data-aos="zoom-in-up" data-aos-duration="1200">{{ currUser}}'s Forest</p>
  
   </div>
   <div id="app" style="position: relative;">
@@ -33,7 +33,7 @@
           </table>
         </div>
       </div>
-      <div class="container-fluid col my-3 "data-aos="fade-left" data-aos-duration="1500">
+      <div class="container-fluid col my-3 text-center"data-aos="fade-left" data-aos-duration="1500">
         <div class="title py-4 rounded mb-5" style="box-shadow: 5px 5px 10px 2px rgb(0 0 0 / 0.8);">Start growing today</div>
         <div class="growing">
           <div class="circle_tree justify-content-center align-items-center d-flex">
@@ -45,6 +45,7 @@
             
             <div class="progress-bar bg-success" :style="{width:cal_data.percent+'%'}"><span v-if="cal_data.current_points / cal_data.current_tree_points!=0">{{ cal_data.current_points }}/{{ cal_data.current_tree_points }}</span></div>
           </div>
+          <button v-if="check_admin(currUser)" class="btn btn-primary mt-2" @click="adminHack()">add 100 points(only for admins)</button>
         </div>
       </div>
     </div>
@@ -290,7 +291,24 @@ async function purchase(item) {
 
 }
 
+ async function adminHack(){
+  let new_points = cal_data.value.current_points +100;
 
+
+
+    const { add_point } = await supabase
+      .from('UserTreesStats')
+      .update({ curr_points: new_points })
+      .eq('username', currUser.value)
+    const { update_tree_points } = await supabase
+    .from('UserOverallStatsTable')
+    .update({ total_points_accumulated:new_points })
+    .eq('username', currUser.value)
+    console.log('points added')
+    fetchCalculationData()
+
+
+}
 
 function changePet_state() {
   display_tree.value = false;
@@ -301,7 +319,11 @@ function changetree_state() {
   display_pet.value = false;
   display_tree.value = true;
 }
-
+function check_admin(name){
+  if(name.search('admin')!=-1){
+    return true
+  }
+}
 function triggerAll() {
   display_pet.value = true;
   display_tree.value = true;
