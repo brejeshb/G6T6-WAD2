@@ -316,6 +316,7 @@ export default {
                     .order('updated_at', { ascending: false })
                     .limit(1);
 
+
                 // console.log("HistoricalLeaderboardTable");
                 // console.log(HistoricalLeaderboardTable);
                 // console.log(HistoricalLeaderboardTable);
@@ -837,7 +838,7 @@ export default {
     },
     mounted() {
         AOS.init({
-            duration: 1000, // Animation duration in milliseconds
+            duration: 800, // Animation duration in milliseconds
             easing: 'ease-in-out', // Animation easing
             once: false,
         });
