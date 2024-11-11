@@ -307,18 +307,21 @@ export default {
                     // console.log(`Total CO2 Emission Reduction: ${this.totalCo2Reduction}`);
                     // console.log(`Total Number of Trees Saved: ${this.totalTreesSaved}`);
                 }
-
+                var currDate = new Date().toISOString();
+                console.log(currDate);
+                console.log(currDate);
                 // GET USER'S CURRENT RANKINGS
                 let { data: HistoricalLeaderboardTable, error: error2 } = await supabase
                     .from('HistoricalLeaderboardTable')
                     .select("*")
                     .eq("username", this.username)
+                    .lt('updated_at', currDate)
                     .order('updated_at', { ascending: false })
                     .limit(1);
 
 
                 // console.log("HistoricalLeaderboardTable");
-                // console.log(HistoricalLeaderboardTable);
+                console.log(HistoricalLeaderboardTable);
                 // console.log(HistoricalLeaderboardTable);
                 if (error2) {
                     console.log("Can't fetch from HistoricalLeaderboardTable");
