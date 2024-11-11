@@ -80,7 +80,7 @@
         </div>
 
         <div class="item-grid">
-          <div class="item" v-for="item of shop_display()" @click="purchase(item)">
+          <div class="item shadow" v-for="item of shop_display()" @click="purchase(item)">
             <img :src="item.tree_png" alt="FAMAS Pulse" />
             <h3  class='text-color'>{{ formattedItem(item.item) }}</h3>
             <p class="price"><span style="color: white;"></span>Cost: {{ item.price }}</p>
@@ -739,6 +739,7 @@ update_tree()
 
 .item {
   background-color: #f8f4ec;
+  
   width: 100%;
   padding: 15px;
   border-radius: 10px;
@@ -746,7 +747,7 @@ update_tree()
 }
 
 .item:hover {
-  transform: scale(1.3) rotateZ(10deg);
+  transform: scale(1.01) ;
   transition-duration: 500ms;
   background-color: #e0dcfc;
 
