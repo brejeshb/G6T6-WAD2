@@ -293,7 +293,7 @@ const quizzes = [
   {
     "id": 9,
     "category": "upcycling",
-    "title": "Environmental Impact of Upcycling Quiz",
+    "title": "Enviromental Upcycling Quiz",
     "questions": [
       { "question": "Upcycling helps to reduce which of the following?", "options": ["Carbon footprint", "Energy usage", "New item costs", "All of the above"], "answer": "All of the above" },
       { "question": "Which greenhouse gas emission is reduced by upcycling?", "options": ["CO2", "Methane", "Ozone", "Nitrogen oxide"], "answer": "CO2" },
