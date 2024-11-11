@@ -7,10 +7,7 @@ import { fileURLToPath, URL } from 'node:url'
 export default defineConfig({
   plugins: [vue(
     {
-      template: {
-        compilerOptions: {
-          isCustomElement: (tag) => tag.startsWith('ion-'),
-        }}}
+      }
   )],
   resolve: {
     alias: {

@@ -11,7 +11,8 @@
                 <h1 data-aos="fade-right">Recycle Right, Feel Right!</h1>
                 <p class="fw-bold" style="color:#788645 ;font-style: italic;" data-aos="fade-right">
 
-                    You earned <mark style="background-color: #D9EA9A;"> {{ totalPoints }} cumulative recycling points</mark>  in 
+                    You earned <mark style="background-color: #D9EA9A;"> {{ totalPoints }} cumulative recycling
+                        points</mark> in
                     your
                     current lifetime ♥︎
 
@@ -171,8 +172,6 @@ import { Bubble } from 'vue-chartjs';
 import BubbleChart from './dashboardCharts/bubbleChart.vue';
 import AOS from 'aos';
 import 'aos/dist/aos.css';  // Import the AOS styles
-import { defineCustomElements } from 'ionicons/dist/loader';
-defineCustomElements(window);
 
 const { userName } = useAuth();
 var currUser = userName;
