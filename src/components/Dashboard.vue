@@ -495,7 +495,7 @@ export default {
 
 
                 // make bubble bigger according to total_trees_saved
-                const scalingFactor = 20;
+                const scalingFactor = 15;
                 for (let object of BubbleChartView) {
                     if (object.username == this.username) {
                         this.index = BubbleChartView.indexOf(object);
@@ -841,7 +841,7 @@ export default {
     },
     mounted() {
         AOS.init({
-            duration: 800, // Animation duration in milliseconds
+            duration: 500, // Animation duration in milliseconds
             easing: 'ease-in-out', // Animation easing
             once: false,
         });

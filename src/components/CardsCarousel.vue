@@ -32,7 +32,7 @@
                 <div class="item col">
                     <div class="card h-100 ">
                         <div>
-                            <img src="../assets/images/bub.png" class="card-img-top " alt="">
+                            <img src="../assets/images/bub.png" class="card-img-top " >
                         </div>
                         <div class="card-body">
                             <div>
@@ -143,7 +143,7 @@ export default {
     name: "CardsCarousel",
     mounted() {
         AOS.init({
-            duration: 1000, // Animation duration in milliseconds
+            duration: 1100, // Animation duration in milliseconds
             easing: 'ease-in-out', // Animation easing
             once: false,
         });
