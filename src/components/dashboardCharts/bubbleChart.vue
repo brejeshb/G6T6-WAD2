@@ -109,7 +109,7 @@ export default {
                         x: {
                             title: {
                                 display: true,
-                                text: 'Co2 Savings',
+                                text: 'Number of Recyling Activities',
                                 font: {
                                     weight: "bold" // Make the y-axis labels bold
                                 }

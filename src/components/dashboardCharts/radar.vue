@@ -50,7 +50,7 @@ export default {
                     labels: this.labels,
                     datasets: [
                         {
-                            label: "User",
+                            label: "Your Majesty",
                             data: this.data_values,
                             borderWidth: 1
                         },

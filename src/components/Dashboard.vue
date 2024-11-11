@@ -9,9 +9,12 @@
             style="background-color: #F3F2EC ;"> <!-- Adjust dashboard div color-->
             <div class="pb-0 p-xl-5 pb-0">
                 <h1 data-aos="fade-right">Recycle Right, Feel Right!</h1>
-                <p class="fw-bold" style="color:#788645 ;font-style: italic;" data-aos="fade-right">Here's the recycling
-                    statistics in your
+                <p class="fw-bold" style="color:#788645 ;font-style: italic;" data-aos="fade-right">
+
+                    You earned <mark style="background-color: #D9EA9A;"> {{ totalPoints }} cumulative recycling points</mark>  in 
+                    your
                     current lifetime ♥︎
+
                 </p>
             </div>
 
@@ -77,6 +80,7 @@
                             </div>
 
                         </div>
+
                     </div>
                 </div>
 
@@ -167,6 +171,8 @@ import { Bubble } from 'vue-chartjs';
 import BubbleChart from './dashboardCharts/bubbleChart.vue';
 import AOS from 'aos';
 import 'aos/dist/aos.css';  // Import the AOS styles
+import { defineCustomElements } from 'ionicons/dist/loader';
+defineCustomElements(window);
 
 const { userName } = useAuth();
 var currUser = userName;
@@ -191,6 +197,7 @@ export default {
             buttonText: "Download Now",
 
             username: currUser,
+            totalPoints: 0,
             totalCo2Reduction: 0,
             totalTreesSaved: 0,
             currRanking: null,
@@ -294,6 +301,7 @@ export default {
                     // console.log(UserOverallStatsTable);
                     this.totalCo2Reduction = UserOverallStatsTable[0].total_co2_emission_reduction;
                     this.totalTreesSaved = UserOverallStatsTable[0].total_trees_saved;
+                    this.totalPoints = UserOverallStatsTable[0].total_points_accumulated;
 
                     // Testing Purposes
                     // console.log(`Username: ${this.username}`);
@@ -440,6 +448,8 @@ export default {
                     .eq('username', this.username)
                     .order('month_number')
 
+
+
                 for (let month of this.timeX) {
                     let found = false;
                     for (let obj of UserRankOverTime) {
@@ -479,13 +489,28 @@ export default {
                     .from('BubbleChartView')
                     .select('*');
 
+
+
                 // make bubble bigger according to total_trees_saved
                 const scalingFactor = 20;
                 for (let object of BubbleChartView) {
                     if (object.username == this.username) {
                         this.index = BubbleChartView.indexOf(object);
                     }
-                    this.bubbleData.push({ x: object.total_co2_emission_reduction, y: object.total_trees_saved, r: object.total_trees_saved * scalingFactor });
+
+                    let { data: UserActivitiesTableUser, error } = await supabase
+                        .from('UserActivitiesTable')
+                        .select('*')
+                        .eq('username', object.username);
+
+                    if (error) {
+                        console.log(error);
+                    }
+                    else {
+                        var numActivities = UserActivitiesTableUser.length;
+                    }
+
+                    this.bubbleData.push({ x: numActivities, y: object.total_trees_saved, r: object.total_trees_saved * scalingFactor });
                 };
                 // console.log(this.index);
 
