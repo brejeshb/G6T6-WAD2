@@ -1,5 +1,8 @@
 <template>
   <div class="form-container">
+    <!-- Close Button -->
+    <button class="close-button" @click="$emit('close-form')">×</button>
+
     <img src="../../assets/images/logo.png" alt="Logo" class="logo" />
     
     <div class="form-content">
@@ -26,22 +29,6 @@
       >
         {{ isLoading ? 'Signing in...' : 'Sign In' }}
       </button>
-
-      <div class="divider">
-        <span>or sign in with</span>
-      </div>
-
-      <div class="social-buttons">
-        <button class="social-btn facebook">
-          <i class="fab fa-facebook-f"></i>
-        </button>
-        <button class="social-btn google">
-          <i class="fab fa-google"></i>
-        </button>
-        <button class="social-btn apple">
-          <i class="fab fa-apple"></i>
-        </button>
-      </div>
 
       <div class="switch-mode-link">
         Need an account? 
@@ -100,6 +87,24 @@ async function handleSubmit() {
   align-items: center;
   height: 100vh;
   padding: 20px;
+  position: relative; /* Needed for positioning the close button */
+}
+
+/* Close Button */
+.close-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 30px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.close-button:hover {
+  color: rgba(255, 255, 255, 1);
 }
 
 /* Logo */
@@ -190,32 +195,6 @@ async function handleSubmit() {
   padding: 0 10px;
   color: rgba(255, 255, 255, 0.7);
   font-size: 14px;
-}
-
-/* Social Buttons Styling */
-.social-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin: 20px 0;
-}
-
-.social-btn {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.2s;
-}
-
-.social-btn:hover {
-  background: rgba(255, 255, 255, 0.2);
 }
 
 /* Switch Mode Link Styling */

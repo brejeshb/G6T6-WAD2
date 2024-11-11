@@ -14,7 +14,7 @@
           <div class="quote-inner-container" :class="{ 'smaller-quote-container': showAuthForm }">
             <!-- Split quote into text and author -->
             <p class="quote" :class="{ 'smaller-quote': showAuthForm }">{{ quoteText }}</p>
-            <p class="author">{{ authorText }}</p>
+            <p class="author" :class="{ 'smaller-author': showAuthForm }">{{ authorText }}</p>
           </div>
 
           <button class="start-button" @click.stop="showAuthForm = true" v-if="!showAuthForm">
@@ -31,6 +31,7 @@
             :is="currentView" 
             @switch-mode="switchMode"
             @auth-success="handleAuthSuccess"
+            @close-form="handleCloseForm" 
           />
         </div>
       </div>
@@ -60,14 +61,12 @@ const quotes = [
   "The Earth is what we all have in common.\n— Wendell Berry"
 ];
 
-// Select a random quote
 const currentQuote = ref(quotes[Math.floor(Math.random() * quotes.length)]);
 
 // Split the quote and author
 const quoteText = ref('');
 const authorText = ref('');
 
-// Update quote and author when a new quote is selected
 const setQuote = (quote) => {
   const parts = quote.split('\n');
   quoteText.value = parts[0];
@@ -83,11 +82,7 @@ const vids = [
   "/vids/picktrash2.mp4"
 ];
 
-// Select a random video
 const currentVideo = ref(vids[Math.floor(Math.random() * vids.length)]);
-
-// Debug the current video path
-console.log('Current video:', currentVideo.value);
 
 // Switch between Login and Register forms
 const switchMode = (mode) => {
@@ -105,6 +100,11 @@ const handleOutsideClick = () => {
     showAuthForm.value = false;
   }
 };
+
+const handleCloseForm = () => {
+  showAuthForm.value = false; 
+};
+
 </script>
 
 <style scoped>
@@ -145,6 +145,7 @@ const handleOutsideClick = () => {
   display: flex;
   align-items: center;
   color: white;
+  padding: 0 20px; /* Add some padding to prevent overflow */
 }
 
 .quote-section {
@@ -153,6 +154,7 @@ const handleOutsideClick = () => {
   justify-content: center;
   align-items: center;
   transition: transform 0.5s ease-out;
+  overflow: hidden; /* Prevent overflow */
 }
 
 .quote-section.shift-left {
@@ -161,18 +163,20 @@ const handleOutsideClick = () => {
 
 .quote-container {
   text-align: center;
-  max-width: 800px;
-  padding: 0 20px;
+  max-width: 800px; /* Set a max-width for quote container */
+  width: 100%;
+  padding: 0 20px; /* Padding to avoid text touching the edges */
+  overflow: hidden; /* Ensure content stays inside */
 }
 
 .quote-inner-container {
   display: inline-block;
-  max-width: 800px;
+  max-width: 100%;
   width: 100%;
 }
 
 .smaller-quote-container {
-  max-width: 600px; /* Container width when smaller quote is displayed */
+  max-width: 500px;
 }
 
 .quote {
@@ -180,6 +184,7 @@ const handleOutsideClick = () => {
   line-height: 1.4;
   margin-bottom: 10px;
   font-weight: 300;
+  word-wrap: break-word; /* Ensure long words break properly */
 }
 
 .author {
@@ -246,6 +251,11 @@ const handleOutsideClick = () => {
   .quote-section.shift-left {
     transform: translateX(-100%);
   }
+
+  /* Adjust padding for smaller screens */
+  .quote-container {
+    padding: 0 10px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -255,6 +265,10 @@ const handleOutsideClick = () => {
 
   .auth-container {
     padding: 40px 20px;
+  }
+
+  .quote-container {
+    padding: 0 10px; /* Ensure padding on small screens */
   }
 }
 </style>
