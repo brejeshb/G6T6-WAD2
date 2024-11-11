@@ -729,6 +729,8 @@ body {
 #app {
   background-color: #f8f4ec;
   min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 .card {

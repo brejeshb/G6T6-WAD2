@@ -15,7 +15,7 @@
   <div id="app" style="position: relative;">
     
     <div class="row">
-      <div class="container col-lg-6 col-12 my-3" data-aos="fade-right" data-aos-duration="1500">
+      <div class="col-lg-6 col-12 my-3" data-aos="fade-right" data-aos-duration="1500">
         <div class="title py-4 rounded mb-5 " style="box-shadow: 5px 5px 10px 2px rgb(0 0 0 / 0.8);">Forest</div>
         <div class="forest">
           <table style="box-shadow: 5px 5px 10px 2px rgb(0 0 0 / 0.8); background-color: brown;"
@@ -479,8 +479,9 @@ update_tree()
 }
   #app{
   background-color:#f5ffe4;
-  min-height: 100vh;
+  width: 100%;
   padding-top: 5%;
+  overflow-x: hidden;
   
 }
 
