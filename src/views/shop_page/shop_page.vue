@@ -38,7 +38,7 @@
         <div class="growing">
           <div class="circle_tree justify-content-center align-items-center d-flex">
             <img v-if="cal_data.current_tree != ''" :src="cal_data.picture" id="tree" style="height: 70%; width: 70%" />
-            <p v-else class="text-center fs-3 m-2">Please open the shop to buy a tree to plant :)</p>
+            <p v-else class="text-center fs-5 m-2">Please open the shop to buy a tree to plant :)</p>
           </div>
           <div class="progress w-50 mx-auto" role="progressbar" aria-label="Success example" aria-valuenow="25" aria-valuemin="0"
             aria-valuemax="100">
