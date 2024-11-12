@@ -504,18 +504,6 @@ export default {
   }
 }
 
-/* recent test */
-@media (max-width: 768px) {
-  .info-section {
-    padding: 20px;
-  }
-
-  .card {
-    margin-bottom: 20px; /* Adds space at the bottom of each card */
-  }
-}
-/* recent test */
-
 @media (max-width: 576px) {
   #leaderboard-title {
     font-size: 10vw;
