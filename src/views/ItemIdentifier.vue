@@ -460,9 +460,17 @@ export default {
   justify-content: center;
   padding: 20px;
   box-sizing: border-box;
-  /* NEW ADDED */
-  padding-bottom: 80px; /* Added padding to avoid overlap */
 }
+
+@supports (-webkit-touch-callout: none) {
+  .info-section {
+    padding-bottom: 20px; /* Add padding specifically for iOS */
+  }
+  .footer {
+    padding-top: 20px;
+  }
+}
+
 
 .leaderboard-head {
   position: relative;
