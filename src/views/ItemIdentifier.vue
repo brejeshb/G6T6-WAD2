@@ -159,7 +159,7 @@ export default {
           image:
             `https://maps.googleapis.com/maps/api/staticmap?center=1.3521,103.8198&zoom=13&size=600x300&key=${cs_key}`,
           title: 'Recycle Where?',
-          text: 'Find the nearest recycling bin in your area with ease.',
+          text: 'Find the nearest recycling bin in your area with ease. Click the button below to find out how to use!',
           buttonText: 'Locate Bins',
           modalTarget: '#modalLocateBins'
         },
@@ -460,6 +460,8 @@ export default {
   justify-content: center;
   padding: 20px;
   box-sizing: border-box;
+  /* NEW ADDED */
+  padding-bottom: 80px; /* Added padding to avoid overlap */
 }
 
 .leaderboard-head {
