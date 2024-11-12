@@ -108,20 +108,21 @@ async function handleSubmit() {
     const { data: existingUsernames, error: usernameErrorCheck } = await supabase
       .from('AuthTable')
       .select('username')
-      .eq('username', username.value)
-      .single(); // Query for a specific username
+
+      const isUsernamePresent = existingUsernames.some(item => item.username === username.value);
 
     if (usernameErrorCheck && usernameErrorCheck.code !== 'PGRST100') {
       throw new Error(usernameErrorCheck.message);
     }
 
-    if (existingUsernames) {
+    if (isUsernamePresent) {
       usernameError.value = 'Username already taken. Please choose another.';
       return;
     }
 
     // Proceed to insert the new user
     const date_registered = new Date().toISOString();
+    console.log(username.value,password.value)
     const { data, error } = await supabase
       .from('AuthTable')
       .insert([{ 
