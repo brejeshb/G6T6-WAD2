@@ -1,7 +1,9 @@
 <!-- src/components/BarChart.vue -->
 <template>
-    <Bar :key="JSON.stringify(ChartData)" :data="ChartData" :options="ChartOptions" />
-    <!-- manually re-render the chart -->
+    <div class="chart-container">
+        <Bar :key="JSON.stringify(ChartData)" :data="ChartData" :options="ChartOptions" />
+        <!-- manually re-render the chart -->
+    </div>
 </template>
 
 <script setup lang="ts">
@@ -40,7 +42,7 @@ const ChartOptions = {
         }
     },
     responsive: true,
-    maintainAspectRatio: true,
+    maintainAspectRatio: false,
     plugins: {
         legend: {
             position: 'top' //  legend position
@@ -81,8 +83,8 @@ const fetchData = async () => {
             .filter(player => player.total_points_accumulated > 0)
             .map(player => ({
                 ...player,
-                username: player.username.length > maxUsernameLength 
-                    ? player.username.slice(0, maxUsernameLength) + '...' 
+                username: player.username.length > maxUsernameLength
+                    ? player.username.slice(0, maxUsernameLength) + '...'
                     : player.username
             }));
 
@@ -123,3 +125,22 @@ const fetchData = async () => {
 onMounted(fetchData);
 
 </script>
+
+<style scoped>
+.chart-container {
+    width: 100%;
+    /* Makes the container fill the width of the parent */
+    height: 100%;
+    /* Adjusts the height automatically to maintain aspect ratio */
+    max-width: 100%;
+    /* Prevents overflow */
+    position: relative;
+    max-height: 80%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+    overflow-x: scroll;
+}
+</style>

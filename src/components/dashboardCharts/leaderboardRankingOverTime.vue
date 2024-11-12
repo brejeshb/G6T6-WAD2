@@ -64,6 +64,7 @@ export default {
                 },
                 options: {
                     responsive: true,
+                    maintainAspectRatio: false,
                     animations: {
                         tension: {
                             duration: 2000,

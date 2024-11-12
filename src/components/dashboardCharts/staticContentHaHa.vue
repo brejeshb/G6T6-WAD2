@@ -9,7 +9,7 @@
                 <mark style="background-color: #D9EA9A;">A Warming World, A Fading Future</mark>
             </h3><br>
             <!-- Earth -->
-            <div class="d-flex justify-content-center w-100 mx-auto p-5">
+            <div class="d-flex justify-content-center w-100 mx-auto p-lg-5 p-0">
                 <div class="section-banner">
 
                 </div>
