@@ -60,9 +60,9 @@
           <h1 class="fw-bold">Shop</h1>
         </div>
         <div class="menu" :class="{ show: menuVisible }">
-          <a href="#" @click="triggerAll">All</a>
-          <a href="#" @click="changePet_state">Pets</a>
-          <a href="#" @click="changetree_state">Trees</a>
+          <a href="#" @click="triggerAll":class="{ active :display_pet&&display_tree}" @click.prevent="true">All</a>
+          <a href="#" @click="changePet_state" :class="{ active :!display_tree}" @click.prevent="true">Pets</a>
+          <a href="#" @click="changetree_state" :class="{ active :!display_pet}" @click.prevent="true">Trees</a>
           <p >Your current points: <span class="fw-bold"> {{ cal_data.current_points }} </span></p>
 
         </div>
@@ -683,6 +683,7 @@ update_tree()
   background-color: #1f1f1f; /* Slightly darker background */
   padding-left: 15px; /* Indent to show it's active */
 }
+
 
 .saved-wishlist {
   margin-top: 20px;
