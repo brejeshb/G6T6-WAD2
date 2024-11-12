@@ -455,7 +455,7 @@ export default {
   height: 100vh;
   min-height: min-content;
   background-color: #FEFAE0;
-  overflow: scroll;
+  overflow: visible;
 }
 
 .section {
