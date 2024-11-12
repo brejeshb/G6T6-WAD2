@@ -508,7 +508,7 @@ function submitQuiz() {
   if (score === maxScore) {
     quizAttempts[quizId].completed = true;
     quizAttempts[quizId].completedAt = new Date().toLocaleString('default', { month: 'long', year: 'numeric' }); // Store the month and year
-    updatePoint(10)
+    updatePoint(15)
   }
 
   isQuizActive.value = false;
