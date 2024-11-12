@@ -1,7 +1,9 @@
 <!-- src/components/BarChart.vue -->
 <template>
-    <Bar :key="JSON.stringify(ChartData)" :data="ChartData" :options="ChartOptions" />
-    <!-- manually re-render the chart -->
+    <div class="chart-container">
+        <Bar :key="JSON.stringify(ChartData)" :data="ChartData" :options="ChartOptions" />
+        <!-- manually re-render the chart -->
+    </div>
 </template>
 
 <script setup lang="ts">
@@ -40,7 +42,7 @@ const ChartOptions = {
         }
     },
     responsive: true,
-    maintainAspectRatio: true,
+    maintainAspectRatio: false,
     plugins: {
         legend: {
             position: 'top' //  legend position
@@ -81,17 +83,14 @@ const fetchData = async () => {
             .filter(player => player.total_points_accumulated > 0)
             .map(player => ({
                 ...player,
-                username: player.username.length > maxUsernameLength 
-                    ? player.username.slice(0, maxUsernameLength) + '...' 
+                username: player.username.length > maxUsernameLength
+                    ? player.username.slice(0, maxUsernameLength) + '...'
                     : player.username
             }));
 
         const numPlayers = playerschart.value.length;
         const dynamicColors = generateColors(numPlayers);
 
-
-        console.log("label")
-        console.log(ChartData.value.labels)
 
         ChartData.value = {
             labels: playerschart.value.map(player => player.username),
@@ -102,17 +101,6 @@ const fetchData = async () => {
             }]
         };
 
-        // ChartData.value.labels = playerschart.value.map(player => player.username);
-        // ChartData.value.datasets[0].data = playerschart.value.map(player => (player.total_points_accumulated));
-        // console.log("label&dataset")
-
-        console.log(ChartData.value.labels)
-        console.log(ChartData.value.datasets[0].data)
-        // players.value = UserOverallStatsTable.map((record, index) => ({
-        //     rank: index + 1,
-        //     name: record.username,
-        //     weeklyScore: record.total_points_accumulated,
-        // }))
 
     } catch (error) {
         console.error('Error fetching data:', error);
@@ -123,3 +111,22 @@ const fetchData = async () => {
 onMounted(fetchData);
 
 </script>
+
+<style scoped>
+.chart-container {
+    width: 100%;
+    /* Makes the container fill the width of the parent */
+    height: 100%;
+    /* Adjusts the height automatically to maintain aspect ratio */
+    max-width: 100%;
+    /* Prevents overflow */
+    position: relative;
+    max-height: 80%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+    overflow-x: scroll;
+}
+</style>

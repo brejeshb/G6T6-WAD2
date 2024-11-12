@@ -9,7 +9,20 @@
     <path d="M617 1v86C372 119 384 1 196 1h421Z" opacity=".5"></path>
     <path d="M1000 0H0v52C62.5 28 125 4 250 4c250 0 250 96 500 96 125 0 187.5-24 250-48V0Z"></path>
   </svg>
-  <Dashboard class="section" style="height: fit-content;" />
+
+
+
+  <div>
+    <div v-if="!isDashboardLoaded" class="loader text-center ps-5 pe-5 pb-3"
+      style="background-color: #F3F2EC;padding-top: 5%;">
+      <h2 style="color: #788645;" class="fw-bold loaderHehe w-100 text-center">
+        ༶•┈┈ Loading your Lovely Dashboard ┈┈•༶
+      </h2>
+    </div>
+    <Dashboard class="section" style="height: fit-content;" />
+  </div>
+
+
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="#F3F2EC">
     <rect fill="#FEFAE1" width="100%" height="100%" />
     <path d="M0 1v99c134.3 0 153.7-99 296-99H0Z" opacity=".5"></path>
@@ -19,7 +32,8 @@
   </svg>
 
 
-  <CardsCarousel style="height: fit-content;" />
+  <CardsCarousel style="height: fit-content;" v-if="isDashboardLoaded" />
+
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="#FEFAE1">
     <rect fill="#D9EA9A" width="100%" height="100%" />
     <path
@@ -62,6 +76,16 @@ export default {
     CardsCarousel,
     staticContentHaHa,
     Footer2
+  }, data() {
+    return {
+      isDashboardLoaded: false
+
+    };
+  },
+  mounted() {
+    setTimeout(() => {
+      this.isDashboardLoaded = true;
+    }, 2750); // Adjust delay time as needed (e.g., 1000ms = 1 second)
   },
 
 
@@ -78,6 +102,42 @@ html {
 body {
   margin: 0;
   padding: 0;
+}
+
+.loaderHehe {
+  -webkit-animation: bounce .4s ease infinite alternate;
+  font-size: 2rem;
+
+}
+
+/* Medium screens */
+@media (max-width: 768px) {
+  .loaderHehe {
+    font-size: 1.5rem;
+    /* Smaller font for medium screens */
+  }
+}
+
+/* Small screens */
+@media (max-width: 480px) {
+  .loaderHehe {
+    font-size: 1rem;
+    /* Even smaller font for small screens */
+  }
+}
+
+@-webkit-keyframes bounce {
+  0% {
+    text-shadow:
+      0 5px 0 #ccc,
+      0 2px 3px rgba(0, 0, 0, 1);
+  }
+
+  100% {
+    transform: translateY(-20px);
+    text-shadow: 0 50px 0 #black,
+      0 0px 20px rgba(0, 0, 0, .8);
+  }
 }
 
 @scroll-timeline scroll-animation {

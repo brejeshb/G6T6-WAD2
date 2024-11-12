@@ -53,7 +53,7 @@ export default {
                 },
                 options: {
                     responsive: true,
-                    maintainAspectRatio: true, // Allows it to stretch to fill container
+                    maintainAspectRatio: false, // Allows it to stretch to fill container
                     aspectRatio: 1,
 
                     plugins: {

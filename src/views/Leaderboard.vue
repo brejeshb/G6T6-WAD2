@@ -181,8 +181,6 @@ async function fetchLeaderboardData() {
         score: record.total_points_accumulated,
     }));
 
-    console.log(players.value); 
-
 
 
 

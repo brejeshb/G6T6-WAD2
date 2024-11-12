@@ -108,7 +108,7 @@
                 <div class="container-fluid" style="margin-bottom: 3em;">
                     <div class="row gx-5">
 
-                        <div v-if="leaderboardReady" class="col-xl-7 col-12 mb-4 mb-lg-0 mx-auto"
+                        <div v-if="leaderboardReady" class="col-xl-7 col-12 mb-4 mb-lg-0 mx-auto "
                             style="margin-right: 3em;">
                             <leaderboardRanking :labels="timeX" :data_values="highestRankData" />
                         </div>
@@ -845,6 +845,8 @@ export default {
             easing: 'ease-in-out', // Animation easing
             once: false,
         });
+
+
     },
 }; 
 </script>
