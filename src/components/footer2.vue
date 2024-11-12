@@ -102,7 +102,7 @@
           { icon: '📚', name: 'Education Hub', link: '/Education/Video' },
           { icon: '🛍️', name: 'Shop', link: '/Forest' },
           { icon: '🏆', name: 'Leaderboard', link: '/Leaderboard' },
-          { icon: '🧠❓', name: 'Quiz', link: '/Education/Quiz' }
+          { icon: '❓', name: 'Quiz', link: '/Education/Quiz' }
         ],
         technologies: ['Bootstrap', 'Vue', 'Chart JS', 'CSS', 'HTML', 'Javascript'],
         teamMembers: [
