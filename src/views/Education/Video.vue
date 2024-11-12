@@ -9,8 +9,8 @@
 
     </div>
   <div style="  background-color: #f8f4ec;   background-attachment: fixed;
-  background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)),
-  url('/img/education_hub.webp');
+  background-image: 
+  url('/img/education_hub.png');
   background-size: 100vw auto;">
     <section class="py-5 text-center top_section" data-aos="fade-up ">
       <div class="row py-lg-5">
