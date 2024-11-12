@@ -159,7 +159,7 @@
                 Certainly you don't want a world full of <mark id="highlight">dead trees</mark> , and <mark id="highlight">extreme heat waves</mark>, especially how hot
                 Singapore is don't you ... How can we do our part so that the world remains an <mark id="highlight">ethereal beauty</mark> for our
                 future generations?
-                You surely do't want a future plagued by dead trees and scorching heatwaves, given how hot Singapore is,
+                You surely don't want a future plagued by dead trees and scorching heatwaves, given how hot Singapore is,
                 don't you? To ensure that our planet remains an <mark id="highlight">enchanting paradise</mark> for our future generations, we must
                 <mark id="highlight">take immediate action</mark> .
 
