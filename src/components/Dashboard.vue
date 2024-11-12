@@ -284,7 +284,6 @@ export default {
             this.totalTreesSaved = 0;
             try {
                 // Get CO2 EMISSION DATA + TREES SAVED
-                console.log(this.username);
                 let { data: UserOverallStatsTable, error: error1 } = await supabase
                     .from('UserOverallStatsTable')
                     .select('*') // Select all columns
@@ -298,7 +297,6 @@ export default {
                 else {
                     // console.log(UserOverallStatsTable); // <Object>
 
-                    console.log(UserOverallStatsTable);
                     this.totalCo2Reduction = UserOverallStatsTable[0].total_co2_emission_reduction;
                     this.totalTreesSaved = UserOverallStatsTable[0].total_trees_saved;
                     this.totalPoints = UserOverallStatsTable[0].total_points_accumulated;

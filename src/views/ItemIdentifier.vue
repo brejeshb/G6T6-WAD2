@@ -42,7 +42,7 @@
 
               <div class="container">
                 <div class="row">
-                  <div class="col-md-3">
+                  <div class="col-lg-3">
                     <div>
                       <p>1. Input your current location and search</p>
                       <p>2. Blue marker will be your current location</p>
@@ -51,7 +51,7 @@
                       <p>5. Click your desired marker to start journey</p>
                     </div>
                   </div>
-                  <div class="col-md-9">
+                  <div class="col-lg-9">
                     <div id="map" style="width: 100%; height: 500px;"></div>
                   </div>
                 </div>
@@ -159,7 +159,7 @@ export default {
           image:
             `https://maps.googleapis.com/maps/api/staticmap?center=1.3521,103.8198&zoom=13&size=600x300&key=${cs_key}`,
           title: 'Recycle Where?',
-          text: 'Find the nearest recycling bin in your area with ease.',
+          text: 'Find the nearest recycling bin in your area with ease. Click the button below to find out how to use!',
           buttonText: 'Locate Bins',
           modalTarget: '#modalLocateBins'
         },
@@ -461,6 +461,16 @@ export default {
   padding: 20px;
   box-sizing: border-box;
 }
+
+@supports (-webkit-touch-callout: none) {
+  .info-section {
+    padding-bottom: 20px; /* Add padding specifically for iOS */
+  }
+  .footer {
+    padding-top: 20px;
+  }
+}
+
 
 .leaderboard-head {
   position: relative;
