@@ -76,7 +76,7 @@ export default {
                 },
                 options: {
                     responsive: true,
-                    maintainAspectRatio: true, // Allows it to stretch to fill container
+                    maintainAspectRatio: false, // Allows it to stretch to fill container
                     animations: {
                         tension: {
                             duration: 2000,
@@ -169,8 +169,8 @@ export default {
 
 
             });
-        }, 
-        
+        },
+
     },
 };
 </script>

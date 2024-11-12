@@ -32,7 +32,7 @@
                 <div class="item col">
                     <div class="card h-100 ">
                         <div>
-                            <img src="../assets/images/bub.png" class="card-img-top " >
+                            <img src="../assets/images/bub.png" class="card-img-top ">
                         </div>
                         <div class="card-body">
                             <div>
