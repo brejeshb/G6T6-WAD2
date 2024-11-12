@@ -4,7 +4,7 @@
         <input type="url" id="website" class="rounded" name="website" placeholder="https://example.com" required>
         <br>
 
-        <button class="btn btn-primary m-3" @click="open_form" >Submit form</button>
+        <button class="btn btn-primary m-3" @click="submit_form" >Submit form</button>
         <button class="btn btn-primary m-3" @click="open_form" >Cancel</button>
 
     </div>
@@ -204,6 +204,11 @@ function videoFiltering() {
 }
 function open_form(){
   form_open.value = !form_open.value;
+
+}
+function submit_form(){
+  form_open.value = !form_open.value;
+  alert('Submit successfully :)')
 
 }
 </script>
