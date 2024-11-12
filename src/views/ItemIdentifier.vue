@@ -106,8 +106,8 @@
           </div>
         </div>
       </div>
-      <Footer2 />
     </div>
+    <Footer2 />
 
 
   </template>
