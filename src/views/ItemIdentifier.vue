@@ -107,7 +107,11 @@
         </div>
       </div>
     </div>
-    <Footer2 />
+
+    <div>
+      <Footer2 />
+    </div>
+
 
 
   </template>
@@ -448,8 +452,10 @@ export default {
 }
 
 #section-1 {
+  height: 100vh;
   min-height: min-content;
   background-color: #FEFAE0;
+  overflow: visible;
 }
 
 .section {
@@ -462,14 +468,7 @@ export default {
   box-sizing: border-box;
 }
 
-@supports (-webkit-touch-callout: none) {
-  .info-section {
-    padding-bottom: 20px; /* Add padding specifically for iOS */
-  }
-  .footer {
-    padding-top: 20px;
-  }
-}
+
 
 
 .leaderboard-head {
