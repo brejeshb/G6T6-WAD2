@@ -8,17 +8,19 @@
 
       <section class="section" id="section-1">
         <div class="info-section">
-          <div class="row">
-            <div class="col-12 col-md-6" v-for="card in infoCards" :key="card.id" v-bind:data-aos="'fade-up'">
-              <div class="card rounded-5">
-                <img :src="card.image" class="card-img-top">
-                <div class="card-body  rounded-bottom">
-                  <h3 class="fw-bold">{{ card.title }}</h3>
-                  <p>{{ card.text }}</p>
-                  <button type="button" class="btn btn-primary fw-bold" :data-bs-target="card.modalTarget"
-                    data-bs-toggle="modal">
-                    {{ card.buttonText }}
-                  </button>
+          <div class="card-container">
+            <div class="card-wrapper row flex-nowrap">
+              <div class="col-12 col-md-6" v-for="card in infoCards" :key="card.id" v-bind:data-aos="'fade-up'">
+                <div class="card rounded-5">
+                  <img :src="card.image" class="card-img-top">
+                  <div class="card-body rounded-bottom">
+                    <h3 class="fw-bold">{{ card.title }}</h3>
+                    <p>{{ card.text }}</p>
+                    <button type="button" class="btn btn-primary fw-bold" :data-bs-target="card.modalTarget"
+                      data-bs-toggle="modal">
+                      {{ card.buttonText }}
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -452,10 +454,8 @@ export default {
 }
 
 #section-1 {
-  /* height: 100vh; */
   min-height: min-content;
   background-color: #FEFAE0;
-  overflow: scroll;
 }
 
 .section {
@@ -545,8 +545,15 @@ export default {
 
 
 .info-section {
-  padding: 50px 50px;
+  padding: 20px 20px;
   text-align: center;
+}
+
+/* Remove padding for screens smaller than 'md' */
+@media (max-width: 767px) {
+  .info-section {
+    padding: 0;
+  }
 }
 
 .info-card {
@@ -560,6 +567,34 @@ export default {
 
 }
 
+.card-container {
+  overflow-x: auto;
+  padding: 50px 0;
+  scroll-snap-type: x mandatory;
+}
+
+.card-wrapper {
+  display: flex;
+}
+@media (min-width: 768px) {
+
+  .card-container {
+    overflow: hidden;  /* Prevent scrolling on the main container */
+  }
+
+}
+
+@media (max-width: 768px) {
+  .card-wrapper {
+    flex-wrap: nowrap;
+  }
+
+  .card {
+    min-width: 300px; /* Set a min-width for each card */
+    flex-shrink: 0;
+  }
+}
+
 /* Ensure all cards have the same height */
 .card {
   height: 100%;
@@ -567,6 +602,7 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  scroll-snap-align: start;
 }
 
 .card-img-top {
