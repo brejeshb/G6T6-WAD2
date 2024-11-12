@@ -453,9 +453,9 @@ export default {
 
 #section-1 {
   height: 100vh;
-  min-height: min-content;
+  min-height: max-content;
   background-color: #FEFAE0;
-  overflow: visible;
+  /* overflow: visible; */
 }
 
 .section {
