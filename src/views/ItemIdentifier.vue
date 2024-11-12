@@ -107,7 +107,7 @@
         </div>
       </div>
     </div>
-    
+
     <div>
       <Footer2 />
     </div>
@@ -452,6 +452,7 @@ export default {
 }
 
 #section-1 {
+  height: 100vh;
   min-height: min-content;
   background-color: #FEFAE0;
 }
