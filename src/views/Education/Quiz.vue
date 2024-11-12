@@ -21,7 +21,7 @@
       <!-- Main Content Section with Filter and Search Bar -->
       <div id="main_content" class="container pt-3" data-aos="fade-up">
         <div id="nav-bar">
-          <nav class="navbar rounded shadow navbar-expand-lg bg-body-tertiary flex-column" data-aos="fade-right">
+          <nav class="navbar rounded shadow navbar-expand-lg bg-body-tertiary flex-column" >
             <div class="container-fluid">
               <a class="navbar-brand ms-5" href="#" style="color:#686c44">Filter</a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
