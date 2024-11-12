@@ -452,10 +452,10 @@ export default {
 }
 
 #section-1 {
-  height: 100vh;
-  min-height: max-content;
+  /* height: 100vh; */
+  min-height: min-content;
   background-color: #FEFAE0;
-  /* overflow: visible; */
+  overflow: scroll;
 }
 
 .section {
