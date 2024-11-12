@@ -41,25 +41,25 @@
               </button>
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <li class="nav-item">
+                  <li class="nav-item my-2">
                     <a class="nav-link" aria-current="page" :class="{ 'active-filter': activeFilter === 'all' }"
                       :style="activeFilter === 'all' ? { color: 'white' } : {}" @click.prevent="activeFilter = 'all'"
                       href="#" @click="filter_recycle = false; filter_upcycle = false; videoFiltering()">All</a>
                   </li>
-                  <li class="nav-item">
+                  <li class="nav-item my-2">
                     <a class="nav-link" aria-current="page" :class="{ 'active-filter': activeFilter === 'recycling' }"
                       :style="activeFilter === 'recycling' ? { color: 'white' } : {}"
                       @click.prevent="activeFilter = 'recycling'" href="#"
                       @click="filter_recycle = true; filter_upcycle = false; videoFiltering()">Recycle</a>
                   </li>
-                  <li class="nav-item">
+                  <li class="nav-item my-2">
                     <a class="nav-link" aria-current="page" :class="{ 'active-filter': activeFilter === 'upcycling' }"
                       :style="activeFilter === 'upcycling' ? { color: 'white' } : {}"
                       @click.prevent="activeFilter = 'upcycling'" href="#"
                       @click="filter_recycle = false; filter_upcycle = true; videoFiltering()">Upcycle</a>
                   </li>
                   
-                  <li class="nav-item">
+                  <li class="nav-item my-2">
                     <a class="nav-link" 
                       href ='#'
                       @click.prevent="activeFilter = 'upcycling'"

@@ -323,6 +323,9 @@ function changetree_state() {
   display_tree.value = true;
 }
 function check_admin(name){
+  if(name ==null){
+    return
+  }
   if(name.search('admin')!=-1){
     return true
   }

@@ -31,18 +31,18 @@
               </button>
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <li class="nav-item" data-aos="fade-right">
+                  <li class="nav-item my-2" data-aos="fade-right">
                     <a href="#" class="nav-link" :class="{ 'active-filter': activeFilter === 'all' }"
                       :style="activeFilter === 'all' ? { color: 'white' } : {}"
                       @click.prevent="activeFilter = 'all'">All</a>
                   </li>
                   <li class="nav-item" data-aos="fade-right">
-                    <a href="#" class="nav-link" :class="{ 'active-filter': activeFilter === 'recycling' }"
+                    <a href="#" class="nav-link my-2" :class="{ 'active-filter': activeFilter === 'recycling' }"
                       :style="activeFilter === 'recycling' ? { color: 'white' } : {}"
                       @click.prevent="activeFilter = 'recycling'">Recycle</a>
                   </li>
                   <li class="nav-item" data-aos="fade-right">
-                    <a href="#" class="nav-link" :class="{ 'active-filter': activeFilter === 'upcycling' }"
+                    <a href="#" class="nav-link my-2" :class="{ 'active-filter': activeFilter === 'upcycling' }"
                       :style="activeFilter === 'upcycling' ? { color: 'white' } : {}"
                       @click.prevent="activeFilter = 'upcycling'">Upcycle</a>
                   </li>
