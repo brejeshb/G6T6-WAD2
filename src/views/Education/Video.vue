@@ -441,4 +441,25 @@ body {
   height: 40px;
 
 }
+.navbar-toggler-icon {
+  background: none; /* Remove the default background */
+  border: none; /* Remove border */
+  width: 30px; /* Adjust size */
+  height: 30px; /* Adjust size */
+  position: relative; /* To position the triangle */
+}
+
+/* Create an upward triangle */
+.navbar-toggler-icon::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-top: 25px solid #000; /* Black upward triangle */
+  transform: translate(-50%, -50%);
+}
 </style>
