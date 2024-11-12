@@ -1,9 +1,12 @@
 import { ref, onMounted } from 'vue';
 import { supabase } from '../lib/supabaseClient';
+import { useRouter } from 'vue-router';
 
 const userName = ref(null);
 
 export const useAuth = () => {
+  const router = useRouter();
+  
   const loadSession = () => {
     const storedUserName = sessionStorage.getItem('userName');
     if (storedUserName) {
@@ -15,6 +18,7 @@ export const useAuth = () => {
     loadSession();
   });
 
+  // Function to log in the user
   const login = async (username, password) => {
     if (typeof username !== 'string') {
       console.error('Invalid username provided');
@@ -53,10 +57,36 @@ export const useAuth = () => {
     return false; // No user found with the provided username
   };
 
+  // Function to log out the user
   const logout = () => {
     userName.value = null; // Clear the username from state
     sessionStorage.removeItem('userName'); // Clear from sessionStorage
   };
 
-  return { userName, login, logout };
+  // Function to delete the user from the database
+  const deleteUser = async () => {
+    if (!userName.value) {
+      console.error('No user logged in');
+      return;
+    }
+
+    // Delete user from the AuthTable by matching the username
+    const { error } = await supabase
+      .from('AuthTable')
+      .delete()
+      .eq('username', userName.value);
+
+    if (error) {
+      console.error('Error deleting user:', error.message);
+      return;
+    }
+
+    console.log('User deleted successfully.');
+
+    // After deleting the user, log out and redirect to the login page
+    logout();
+    router.push('/login'); // Make sure '/login' is the correct route to your login page
+  };
+
+  return { userName, login, logout, deleteUser };
 };

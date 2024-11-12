@@ -1,0 +1,127 @@
+$primary-color: #798645
+$text-color: #FEFAE0
+$mobile-breakpoint: 1100px
+$tablet-breakpoint: 1100px
+$danger-color: #ff5252
+
+.navbar
+  width: 100vw
+  position: fixed
+  top: 0
+  left: 0
+  right: 0
+  background-color: $primary-color
+  background-clip: content-box
+  box-shadow: inset 0 0 0 20px $primary-color
+  padding: 0 20px
+  z-index: 9999
+
+  &__brand
+    display: flex
+    align-items: center
+    padding-right: 16px
+
+  &__logo
+    height: 40px
+    width: auto
+    margin-right: 12px
+
+  &__nav
+    margin-left: 20px
+    display: flex
+    align-items: center
+    
+    &--hidden
+      display: none
+
+    &-btn
+      color: $text-color !important
+      margin: 0 8px
+      padding: 0 12px
+
+  &__avatar
+    margin-left: 24px
+    margin-right: 12px
+    cursor: pointer
+    transition: opacity 0.2s ease
+    padding: 4px
+    display: flex  // Added to ensure consistent display
+    
+    &:hover
+      opacity: 0.8
+
+  &__burger
+    width: 40px
+    height: 30px
+    margin-right: 20px
+    cursor: pointer
+    display: none  // Hidden by default
+    flex-direction: column
+    justify-content: space-around
+    padding: 5px 0
+
+    span
+      display: block
+      height: 4px
+      width: 100%
+      background: $text-color
+      border-radius: 9px
+      transition: .25s ease-in-out
+
+  &__mobile-menu,
+  &__user-menu
+    .v-list-item
+      margin: 4px 0
+      padding: 8px 16px
+    
+    .v-icon
+      margin-right: 12px
+
+  &__menu-item--danger
+    color: $danger-color !important
+    .v-icon
+      color: $danger-color !important
+
+// Media Queries - Three breakpoint system
+@media (max-width: $mobile-breakpoint)
+  .navbar
+    &__nav
+      display: none
+    
+    &__burger
+      display: flex
+    
+    &__avatar
+      margin-left: 16px
+      display: flex  // Ensure avatar is always visible
+
+@media (min-width: $mobile-breakpoint + 1) and (max-width: $tablet-breakpoint)
+  .navbar
+    &__nav
+      display: none
+    
+    &__burger
+      display: flex
+    
+    &__avatar
+      display: flex  // Ensure avatar is always visible
+      margin-left: 20px
+
+@media (min-width: $tablet-breakpoint + 1)
+  .navbar
+    &__burger
+      display: none
+    
+    &__nav
+      display: flex
+    
+    &__avatar
+      display: flex  // Ensure avatar is always visible
+
+// Vuetify overrides
+.v-toolbar
+  padding: 0 !important
+
+.v-btn
+  text-transform: none !important
+  letter-spacing: 0.5px !important
