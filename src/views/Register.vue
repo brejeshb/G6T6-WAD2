@@ -1,5 +1,6 @@
 <template>
-  <div class="min-h-screen flex items-center justify-center bg-[#FEFAE0]">
+  <div class="min-h-screen flex items-center justify-center bg-custom-bg">
+    <!-- White container with form content -->
     <div class="max-w-md w-full space-y-8 p-8 bg-white rounded-lg shadow-xl">
       <!-- Logo -->
       <div class="flex justify-center">
@@ -151,6 +152,21 @@ onMounted(() => {
   readData();
 });
 </script>
+
+<style scoped>
+/* Custom background class for the page */
+.bg-custom-bg {
+  background-color: black;
+  background-image: url("../assets/images/redox-02.png") !important;
+
+  /* Use absolute or relative path based on your assets folder */
+  /* background-image: url("https://www.transparenttextures.com/patterns/rough-diagonal.png"); */
+  /* background-image: url("../assets/images/redox-02.png"); Make sure the path is correct */
+  background-size: cover; /* Ensures the image covers the entire screen */
+  background-position: center;
+  background-repeat: no-repeat;
+}
+</style>
 
 <!-- Original template for reference -->
 <!-- <h1>Create an Account</h1>
