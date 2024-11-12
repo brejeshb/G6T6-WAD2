@@ -14,7 +14,7 @@ const routes = [
   { path: '/Register', component: Register },
   { path: '/Dashboard', component: DashboardPage },
   { path: '/Forest', component: Forest },
-  { path: '/ItemIdentifier', component: ItemIdentifier },
+  { path: '/RecycleNow', component: ItemIdentifier },
   { path: '/Education/Quiz', component: Quiz },
   { path: '/Education/Video', component: Video },
   { path: '/Leaderboard', component: Leaderboard },
