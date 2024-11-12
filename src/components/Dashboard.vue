@@ -157,7 +157,7 @@
 
 // Importing Smaller Components
 import { supabase } from '../lib/supabaseClient';
-
+import { useAuth } from '../lib/auth.js'; // Adjust the path as needed
 import PieChart from './dashboardCharts/piechart.vue';
 import TreesSaved from './dashboardCharts/treesSavedChart.vue';
 import leaderboardRanking from './dashboardCharts/leaderboardRankingOverTime.vue';
@@ -166,7 +166,7 @@ import Radar from './dashboardCharts/radar.vue';
 import Doughnut from './dashboardCharts/doughnut.vue';
 import SocialsDiv from './dashboardCharts/socialsIcons.vue';
 import Button from './dashboardCharts/button.vue';
-import { useAuth } from '../lib/auth'
+// import { useAuth } from '../lib/auth'
 import { ref, watchEffect } from 'vue';
 import { Bubble } from 'vue-chartjs';
 import BubbleChart from './dashboardCharts/bubbleChart.vue';
@@ -175,6 +175,7 @@ import 'aos/dist/aos.css';  // Import the AOS styles
 
 const { userName } = useAuth();
 var currUser = userName;
+
 
 
 
@@ -243,7 +244,6 @@ export default {
     },
     async created() {
         // fetch data from Supabase
-        await this.fetchAllData();
     },
     computed: {
         currRankingFormatted() {
@@ -284,6 +284,7 @@ export default {
             this.totalTreesSaved = 0;
             try {
                 // Get CO2 EMISSION DATA + TREES SAVED
+                console.log(this.username);
                 let { data: UserOverallStatsTable, error: error1 } = await supabase
                     .from('UserOverallStatsTable')
                     .select('*') // Select all columns
@@ -297,7 +298,7 @@ export default {
                 else {
                     // console.log(UserOverallStatsTable); // <Object>
 
-                    // console.log(UserOverallStatsTable);
+                    console.log(UserOverallStatsTable);
                     this.totalCo2Reduction = UserOverallStatsTable[0].total_co2_emission_reduction;
                     this.totalTreesSaved = UserOverallStatsTable[0].total_trees_saved;
                     this.totalPoints = UserOverallStatsTable[0].total_points_accumulated;
@@ -839,13 +840,14 @@ export default {
         }
 
     },
-    mounted() {
+    async mounted() {
+        await this.fetchAllData();
         AOS.init({
             duration: 500, // Animation duration in milliseconds
             easing: 'ease-in-out', // Animation easing
             once: false,
         });
-
+        
 
     },
 }; 
