@@ -9,7 +9,7 @@
       <section class="section" id="section-1">
         <div class="info-section">
           <div class="row">
-            <div class="col-12 col-md-6" v-for="card in infoCards" :key="card.id" v-bind:data-aos="'fade-up'">
+            <div class="col-12 col-md-6" v-for="card in infoCards" :key="card.id">
               <div class="card rounded-5">
                 <img :src="card.image" class="card-img-top">
                 <div class="card-body  rounded-bottom">
