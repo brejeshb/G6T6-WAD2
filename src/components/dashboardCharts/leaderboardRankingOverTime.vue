@@ -2,7 +2,7 @@
 <template>
     <div class="border rounded-5 p-2 p-md-3 p-lg-5 p-xl-5 w-100 h-100 bento" style="min-height: 600px;">
         <div class="text-center mb-4 w-100">
-            <h1>Your Leaderboard Ranking Over Time</h1>
+            <h1>Highest Ranking Over Time</h1>
         </div>
         <div class="chart-container">
             <canvas id="leaderboardRanking"></canvas>

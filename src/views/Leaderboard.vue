@@ -174,12 +174,14 @@ async function fetchLeaderboardData() {
         return;
     }
 
-
+    
     players.value = UserOverallStatsTable.slice(0,13).map((record, index) => ({
         rank: index + 1,
         name: record.username,
         score: record.total_points_accumulated,
     }));
+
+    console.log(players.value); 
 
 
 

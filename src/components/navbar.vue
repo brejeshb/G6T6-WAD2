@@ -125,6 +125,7 @@ onUnmounted(() => {
   window.removeEventListener('resize', handleResize)
 })
 </script>
+
 <style scoped>
 .navbar {
   width: 100%;
@@ -132,8 +133,11 @@ onUnmounted(() => {
   top: 0;
   left: 0;
   right: 0;
-  padding: 0;
-  z-index: 9999; /* Ensures navbar is in front of all other elements */
+  background-color: '#798645';
+  background-clip: content-box; /* <---- */
+  box-shadow: inset 0 0 0 20px  #798645;/* <-- 10px spread radius */
+  padding: 0 20px;
+  z-index: 9999;
 }
 
 .v-toolbar {

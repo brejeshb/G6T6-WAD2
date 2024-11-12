@@ -9,9 +9,13 @@
             style="background-color: #F3F2EC ;"> <!-- Adjust dashboard div color-->
             <div class="pb-0 p-xl-5 pb-0">
                 <h1 data-aos="fade-right">Recycle Right, Feel Right!</h1>
-                <p class="fw-bold" style="color:#788645 ;font-style: italic;" data-aos="fade-right">Here's the recycling
-                    statistics in your
+                <p class="fw-bold" style="color:#788645 ;font-style: italic;" data-aos="fade-right">
+
+                    You earned <mark style="background-color: #D9EA9A;"> {{ totalPoints }} cumulative recycling
+                        points</mark> in
+                    your
                     current lifetime ♥︎
+
                 </p>
             </div>
 
@@ -77,6 +81,7 @@
                             </div>
 
                         </div>
+
                     </div>
                 </div>
 
@@ -191,6 +196,7 @@ export default {
             buttonText: "Download Now",
 
             username: currUser,
+            totalPoints: 0,
             totalCo2Reduction: 0,
             totalTreesSaved: 0,
             currRanking: null,
@@ -294,23 +300,28 @@ export default {
                     // console.log(UserOverallStatsTable);
                     this.totalCo2Reduction = UserOverallStatsTable[0].total_co2_emission_reduction;
                     this.totalTreesSaved = UserOverallStatsTable[0].total_trees_saved;
+                    this.totalPoints = UserOverallStatsTable[0].total_points_accumulated;
+
 
                     // Testing Purposes
                     // console.log(`Username: ${this.username}`);
                     // console.log(`Total CO2 Emission Reduction: ${this.totalCo2Reduction}`);
                     // console.log(`Total Number of Trees Saved: ${this.totalTreesSaved}`);
                 }
-
+                var currDate = new Date().toISOString();
+                // console.log(currDate);
                 // GET USER'S CURRENT RANKINGS
                 let { data: HistoricalLeaderboardTable, error: error2 } = await supabase
                     .from('HistoricalLeaderboardTable')
                     .select("*")
                     .eq("username", this.username)
+                    .lt('updated_at', currDate)
                     .order('updated_at', { ascending: false })
                     .limit(1);
 
+
                 // console.log("HistoricalLeaderboardTable");
-                // console.log(HistoricalLeaderboardTable);
+
                 // console.log(HistoricalLeaderboardTable);
                 if (error2) {
                     console.log("Can't fetch from HistoricalLeaderboardTable");
@@ -440,6 +451,8 @@ export default {
                     .eq('username', this.username)
                     .order('month_number')
 
+
+
                 for (let month of this.timeX) {
                     let found = false;
                     for (let obj of UserRankOverTime) {
@@ -479,13 +492,28 @@ export default {
                     .from('BubbleChartView')
                     .select('*');
 
+
+
                 // make bubble bigger according to total_trees_saved
-                const scalingFactor = 20;
+                const scalingFactor = 15;
                 for (let object of BubbleChartView) {
                     if (object.username == this.username) {
                         this.index = BubbleChartView.indexOf(object);
                     }
-                    this.bubbleData.push({ x: object.total_co2_emission_reduction, y: object.total_trees_saved, r: object.total_trees_saved * scalingFactor });
+
+                    let { data: UserActivitiesTableUser, error } = await supabase
+                        .from('UserActivitiesTable')
+                        .select('*')
+                        .eq('username', object.username);
+
+                    if (error) {
+                        console.log(error);
+                    }
+                    else {
+                        var numActivities = UserActivitiesTableUser.length;
+                    }
+
+                    this.bubbleData.push({ x: numActivities, y: object.total_trees_saved, r: object.total_trees_saved * scalingFactor });
                 };
                 // console.log(this.index);
 
@@ -813,7 +841,7 @@ export default {
     },
     mounted() {
         AOS.init({
-            duration: 1000, // Animation duration in milliseconds
+            duration: 500, // Animation duration in milliseconds
             easing: 'ease-in-out', // Animation easing
             once: false,
         });

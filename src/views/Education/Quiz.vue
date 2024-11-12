@@ -59,7 +59,7 @@
         <!-- Quiz Card Section with AOS animation -->
         <div id="videos" class="mt-4 shadow p-3 mb-5 rounded" data-aos="fade-up">
           <div v-if="!isQuizActive">
-            <h2 class="text-center" data-aos="fade-in">Available Quizzes</h2>
+            <h2 class="text-center fw-bold mt-3 mb-5" data-aos="fade-in">Available Quizzes</h2>
             <div class="row">
               <div class="col-xl-3 col-lg-4 col-md-6 mb-4" v-for="quiz in filteredQuizzes" :key="quiz.id"
                 data-aos="zoom-in">

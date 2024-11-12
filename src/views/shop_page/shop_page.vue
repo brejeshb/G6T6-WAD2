@@ -16,7 +16,7 @@
     
     <div class="row">
       <div class="col-lg-6 col-12 my-3" data-aos="fade-right" data-aos-duration="1500">
-        <div class="title py-4 rounded mb-5 " style="box-shadow: 5px 5px 10px 2px rgb(0 0 0 / 0.8);">Forest</div>
+        <div class="title py-4 rounded mb-5 fw-bold " style="box-shadow: 5px 5px 10px 2px rgb(0 0 0 / 0.8);">Forest</div>
         <div class="forest">
           <table style="box-shadow: 5px 5px 10px 2px rgb(0 0 0 / 0.8); background-color: brown;"
             class="align-content-center mx-auto">
@@ -34,7 +34,7 @@
         </div>
       </div>
       <div class="container-fluid col my-3 text-center"data-aos="fade-left" data-aos-duration="1500">
-        <div class="title py-4 rounded mb-5" style="box-shadow: 5px 5px 10px 2px rgb(0 0 0 / 0.8);">Start growing today</div>
+        <div class="title py-4 rounded mb-5 fw-bold" style="box-shadow: 5px 5px 10px 2px rgb(0 0 0 / 0.8);">Start growing today</div>
         <div class="growing">
           <div class="circle_tree justify-content-center align-items-center d-flex">
             <img v-if="cal_data.current_tree != ''" :src="cal_data.picture" id="tree" style="height: 70%; width: 70%" />
@@ -57,13 +57,13 @@
       <div class="sidebar" :style="menuVisible ? { width: '250px' } : {}">
         <div class="hamburger" @click="toggleMenu">&#9776;</div>
         <div class="header" :class="{ show: menuVisible }">
-          <h1>Shop</h1>
+          <h1 class="fw-bold">Shop</h1>
         </div>
         <div class="menu" :class="{ show: menuVisible }">
           <a href="#" @click="triggerAll">All</a>
           <a href="#" @click="changePet_state">Pets</a>
           <a href="#" @click="changetree_state">Trees</a>
-          <p>Your current points: {{ cal_data.current_points }}</p>
+          <p >Your current points: <span class="fw-bold"> {{ cal_data.current_points }} </span></p>
 
         </div>
       </div>
@@ -72,7 +72,7 @@
         <div class="row mb-3">
           <input id="searchBar" class="col-lg-5 col-sm-9 col-8 me-1 rounded" type="text" placeholder="Search items..." @input="shop_display()" v-model="search" />
           <button type="button"  @click="shop_open = false" class="btn btn-secondary col-lg-1 col-xs-2 col-1 order-lg-last mx-4" style="width: 50px;">X</button>
-          <select class="filters col-lg-5 col-sm-9 col-8" @change="shop_display()" v-model="sort">
+          <select class="filters col-lg-5 col-sm-9 col-8 fw-bold" @change="shop_display()" v-model="sort">
             <option>Sort by: Highest price</option>
             <option>Lowest price</option>
           </select>
@@ -82,7 +82,7 @@
         <div class="item-grid">
           <div class="item shadow" v-for="item of shop_display()" @click="purchase(item)">
             <img :src="item.tree_png" alt="FAMAS Pulse" />
-            <h3  class='text-color'>{{ formattedItem(item.item) }}</h3>
+            <h3  class='text-color fw-bold'>{{ formattedItem(item.item) }}</h3>
             <p class="price"><span style="color: white;"></span>Cost: {{ item.price }}</p>
             <p class="time text-color" ><span >Cost to grow: </span>{{ item.growth_points }}</p>
           </div>

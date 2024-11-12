@@ -98,6 +98,7 @@
               <p id="result" style="margin-top: 10px;">{{ resultMessage }}</p>
             </div>
             <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" @click="clearImage">Clear Image</button>
               <button type="button" class="btn btn-primary" @click="recycleNow()" :class="{ 'disabled': isTrue }">I want
                 to recycle
                 this!</button>
@@ -105,7 +106,7 @@
           </div>
         </div>
       </div>
-      <Footer2/>
+      <Footer2 />
     </div>
 
 
@@ -184,7 +185,7 @@ export default {
     });
   },
   methods: {
-     loadGoogleMapsScript() {
+    loadGoogleMapsScript() {
       return new Promise((resolve, reject) => {
         if (typeof google !== "undefined" && google.maps) {
           resolve();
@@ -215,7 +216,7 @@ export default {
 
     },
     performSearch() {
-      
+
       const geocoder = new google.maps.Geocoder();
 
       this.initMap();
@@ -308,6 +309,13 @@ export default {
 
     triggerImageUpload() {
       this.$refs.fileInput.click();
+    },
+
+    clearImage() {
+      this.imagePreviewUrl = null; // Clear the image preview
+      this.resultMessage = 'Please upload an image of your item to ensure it is recyclable before you can submit and earn points';
+      this.$refs.fileInput.value = ''; // Clear the file input
+      this.isTrue = true; // Reset the button state if needed
     },
 
     getAccessToken() {

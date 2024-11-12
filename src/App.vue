@@ -1,14 +1,17 @@
 <script setup lang="ts">
+import { useRoute } from 'vue-router';
 import Footer2 from './components/footer2.vue';
 import Navbar from './components/navbar.vue';
 import { defineComponent } from 'vue';
+
+const route = useRoute();
 </script>
 
 <template>
   <div id="app">
-    <Navbar />
+    <Navbar v-if="route.path !== '/'" />
     <!-- Content should be pushed down by the height of the navbar -->
-    <div class="content-wrapper">
+    <div :class="{'content-wrapper': true, 'with-navbar': route.path !== '/'}">
       <router-view />
     </div>
     <!-- <Footer2/> -->
@@ -32,6 +35,10 @@ import { defineComponent } from 'vue';
 <style scoped>
 /* Add padding or margin to the content area */
 .content-wrapper {
+  transition: margin-top 0.3s ease; /* Smooth transition for margin-top */
+}
+
+.content-wrapper.with-navbar {
   margin-top: 64px; /* Adjust based on the height of your navbar */
 }
 </style>
