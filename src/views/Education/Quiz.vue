@@ -1,4 +1,5 @@
 <template>
+
   <div style="  background-color: #f8f4ec;   background-attachment: fixed;
   background-image: url('/img/moreblocks.jpg');
   background-size: 100vw auto;height: 100vh;">
@@ -20,7 +21,7 @@
       <!-- Main Content Section with Filter and Search Bar -->
       <div id="main_content" class="container pt-3" data-aos="fade-up">
         <div id="nav-bar">
-          <nav class="navbar navbar-expand-lg bg-body-tertiary flex-column" data-aos="fade-left">
+          <nav class="navbar rounded shadow navbar-expand-lg bg-body-tertiary flex-column" data-aos="fade-right">
             <div class="container-fluid">
               <a class="navbar-brand ms-5" href="#" style="color:#686c44">Filter</a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -46,7 +47,7 @@
                       @click.prevent="activeFilter = 'upcycling'">Upcycle</a>
                   </li>
                 </ul>
-                <form class="d-flex" role="search" @submit.prevent data-aos="fade-left">
+                <form class="d-flex" role="search">
                   <input class="form-control me-3" type="search" placeholder="Search" aria-label="Search"
                     v-model="search">
                   <button class="btn btn-outline-success" type="button" @click="search = ''">Reset</button>
@@ -129,6 +130,7 @@ import { useAuth } from '../../lib/auth'
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Footer2 from '../../components/footer2.vue'
+import Navbar from '../../components/navbar.vue'
 
 onMounted(async () => {
   AOS.init({
@@ -524,6 +526,8 @@ function getScorePercentage(quizId) {
   const attempt = quizAttempts[quizId];
   return attempt ? Math.round((attempt.score / quizzes.find(q => q.id === quizId).questions.length) * 100) : 0;
 }
+
+
 </script>
 
 <style scoped>

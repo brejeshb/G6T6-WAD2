@@ -5,11 +5,12 @@ import Navbar from './components/navbar.vue';
 import { defineComponent } from 'vue';
 
 const route = useRoute();
+
 </script>
 
 <template>
   <div id="app">
-    <Navbar v-if="route.path !== '/'" />
+    <Navbar v-if="route.path !== '/' " />
     <!-- Content should be pushed down by the height of the navbar -->
     <div :class="{'content-wrapper': true, 'with-navbar': route.path !== '/'}">
       <router-view />
