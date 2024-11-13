@@ -9,7 +9,7 @@ import * as directives from 'vuetify/directives';
 import { createVuetify } from 'vuetify';
 import 'vuetify/styles';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import { piniaInstance } from './global.ts';  // Import piniaInstance
+import { piniaInstance } from './global.ts';
 
 import '@mdi/font/css/materialdesignicons.css';
 
