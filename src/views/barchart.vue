@@ -55,7 +55,6 @@ const youPlugin = {
             ctx.textAlign = 'center';
             ctx.textBaseline = 'bottom';
             ctx.fillText('You!', x, y - 10);
-            console.log(y)
         }
     }
 };
