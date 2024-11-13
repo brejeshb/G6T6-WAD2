@@ -27,6 +27,7 @@ List the key features of your project. Highlight its unique aspects or functiona
 - Recycling Impact Dashboard
 - Leaderboard
 - Forest
+    - to access the button to earn points, create an account with admin anywhere in its name
 - Education hub (Quizzes + Videos)
 - Item Identifier / Recycling Bin Map
 
@@ -42,7 +43,7 @@ Follow these steps to get your project up and running locally.
 
    ```bash
    git clone https://github.com/brejeshb/G6T6-WAD2.git
-   
+
 Navigate into the project directory:
 
 cd G6T6-WAD2
@@ -81,6 +82,7 @@ Give credit to those who helped you with your project, if applicable.
 [VueRouter]
 [Pina]
 [Vuetify]
+[Vue]
 
 
 
