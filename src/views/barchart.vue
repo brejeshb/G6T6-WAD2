@@ -109,6 +109,7 @@ const fetchData = async () => {
 
 // Fetch data when the component is mounted
 onMounted(fetchData);
+console.log(data)
 
 </script>
 
