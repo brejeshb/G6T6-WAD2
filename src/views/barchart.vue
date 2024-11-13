@@ -55,7 +55,6 @@ const youPlugin = {
             ctx.textAlign = 'center';
             ctx.textBaseline = 'bottom';
             ctx.fillText('You!', x, y - 10);
-            console.log(y)
         }
     }
 };
@@ -148,6 +147,17 @@ onMounted(fetchData);
 </script>
 
 <style scoped>
+
+.chart-container {
+    width: 100%;
+    height: 70vh;              /* Set height relative to viewport for responsiveness */
+    max-width: 100%;           /* Ensures container doesn't overflow parent width */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;         /* Sets a minimum height */
+    position: relative;
+}
 
 canvas {
     width: 100% !important;
