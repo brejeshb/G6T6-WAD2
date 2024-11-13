@@ -154,15 +154,14 @@ onMounted(() => {
 </script>
 
 <style scoped>
-/* Custom background class for the page */
 .bg-custom-bg {
   background-color: black;
   background-image: url("../assets/images/redox-02.png") !important;
 
   /* Use absolute or relative path based on your assets folder */
   /* background-image: url("https://www.transparenttextures.com/patterns/rough-diagonal.png"); */
-  /* background-image: url("../assets/images/redox-02.png"); Make sure the path is correct */
-  background-size: cover; /* Ensures the image covers the entire screen */
+  /* background-image: url("../assets/images/redox-02.png");*/
+  background-size: cover; 
   background-position: center;
   background-repeat: no-repeat;
 }

@@ -4,16 +4,16 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
-import * as components from 'vuetify/components'
-import * as directives from 'vuetify/directives'
+import * as components from 'vuetify/components';
+import * as directives from 'vuetify/directives';
 import { createVuetify } from 'vuetify';
-import 'vuetify/styles'; // Global Vuetify styles
+import 'vuetify/styles';
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import { piniaInstance } from './global.ts';
 
+import '@mdi/font/css/materialdesignicons.css';
 
-import '@mdi/font/css/materialdesignicons.css'; // Import the Material Design Icon font
-
-// Import Firebase and initialize it
+// Firebase not in use for this project
 import { initializeApp } from "firebase/app";
 
 const firebaseConfig = {
@@ -25,19 +25,19 @@ const firebaseConfig = {
   appId: "1:6325141042:web:8235f9b26a915e3ba3c62b"
 };
 
-// Initialize Firebase
 initializeApp(firebaseConfig);
 
-// Vuetify configuration
+
 const vuetify = createVuetify({
   components,
   directives,
   icons: {
-    defaultSet: 'mdi',  // Telling Vuetify to use the 'mdi' icon set by default
+    defaultSet: 'mdi',
   },
 });
 
 createApp(App)
   .use(router)
-  .use(vuetify) // Make sure Vuetify is used here
+  .use(vuetify)
+  .use(piniaInstance)
   .mount('#app');

@@ -175,7 +175,7 @@ onUpdated(() => {
 
 const { userName } = useAuth();
 
-var currUser = userName;
+var currUser = ref(userName);
 
 
 const quizzes = [

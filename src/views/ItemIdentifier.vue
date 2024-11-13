@@ -1,5 +1,6 @@
   <template>
-    <div id="container">
+  <Preloader v-if="!isPageLoaded" :minimum-time="1500" />
+  <div v-show="isPageLoaded" id="container">
       <div id="section-0">
         <div class="leaderboard-head">
           <h1 id="leaderboard-title"><span id="half-title">Recycle</span> Now Lah!</h1>
@@ -84,11 +85,9 @@
 
                 <p id="uploadText" v-if="!imagePreviewUrl">Click to select<br>JPG, PNG, BMP, or WEBP Only</p>
 
-
                 <img v-if="imagePreviewUrl" :src="imagePreviewUrl" alt="Image Preview" id="imagePreview" />
               </div>
               <input type="file" ref="fileInput" accept="image/*" style="display: none" @change="analyseImage" />
-
 
               <div style="margin-top: 10px ;" v-if="loading" class="spinner-border text-primary" role="status">
                 <span class="visually-hidden">Loading...</span>
@@ -129,23 +128,28 @@ import { supabase } from '../lib/supabaseClient';
 import { useAuth } from '../lib/auth'
 
 import Footer2 from '../components/footer2.vue';
-
-const { userName } = useAuth();
-var currUser = userName;
-
+import Preloader from '../components/Preloader.vue';
 
 export default {
   components: {
-    Footer2
+    Footer2,
+    Preloader
+  },
+  setup() {
+
+    const { userName } = useAuth();
+    const username = userName; 
+    return { username };
   },
 
   data() {
     return {
-      username: currUser,
+      
+      isPageLoaded: false,
       map: null,
       isTrue: true,
       ifInsertSuccess: false,
-      loading: false, 
+      loading: false,
       recyclablesArr: ["Cloth", "Metal", "Plastic", "Paper", "Glass"],
       uploadedMaterial: undefined,
       nyckelKey: undefined,
@@ -179,16 +183,17 @@ export default {
       ]
     };
   },
+
   mounted() {
-    AOS.init({
-      duration: 800,
-      easing: 'ease-in-out',
-      once: false,
-    });
-    this.loadGoogleMapsScript().then(() => {
-      this.initMap();
-    });
-  },
+  Promise.all([
+    AOS.init({ duration: 800, easing: 'ease-in-out', once: false }),
+    this.loadGoogleMapsScript(),
+    new Promise(resolve => setTimeout(resolve, 1500))
+  ]).then(() => {
+    this.isPageLoaded = true;
+    this.initMap();
+  });
+},
   methods: {
     loadGoogleMapsScript() {
       return new Promise((resolve, reject) => {
@@ -228,7 +233,8 @@ export default {
 
       this.clearMarkers();
       this.clearRoute();
-      
+
+
       geocoder.geocode({ address: this.searchText }, (results, status) => {
         if (status === 'OK') {
           const searchLocation = results[0].geometry.location;
@@ -245,7 +251,6 @@ export default {
 
           const bounds = new google.maps.LatLngBounds();
           bounds.extend(searchLocation);
-
           this.mapJson.features.forEach((feature) => {
             const [lng, lat] = feature.geometry.coordinates;
             const binLocation = new google.maps.LatLng(lat, lng);
@@ -294,8 +299,10 @@ export default {
     },
 
     clearMarkers() {
+
       this.mapMarkers.forEach((marker) => marker.setMap(null));
-      this.mapMarkers = []; 
+      this.mapMarkers = [];
+
 
       if (this.searchLocationMarker) {
         this.searchLocationMarker.setMap(null);
@@ -340,7 +347,7 @@ export default {
           return material;
         }
       }
-      return null; 
+      return null;  
     },
 
     async recycleNow() {
@@ -566,7 +573,7 @@ export default {
 @media (min-width: 768px) {
 
   .card-container {
-    overflow: hidden; 
+    overflow: hidden;  
   }
 
 }

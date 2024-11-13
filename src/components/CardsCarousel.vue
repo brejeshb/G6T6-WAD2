@@ -20,8 +20,8 @@
                                 <h3 class="card-title fw-bold">Where I stand?</h3>
                             </div>
                             <p class="card-text">
-                                See how your impact compares to other eco-warriors. The closer to 100, the more powerful
-                                you are!
+                                See how your impact compares to other eco-warriors. The closer to 100, the better you are as an eco-warrior, compared
+                                to the community!
 
 
                             </p>

@@ -131,7 +131,7 @@ import { useAuth } from '../../lib/auth'
 const { userName } = useAuth();
 import Footer2 from '../../components/footer2.vue'
 
-var currUser = userName;
+var currUser = ref(userName);
 
 
 readData()

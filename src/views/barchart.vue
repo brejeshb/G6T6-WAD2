@@ -167,4 +167,6 @@ const fetchData = async () => {
 
 // Fetch data on mounted
 onMounted(fetchData);
+
+
 </script>

@@ -45,35 +45,43 @@
 
 <script setup>
 import { ref } from 'vue';
-import { useAuth } from '../../lib/auth'; // Adjust the path to auth.js
+import { useAuth } from '../../lib/auth';
+import { useRouter } from 'vue-router';
 
 const emit = defineEmits(['switch-mode', 'auth-success']);
+const router = useRouter();
 
 const username = ref('');
 const password = ref('');
 const isLoading = ref(false);
 const error = ref('');
 
-const { login } = useAuth(); // Access the login function from useAuth()
+const { login } = useAuth();
 
 async function handleSubmit() {
   isLoading.value = true;
-  error.value = ''; // Clear any previous errors
+  error.value = '';
 
   try {
-    // Attempt to login
     const success = await login(username.value.trim(), password.value.trim());
 
     if (success) {
-      emit('auth-success'); // If login is successful, emit auth-success
+      const redirectPath = localStorage.getItem('redirectPath');
+      if (redirectPath) {
+        localStorage.removeItem('redirectPath');
+        router.push(redirectPath);
+      } else {
+        router.push('/Dashboard');
+      }
+      emit('auth-success');
     } else {
-      error.value = 'Invalid username or password'; // Handle invalid credentials
+      error.value = 'Invalid username or password';
     }
   } catch (err) {
     console.error('Login error:', err);
-    error.value = 'An error occurred during login'; // Handle any network or query errors
+    error.value = 'An error occurred during login';
   } finally {
-    isLoading.value = false; // Stop loading
+    isLoading.value = false;
   }
 }
 </script>

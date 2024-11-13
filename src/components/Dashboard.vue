@@ -173,8 +173,8 @@ import BubbleChart from './dashboardCharts/bubbleChart.vue';
 import AOS from 'aos';
 import 'aos/dist/aos.css';  // Import the AOS styles
 
-const { userName } = useAuth();
-var currUser = userName;
+// const { userName } = useAuth();
+// var currUser = userName;
 
 
 
@@ -191,12 +191,17 @@ export default {
         SocialsDiv,
         Button,
     },
+    setup() {
+    const { userName } = useAuth();
+    const username = userName;
+    return { username };
+  },
     data() {
         return {
             // button 
             buttonText: "Download Now",
 
-            username: currUser,
+            
             totalPoints: 0,
             totalCo2Reduction: 0,
             totalTreesSaved: 0,
@@ -840,6 +845,7 @@ export default {
     },
     async mounted() {
         await this.fetchAllData();
+
         AOS.init({
             duration: 500, // Animation duration in milliseconds
             easing: 'ease-in-out', // Animation easing

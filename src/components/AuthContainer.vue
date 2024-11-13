@@ -1,18 +1,14 @@
 <template>
   <div class="auth-page" @click="handleOutsideClick">
-    <!-- Video Background -->
     <video autoplay muted loop playsinline class="background-video">
       <source :src="currentVideo" type="video/mp4">
     </video>
 
-    <!-- Main container -->
+
     <div class="main-content">
-      <!-- Quote Section -->
       <div class="quote-section" :class="{ 'shift-left': showAuthForm }">
         <div class="quote-container">
-          <!-- Quote container with dynamic width for smaller quote -->
           <div class="quote-inner-container" :class="{ 'smaller-quote-container': showAuthForm }">
-            <!-- Split quote into text and author -->
             <p class="quote" :class="{ 'smaller-quote': showAuthForm }">{{ quoteText }}</p>
             <p class="author" :class="{ 'smaller-author': showAuthForm }">{{ authorText }}</p>
           </div>
@@ -23,10 +19,8 @@
         </div>
       </div>
 
-      <!-- Auth Container -->
       <div class="auth-container" :class="{ 'show': showAuthForm }" @click.stop>
         <div class="auth-form">
-          <!-- Dynamic component (Login/Register) -->
           <component 
             :is="currentView" 
             @switch-mode="switchMode"
@@ -52,7 +46,7 @@ const RegisterForm = defineAsyncComponent(() => import('./AuthForms/RegisterForm
 
 const currentView = ref(LoginForm);
 
-// Define quotes
+
 const quotes = [
   "The greatest threat to our planet is the belief that someone else will save it.\n— Robert Swan",
   "We do not inherit the Earth from our ancestors, we borrow it from our children.\n— Native American Proverb",
@@ -63,7 +57,7 @@ const quotes = [
 
 const currentQuote = ref(quotes[Math.floor(Math.random() * quotes.length)]);
 
-// Split the quote and author
+
 const quoteText = ref('');
 const authorText = ref('');
 
@@ -75,7 +69,7 @@ const setQuote = (quote) => {
 
 setQuote(currentQuote.value);
 
-// Define video file paths (use public/assets path for Vue project)
+
 const vids = [
   "/vids/batteryvid.mp4", 
   "/vids/picktrash.mp4", 
@@ -84,12 +78,12 @@ const vids = [
 
 const currentVideo = ref(vids[Math.floor(Math.random() * vids.length)]);
 
-// Switch between Login and Register forms
+
 const switchMode = (mode) => {
   currentView.value = mode === 'login' ? LoginForm : RegisterForm;
 };
 
-// Handle successful authentication
+
 const handleAuthSuccess = () => {
   router.push('/Dashboard');
 };
@@ -145,7 +139,7 @@ const handleCloseForm = () => {
   display: flex;
   align-items: center;
   color: white;
-  padding: 0 20px; /* Add some padding to prevent overflow */
+  padding: 0 20px;
 }
 
 .quote-section {
@@ -154,7 +148,7 @@ const handleCloseForm = () => {
   justify-content: center;
   align-items: center;
   transition: transform 0.5s ease-out;
-  overflow: hidden; /* Prevent overflow */
+  overflow: hidden;
 }
 
 .quote-section.shift-left {
@@ -163,10 +157,10 @@ const handleCloseForm = () => {
 
 .quote-container {
   text-align: center;
-  max-width: 800px; /* Set a max-width for quote container */
+  max-width: 800px;
   width: 100%;
-  padding: 0 20px; /* Padding to avoid text touching the edges */
-  overflow: hidden; /* Ensure content stays inside */
+  padding: 0 20px;
+  overflow: hidden;
 }
 
 .quote-inner-container {
@@ -184,7 +178,7 @@ const handleCloseForm = () => {
   line-height: 1.4;
   margin-bottom: 10px;
   font-weight: 300;
-  word-wrap: break-word; /* Ensure long words break properly */
+  word-wrap: break-word;
 }
 
 .author {
@@ -233,7 +227,6 @@ const handleCloseForm = () => {
   margin: 0 auto;
 }
 
-/* Dynamic style for smaller quote when auth form is open */
 .smaller-quote {
   font-size: 20px;
 }
@@ -252,7 +245,7 @@ const handleCloseForm = () => {
     transform: translateX(-100%);
   }
 
-  /* Adjust padding for smaller screens */
+
   .quote-container {
     padding: 0 10px;
   }
@@ -268,7 +261,7 @@ const handleCloseForm = () => {
   }
 
   .quote-container {
-    padding: 0 10px; /* Ensure padding on small screens */
+    padding: 0 10px;
   }
 }
 </style>

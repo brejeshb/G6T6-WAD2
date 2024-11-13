@@ -1,13 +1,12 @@
+<!-- This page is notbeing used -->
 <template>
   <div class="login-page" @click="handleOutsideClick">
-    <!-- Video Background -->
     <video autoplay muted loop playsinline class="background-video">
       <source src="/public/vids/batteryvid.mp4" type="video/mp4">
     </video>
-    
-    <!-- Main container -->
+
     <div class="main-content">
-      <!-- Initial View with Quote -->
+
       <div class="quote-section" :class="{ 'shift-left': showLogin }">
         <div class="quote-container">
           <p class="quote">{{ currentQuote }}</p>
@@ -17,7 +16,7 @@
         </div>
       </div>
 
-      <!-- Login Container -->
+ 
       <div class="login-container" :class="{ 'show': showLogin }" @click.stop>
         <div class="login-form">
           <img src="../assets/images/logo.png" alt="Logo" class="logo" />
