@@ -1,7 +1,5 @@
   <template>
-
     <div id="container">
-      <Preloader />
       <div id="section-0">
         <div class="leaderboard-head">
           <h1 id="leaderboard-title"><span id="half-title">Recycle</span> Now Lah!</h1>
@@ -83,15 +81,13 @@
             <div class="modal-body text-center">
 
               <div class="upload-container" @click="triggerImageUpload">
-                <!-- Only show this text if no image preview is available -->
+
                 <p id="uploadText" v-if="!imagePreviewUrl">Click to select<br>JPG, PNG, BMP, or WEBP Only</p>
 
-                <!-- Image preview, fills the container and hides the text when visible -->
                 <img v-if="imagePreviewUrl" :src="imagePreviewUrl" alt="Image Preview" id="imagePreview" />
               </div>
               <input type="file" ref="fileInput" accept="image/*" style="display: none" @change="analyseImage" />
 
-              <!-- Display loading spinner if loading is true -->
               <div style="margin-top: 10px ;" v-if="loading" class="spinner-border text-primary" role="status">
                 <span class="visually-hidden">Loading...</span>
               </div>
@@ -131,12 +127,10 @@ import { supabase } from '../lib/supabaseClient';
 import { useAuth } from '../lib/auth'
 
 import Footer2 from '../components/footer2.vue';
-import Preloader from '../components/Preloader.vue'
 
 export default {
   components: {
     Footer2,
-    Preloader
   },
   setup() {
 
