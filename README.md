@@ -85,3 +85,6 @@ We would like to express our gratitude to the following libraries and tools that
 - [VueRouter](https://router.vuejs.org/) – Vue.js routing library
 - [Pinia](https://pinia.vuejs.org/) – State management for Vue 3
 - [Vuetify](https://vuetifyjs.com/) – Material Design component framework for Vue.js
+- [Data.gov] (https://data.gov.sg/collections/1450/view) - Recycling bins latitude & longtitude data in Singapore
+- [Nyckel] (https://www.nyckel.com/pretrained-classifiers/recycling-identifier/) - Pre-trained AI Image Identifier for Recyclables API by Nyckel
+- [GoogleForDevelopers] (https://developers.google.com/maps) - Maps Javascript API & Geocoding API by Google
