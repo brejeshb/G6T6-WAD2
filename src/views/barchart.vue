@@ -38,7 +38,9 @@ const ChartOptions = {
     indexAxis: 'y', // Set indexAxis to 'y' for horizontal bars
     elements: {
         bar: {
-            borderWidth: 2,
+            borderWidth: 1.0,
+            categoryPercentage: 1.0 // Adjust spacing between bars (1.0 fills the entire category width)
+
         }
     },
     responsive: true,
@@ -59,9 +61,14 @@ const ChartOptions = {
             },
             ticks: {
                 font: {
-                    weight: 'bold' // Set font weight to bold for x-axis labels
-                }
+                    weight: 'bold', // Set font weight to bold for x-axis labels
+                    size: 10 // Set a smaller font size if labels are too large
+
+                },
+                autoSkip: false,
+
             },
+
 
         },
         y: {
@@ -69,6 +76,8 @@ const ChartOptions = {
                 display: false
             },
             ticks: {
+                autoSkip: false, // Ensure all labels are displayed on the y-axis
+
                 font: {
                     weight: 'bold' // Set font weight to bold for x-axis labels
                 }
