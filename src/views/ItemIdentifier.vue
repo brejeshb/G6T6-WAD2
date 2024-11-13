@@ -117,6 +117,7 @@
   </template>
 
 <script>
+console.warn = function () {};
 
 const cs_key = import.meta.env.VITE_MAPS_API_KEY;
 const nyckelClientId = import.meta.env.VITE_NYCKEL_CLIENT_ID;
