@@ -298,6 +298,7 @@ onMounted(async () => {
     display: grid;
     align-items: center;
     height: 100%;
+    padding: 0px;
 }
 
 .bar-chart {

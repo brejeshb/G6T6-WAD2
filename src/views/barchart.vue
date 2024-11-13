@@ -97,7 +97,7 @@ const ChartOptions = {
 };
 
 // Get random position function for distributing bubbles
-const getRandomPosition = (min = 10, max = 90) => Math.random() * (max - min) + min;
+const getRandomPosition = (min = 20, max = 80) => Math.random() * (max - min) + min;
 
 // Fetch data and update ChartData
 const fetchData = async () => {
@@ -129,8 +129,8 @@ const fetchData = async () => {
                     player.username === loggedInUsername.value ? '#FF0000' : `hsl(${(Math.random() * 360)}, 70%, 50%, 0.5)`
                 ),
                 data: playerschart.value.map(player => ({
-                    x: getRandomPosition(0, 100),
-                    y: getRandomPosition(0, 100),
+                    x: getRandomPosition(5, 95),
+                    y: getRandomPosition(5, 95),
                     r: player.username === loggedInUsername.value 
                         ? player.total_points_accumulated / 8 + 2  // Slightly larger size for current user
                         : player.total_points_accumulated / 8,
@@ -148,16 +148,6 @@ onMounted(fetchData);
 </script>
 
 <style scoped>
-.chart-container {
-    width: 100%;
-    height: 70vh;              /* Set height relative to viewport for responsiveness */
-    max-width: 100%;           /* Ensures container doesn't overflow parent width */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 400px;         /* Sets a minimum height */
-    position: relative;
-}
 
 canvas {
     width: 100% !important;
