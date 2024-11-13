@@ -3,12 +3,14 @@ import { useRoute } from 'vue-router';
 import Footer2 from './components/footer2.vue';
 import Navbar from './components/navbar.vue';
 import { defineComponent } from 'vue';
+import Preloader from './components/Preloader.vue';
 
 const route = useRoute();
 
 </script>
 
 <template>
+  <!-- <Preloader /> -->
   <div id="app">
     <Navbar v-if="route.path !== '/' " />
     <!-- Content should be pushed down by the height of the navbar -->

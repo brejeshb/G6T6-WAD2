@@ -1,5 +1,6 @@
   <template>
-    <div id="container">
+  <Preloader v-if="!isPageLoaded" :minimum-time="1500" />
+  <div v-show="isPageLoaded" id="container">
       <div id="section-0">
         <div class="leaderboard-head">
           <h1 id="leaderboard-title"><span id="half-title">Recycle</span> Now Lah!</h1>
@@ -127,10 +128,12 @@ import { supabase } from '../lib/supabaseClient';
 import { useAuth } from '../lib/auth'
 
 import Footer2 from '../components/footer2.vue';
+import Preloader from '../components/Preloader.vue';
 
 export default {
   components: {
     Footer2,
+    Preloader
   },
   setup() {
 
@@ -142,7 +145,7 @@ export default {
   data() {
     return {
       
-
+      isPageLoaded: false,
       map: null,
       isTrue: true,
       ifInsertSuccess: false,
@@ -180,16 +183,18 @@ export default {
       ]
     };
   },
+
   mounted() {
-    AOS.init({
-      duration: 800,
-      easing: 'ease-in-out',
-      once: false,
-    });
-    this.loadGoogleMapsScript().then(() => {
-      this.initMap();
-    });
-  },
+  // Simplified promise handling
+  Promise.all([
+    AOS.init({ duration: 800, easing: 'ease-in-out', once: false }),
+    this.loadGoogleMapsScript(),
+    new Promise(resolve => setTimeout(resolve, 1500)) // For a minimum load time
+  ]).then(() => {
+    this.isPageLoaded = true;
+    this.initMap();
+  });
+},
   methods: {
     loadGoogleMapsScript() {
       return new Promise((resolve, reject) => {
