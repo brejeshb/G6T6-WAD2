@@ -1,5 +1,7 @@
   <template>
+
     <div id="container">
+      <Preloader />
       <div id="section-0">
         <div class="leaderboard-head">
           <h1 id="leaderboard-title"><span id="half-title">Recycle</span> Now Lah!</h1>
@@ -28,8 +30,6 @@
         </div>
       </section>
 
-      <!-- Modals -->
-      <!-- Modal structure for Locate Bins -->
       <div class="modal fade" id="modalLocateBins" tabindex="-1" aria-labelledby="modalLocateBinsLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -131,14 +131,12 @@ import { supabase } from '../lib/supabaseClient';
 import { useAuth } from '../lib/auth'
 
 import Footer2 from '../components/footer2.vue';
-
-// const { userName } = useAuth();
-// var currUser = userName;
-
+import Preloader from '../components/Preloader.vue'
 
 export default {
   components: {
-    Footer2
+    Footer2,
+    Preloader
   },
   setup() {
 
@@ -154,7 +152,7 @@ export default {
       map: null,
       isTrue: true,
       ifInsertSuccess: false,
-      loading: false, // Loading state for the spinner
+      loading: false,
       recyclablesArr: ["Cloth", "Metal", "Plastic", "Paper", "Glass"],
       uploadedMaterial: undefined,
       nyckelKey: undefined,
@@ -235,21 +233,17 @@ export default {
 
       this.initMap();
 
-      // Clear existing markers at the start of each new search
       this.clearMarkers();
       this.clearRoute();
 
 
-      // Start a new search for the entered location
       geocoder.geocode({ address: this.searchText }, (results, status) => {
         if (status === 'OK') {
           const searchLocation = results[0].geometry.location;
           this.map.setCenter(searchLocation);
 
-          // Clear the previous search location marker if it exists
           if (this.searchLocationMarker) this.searchLocationMarker.setMap(null);
 
-          // Add new search location marker
           this.searchLocationMarker = new google.maps.Marker({
             position: searchLocation,
             map: this.map,
@@ -259,8 +253,6 @@ export default {
 
           const bounds = new google.maps.LatLngBounds();
           bounds.extend(searchLocation);
-
-          // Iterate over recycling bins and add markers within 1km
           this.mapJson.features.forEach((feature) => {
             const [lng, lat] = feature.geometry.coordinates;
             const binLocation = new google.maps.LatLng(lat, lng);
@@ -280,7 +272,6 @@ export default {
                 window.open(directionsUrl, '_blank');
               });
 
-              // Store the marker for clearing later
               this.mapMarkers.push(marker);
               bounds.extend(binLocation);
             }
@@ -310,11 +301,11 @@ export default {
     },
 
     clearMarkers() {
-      // Remove all markers from the map
-      this.mapMarkers.forEach((marker) => marker.setMap(null));
-      this.mapMarkers = []; // Reset the marker array
 
-      // Clear the search location marker as well
+      this.mapMarkers.forEach((marker) => marker.setMap(null));
+      this.mapMarkers = [];
+
+
       if (this.searchLocationMarker) {
         this.searchLocationMarker.setMap(null);
         this.searchLocationMarker = null;
@@ -326,10 +317,10 @@ export default {
     },
 
     clearImage() {
-      this.imagePreviewUrl = null; // Clear the image preview
+      this.imagePreviewUrl = null; 
       this.resultMessage = 'Please upload an image of your item to ensure it is recyclable before you can submit and earn points';
-      this.$refs.fileInput.value = ''; // Clear the file input
-      this.isTrue = true; // Reset the button state if needed
+      this.$refs.fileInput.value = ''; 
+      this.isTrue = true; 
     },
 
     getAccessToken() {
@@ -348,18 +339,17 @@ export default {
     },
 
     findWord(word, str) {
-      return new RegExp(`\\(${word}\\)`).test(str);  // Check for the word inside parentheses
+      return new RegExp(`\\(${word}\\)`).test(str);  
     },
 
     checkMaterial(input) {
       for (let material of this.recyclablesArr) {
-        // Use a regular expression to match the exact word
-        let regex = new RegExp(`\\b${material}\\b`, 'i');  // 'i' makes it case-insensitive
+        let regex = new RegExp(`\\b${material}\\b`, 'i');  
         if (regex.test(input)) {
           return material;
         }
       }
-      return null;  // Return null if no match is found
+      return null;  
     },
 
     async recycleNow() {
@@ -517,7 +507,6 @@ export default {
     left: 10%;
     text-align: center;
     width: 80%;
-    /* Make the title wrap instead of using white-space: nowrap */
   }
 }
 
@@ -557,7 +546,6 @@ export default {
   text-align: center;
 }
 
-/* Remove padding for screens smaller than 'md' */
 @media (max-width: 767px) {
   .info-section {
     padding: 0;
@@ -587,7 +575,7 @@ export default {
 @media (min-width: 768px) {
 
   .card-container {
-    overflow: hidden;  /* Prevent scrolling on the main container */
+    overflow: hidden;  
   }
 
 }
@@ -598,15 +586,14 @@ export default {
   }
 
   .card {
-    min-width: 300px; /* Set a min-width for each card */
+    min-width: 300px; 
     flex-shrink: 0;
   }
 }
 
-/* Ensure all cards have the same height */
+
 .card {
   height: 100%;
-  /* Allows consistent height within each column */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -615,9 +602,7 @@ export default {
 
 .card-img-top {
   height: 300px;
-  /* Set a consistent height for all images */
   object-fit: cover;
-  /* Ensures image fills the space without distortion */
   border-radius: 10px 10px 0 0;
 }
 
@@ -644,10 +629,9 @@ export default {
 
 .modal-dialog-centered {
   margin-top: 70px;
-  /* Adjust based on navbar height */
 }
 
-/* Remove extra space below search button */
+
 .modal .container .row:last-of-type {
   margin-bottom: 0;
 }
@@ -675,7 +659,6 @@ export default {
   cursor: pointer;
   margin: auto;
   height: 450px;
-  /* Adjust height as needed */
   width: auto;
   overflow: hidden;
   text-align: center;
