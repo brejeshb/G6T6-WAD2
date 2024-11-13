@@ -51,8 +51,33 @@ const ChartOptions = {
             display: true,
             text: 'User Points Accumulated'
         }
+    },
+    scales: {
+        x: {
+            grid: {
+                display: false, // Hide grid lines on the x-axis
+            },
+            ticks: {
+                font: {
+                    weight: 'bold' // Set font weight to bold for x-axis labels
+                }
+            },
+
+        },
+        y: {
+            grid: {
+                display: false
+            },
+            ticks: {
+                font: {
+                    weight: 'bold' // Set font weight to bold for x-axis labels
+                }
+            }
+
+        }
     }
 }
+
 
 const generateColors = (numColors) => {
     const colors = [];
