@@ -96,7 +96,7 @@
                 <div class="py-5 mx-auto">
                     <div class="card">
                         <div class="card-title hidden">
-                            <h2 style="font-weight: bold;">Overall user ranking</h2>
+                            <h2 style="font-weight: bold;">Overall user rankings</h2>
                         </div>
                         <div class="card-body chart hidden">
                             <hr>
