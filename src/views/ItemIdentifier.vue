@@ -1,5 +1,5 @@
   <template>
-  <Preloader v-if="!isPageLoaded" :minimum-time="1500" />
+  <Preloader v-if="!isPageLoaded" :minimum-time="3000" />
   <div v-show="isPageLoaded" id="container">
       <div id="section-0">
         <div class="leaderboard-head">

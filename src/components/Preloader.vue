@@ -19,7 +19,7 @@
   const props = defineProps({
     minimumTime: {
       type: Number,
-      default: 3000
+      default: 1000
     }
   });
   
