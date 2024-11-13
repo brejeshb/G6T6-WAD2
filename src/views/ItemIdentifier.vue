@@ -11,7 +11,7 @@
         <div class="info-section">
           <div class="card-container">
             <div class="card-wrapper row flex-nowrap">
-              <div class="col-12 col-md-6" v-for="card in infoCards" :key="card.id">
+              <div class="col-12 col-md-6" v-for="card in infoCards" :key="card.id" v-bind:data-aos="'fade-up'">
                 <div class="card rounded-5">
                   <img :src="card.image" class="card-img-top">
                   <div class="card-body rounded-bottom">
@@ -186,7 +186,7 @@ export default {
 
   mounted() {
   Promise.all([
-    AOS.init({ duration: 800, easing: 'ease-in-out', once: false }),
+    AOS.init({ duration: 800, easing: 'ease-in-out', once: false, passive: true }),
     this.loadGoogleMapsScript(),
     new Promise(resolve => setTimeout(resolve, 1500))
   ]).then(() => {
