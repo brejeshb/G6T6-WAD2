@@ -3,7 +3,7 @@
       <div class="content-wrapper">
         <div class="text-section">
           <h1 class="title">
-            <span>LOGIN LAH</span>
+            <span>LoginLah!</span>
           </h1>
           <button @click="redirectToAuth" class="auth-button">
             Back to Login
