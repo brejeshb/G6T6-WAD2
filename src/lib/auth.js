@@ -38,8 +38,6 @@ export const useAuth = () => {
     }
 
     if (data) {
-      console.log('Password input:', password);
-      console.log('Fetched user password:', data.password);
 
       // Check password
       const isPasswordValid = (data.password === null || data.password === "" || data.password === password);

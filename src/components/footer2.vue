@@ -98,7 +98,7 @@
         activeMember: null,
         features: [
           { icon: '📊', name: 'Dashboard', link: '/Dashboard' },
-          { icon: '🔍', name: 'Item Identifier', link: '/ItemIdentifier' },
+          { icon: '🔍', name: 'RecycleNow', link: '/RecycleNow' },
           { icon: '📚', name: 'Education Hub', link: '/Education/Video' },
           { icon: '🛍️', name: 'Shop', link: '/Forest' },
           { icon: '🏆', name: 'Leaderboard', link: '/Leaderboard' },

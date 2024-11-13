@@ -27,6 +27,7 @@ List the key features of your project. Highlight its unique aspects or functiona
 - Recycling Impact Dashboard
 - Leaderboard
 - Forest
+    - to access the button to earn points, create an account with admin anywhere in its name
 - Education hub (Quizzes + Videos)
 - Item Identifier / Recycling Bin Map
 
@@ -43,45 +44,44 @@ Follow these steps to get your project up and running locally.
    ```bash
    git clone https://github.com/brejeshb/G6T6-WAD2.git
    
-Navigate into the project directory:
+2. Navigate into the project directory:
+   
+   ```bash
+   cd G6T6-WAD2
 
-cd G6T6-WAD2
+3. Install dependencies:
 
-Install dependencies:
+   ```bash
+   npm i
 
-npm i
+4. Start the application:
 
-Provide examples and instructions on how to use your project after installation. For example:
-
-Start the application:
-npm run dev
+   ```bash
+   npm run dev
 
 Access the application in your browser at http://localhost:5173.
 
 
-Contributing
-YL-Smu
-luuuneytunes12
-brejeshb
-Chensang-Wu
-annaxlium
+## Contributing
 
-License
+We welcome contributions to improve the project! If you'd like to contribute, feel free to fork the repository, make your changes, and submit a pull request. Special thanks to the following contributors:
 
-Include the license under which your project is distributed. For example:
+- **YL-Smu**
+- **luuuneytunes12**
+- **brejeshb**
+- **Chensang-Wu**
+- **annaxlium**
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+## License
 
-Acknowledgements
+This project is licensed under the **MIT License** – see the [LICENSE](LICENSE) file for details.
 
-Give credit to those who helped you with your project, if applicable.
+## Acknowledgements
 
-[AOS]
-[Chart.js]
-[VueRouter]
-[Pina]
-[Vuetify]
+We would like to express our gratitude to the following libraries and tools that helped make this project possible:
 
-
-
-Let me know if you need any specific section added or modified!
+- [AOS](https://michalsnik.github.io/aos/) – Animation on scroll
+- [Chart.js](https://www.chartjs.org/) – JavaScript charting library
+- [VueRouter](https://router.vuejs.org/) – Vue.js routing library
+- [Pinia](https://pinia.vuejs.org/) – State management for Vue 3
+- [Vuetify](https://vuetifyjs.com/) – Material Design component framework for Vue.js

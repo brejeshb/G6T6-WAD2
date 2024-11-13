@@ -24,7 +24,10 @@
         </div>
       </div>
     </section>
-
+    <div class="confirmation p-4" v-if="message!=''">
+    <div class="mb-5">{{ message }}</div>
+    <button class="btn btn-primary" @click="message=''">OK</button>
+  </div>
     <div id="app">
 
 
@@ -135,6 +138,7 @@ const recycle_videos = ref([]);
 const filter_recycle = ref(false);
 const filter_upcycle = ref(false);
 const activeFilter = ref('all');
+const message = ref('');
 let form_open = ref(false);
 // Fetch videos on mount
 onMounted(fetchVideos);
@@ -208,7 +212,8 @@ function open_form(){
 }
 function submit_form(){
   form_open.value = !form_open.value;
-  alert('Submit successfully :)')
+  message.value='Submit successfully :)'
+
 
 }
 </script>
@@ -466,5 +471,19 @@ body {
   border-right: 15px solid transparent;
   border-top: 25px solid #000; /* Black upward triangle */
   transform: translate(-50%, -50%);
+}
+.confirmation{
+  position: fixed;
+  display: flex;
+  top: 50vh;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  border-radius: 20px;
+  z-index: 1000;
+  font-size: 20px;
+  color:#f5ffe4;
+  background-color: #798645;
+  flex-direction: column;
 }
 </style>

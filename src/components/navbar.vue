@@ -27,9 +27,9 @@
           <v-icon left>mdi-tree</v-icon>
           Forest
         </v-btn>
-        <v-btn text to="/ItemIdentifier" class="navbar__nav-btn">
+        <v-btn text to="/RecycleNow" class="navbar__nav-btn">
           <v-icon left>mdi-magnify</v-icon>
-          Item Identifier
+          RecycleNow
         </v-btn>
         <v-btn text to="/Education/Quiz" class="navbar__nav-btn">
           <v-icon left>mdi-help-circle</v-icon>
@@ -71,11 +71,11 @@
             </template>
             <v-list-item-title>Forest</v-list-item-title>
           </v-list-item>
-          <v-list-item to="/ItemIdentifier">
+          <v-list-item to="/RecycleNow">
             <template v-slot:prepend>
               <v-icon>mdi-magnify</v-icon>
             </template>
-            <v-list-item-title>Item Identifier</v-list-item-title>
+            <v-list-item-title>RecycleNow</v-list-item-title>
           </v-list-item>
           <v-list-item to="/Education/Quiz">
             <template v-slot:prepend>

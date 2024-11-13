@@ -96,19 +96,42 @@
 
           <!-- Quiz Question Section with AOS animation -->
           <div v-else>
-            <h2 class="text-center" data-aos="fade-down">{{ currentQuiz.title }}</h2>
-            <div v-for="(question, index) in currentQuiz.questions" :key="index" class="mb-4">
-              <h5>{{ question.question }}</h5>
-              <div v-for="(option, idx) in question.options" :key="idx">
-                <label>
-                  <input type="radio" :name="'question' + index" :value="option" v-model="selectedAnswers[index]">
-                  {{ option }}
-                </label>
-              </div>
-            </div>
-            <button class="btn btn-primary" @click="submitQuiz">Submit Quiz</button>
-            <button class="btn btn-primary ms-2" @click="goBack">Back to Quizzes</button>
-          </div>
+    <h2 class="text-center" data-aos="fade-down">{{ currentQuiz.title }}</h2>
+
+    <!-- Display current question -->
+    <div class="mb-4">
+      <h5>{{ currentQuiz.questions[currentQuestionIndex].question }}</h5>
+      <div v-for="(option, idx) in currentQuiz.questions[currentQuestionIndex].options" :key="idx">
+        <label>
+          <input type="radio" :name="'question' + currentQuestionIndex" :value="option" v-model="selectedAnswers[currentQuestionIndex]">
+          {{ option }}
+        </label>
+      </div>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="d-flex justify-content-between">
+      <button 
+        class="btn btn-secondary" 
+        @click="previousQuestion" 
+        :disabled="currentQuestionIndex === 0">
+        <
+      </button>
+
+      <button 
+        class="btn btn-secondary" 
+        @click="nextQuestion" 
+        :disabled="currentQuestionIndex === currentQuiz.questions.length - 1">
+        >
+      </button>
+    </div>
+
+    <!-- Submit and Back buttons -->
+    <div class="mt-4 d-flex justify-content-between">
+      <button class="btn btn-primary" @click="submitQuiz">Submit Quiz</button>
+      <button class="btn btn-primary ms-2" @click="goBack">Back to Quizzes</button>
+    </div>
+  </div>
         </div>
       </div>
       <div class="mt-5">
@@ -319,6 +342,7 @@ const selectedAnswers = ref([]);
 const quizAttempts = reactive({});
 const activeFilter = ref('all');
 const search = ref('');
+const currentQuestionIndex = ref(0);
 
 for (let i of quizzes) {
   quizAttempts[i.id] = {
@@ -477,6 +501,17 @@ function startQuiz(quiz) {
   currentQuiz.value = quiz;
   selectedAnswers.value = new Array(quiz.questions.length).fill(null);
   isQuizActive.value = true;
+}
+function nextQuestion() {
+  if (currentQuestionIndex.value < currentQuiz.value.questions.length - 1) {
+    currentQuestionIndex.value++;
+  }
+}
+
+function previousQuestion() {
+  if (currentQuestionIndex.value > 0) {
+    currentQuestionIndex.value--;
+  }
 }
 
 function submitQuiz() {
@@ -661,9 +696,19 @@ body {
   background-color: #808444;
   color: #fff;
 }
+.btn-secondary {
+  background-color:transparent;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  color:#686c44;
+  border-radius: 8px;
+  font-size: 30px;
+  font-weight: bold
+}
 
 .btn-secondary:hover {
-  background-color: orange;
+  background-color: rgba(104, 108, 68, 0.5); /* Adjust the last value (0.5) for desired transparency */
+
   color: #fff;
 }
 
@@ -685,13 +730,7 @@ body {
   border-radius: 8px;
 }
 
-.btn-secondary {
-  background-color: #ff9800;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  color: white;
-  border-radius: 8px;
-}
+
 
 /* Responsive Spacing */
 @media (max-width: 768px) {
