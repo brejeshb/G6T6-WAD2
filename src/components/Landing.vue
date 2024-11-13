@@ -15,16 +15,22 @@
 
 <script>
 import { useAuth } from '../lib/auth'
-const { userName } = useAuth();
+// const { userName } = useAuth();
 
 export default {
     name: "Landing",
+    setup() {
+    const { userName } = useAuth();
+    const username = userName;
+    return { username };
+  },
     data() {
         return {
-            currUser: userName
+            currUser: ''
         }
     },
     mounted() {
+        this.currUser = this.username;
         let text = document.getElementById("text");
         let img1 = document.getElementById('img1');
         let img2 = document.getElementById('img2');

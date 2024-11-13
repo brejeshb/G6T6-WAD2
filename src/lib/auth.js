@@ -1,16 +1,17 @@
 import { ref, onMounted } from 'vue';
-import { supabase } from '../lib/supabaseClient';
+import { defineStore } from 'pinia';
+import { supabase } from './supabaseClient';
 import { useRouter } from 'vue-router';
 
-const userName = ref(null);
 
-export const useAuth = () => {
+export const useAuthStore = defineStore('auth', () => {
   const router = useRouter();
-  
+  const userName = ref(null);
+
   const loadSession = () => {
     const storedUserName = sessionStorage.getItem('userName');
     if (storedUserName) {
-      userName.value = storedUserName; // Restore the user's name from sessionStorage
+      userName.value = storedUserName;
     }
   };
 
@@ -18,19 +19,17 @@ export const useAuth = () => {
     loadSession();
   });
 
-  // Function to log in the user
   const login = async (username, password) => {
     if (typeof username !== 'string') {
       console.error('Invalid username provided');
       return false;
     }
 
-    // Query the database for the user based on the username
     const { data, error } = await supabase
       .from('AuthTable')
-      .select('*') // Fetch all columns
-      .eq('username', username) // Only search by username
-      .single(); // Ensure we get a single row
+      .select('*')
+      .eq('username', username)
+      .single();
 
     if (error) {
       console.error('Login error:', error.message);
@@ -38,13 +37,11 @@ export const useAuth = () => {
     }
 
     if (data) {
-
-      // Check password
       const isPasswordValid = (data.password === null || data.password === "" || data.password === password);
 
       if (isPasswordValid) {
-        userName.value = data.username || username; // Store username in Vue state
-        sessionStorage.setItem('userName', data.username || username); // Store in sessionStorage
+        userName.value = data.username || username;
+        sessionStorage.setItem('userName', data.username || username);
         return true;
       } else {
         console.error('Invalid password.');
@@ -52,23 +49,19 @@ export const useAuth = () => {
       }
     }
 
-    return false; // No user found with the provided username
+    return false;
   };
 
-  // Function to log out the user
   const logout = () => {
-    userName.value = null; // Clear the username from state
-    sessionStorage.removeItem('userName'); // Clear from sessionStorage
+    userName.value = null;
+    sessionStorage.removeItem('userName');
   };
 
-  // Function to delete the user from the database
   const deleteUser = async () => {
     if (!userName.value) {
       console.error('No user logged in');
       return;
     }
-
-    // Delete user from the AuthTable by matching the username
     const { error } = await supabase
       .from('AuthTable')
       .delete()
@@ -81,10 +74,19 @@ export const useAuth = () => {
 
     console.log('User deleted successfully.');
 
-    // After deleting the user, log out and redirect to the login page
     logout();
-    router.push('/login'); // Make sure '/login' is the correct route to your login page
+    router.push('/');
   };
+
+  return { userName, login, logout, deleteUser };
+});
+
+export const useAuth = () => {
+  const authStore = useAuthStore();
+  const userName = authStore.userName;
+  const login = authStore.login;
+  const logout = authStore.logout;
+  const deleteUser = authStore.deleteUser;
 
   return { userName, login, logout, deleteUser };
 };
