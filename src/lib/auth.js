@@ -39,7 +39,7 @@ export const useAuthStore = defineStore('auth', {
 export const useAuth = () => {
   const authStore = useAuthStore();
 
-  // Initialize store on first use onMounted(() => { authStore.initializeStore(); });
+
 
   return { userName: authStore.userName, login: authStore.login, logout: authStore.logout, deleteUser: authStore.deleteUser };
 };

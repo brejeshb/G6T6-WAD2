@@ -13,7 +13,6 @@ const route = useRoute();
   <!-- <Preloader /> -->
   <div id="app">
     <Navbar v-if="route.path !== '/' " />
-    <!-- Content should be pushed down by the height of the navbar -->
     <div :class="{'content-wrapper': true, 'with-navbar': route.path !== '/'}">
       <router-view />
     </div>
@@ -36,13 +35,13 @@ const route = useRoute();
 </template>
 
 <style scoped>
-/* Add padding or margin to the content area */
+
 .content-wrapper {
-  transition: margin-top 0.3s ease; /* Smooth transition for margin-top */
+  transition: margin-top 0.3s ease;
 }
 
 .content-wrapper.with-navbar {
-  margin-top: 64px; /* Adjust based on the height of your navbar */
+  margin-top: 64px;
 }
 </style>
 

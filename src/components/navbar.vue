@@ -1,7 +1,6 @@
 <template>
   <header class="navbar">
     <v-toolbar flat :color="primaryColor">
-      <!-- Logo and Brand -->
       <div class="navbar__brand">
         <img
           src="../assets/images/logo.png"
@@ -13,7 +12,7 @@
         </v-toolbar-title>
       </div>
 
-      <!-- Navigation Buttons -->
+    
       <div class="navbar__nav" :class="{ 'navbar__nav--hidden': isMobile }">
         <v-btn text to="/Dashboard" class="navbar__nav-btn">
           <v-icon left>mdi-home</v-icon>
@@ -43,7 +42,6 @@
 
       <v-spacer></v-spacer>
 
-      <!-- Burger Menu (Mobile) -->
       <v-menu v-if="isMobile" offset-y>
         <template v-slot:activator="{ props }">
           <div class="navbar__burger" v-bind="props">

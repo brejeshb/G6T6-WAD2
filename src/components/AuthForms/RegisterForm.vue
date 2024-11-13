@@ -1,10 +1,8 @@
 <template>
   <div class="form-container">
-    <!-- Close Button: Exit button for Register Form -->
     <button @click="$emit('close-form')" class="close-button">×</button>
     <img src="../../assets/images/logo.png" alt="Logo" class="logo" />
 
-    <!-- Form Content -->
     <div class="form-content">
       <div class="text-center">
         <h2 class="text-3xl font-bold text-[#798645]">Create Account</h2>
@@ -26,7 +24,6 @@
             <p v-if="usernameError" class="mt-1 text-xs text-red-500">{{ usernameError }}</p>
           </div>
 
-          <!-- Password Fields -->
           <div>
             <label for="password" class="block text-sm font-medium text-[#626F47]">Password</label>
             <input
@@ -77,10 +74,10 @@
 
 <script setup>
 import { ref } from 'vue';
-import { useAuth } from '../../lib/auth'; // Import useAuth
+import { useAuth } from '../../lib/auth';
 import { supabase } from '../../lib/supabaseClient';
 
-const emit = defineEmits(['close-form', 'switch-mode', 'auth-success']); // Declare emitted events
+const emit = defineEmits(['close-form', 'switch-mode', 'auth-success']);
 
 const username = ref('');
 const password = ref('');
@@ -89,13 +86,13 @@ const isLoading = ref(false);
 const passwordError = ref('');
 const usernameError = ref('');
 
-const { login } = useAuth(); // Destructure login from useAuth
+const { login } = useAuth();
 
 async function handleSubmit() {
   passwordError.value = '';
   usernameError.value = '';
 
-  // Ensure passwords match
+
   if (password.value !== confirmPassword.value) {
     passwordError.value = 'Passwords do not match';
     return;
@@ -103,8 +100,7 @@ async function handleSubmit() {
 
   isLoading.value = true;
 
-  try {
-    // Check if the username already exists
+try{
     const { data: existingUsernames, error: usernameErrorCheck } = await supabase
       .from('AuthTable')
       .select('username')
@@ -120,21 +116,20 @@ async function handleSubmit() {
       return;
     }
 
-    // Proceed to insert the new user
+
     const date_registered = new Date().toISOString();
     console.log(username.value,password.value)
     const { data, error } = await supabase
       .from('AuthTable')
       .insert([{ 
         username: username.value, 
-        password: password.value || null, // Allow empty or null passwords
+        password: password.value || null,
         date_registered
       }])
       .select();
 
     if (error) throw error;
 
-    // Log in user immediately after successful registration
     const success = await login(username.value.trim(), password.value.trim());
     if (success) {
       emit('auth-success');
@@ -150,7 +145,6 @@ async function handleSubmit() {
 </script>
 
 <style scoped>
-/* General Container */
 .form-container {
   display: flex;
   flex-direction: column;
@@ -158,42 +152,38 @@ async function handleSubmit() {
   align-items: center;
   height: 100vh;
   padding: 20px;
-  position: relative; /* Ensure close button is positioned correctly */
+  position: relative; 
 }
 
-/* Close Button: Positioned top-right */
 .close-button {
   position: absolute;
-  top: 20px; /* Adjust position from the top */
-  right: 20px; /* Adjust position from the right */
+  top: 20px; 
+  right: 20px; 
   background: none;
   border: none;
   font-size: 30px;
   color: white;
   cursor: pointer;
-  z-index: 10; /* Ensure button is on top of other content */
+  z-index: 10;
   transition: color 0.3s;
 }
 
 .close-button:hover {
-  color: #ff6b6b; /* Change color on hover for better visibility */
+  color: #ff6b6b;
 }
 
-/* Centered Logo */
 .logo {
   width: 150px;
   margin-bottom: 40px;
   display: block;
 }
 
-/* Form content area */
 .form-content {
   width: 100%;
   max-width: 400px;
   text-align: center;
 }
 
-/* Input Styling (Matching LoginForm) */
 .auth-input {
   padding: 12px;
   border: 1px solid rgba(121, 134, 69, 0.3); /* Border color similar to LoginForm */
@@ -208,7 +198,6 @@ async function handleSubmit() {
   color:white;
 }
 
-/* Submit Button Styling (Matching LoginForm) */
 .submit-btn {
   width: 100%;
   padding: 12px;
@@ -235,7 +224,6 @@ async function handleSubmit() {
   color: #ff6b6b;
 }
 
-/* Switch Mode Link */
 .switch-mode-btn {
   color: #798645;
   background: none;

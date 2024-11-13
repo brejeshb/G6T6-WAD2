@@ -185,11 +185,10 @@ export default {
   },
 
   mounted() {
-  // Simplified promise handling
   Promise.all([
     AOS.init({ duration: 800, easing: 'ease-in-out', once: false }),
     this.loadGoogleMapsScript(),
-    new Promise(resolve => setTimeout(resolve, 1500)) // For a minimum load time
+    new Promise(resolve => setTimeout(resolve, 1500))
   ]).then(() => {
     this.isPageLoaded = true;
     this.initMap();
