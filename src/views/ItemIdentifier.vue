@@ -150,7 +150,7 @@ export default {
   data() {
     return {
       
-      username: currUser,
+
       map: null,
       isTrue: true,
       ifInsertSuccess: false,

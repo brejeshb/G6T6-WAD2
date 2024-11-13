@@ -27,7 +27,6 @@ const firebaseConfig = {
 
 initializeApp(firebaseConfig);
 
-console.log('Pinia instance initialized', piniaInstance);
 
 const vuetify = createVuetify({
   components,
