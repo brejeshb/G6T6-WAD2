@@ -1,8 +1,6 @@
-<!-- src/components/BarChart.vue -->
 <template>
     <div class="chart-container">
-        <Bar :key="JSON.stringify(ChartData)" :data="ChartData" :options="ChartOptions" />
-        <!-- manually re-render the chart -->
+        <Bubble ref="bubbleChart" :data="ChartData" :options="ChartOptions" />
     </div>
 </template>
 
@@ -12,95 +10,118 @@ import {
     Title,
     Tooltip,
     Legend,
-    BarElement,
+    PointElement,
     CategoryScale,
     LinearScale
-} from 'chart.js'
-import { Bar } from 'vue-chartjs'
-import { ref, onMounted } from 'vue'
+} from 'chart.js';
+import { Bubble } from 'vue-chartjs';
+import { ref, onMounted } from 'vue';
 import { supabase } from '../lib/supabaseClient';
+import { useAuth } from '../lib/auth.js';
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
+// Register Chart.js components
+ChartJS.register(CategoryScale, LinearScale, PointElement, Title, Tooltip, Legend);
+
+// Get logged-in username
+const { userName } = useAuth();
+var loggedInUsername = userName;
+
 const playerschart = ref([]);
 const ChartData = ref({
-    labels: [],
-    datasets: [
-        {
-            label: 'Total Points Accumulated',
-            backgroundColor: '#f87979',
-            data: []
-        }
-    ]
+    datasets: [{
+        label: 'User Points',
+        backgroundColor: '#f87979',
+        data: []
+    }]
 });
 
+// Define youPlugin to label the current user's bubble
+const youPlugin = {
+    id: 'youPlugin',
+    beforeDatasetsDraw(chart) {
+        const { ctx } = chart;
+        ctx.save();
+        const dataset = chart.data.datasets[0].data;
+        const userIndex = dataset.findIndex(point => point.username === loggedInUsername.value);
+        // console.log(userIndex)
+        console.log(userName)
+        console.log("username", loggedInUsername.value)
+        if (userIndex === -1) return; // If user not found, do nothing
 
-const ChartOptions = {
-    indexAxis: 'y', // Set indexAxis to 'y' for horizontal bars
-    elements: {
-        bar: {
-            borderWidth: 1.0,
-            categoryPercentage: 1.0 // Adjust spacing between bars (1.0 fills the entire category width)
+        ctx.save();
 
+        const meta = chart.getDatasetMeta(0);
+        const userDataPoint = meta.data[userIndex];
+
+        if (userDataPoint) {
+            // Get accurate pixel coordinates for the data point
+            const { x, y } = userDataPoint.getProps(['x', 'y'], true);
+
+            // Set font properties and alignment for the "You" label
+            ctx.font = 'bold 14px sans-serif';
+            ctx.fillStyle = '#798645'; // Unique color for "You!" label
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'bottom';
+
+            // Draw "You!" label above the data point
+            ctx.fillText('You!', x, y - 10);
         }
-    },
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-        legend: {
-            position: 'top' //  legend position
-        },
-        title: {
-            display: true,
-            text: 'User Points Accumulated'
-        }
-    },
-    scales: {
-        x: {
-            grid: {
-                display: false, // Hide grid lines on the x-axis
-            },
-            ticks: {
-                font: {
-                    weight: 'bold', // Set font weight to bold for x-axis labels
-                    size: 10 // Set a smaller font size if labels are too large
 
-                },
-                autoSkip: false,
-
-            },
-
-
-        },
-        y: {
-            grid: {
-                display: false
-            },
-            ticks: {
-                autoSkip: false, // Ensure all labels are displayed on the y-axis
-
-                font: {
-                    weight: 'bold' // Set font weight to bold for x-axis labels
-                }
-            }
-
-        }
+        ctx.restore();
     }
-}
-
-
-const generateColors = (numColors) => {
-    const colors = [];
-    for (let i = 0; i < numColors; i++) {
-        const hue = (i * 360) / numColors; // Spread hues across the color wheel
-        const color = `hsl(${hue}, 70%, 50%, 0.5)`; // Adjust saturation and lightness as needed
-        colors.push(color);
-    }
-    return colors;
 };
 
+// Register the plugin globally
+ChartJS.register(youPlugin);
 
-const maxUsernameLength = 10;
+const ChartOptions = {
+    responsive: true,
+    maintainAspectRatio: true,
+    animations: {
+        loop: true,
+        // y: {
+        //     easing: 'easeInOutBounce',
+        //     duration: 2000,
 
+        //     from: (context) => context.chart.scales.y.getPixelForValue(0)
+        // },
+        // x: {
+        //     easing: 'easeOutElastic',
+        //     duration: 2000,
+        //     from: (context) => context.chart.scales.x.getPixelForValue(0)
+        // },
+        radius: {
+            easing: 'easeInOutQuint',
+            duration: 1000,
+            from: 5,
+            loop: true,
+            delay: (context) => context.dataIndex * 200
+        }
+    },
+    plugins: {
+        legend: { position: 'top' },
+        title: { display: true, text: 'User Points as Bubble Size' },
+        tooltip: {
+            callbacks: {
+                label: (ctx) => {
+                    const username = ctx.raw.username;
+                    const points = ctx.raw.r * 10;
+                    return `${username}: ${points} points`;
+                }
+            }
+        },
+        youPlugin // Register youPlugin here
+    },
+    scales: {
+        x: { min: 0, max: 100, display: false },
+        y: { min: 0, max: 100, display: false }
+    }
+};
+
+// Get random position function
+const getRandomPosition = (min = 10, max = 90) => Math.random() * (max - min) + min;
+
+// Fetch data and update ChartData
 const fetchData = async () => {
     try {
         const { data: UserOverallStatsTable, error } = await supabase
@@ -109,7 +130,7 @@ const fetchData = async () => {
             .order('total_points_accumulated', { ascending: false });
 
         if (error) {
-            console.error('Error fetching barchart data:', error);
+            console.error('Error fetching bubble chart data:', error);
             return;
         }
 
@@ -117,51 +138,33 @@ const fetchData = async () => {
             .filter(player => player.total_points_accumulated > 0)
             .map(player => ({
                 ...player,
-                username: player.username.length > maxUsernameLength
-                    ? player.username.slice(0, maxUsernameLength) + '...'
+                username: player.username.length > 10
+                    ? player.username.slice(0, 10) + '...'
                     : player.username
             }));
 
-        const numPlayers = playerschart.value.length;
-        const dynamicColors = generateColors(numPlayers);
-
-
+        // Populate ChartData with bubble chart data
         ChartData.value = {
-            labels: playerschart.value.map(player => player.username),
             datasets: [{
-                label: 'Total Points Accumulated',
-                backgroundColor: dynamicColors,
-                data: playerschart.value.map(player => player.total_points_accumulated)
+                label: 'User Points',
+                backgroundColor: playerschart.value.map(player =>
+                    player.username === loggedInUsername ? '#FF0000' : `hsl(${(Math.random() * 360)}, 70%, 50%, 0.5)`
+                ),
+                data: playerschart.value.map(player => ({
+                    x: getRandomPosition(0, 100),
+                    y: getRandomPosition(0, 100),
+                    r: player.username === loggedInUsername
+                        ? player.total_points_accumulated / 8 + 2 // Slightly larger size for current user
+                        : player.total_points_accumulated / 8,
+                    username: player.username
+                }))
             }]
         };
-
-
     } catch (error) {
         console.error('Error fetching data:', error);
     }
 };
 
-// Fetch data when the component is mounted
+// Fetch data on mounted
 onMounted(fetchData);
-console.log(data)
-
 </script>
-
-<style scoped>
-.chart-container {
-    width: 100%;
-    /* Makes the container fill the width of the parent */
-    height: 100%;
-    /* Adjusts the height automatically to maintain aspect ratio */
-    max-width: 100%;
-    /* Prevents overflow */
-    position: relative;
-    max-height: 80%;
-    margin: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 400px;
-    overflow-x: scroll;
-}
-</style>
