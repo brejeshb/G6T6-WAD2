@@ -12,7 +12,12 @@
   <p class="text-pos" data-aos="zoom-in-up" data-aos-duration="1200">{{ currUser}}'s Forest</p>
  
   </div>
+  <div class="confirmation p-4" v-if="message!=''">
+    <div class="mb-5">{{ message }}</div>
+    <button class="btn btn-primary" @click="message=''">OK</button>
+  </div>
   <div id="app" style="position: relative;">
+    
     
     <div class="row">
       <div class="col-lg-6 col-12 my-3" data-aos="fade-right" data-aos-duration="1500">
@@ -54,6 +59,7 @@
       <img src="/img/cart.png" style="width: 60px" />
     </button>
     <div class="shop" v-if="shop_open">
+      
       <div class="sidebar" :style="menuVisible ? { width: '250px' } : {}">
         <div class="hamburger" @click="toggleMenu">&#9776;</div>
         <div class="header" :class="{ show: menuVisible }">
@@ -71,7 +77,7 @@
       <div class="main-content">
         <div class="row mb-3">
           <input id="searchBar" class="col-lg-5 col-sm-9 col-8 me-1 rounded" type="text" placeholder="Search items..." @input="shop_display()" v-model="search" />
-          <button type="button"  @click="shop_open = false" class="btn btn-secondary col-lg-1 col-xs-2 col-1 order-lg-last mx-4" style="width: 50px;">X</button>
+          <button type="button"  @click="shop_open = false;message =''" class="btn btn-secondary col-lg-1 col-xs-2 col-1 order-lg-last mx-4" style="width: 50px;">X</button>
           <select class="filters col-lg-5 col-sm-9 col-8 fw-bold" @change="shop_display()" v-model="sort">
             <option>Sort by: Highest price</option>
             <option>Lowest price</option>
@@ -208,6 +214,7 @@ const display_tree = ref(true);
 const display_pet = ref(true);
 const display_background = ref(true);
 const menuVisible = ref(false);
+const message = ref('')
 
 
 
@@ -265,10 +272,12 @@ function clicky() {
 
 async function purchase(item) {
   if (cal_data.value.current_tree !== '') {
-    alert('Please grow your current item to the max first');
+    message.value='Please grow your current item to the max first'
+    document.body.style.overflow = 'hidden';
   }
   else if (cal_data.value.current_points < item.price) {
-    alert('Please earn more points first');
+    message.value='Please earn more points first'
+    document.body.style.overflow = 'hidden';
   }
   else {
     let new_points = cal_data.value.current_points - item.price;
@@ -287,7 +296,8 @@ async function purchase(item) {
       .update({ curr_trees_points: item.growth_points })
       .eq('username', currUser.value)
     fetchCalculationData()
-    alert('Item purchased, please exit the shop to view it');
+    message.value='Item purchased, please exit the shop to view it'
+    
 
 
   }
@@ -471,6 +481,18 @@ update_tree()
 
 
 <style scoped>
+.btn-primary {
+  background-color: #f4ecd4;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  color: #666;
+}
+
+.btn-primary:hover {
+  background-color: #808444;
+  color: #fff;
+}
 .text-pos{
   position: relative;
   top:30%;
@@ -650,7 +672,20 @@ update_tree()
 
 /* for shop */
 
-
+.confirmation{
+  position: fixed;
+  display: flex;
+  top: 50vh;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  border-radius: 20px;
+  z-index: 1000;
+  font-size: 20px;
+  color:#f5ffe4;
+  background-color: #798645;
+  flex-direction: column;
+}
 .shop {
   display: flex;
   background-color: #686c44;
