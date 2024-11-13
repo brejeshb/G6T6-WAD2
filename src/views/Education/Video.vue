@@ -65,7 +65,7 @@
                   <li class="nav-item my-2">
                     <a class="nav-link" 
                       href ='#'
-                      @click.prevent="activeFilter = 'upcycling'"
+                      @click.prevent="true"
                       @click="open_form">Click me to suggest videos</a>
                   </li>
                 </ul>
